@@ -8,14 +8,15 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     private int[] imagenes = {R.drawable.patata1,R.drawable.patata2,R.drawable.patata3};
-    private int sizeImagenes = imagenes.length;
+    private int sizeImagenes = 3;
     private int posActual = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ImageView imageView011 = findViewById(R.id.imageView01);
+        imageView011.setImageResource(imagenes[posActual]);
     }
 
     /**
@@ -26,14 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView imageView01 = findViewById(R.id.imageView01);
 
-        if(posActual <= sizeImagenes){
+        posActual = posActual + 1;
+
+        if(posActual>=sizeImagenes) {
             posActual = 0;
-        }else{
-            posActual++;
         }
 
         imageView01.setImageResource(imagenes[posActual]);
-
     }
 
     /**
@@ -44,14 +44,13 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView imageView01 = findViewById(R.id.imageView01);
 
-        if(posActual == 0){
-            posActual = sizeImagenes;
-        }else{
-            posActual--;
+        posActual = posActual - 1;
+
+        if(posActual < 0) {
+            posActual = sizeImagenes-1;
         }
 
         imageView01.setImageResource(imagenes[posActual]);
-
     }
 
 }
