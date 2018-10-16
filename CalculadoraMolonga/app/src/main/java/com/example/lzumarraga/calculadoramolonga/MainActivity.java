@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     int resultadoParcial = 0;
     int resultadoFinal = 0;
     char operacionARealizar = 'v';
+    boolean operacionPulsada = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,24 +82,21 @@ public class MainActivity extends AppCompatActivity {
         Button btn7 = findViewById(R.id.btn7);
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                concatenarPulsacionNumero("7");
+            public void onClick(View v) {concatenarPulsacionNumero("7");
             }
         });
 
         Button btn8 = findViewById(R.id.btn8);
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                concatenarPulsacionNumero("8");
+            public void onClick(View v) {concatenarPulsacionNumero("8");
             }
         });
 
         Button btn9 = findViewById(R.id.btn9);
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                concatenarPulsacionNumero("9");
+            public void onClick(View v) {concatenarPulsacionNumero("9");
             }
         });
 
@@ -108,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
         btnMult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                operacionPulsada = true;
                 concatenarPulsacionNumero("x");
                 operacionARealizar = 'x';
-                resultadoParcial = Integer.parseInt(visor.getText().toString());
             }
         });
 
@@ -118,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
         btnSum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                operacionPulsada = true;
                 concatenarPulsacionNumero("+");
                 operacionARealizar = '+';
-                resultadoParcial = Integer.parseInt(visor.getText().toString());
             }
         });
 
@@ -128,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
         btnRestar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                operacionPulsada = true;
                 concatenarPulsacionNumero("-");
                 operacionARealizar = '-';
-                resultadoParcial = Integer.parseInt(visor.getText().toString());
             }
         });
 
@@ -138,9 +136,9 @@ public class MainActivity extends AppCompatActivity {
         btnDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                operacionPulsada = true;
                 concatenarPulsacionNumero("/");
                 operacionARealizar = '/';
-                resultadoParcial = Integer.parseInt(visor.getText().toString());
             }
         });
 
@@ -152,36 +150,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnLimpiar = findViewById(R.id.btnLimpiar);
+        btnLimpiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visor.setText("");
+                visorResultado.setText("");
+                resultadoParcial = 0;
+                resultadoFinal = 0;
+                operacionPulsada = false;
+            }
 
+        });
 
     }
 
-
-    public String concatenarPulsacionNumero(String i){
+    public void concatenarPulsacionNumero(String i){
         String resultado = "";
-
         resultado = visor.getText() + i;
-
         visor.setText(resultado.toString());
 
-        return resultado;
+        if(!operacionPulsada){
+            resultadoParcial = Integer.parseInt(visor.getText().toString());
+        }
     }
 
     public void realizarOperacion (char operador){
         //String txtResultado = "";
 
+
         switch (operador){
             case '+':
-                resultadoFinal = resultadoParcial + Integer.parseInt(visor.getText().toString());
+                resultadoFinal = resultadoParcial + Integer.parseInt(visor.getText().toString().split("\\+")[1]);
                 break;
             case '-':
-                resultadoFinal = resultadoParcial - Integer.parseInt(visor.getText().toString());
+                resultadoFinal = resultadoParcial - Integer.parseInt(visor.getText().toString().split("-")[1]);
                 break;
             case 'x':
-                resultadoFinal = resultadoParcial * Integer.parseInt(visor.getText().toString());
+                resultadoFinal = resultadoParcial * Integer.parseInt(visor.getText().toString().split("x")[1]);
                 break;
             case '/':
-                resultadoFinal = resultadoParcial / Integer.parseInt(visor.getText().toString());
+                resultadoFinal = resultadoParcial / Integer.parseInt(visor.getText().toString().split("/")[1]);
                 break;
 
         }
