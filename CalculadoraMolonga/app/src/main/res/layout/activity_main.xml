@@ -45,37 +45,37 @@
             android:layout_weight="25">
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn7"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="7"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:background="@drawable/rounddarkgrey"
+                android:text="7"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn8"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
+                android:background="@drawable/rounddarkgrey"
                 android:text="8"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn9"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="9"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:background="@drawable/rounddarkgrey"
+                android:text="9"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
                 android:layout_margin="2dp"
@@ -99,37 +99,37 @@
             android:layout_weight="25">
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="4"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:background="@drawable/rounddarkgrey"
+                android:text="4"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="5"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:background="@drawable/rounddarkgrey"
+                android:text="5"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn6"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="6"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:background="@drawable/rounddarkgrey"
+                android:text="6"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
                 android:layout_margin="2dp"
@@ -152,37 +152,37 @@
             android:layout_weight="25">
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="1"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000"  />
+                android:background="@drawable/rounddarkgrey"
+                android:text="1"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="2"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:background="@drawable/rounddarkgrey"
+                android:text="2"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="3"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:background="@drawable/rounddarkgrey"
+                android:text="3"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
                 android:layout_margin="2dp"
@@ -211,18 +211,20 @@
                 android:layout_height="match_parent"
                 android:text="C"
                 android:layout_weight="25"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:background="@drawable/roundlightgrey"
+                android:textColor="#000000" />
 
             <Button
-                android:layout_margin="2dp"
                 android:id="@+id/btn0"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="0"
+                android:layout_margin="2dp"
                 android:layout_weight="25"
-                android:textSize="40sp"
-                android:background="@drawable/roundgrey"
-                android:textColor="#000000" />
+                android:background="@drawable/rounddarkgrey"
+                android:text="0"
+                android:textColor="#FFF"
+                android:textSize="40sp" />
 
             <Button
                 android:layout_margin="2dp"
@@ -231,7 +233,10 @@
                 android:layout_height="match_parent"
                 android:text="="
                 android:layout_weight="25"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+
+                android:background="@drawable/roundlightgrey"
+                android:textColor="#000000" />
 
             <Button
                 android:layout_margin="2dp"
