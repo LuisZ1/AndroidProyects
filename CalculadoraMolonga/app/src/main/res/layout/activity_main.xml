@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:textSize="36sp"
         android:layout_weight="20"
-        android:text="estadoActual"/>
+        android:text="ResultadoFinal"/>
 
     <!-- /////////////////////RESULTADO FINAL////////////////////////// -->
     <TextView
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
-        android:text="ResultadoFinal"
+        android:text="EstadoActual"
         android:textColor="@android:color/black"
         android:textSize="36sp" />
 
