@@ -16,9 +16,16 @@ public class MainActivity extends AppCompatActivity {
 
         ListView lv = (ListView) findViewById(R.id.listilla);
 
+        Ciudad sevilla = new Ciudad(0,"Sevilla",690560,"La más grande");
+        Ciudad madrid = new Ciudad(1,"Madrid",3125000,"La más pestosa");
+        Ciudad barcelona = new Ciudad(2,"Barcelona",1624000,"La más indepe");
+
         String[] ciudades={"Roma","París","Londres"};
 
-        ArrayAdapter a = new ArrayAdapter<String>(this,R.layout.simple_list_item_1,R.id.selection, ciudades);
+        Ciudad[] ciudades2= {sevilla,madrid,barcelona};
+
+        //ArrayAdapter a = new ArrayAdapter<String>(this,R.layout.simple_list_item_1,R.id.selection, ciudades);
+        ArrayAdapter a = new ArrayAdapter<Ciudad>(this,R.layout.simple_list_item_1,R.id.selection, ciudades2);
         lv.setAdapter(a);
 
 
