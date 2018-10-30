@@ -23,22 +23,21 @@ public class activityMostrarEquipo extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        Equipo equipo = intent.getParcelableExtra("objEquipo");
+
         //Pintar Denominacion equipo
-        denominacion = intent.getStringExtra("denominacion");
+        denominacion = equipo.getDenominacion();
         txtDenominacion = findViewById(R.id.denominacionEquipo);
         txtDenominacion.setText(denominacion);
 
-        //pintar escudo equipo
+//        pintar escudo equipo
         imgFoto = findViewById(R.id.escudoEquipo);
-        Bundle extras = getIntent().getExtras();
-        byte[] byteArray = extras.getByteArray("picture");
-        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        imgFoto.setImageBitmap(bmp);
+        imgFoto.setImageResource(equipo.getEscudo());
 
         //pintar descripcion equipo
 
-        if(!intent.getStringExtra("des").equals("nulo")){
-            descripcion = intent.getStringExtra("des");
+        if(!equipo.getDescripcion().isEmpty()){
+            descripcion = equipo.getDescripcion();
             txtDescripcion = findViewById(R.id.txtDescripcion);
             txtDescripcion.setText(descripcion);
         }
