@@ -3,6 +3,7 @@ package com.example.lzumarraga.ejemploconlistadinamica;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,13 +16,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,21 +36,21 @@ import java.util.HashMap;
 
 public class MainActivity extends ListActivity {
 
-    Equipo[] equipos = new Equipo[25];
+    equipitos equipaso = new equipitos();
     TextView selection;
     ImageView icon;
-
-    //https://stackoverflow.com/questions/19945411/android-java-how-can-i-parse-a-local-json-file-from-assets-folder-into-a-listvi
-    ArrayList<HashMap<String, String>> formList = new ArrayList<HashMap<String, String>>();
+    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rellenarEquipos();
+        //rellenarEquipos();
+        //cargarEquiposJSON();
+        recuperarEquiposJSON();
 
-        setListAdapter(new IconicAdapter<Equipo>(this, R.layout.fila_equipo_primera, R.id.label, equipos));
+        setListAdapter(new IconicAdapter<Equipo>(this, R.layout.fila_equipo_primera, R.id.label, equipitos.getEquipos()));
         selection = findViewById(R.id.selection);
 
     }
@@ -52,6 +59,8 @@ public class MainActivity extends ListActivity {
      * El metodo rellena un array con varios objetos equipo de futbol para mostrarlos en una lista
      * */
     public void rellenarEquipos() {
+        Equipo[] equipos = new Equipo[25];
+
         Equipo sevilla = new Equipo("sevilla", "Sevilla FC", R.drawable.sevilla, liga.PRIMERA, "El Sevilla Fútbol Club es un " +
                 "club de fútbol español organizado como sociedad anónima deportiva. Tiene su sede en Sevilla, capital de la comunidad " +
                 "autónoma de Andalucía, y actualmente juega en Primera División. Fue fundado el 25 de enero de 18905\u200B6\u200B y " +
@@ -108,6 +117,8 @@ public class MainActivity extends ListActivity {
 
 
         Collections.shuffle(Arrays.asList(equipos));
+
+        equipaso.setEquipos(equipos);
     }
 
     class IconicAdapter<T> extends ArrayAdapter<T> {
@@ -143,8 +154,8 @@ public class MainActivity extends ListActivity {
                 holder = (ViewHolder) row.getTag();
             }
 
-            holder.getLab().setText(equipos[position].toString());
-            holder.getImgV().setImageResource(equipos[position].getEscudo());
+            holder.getLab().setText(equipitos.getEquipos()[position].toString());
+            holder.getImgV().setImageResource(equipitos.getEquipos()[position].getEscudo());
 
             return (row);
         }
@@ -158,10 +169,10 @@ public class MainActivity extends ListActivity {
         public int getItemViewType(int position) {
             int type = -1;
 
-            if (equipos[position].getLiga() == liga.PRIMERA) {
+            if (equipitos.getEquipos()[position].getLiga() == liga.PRIMERA) {
                 type = 0;
             } else {
-                if (equipos[position].getLiga() == liga.SEGUNDA) {
+                if (equipitos.getEquipos()[position].getLiga() == liga.SEGUNDA) {
                     type = 1;
                 }
             }
@@ -192,7 +203,7 @@ public class MainActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(this, activityMostrarEquipo.class);
 
-        intent.putExtra("objEquipo", equipos[position]);
+        intent.putExtra("objEquipo", equipitos.getEquipos()[position]);
 
         startActivity(intent);
     }
@@ -202,7 +213,7 @@ public class MainActivity extends ListActivity {
      * */
     private byte[] convertirImagenABitmap(ImageView icono, int position) {
 
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), equipos[position].getEscudo());
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), equipitos.getEquipos()[position].getEscudo());
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
@@ -228,27 +239,36 @@ public class MainActivity extends ListActivity {
     }
 
     public void cargarEquiposJSON(){
+        rellenarEquipos();
+        String json = gson.toJson(equipitos.getEquipos());
+        int i = 0;
+    }
+
+
+    public String readJSONFromAsset() {
+        String json = null;
         try {
-            JSONObject obj = new JSONObject(loadJSONFromAsset());
-            JSONArray m_jArry = obj.getJSONArray("formules");
-            HashMap<String, String> m_li;
-
-            for (int i = 0; i < m_jArry.length(); i++) {
-                JSONObject jo_inside = m_jArry.getJSONObject(i);
-                Log.d("Details-->", jo_inside.getString("nombre"));
-                String nombre_value = jo_inside.getString("nombre");
-                String denominacion_value = jo_inside.getString("denominacion");
-
-                //Add your values in your `ArrayList` as below:
-                m_li = new HashMap<String, String>();
-                m_li.put("nombre", nombre_value);
-                m_li.put("denominacion", denominacion_value);
-
-                formList.add(m_li);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+            InputStream is = getAssets().open("equipo.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
         }
+        return json;
+    }
+
+    public void recuperarEquiposJSON() {
+
+        String json = readJSONFromAsset();
+
+        equipaso = gson.fromJson(json, equipitos.class);
+
+        int i = 0;
+
     }
 
 }

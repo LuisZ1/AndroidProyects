@@ -3,38 +3,51 @@ package com.example.lzumarraga.ejemploconlistadinamica;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Equipo implements Parcelable {
 
     //ATRIBUTOS
+    @SerializedName("nombre")
+    @Expose
     private String nombre;
+    @SerializedName("denominacion")
+    @Expose
     private String denominacion;
+    @SerializedName("liga")
+    @Expose
     private liga liga;
+    @SerializedName("escudo")
+    @Expose
     private int escudo;
+    @SerializedName("descripcion")
+    @Expose
     private String descripcion;
 
     //CONSTRUCTORES
-    public Equipo(){
+    public Equipo() {
         this.nombre = "equipo";
         this.denominacion = "equipo";
     }
 
-    public Equipo (String nombre, String denominacion, liga liga, String descripcion){
+    public Equipo(String nombre, String denominacion, liga liga, String descripcion) {
         this.nombre = nombre;
         this.denominacion = denominacion;
         this.descripcion = descripcion;
         this.liga = liga;
     }
 
-    public Equipo (String nombre, String denominacion, int escudo){
+    public Equipo(String nombre, String denominacion, int escudo) {
         this.nombre = nombre;
         this.denominacion = denominacion;
         this.escudo = escudo;
         this.descripcion = "nulo";
     }
 
-    public Equipo (String nombre, String denominacion, int escudo, liga liga){
+    public Equipo(String nombre, String denominacion, int escudo, liga liga) {
         this.nombre = nombre;
         this.denominacion = denominacion;
         this.escudo = escudo;
@@ -42,14 +55,14 @@ public class Equipo implements Parcelable {
         this.liga = liga;
     }
 
-    public Equipo (String nombre, String denominacion, int escudo,String descripcion){
+    public Equipo(String nombre, String denominacion, int escudo, String descripcion) {
         this.nombre = nombre;
         this.denominacion = denominacion;
         this.escudo = escudo;
         this.descripcion = descripcion;
     }
 
-    public Equipo (String nombre, String denominacion, int escudo,liga liga, String descripcion){
+    public Equipo(String nombre, String denominacion, int escudo, liga liga, String descripcion) {
         this.nombre = nombre;
         this.denominacion = denominacion;
         this.escudo = escudo;
@@ -101,7 +114,7 @@ public class Equipo implements Parcelable {
     //AÑADIDOS
     @Override
     public String toString() {
-        return denominacion ;
+        return denominacion;
     }
 
     @Override
