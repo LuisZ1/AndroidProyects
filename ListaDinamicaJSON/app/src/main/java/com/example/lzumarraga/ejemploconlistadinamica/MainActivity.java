@@ -24,7 +24,6 @@ import java.util.Collections;
 
 public class MainActivity extends ListActivity {
 
-    equipitos equipaso = new equipitos();
     Equipo[] equipos;
     TextView selection;
     ImageView icon;
@@ -91,24 +90,6 @@ public class MainActivity extends ListActivity {
         equipos[10] = cordoba;
         equipos[11] = almeria;
 
-        equipos[12] = sevilla;
-        equipos[13] = betis;
-        equipos[14] = cadiz;
-        equipos[15] = almeria;
-        equipos[16] = almeria;
-        equipos[17] = barsa;
-        equipos[18] = almeria;
-        equipos[19] = madrid;
-        equipos[20] = almeria;
-        equipos[21] = cadiz;
-        equipos[22] = almeria;
-        equipos[23] = valencia;
-        equipos[24] = recre;
-
-
-        Collections.shuffle(Arrays.asList(equipos));
-
-        equipaso.setEquipos(equipos);
     }
 
     class IconicAdapter<T> extends ArrayAdapter<T> {
@@ -123,7 +104,6 @@ public class MainActivity extends ListActivity {
             TextView lab;
             ImageView imgV;
 
-            //DIBUJA MAL LAS FILAS CUANDO NO ES NULL, HAY QUE SOBREESCRIBIR METODOS
             if (row == null) {
                 LayoutInflater inflater = getLayoutInflater();
 
@@ -191,7 +171,6 @@ public class MainActivity extends ListActivity {
         }
     }
 
-
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(this, activityMostrarEquipo.class);
@@ -206,7 +185,7 @@ public class MainActivity extends ListActivity {
      * */
     private byte[] convertirImagenABitmap(ImageView icono, int position) {
 
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), equipitos.getEquipos()[position].getEscudo());
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), equipos[position].getEscudo());
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
@@ -214,12 +193,11 @@ public class MainActivity extends ListActivity {
         return byteArray;
     }
 
-
     @Deprecated
     public String loadJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = getAssets().open("/assets/equipos.json");
+            InputStream is = getAssets().open("equipos.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -233,11 +211,10 @@ public class MainActivity extends ListActivity {
     }
 
     @Deprecated
-    public void cargarEquiposJSON(){
+    public void cargarEquiposJSON() {
         rellenarEquipos();
         String json = gson.toJson(equipos);
     }
-
 
     public String readJSONFromAsset() {
         String json = null;

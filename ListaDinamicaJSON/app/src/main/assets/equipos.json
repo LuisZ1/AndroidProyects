@@ -1,177 +1,100 @@
 [
-    {
-      "denominacion": "Sevilla FC",
-      "descripcion": "El Sevilla Fútbol Club es un club de fútbol español organizado como sociedad anónima deportiva. Tiene su sede en Sevilla, capital de la comunidad autónoma de Andalucía, y actualmente juega en Primera División. Fue fundado el 25 de enero de 18905​6​ y su primer presidente fue el vice-cónsul británico Edward Farquharson Johnston.7​ Posteriormente fue inscrito en el registro de asociaciones el 14 de octubre de 1905, siendo su presidente el jerezano José Luis Gallegos Arnosa.",
-      "escudo": 2131099752,
-      "liga": "PRIMERA",
-      "nombre": "sevilla"
-    },
-    {
-      "denominacion": "UD Almería",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "almeria"
-    },
-    {
-      "denominacion": "Albacete CF",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "albacete"
-    },
-    {
-      "denominacion": "UD Almería",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "almeria"
-    },
-    {
-      "denominacion": "UD Almería",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "almeria"
-    },
-    {
-      "denominacion": "Real Betis",
-      "descripcion": "El Real Betis Balompié, también conocido como Real Betis o simplemente Betis, es una entidad polideportiva con sede en Sevilla, España. Fue establecida en septiembre de 1908 para la práctica del fútbol —aunque sus orígenes datan de 1907 y así consta como fecha fundacional por el propio club—, y oficialmente registrada el 1 de febrero de 1909.",
-      "escudo": 2131099735,
-      "liga": "PRIMERA",
-      "nombre": "betis"
-    },
-    {
-      "denominacion": "Barcelona FC",
-      "descripcion": "nulo",
-      "escudo": 2131099734,
-      "liga": "PRIMERA",
-      "nombre": "barcelona"
-    },
-    {
-      "denominacion": "Real Sociedad",
-      "descripcion": "nulo",
-      "escudo": 2131099751,
-      "liga": "PRIMERA",
-      "nombre": "real sociedad"
-    },
-    {
-      "denominacion": "Valencia",
-      "descripcion": "nulo",
-      "escudo": 2131099755,
-      "liga": "PRIMERA",
-      "nombre": "valencia"
-    },
-    {
-      "denominacion": "Sevilla FC",
-      "descripcion": "El Sevilla Fútbol Club es un club de fútbol español organizado como sociedad anónima deportiva. Tiene su sede en Sevilla, capital de la comunidad autónoma de Andalucía, y actualmente juega en Primera División. Fue fundado el 25 de enero de 18905​6​ y su primer presidente fue el vice-cónsul británico Edward Farquharson Johnston.7​ Posteriormente fue inscrito en el registro de asociaciones el 14 de octubre de 1905, siendo su presidente el jerezano José Luis Gallegos Arnosa.",
-      "escudo": 2131099752,
-      "liga": "PRIMERA",
-      "nombre": "sevilla"
-    },
-    {
-      "denominacion": "Alavés",
-      "descripcion": "nulo",
-      "escudo": 2131099733,
-      "liga": "PRIMERA",
-      "nombre": "alaves"
-    },
-    {
-      "denominacion": "UD Almería",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "almeria"
-    },
-    {
-      "denominacion": "Córdoba CF",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "cordoba"
-    },
-    {
-      "denominacion": "Alcorcon UD",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "alcorcon"
-    },
-    {
-      "denominacion": "UD Almería",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "almeria"
-    },
-    {
-      "denominacion": "Real Madrid",
-      "descripcion": "El Real Madrid Club de Fútbol, más conocido simplemente como Real Madrid, es una entidad polideportiva con sede en Madrid, España. Fue declarada oficialmente registrada como club de fútbol por sus socios el 6 de marzo de 1902 con el objeto de la práctica y desarrollo de este deporte —si bien sus orígenes datan al año 1900,8​ y su denominación de (Sociedad) Madrid Foot-ball Club a noviembre de 1901—. Tuvo a Julián Palacios y los hermanos Juan Padrós y Carlos Padrós como principales valedores de su creación.",
-      "escudo": 2131099738,
-      "liga": "PRIMERA",
-      "nombre": "madrid"
-    },
-    {
-      "denominacion": "Cádiz CD",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "cadiz"
-    },
-    {
-      "denominacion": "Alavés",
-      "descripcion": "nulo",
-      "escudo": 2131099733,
-      "liga": "PRIMERA",
-      "nombre": "alaves"
-    },
-    {
-      "denominacion": "Barcelona FC",
-      "descripcion": "nulo",
-      "escudo": 2131099734,
-      "liga": "PRIMERA",
-      "nombre": "barcelona"
-    },
-    {
-      "denominacion": "Real Madrid",
-      "descripcion": "El Real Madrid Club de Fútbol, más conocido simplemente como Real Madrid, es una entidad polideportiva con sede en Madrid, España. Fue declarada oficialmente registrada como club de fútbol por sus socios el 6 de marzo de 1902 con el objeto de la práctica y desarrollo de este deporte —si bien sus orígenes datan al año 1900,8​ y su denominación de (Sociedad) Madrid Foot-ball Club a noviembre de 1901—. Tuvo a Julián Palacios y los hermanos Juan Padrós y Carlos Padrós como principales valedores de su creación.",
-      "escudo": 2131099738,
-      "liga": "PRIMERA",
-      "nombre": "madrid"
-    },
-    {
-      "denominacion": "UD Almería",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "almeria"
-    },
-    {
-      "denominacion": "Cádiz CD",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "cadiz"
-    },
-    {
-      "denominacion": "Cádiz CD",
-      "descripcion": "descripcion",
-      "escudo": 2131099735,
-      "liga": "SEGUNDA",
-      "nombre": "cadiz"
-    },
-    {
-      "denominacion": "Valencia",
-      "descripcion": "nulo",
-      "escudo": 2131099755,
-      "liga": "PRIMERA",
-      "nombre": "valencia"
-    },
-    {
-      "denominacion": "Real Betis",
-      "descripcion": "El Real Betis Balompié, también conocido como Real Betis o simplemente Betis, es una entidad polideportiva con sede en Sevilla, España. Fue establecida en septiembre de 1908 para la práctica del fútbol —aunque sus orígenes datan de 1907 y así consta como fecha fundacional por el propio club—, y oficialmente registrada el 1 de febrero de 1909.",
-      "escudo": 2131099735,
-      "liga": "PRIMERA",
-      "nombre": "betis"
-    }
-  ]
+  {
+    "denominacion": "Sevilla FC",
+    "descripcion": "El Sevilla Fútbol Club es un club de fútbol español organizado como sociedad anónima deportiva. Tiene su sede en Sevilla, capital de la comunidad autónoma de Andalucía, y actualmente juega en Primera División. Fue fundado el 25 de enero de 18905​6​ y su primer presidente fue el vice-cónsul británico Edward Farquharson Johnston.7​ Posteriormente fue inscrito en el registro de asociaciones el 14 de octubre de 1905, siendo su presidente el jerezano José Luis Gallegos Arnosa.",
+    "escudo": 2131099752,
+    "liga": "PRIMERA",
+    "nombre": "sevilla"
+  },
+  {
+    "denominacion": "Real Betis",
+    "descripcion": "El Real Betis Balompié, también conocido como Real Betis o simplemente Betis, es una entidad polideportiva con sede en Sevilla, España. Fue establecida en septiembre de 1908 para la práctica del fútbol —aunque sus orígenes datan de 1907 y así consta como fecha fundacional por el propio club—, y oficialmente registrada el 1 de febrero de 1909.",
+    "escudo": 2131099735,
+    "liga": "PRIMERA",
+    "nombre": "betis"
+  },
+  {
+    "denominacion": "Barcelona FC",
+    "descripcion": "El Fútbol Club Barcelona (en catalán, Futbol Club Barcelona) es una entidad polideportiva de Barcelona (España). Fue fundado como club de fútbol el 29 de noviembre de 1899.Una de las principales características del F. C. Barcelona es su carácter polideportivo. Se distingue de las demás instituciones deportivas por el hecho de que posee un extenso palmarés a nivel europeo, por el alto nivel de formación de sus jugadores, el potencial económico que maneja, por la calidad de los jugadores y también porque «posee una remarcable cultura del juego y del triunfo».",
+    "escudo": 2131099734,
+    "liga": "PRIMERA",
+    "nombre": "barcelona"
+  },
+  {
+    "denominacion": "Real Madrid",
+    "descripcion": "El Real Madrid Club de Fútbol, más conocido simplemente como Real Madrid, es una entidad polideportiva con sede en Madrid, España. Fue declarada oficialmente registrada como club de fútbol por sus socios el 6 de marzo de 1902 con el objeto de la práctica y desarrollo de este deporte —si bien sus orígenes datan al año 1900,8 y su denominación de (Sociedad) Madrid Foot-ball Club a noviembre de 1901—. Tuvo a Julián Palacios y los hermanos Juan Padrós y Carlos Padrós como principales valedores de su creación.",
+    "escudo": 2131099738,
+    "liga": "PRIMERA",
+    "nombre": "madrid"
+  },
+  {
+    "denominacion": "Cádiz CF",
+    "descripcion": "El Cádiz Club de Fútbol es un equipo de fútbol con sede en Cádiz, España. Fue fundado el 10 de septiembre de 1910 (aunque en realidad en esa fecha se fundó el Mirandilla CF por lo que la fecha es discutida) y desde entonces ha disputado doce temporadas en la máxima categoría del fútbol español, la Primera División en la que es considerado por su trayectoria como uno de los clubes históricos del fútbol español. En dicha competición ocupa el 34.º puesto en su clasificación histórica. Actualmente milita en Segunda División, desde la temporada 2016-17",
+    "escudo": 2131099735,
+    "liga": "SEGUNDA",
+    "nombre": "cadiz"
+  },
+  {
+    "denominacion": "Valencia CF",
+    "descripcion": "El Valencia Club de Fútbol es una sociedad anónima deportiva con sede en la ciudad de Valencia, España. El club de fútbol fue fundado el 18 de marzo de 1919. Su primer equipo juega en la LaLiga Santander, la máxima competición de fútbol en España, y disputa sus encuentros como local en el estadio de Mestalla, que dispone de una capacidad para 50.242 espectadores. En la clasificación histórica de la LFP ocupa el 4º puesto, habiendo disputado 84 de las 88 ediciones de la máxima categoría. Es el 4º club español en cuanto a títulos internacionales (con 7 títulos) y el 5º club español con más títulos con un total de 22 trofeos: 6 títulos de Liga, 7 Copas del Rey, 1 Supercopa de España, 1 Copa Eva Duarte, 1 Copa de la UEFA, 2 Copa de Ferias, 2 Supercopas de Europa, 1 Recopa de Europa y 1 Copa Intertoto, además de dos subcampeonatos consecutivos de la Liga de Campeones de la UEFA en los años 2000 y 2001.",
+    "escudo": 2131099755,
+    "liga": "PRIMERA",
+    "nombre": "valencia"
+  },
+  {
+    "denominacion": "UD Almería",
+    "descripcion": "La Unión Deportiva Almería es un club de fútbol de la ciudad de Almería, en la comunidad autónoma de Andalucía, al sur de España. Fue fundado el 26 de julio de 1989, bajo la denominación de Almería CF, adoptando la actual denominación en el año 2001. En la actualidad juega en la Segunda División de España, después de haber descendido de la Primera División de España tras dos temporadas consecutivas en ella. Es el 26º equipo con más simpatizantes de España (0,3%) según la encuesta del CIS de mayo de 2007. El club llegó a ocupar la posición número 271 de la clasificación mundial de mejores equipos del mundo que realiza la IFFHS en el año 2009. Además, el club ostenta actualmente la 38ª posición en la clasificación histórica de Primera División, habiendo cosechado 242 puntos en las seis temporadas que ha estado en Primera División hasta la fecha.",
+    "escudo": 2131099735,
+    "liga": "SEGUNDA",
+    "nombre": "almeria"
+  },
+  {
+    "denominacion": "Alavés",
+    "descripcion": "nulo",
+    "escudo": 2131099733,
+    "liga": "PRIMERA",
+    "nombre": "alaves"
+  },
+  {
+    "denominacion": "Alcorcon UD",
+    "descripcion": "descripcion",
+    "escudo": 2131099735,
+    "liga": "SEGUNDA",
+    "nombre": "alcorcon"
+  },
+  {
+    "denominacion": "Córdoba CF",
+    "descripcion": "descripcion",
+    "escudo": 2131099735,
+    "liga": "SEGUNDA",
+    "nombre": "cordoba"
+  },
+  {
+    "denominacion": "Real Sociedad",
+    "descripcion": "nulo",
+    "escudo": 2131099751,
+    "liga": "PRIMERA",
+    "nombre": "real sociedad"
+  },
+  {
+    "denominacion": "Albacete CF",
+    "descripcion": "descripcion",
+    "escudo": 2131099735,
+    "liga": "SEGUNDA",
+    "nombre": "albacete"
+  },
+  {
+    "denominacion": "Los nenes de Asun",
+    "descripcion": "descripcion",
+    "escudo": 2131099735,
+    "liga": "PRIMERA",
+    "nombre": "nenesAsun"
+  },
+  {
+    "denominacion": "Los nenes de Leo",
+    "descripcion": "descripcion",
+    "escudo": 2131099735,
+    "liga": "SEGUNDA",
+    "nombre": "nenesLeo"
+  }
+]
