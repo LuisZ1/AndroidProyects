@@ -3,11 +3,9 @@ package com.example.lzumarraga.ejemploconlistadinamica;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,26 +15,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 
 public class MainActivity extends ListActivity {
 
     equipitos equipaso = new equipitos();
+    Equipo[] equipos;
     TextView selection;
     ImageView icon;
     Gson gson = new Gson();
@@ -50,7 +39,7 @@ public class MainActivity extends ListActivity {
         //cargarEquiposJSON();
         recuperarEquiposJSON();
 
-        setListAdapter(new IconicAdapter<Equipo>(this, R.layout.fila_equipo_primera, R.id.label, equipitos.getEquipos()));
+        setListAdapter(new IconicAdapter<Equipo>(this, R.layout.fila_equipo_primera, R.id.label, equipos));
         selection = findViewById(R.id.selection);
 
     }
@@ -58,6 +47,7 @@ public class MainActivity extends ListActivity {
     /*
      * El metodo rellena un array con varios objetos equipo de futbol para mostrarlos en una lista
      * */
+    @Deprecated
     public void rellenarEquipos() {
         Equipo[] equipos = new Equipo[25];
 
@@ -154,8 +144,11 @@ public class MainActivity extends ListActivity {
                 holder = (ViewHolder) row.getTag();
             }
 
-            holder.getLab().setText(equipitos.getEquipos()[position].toString());
-            holder.getImgV().setImageResource(equipitos.getEquipos()[position].getEscudo());
+//            holder.getLab().setText(equipitos.getEquipos()[position].toString());
+//            holder.getImgV().setImageResource(equipitos.getEquipos()[position].getEscudo());
+
+            holder.getLab().setText(equipos[position].toString());
+            holder.getImgV().setImageResource(equipos[position].getEscudo());
 
             return (row);
         }
@@ -169,10 +162,10 @@ public class MainActivity extends ListActivity {
         public int getItemViewType(int position) {
             int type = -1;
 
-            if (equipitos.getEquipos()[position].getLiga() == liga.PRIMERA) {
+            if (equipos[position].getLiga() == liga.PRIMERA) {
                 type = 0;
             } else {
-                if (equipitos.getEquipos()[position].getLiga() == liga.SEGUNDA) {
+                if (equipos[position].getLiga() == liga.SEGUNDA) {
                     type = 1;
                 }
             }
@@ -203,7 +196,7 @@ public class MainActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(this, activityMostrarEquipo.class);
 
-        intent.putExtra("objEquipo", equipitos.getEquipos()[position]);
+        intent.putExtra("objEquipo", equipos[position]);
 
         startActivity(intent);
     }
@@ -222,6 +215,7 @@ public class MainActivity extends ListActivity {
     }
 
 
+    @Deprecated
     public String loadJSONFromAsset() {
         String json = null;
         try {
@@ -238,17 +232,17 @@ public class MainActivity extends ListActivity {
         return json;
     }
 
+    @Deprecated
     public void cargarEquiposJSON(){
         rellenarEquipos();
-        String json = gson.toJson(equipitos.getEquipos());
-        int i = 0;
+        String json = gson.toJson(equipos);
     }
 
 
     public String readJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = getAssets().open("equipo.json");
+            InputStream is = getAssets().open("equipos.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -265,10 +259,7 @@ public class MainActivity extends ListActivity {
 
         String json = readJSONFromAsset();
 
-        equipaso = gson.fromJson(json, equipitos.class);
-
-        int i = 0;
-
+        equipos = gson.fromJson(json, Equipo[].class);
     }
 
 }

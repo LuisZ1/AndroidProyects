@@ -72,7 +72,7 @@ public class MainActivity extends ListActivity {
         Equipo alcorcon = new Equipo("alcorcon", "Alcorcon UD", R.drawable.betis, liga.SEGUNDA, "descripcion");
         Equipo cadiz = new Equipo("cadiz", "Cádiz CD", R.drawable.betis, liga.SEGUNDA, "descripcion");
         Equipo cordoba = new Equipo("cordoba", "Córdoba CF", R.drawable.betis, liga.SEGUNDA, "descripcion");
-        Equipo almeria = new Equipo("almeria", "UD Almería", R.drawable.betis, liga.SEGUNDA, "descripcion");
+        Equipo almeria = new Equipo("almeria", "UD Almería", R.drawable.betis, liga.SEGUNDA, "llevalatararaunvestidoblancollenodecascabeles");
 
         equipos[7] = albacete;
         equipos[8] = alcorcon;
