@@ -172,7 +172,7 @@ public class MainActivity extends ListActivity {
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(this, activityMostrarEquipo.class);
 
         intent.putExtra("objEquipo", equipos[position]);
