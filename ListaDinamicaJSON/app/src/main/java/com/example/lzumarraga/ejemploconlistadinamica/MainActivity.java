@@ -128,7 +128,8 @@ public class MainActivity extends ListActivity {
 //            holder.getImgV().setImageResource(equipitos.getEquipos()[position].getEscudo());
 
             holder.getLab().setText(equipos[position].toString());
-            holder.getImgV().setImageResource(equipos[position].getEscudo());
+//            holder.getImgV().setImageResource(equipos[position].getEscudo());
+            holder.getImgV().setImageResource(R.drawable.pink);
 
             return (row);
         }
@@ -174,10 +175,20 @@ public class MainActivity extends ListActivity {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(this, activityMostrarEquipo.class);
+        equipos[position].setLiga(liga.SEGUNDA);
 
         intent.putExtra("objEquipo", equipos[position]);
 
+
         startActivity(intent);
+        refreshMain();
+    }
+
+    public void refreshMain(){
+
+        Intent refresh = new Intent(this, MainActivity.class);
+        startActivity(refresh);
+        this.finish();
     }
 
     /*
@@ -197,7 +208,7 @@ public class MainActivity extends ListActivity {
     public String loadJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = getAssets().open("equipos.json");
+            InputStream is = getAssets().open("cotilleos.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -219,7 +230,7 @@ public class MainActivity extends ListActivity {
     public String readJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = getAssets().open("equipos.json");
+            InputStream is = getAssets().open("cotilleos.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);

@@ -32,7 +32,8 @@ public class activityMostrarEquipo extends AppCompatActivity {
 
 //        pintar escudo equipo
         imgFoto = findViewById(R.id.escudoEquipo);
-        imgFoto.setImageResource(equipo.getEscudo());
+//        imgFoto.setImageResource(equipo.getEscudo());
+        imgFoto.setImageResource(R.drawable.pink);
 
         //pintar descripcion equipo
 
