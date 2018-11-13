@@ -16,6 +16,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tech.alvarez.pokedex.models.Pokemon;
+import tech.alvarez.pokedex.models.PokemonCompleto;
 import tech.alvarez.pokedex.models.PokemonRespuesta;
 import tech.alvarez.pokedex.pokeapi.PokeapiService;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListaPokemonAdapter listaPokemonAdapter;
     ArrayList<Pokemon> listaPokemon;
+    private PokemonCompleto pokemonCompletoRespuesta;
 
     private int offset;
     private boolean aptoParaCargar;
@@ -47,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), activity_pokemon_details.class);
-                intent.putExtra("objPokemon", listaPokemon.get(recyclerView.getChildAdapterPosition(view)));
+
+                Pokemon pokemon = (Pokemon) listaPokemon.get(recyclerView.getChildAdapterPosition(view));
+
+                obtenerPokemon(pokemon.getNumber());
+
+                intent.putExtra("objPokemon", pokemon);
+
                 startActivity(intent);
             }
         });
@@ -113,4 +121,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void obtenerPokemon(int idPokemon) {
+        PokeapiService service = retrofit.create(PokeapiService.class);
+        Call<PokemonCompleto> pokemonCall = service.obtenerPokemon(idPokemon);
+//        PokemonCompleto pokemonCompletoRespuesta = new PokemonCompleto();
+
+        pokemonCall.enqueue(new Callback<PokemonCompleto>() {
+            @Override
+            public void onResponse(Call<PokemonCompleto> call, Response<PokemonCompleto> response) {
+
+                try {
+                    aptoParaCargar = true;
+                    if (response.isSuccessful()) {
+
+                        pokemonCompletoRespuesta = response.body();
+                        //pokemonCompletoRespuesta
+
+                    } else {
+                        Log.e(TAG, " onResponse: " + response.errorBody());
+                    }
+
+                }catch (Exception e){}
+            }
+
+            @Override
+            public void onFailure(Call<PokemonCompleto> call, Throwable t) {
+                Log.e(TAG, " onFailure: " + t.getMessage());
+            }
+
+        });
+    }
 }
+

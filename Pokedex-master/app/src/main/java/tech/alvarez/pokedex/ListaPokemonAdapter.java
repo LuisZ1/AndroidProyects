@@ -14,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 
 import tech.alvarez.pokedex.models.Pokemon;
+import tech.alvarez.pokedex.models.PokemonCompleto;
 
 public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapter.ViewHolder> implements View.OnClickListener {
 
@@ -31,7 +32,7 @@ public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapte
 
     public ListaPokemonAdapter(Context context) {
         this.context = context;
-        dataset = new ArrayList<>();
+        dataset = new ArrayList<Pokemon>();
     }
 
     @Override
@@ -47,7 +48,7 @@ public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapte
         holder.nombreTextView.setText(p.getName());
 
         Glide.with(context)
-                .load("http://pokeapi.co/media/sprites/pokemon/" + p.getId() + ".png")
+                .load("http://pokeapi.co/media/sprites/pokemon/" + p.getNumber() + ".png")
                 .centerCrop()
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

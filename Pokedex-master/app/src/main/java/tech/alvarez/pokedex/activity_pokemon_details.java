@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import tech.alvarez.pokedex.models.Pokemon;
-import tech.alvarez.pokedex.models.type;
+import tech.alvarez.pokedex.models.PokemonCompleto;
 
 public class activity_pokemon_details extends AppCompatActivity {
 
@@ -34,7 +34,7 @@ public class activity_pokemon_details extends AppCompatActivity {
         imgV = (ImageView) findViewById(R.id.imgVFotoPokemon);
 
         Glide.with(activity_pokemon_details.this)
-                .load("http://pokeapi.co/media/sprites/pokemon/" + pokemon.getId() + ".png")
+                .load("http://pokeapi.co/media/sprites/pokemon/" + pokemon.getNumber() + ".png")
                 .centerCrop()
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -49,12 +49,12 @@ public class activity_pokemon_details extends AppCompatActivity {
         txtNombre.setText(Nombre);
 
         //Numero
-        Numero = String.valueOf(pokemon.getId());
+        Numero = String.valueOf(pokemon.getNumber());
         txtNumero = (TextView) findViewById(R.id.txtNumPokemon);
         txtNumero.setText(Numero);
 
         //Tipo
-//        type[] types = pokemon.getTypes();
+//        type[] types = pokemonCompleto.getTypes();
 //        Tipo = types[0].toString();
         txtTipo = (TextView) findViewById(R.id.txtTipos);
         txtTipo.setText(Tipo);

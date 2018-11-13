@@ -1,7 +1,5 @@
 package tech.alvarez.pokedex.models;
 
-import java.util.ArrayList;
-
 public class stats {
 
     private int base_stat;
