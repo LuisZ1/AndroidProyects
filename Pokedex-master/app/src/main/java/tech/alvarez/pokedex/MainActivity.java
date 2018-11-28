@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     private void obtenerPokemon(int idPokemon) {
         PokeapiService service = retrofit.create(PokeapiService.class);
         Call<PokemonCompleto> pokemonCall = service.obtenerPokemon(idPokemon);
-//        PokemonCompleto pokemonCompletoRespuesta = new PokemonCompleto();
+//      PokemonCompleto pokemonCompletoRespuesta = new PokemonCompleto();
 
         pokemonCall.enqueue(new Callback<PokemonCompleto>() {
             @Override
