@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/txtPulsacionesBronce" />
 
@@ -182,6 +183,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -190,6 +192,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/txtNPulsaciones"
         app:layout_constraintTop_toBottomOf="@+id/txtNPulsaciones" />
 
@@ -198,6 +201,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/txtPulsacionesCobre"
         app:layout_constraintTop_toBottomOf="@+id/txtPulsacionesCobre" />
 
@@ -208,6 +212,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="nClicks:"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -216,6 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="lvl Cobre:"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -225,13 +231,15 @@
         android:layout_height="wrap_content"
         android:text="lvl Bronce:"
         app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="lvl Plata:"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -327,6 +335,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="TextView"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/txtNPulsaciones" />
 
