@@ -3,7 +3,7 @@ package com.example.lzumarraga.probandoviewmodel;
 public class ViewModel extends android.arch.lifecycle.ViewModel{
 
     public long sumador = 1;
-    public long contador = 100000000;
+    public long contador = 0;
     public long precioCobre = 50;
     public long precioBronce = 5000;
     public long precioPlata = 500000;
