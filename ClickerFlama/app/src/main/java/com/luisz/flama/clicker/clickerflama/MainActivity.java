@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,24 @@ public class MainActivity extends AppCompatActivity {
         displayForPuntos(miViewModel.contador);
     }
 
+    public void onClickSumadorOro(View view){
+        miViewModel.sumadorOro();
+        displayForPuntos(miViewModel.contador);
+//        Toast.makeText(this, "Oro: En construccion", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClickSumadorPlatino(View view){
+        miViewModel.sumadorPlatino();
+        displayForPuntos(miViewModel.contador);
+//        Toast.makeText(this, "Platino: En construccion", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClickSumadorDiamante(View view){
+        miViewModel.sumadorDiamante();
+        displayForPuntos(miViewModel.contador);
+//        Toast.makeText(this, "Diamante: En construccion", Toast.LENGTH_SHORT).show();
+    }
+
 
     public void displayForPuntos(long puntos){
 
@@ -46,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView txtSumador = findViewById(R.id.txtSumador);
         txtSumador.setText(String.valueOf(miViewModel.sumador));
+
+        //Precios
 
         TextView txtPrecioCobre = findViewById(R.id.txtPrecioCobre);
         txtPrecioCobre.setText(String.valueOf(miViewModel.precioCobre));
@@ -56,8 +77,22 @@ public class MainActivity extends AppCompatActivity {
         TextView txtPrecioPlata = findViewById(R.id.txtPrecioPlata);
         txtPrecioPlata.setText(String.valueOf(miViewModel.precioPlata));
 
+        TextView txtPrecioOro = findViewById(R.id.txtPrecioOro);
+        txtPrecioOro.setText(String.valueOf(miViewModel.precioOro));
+
+        TextView txtPrecioPlatino = findViewById(R.id.txtPrecioPlatino);
+        txtPrecioPlatino.setText(String.valueOf(miViewModel.precioPlatino));
+
+        TextView txtPrecioDiamante = findViewById(R.id.txtPrecioDiamante);
+        txtPrecioDiamante.setText(String.valueOf(miViewModel.precioDiamante));
+
+        //Contadores
+
         TextView txtContadorPulsaciones = findViewById(R.id.txtNPulsaciones);
         txtContadorPulsaciones.setText(String.valueOf(miViewModel.contadorPulsaciones));
+
+        TextView txtContadorParcial = findViewById(R.id.txtPulsacionesParcial);
+        txtContadorParcial.setText(String.valueOf(miViewModel.contadorPulsacionesParcial));
 
         TextView txtContadorCobre = findViewById(R.id.txtPulsacionesCobre);
         txtContadorCobre.setText(String.valueOf(miViewModel.contadorCobre));
@@ -65,15 +100,8 @@ public class MainActivity extends AppCompatActivity {
         TextView txtContadorBronce = findViewById(R.id.txtPulsacionesBronce);
         txtContadorBronce.setText(String.valueOf(miViewModel.contadorBronce));
 
-//        if(miViewModel.contador > 0) {
-//            TextView txtPrecioPulsacionesCobre = findViewById(R.id.txtPrecioClickCobre);
-//            txtPrecioPulsacionesCobre.setText(String.valueOf(miViewModel.precioCobre / miViewModel.sumador));
-//
-//            TextView txtPrecioPulsacionesBronce = findViewById(R.id.txtPrecioClickBronce);
-//            txtPrecioPulsacionesBronce.setText(String.valueOf(miViewModel.precioBronce / miViewModel.sumador));
-//
-//            TextView txtPrecioPulsacionesPlata = findViewById(R.id.txtPrecioClickPlata);
-//            txtPrecioPulsacionesPlata.setText(String.valueOf(miViewModel.precioPlata / miViewModel.sumador));
-//        }
+        TextView txtContadorPlata = findViewById(R.id.txtPulsacionesPlata);
+        txtContadorPlata.setText(String.valueOf(miViewModel.contadorPlata));
+
     }
 }
