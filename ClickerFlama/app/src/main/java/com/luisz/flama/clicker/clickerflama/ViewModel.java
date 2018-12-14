@@ -1,5 +1,10 @@
 package com.luisz.flama.clicker.clickerflama;
 
+import android.os.Handler;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class ViewModel extends android.arch.lifecycle.ViewModel{
 
     constantesClicker cons = new constantesClicker();
@@ -27,9 +32,6 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
         contadorPulsacionesParcial++;
         return contador;
     }
-
-    //Formula coste :costeActual + BASE_PRECIO_X * MULTIPLICADOR ^ nivel  //precioCobre/bronce/...
-    //Formula ingresos : ingresosActual +  BASE_INGRESOS_X * nivel   //Sumador
 
     public void sumadorCobre(){
         if(contador >= precioCobre) {
@@ -91,36 +93,34 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
         }
     }
 
-//    public void sumadorCobre(){
-//        if(contador >= precioCobre) {
-//            contador = contador - precioCobre;
-//            precioCobre = ((long) Math.ceil(precioCobre + Math.max(precioCobre, cons.multiplicadorPrecioCobre * Math.pow(cons.basePotenciaPrecioCobre, ++exponenteCobre))));
-//            sumador = (long) Math.ceil(sumador + Math.max(cons.minimoSumadorCobre, cons.multiplicadorSumadorCobre * Math.pow(cons.basePotenciaSumadorCobre, exponenteCobre)));
-//            contadorCobre++;
-//            contadorPulsacionesParcial = 0;
-//        }
-//    }
 
-//    public void sumadorBronce(){
-//        if(contador >= precioBronce) {
+    //MINERO AUTOMATICO
 //
-//            contador = contador - precioBronce;
-//            precioBronce = ((long)Math.ceil(precioBronce + Math.max(cons.precioBronce, cons.multiplicadorPrecioBronce * Math.pow(cons.basePotenciaPrecioBronce, ++exponenteBronce))));
-//            sumador = (long)Math.ceil(sumador + Math.max(cons.minimoSumadorBronce, cons.multiplicadorSumadorBronce * Math.pow(cons.basePotenciaSumadorBronce, exponenteBronce)));
-//            contadorBronce++;
-//            contadorPulsacionesParcial = 0;
+//    private Timer timer;
+//    private TimerTask timerTask;
+//    private Handler handler = new Handler();
+//
+//    //To stop timer
+//    public void stopTimer(){
+//        if(timer != null){
+//            timer.cancel();
+//            timer.purge();
 //        }
 //    }
-
-    //TODO
-//    public void sumadorPlata(){
-//        if(contador >= precioPlata) {
-//            contador = contador - precioPlata;
-//            precioPlata = ((long)Math.ceil(precioPlata + Math.max(500000, 155000 * Math.pow(1.1111, ++exponentePlata))));
-//            sumador = (long)Math.ceil(sumador + Math.max(100, 2500 * Math.pow(1.07, exponentePlata)));
-//            contadorPlata++;
-//            contadorPulsacionesParcial = 0;
-//        }
+//
+//    //To start timer
+//    public void startTimer(){
+//        timer = new Timer();
+//        timerTask = new TimerTask() {
+//            public void run() {
+//                handler.post(new Runnable() {
+//                    public void run(){
+//                        sumatron ();
+//                    }
+//                });
+//            }
+//        };
+//        timer.schedule(timerTask, 1000, 1000);
 //    }
 
 }

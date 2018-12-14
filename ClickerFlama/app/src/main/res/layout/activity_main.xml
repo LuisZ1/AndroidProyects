@@ -7,15 +7,6 @@
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
-    <TextView
-        android:id="@+id/txtPulsacionesPlata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/txtPulsacionesBronce" />
-
     <Button
         android:id="@+id/btnPlata"
         android:layout_width="0dp"
@@ -35,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Precio plata:"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/txtPrecioPlata"
         app:layout_constraintStart_toStartOf="@+id/txtPrecioPlata" />
 
@@ -42,9 +34,10 @@
         android:id="@+id/txtPrecioPlata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:text="0"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
@@ -97,26 +90,27 @@
         android:id="@+id/lblPuntos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="27dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="8dp"
         android:text="Tus puntos:"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.281" />
+        app:layout_constraintTop_toBottomOf="@+id/swMineroAuto"
+        app:layout_constraintVertical_bias="0.007" />
 
     <TextView
         android:id="@+id/txtPuntos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="10"
-        android:textSize="36sp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="@+id/lblPuntos"
         app:layout_constraintStart_toStartOf="@+id/lblPuntos"
         app:layout_constraintTop_toBottomOf="@+id/lblPuntos" />
@@ -125,9 +119,10 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Sumador:"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,6 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="0"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -145,6 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Precio cobre:"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/txtPrecioCobre"
         app:layout_constraintStart_toStartOf="@+id/txtPrecioCobre" />
 
@@ -152,9 +149,10 @@
         android:id="@+id/txtPrecioCobre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:text="0"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -163,6 +161,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Precio bronce:"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/txtPrecioBronce"
         app:layout_constraintStart_toStartOf="@+id/txtPrecioBronce" />
 
@@ -170,9 +169,10 @@
         android:id="@+id/txtPrecioBronce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:text="0"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
@@ -180,30 +180,11 @@
         android:id="@+id/txtNPulsaciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtPulsacionesCobre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/txtNPulsaciones"
-        app:layout_constraintTop_toBottomOf="@+id/txtNPulsaciones" />
-
-    <TextView
-        android:id="@+id/txtPulsacionesBronce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/txtPulsacionesCobre"
-        app:layout_constraintTop_toBottomOf="@+id/txtPulsacionesCobre" />
+        android:text="0"
+        android:textSize="10sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/textView8"
@@ -211,37 +192,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="nClicks:"
-        android:visibility="invisible"
+        android:text="Número de clicks:"
+        android:textSize="10sp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lvl Cobre:"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lvl Bronce:"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lvl Plata:"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <Button
         android:id="@+id/button"
@@ -327,17 +282,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
-
-    <TextView
-        android:id="@+id/txtPulsacionesParcial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/txtNPulsaciones" />
+        app:layout_constraintGuide_percent="0.55555" />
 
     <TextView
         android:id="@+id/textView7"
@@ -346,6 +291,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Precio Oro:"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
@@ -356,6 +302,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Precio Platino:"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
@@ -366,6 +313,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Precio Diamante:"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
@@ -374,6 +322,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -383,14 +332,32 @@
         android:layout_height="wrap_content"
         android:text="0"
         app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        android:textSize="10sp" />
 
     <TextView
         android:id="@+id/txtPrecioDiamante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <Switch
+        android:id="@+id/swMineroAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:checked="false"
+        android:onClick="onSwitchClicked"
+        android:text="AutoMiner"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:checked="false" />
 
 </android.support.constraint.ConstraintLayout>
