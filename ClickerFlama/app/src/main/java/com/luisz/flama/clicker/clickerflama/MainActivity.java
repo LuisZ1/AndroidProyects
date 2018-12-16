@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
-        
+
         btnCobre = (Button) findViewById(R.id.btnCobre);
         btnBronce = (Button) findViewById(R.id.btnBronce);
         btnPlata = (Button) findViewById(R.id.btnPlata);
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     private Timer timer;
     private TimerTask timerTask;
     private Handler handler = new Handler();
-    private int delay = 500;
+    private int delay = 1000;
     private int period = delay;
 
     public void stopTimer(){
