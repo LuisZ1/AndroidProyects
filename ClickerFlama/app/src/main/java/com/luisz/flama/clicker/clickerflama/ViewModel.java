@@ -17,6 +17,26 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
     public long contadorPulsacionesParcial=0, contadorOro = 0, contadorPlatino = 0, contadorDiamante = 0;
 
 
+    public ViewModel(){
+        sumador = 1;
+        puntos = 0;
+        precioCobre = cons.BASE_PRECIO_COBRE;
+        precioBronce = cons.BASE_PRECIO_BRONCE;
+        precioPlata = cons.BASE_PRECIO_PLATA;
+        precioOro = cons.BASE_PRECIO_ORO;
+        precioPlatino = cons.BASE_PRECIO_PLATINO;
+        precioDiamante = cons.BASE_PRECIO_DIAMANTE;
+        contadorPulsaciones=0;
+        contadorCobre = 0;
+        contadorBronce = 0;
+        contadorPlata = 0;
+        contadorPulsacionesParcial=0;
+        contadorOro = 0;
+        contadorPlatino = 0;
+        contadorDiamante = 0;
+    }
+
+
     public long sumatron (){
         puntos = puntos + sumador;
         contadorPulsaciones++;

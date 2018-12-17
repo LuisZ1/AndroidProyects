@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     Button btnBronce, btnCobre, btnPlata, btnOro, btnPlatino, btnDiamante;
     constantesClicker cons = new constantesClicker();
 
+    private int delay = 1000;
+    private int period = delay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         comprobarPrecios();
 
-        DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###");
+        DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
         TextView txtPuntos = findViewById(R.id.txtPuntos);
         txtPuntos.setText(formatter.format(puntos));
@@ -180,8 +183,6 @@ public class MainActivity extends AppCompatActivity {
     private Timer timer;
     private TimerTask timerTask;
     private Handler handler = new Handler();
-    private int delay = 1000;
-    private int period = delay;
 
     public void stopTimer(){
         if(timer != null){
@@ -218,22 +219,6 @@ public class MainActivity extends AppCompatActivity {
             stopTimer();
         }
     }
-
-    /*
-
-    public long sumador = 1, puntos = 0;
-
-    public long precioCobre = cons.BASE_PRECIO_COBRE;
-    public long precioBronce = cons.BASE_PRECIO_BRONCE;
-    public long precioPlata = cons.BASE_PRECIO_PLATA;
-    public long precioOro = cons.BASE_PRECIO_ORO;
-    public long precioPlatino = cons.BASE_PRECIO_PLATINO;
-    public long precioDiamante = cons.BASE_PRECIO_DIAMANTE;
-
-    public long contadorPulsaciones=0, contadorCobre = 0, contadorBronce = 0, contadorPlata = 0;
-    public long contadorPulsacionesParcial=0, contadorOro = 0, contadorPlatino = 0, contadorDiamante = 0;
-
-     */
 
     private void guardarPartida(){
         SharedPreferences preferences = getSharedPreferences("partida",MODE_PRIVATE);
@@ -276,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
         miViewModel.precioPlatino = preferences.getLong("precioPlatino",cons.BASE_PRECIO_PLATINO);
         miViewModel.contadorPlatino = preferences.getLong("contadorPlatino",0);
         miViewModel.precioDiamante = preferences.getLong("precioDiamante",cons.BASE_PRECIO_DIAMANTE);
+        miViewModel.contadorDiamante = preferences.getLong("ContadorDiamante",0);
         miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones",0);
         miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial",0);
     }
