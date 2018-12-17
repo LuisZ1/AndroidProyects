@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
         miViewModel.precioPlatino = preferences.getLong("precioPlatino",cons.BASE_PRECIO_PLATINO);
         miViewModel.contadorPlatino = preferences.getLong("contadorPlatino",0);
         miViewModel.precioDiamante = preferences.getLong("precioDiamante",cons.BASE_PRECIO_DIAMANTE);
-        miViewModel.contadorDiamante = preferences.getLong("ContadorDiamante",0);
+        miViewModel.contadorDiamante = preferences.getLong("contadorDiamante",0);
         miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones",0);
         miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial",0);
     }
