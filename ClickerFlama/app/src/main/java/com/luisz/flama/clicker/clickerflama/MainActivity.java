@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.Timer;
@@ -33,48 +32,48 @@ public class MainActivity extends AppCompatActivity {
         btnPlatino = (Button) findViewById(R.id.btnPlatino);
         btnDiamante = (Button) findViewById(R.id.btnDiamante);
 
-        displayForPuntos(miViewModel.contador);
+        displayForPuntos(miViewModel.puntos);
     }
 
     public void onClickSumar(View view){
         miViewModel.sumatron();
-        displayForPuntos(miViewModel.contador);
+        displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
     public void onClickSumadorCobre(View view){
         miViewModel.sumadorCobre();
-        displayForPuntos(miViewModel.contador);
+        displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
     public void onClickSumadorBronce(View view){
         miViewModel.sumadorBronce();
-        displayForPuntos(miViewModel.contador);
+        displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
     public void onClickSumadorPlata(View view){
         miViewModel.sumadorPlata();
-        displayForPuntos(miViewModel.contador);
+        displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
     public void onClickSumadorOro(View view){
         miViewModel.sumadorOro();
-        displayForPuntos(miViewModel.contador);
+        displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
     public void onClickSumadorPlatino(View view){
         miViewModel.sumadorPlatino();
-        displayForPuntos(miViewModel.contador);
+        displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
     public void onClickSumadorDiamante(View view){
         miViewModel.sumadorDiamante();
-        displayForPuntos(miViewModel.contador);
+        displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
@@ -118,37 +117,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void comprobarPrecios(){
-        if(miViewModel.contador < miViewModel.precioCobre){
+        if(miViewModel.puntos < miViewModel.precioCobre){
             btnCobre.setEnabled(false);
         }else{
             btnCobre.setEnabled(true);
         }
 
-        if(miViewModel.contador < miViewModel.precioBronce){
+        if(miViewModel.puntos < miViewModel.precioBronce){
             btnBronce.setEnabled(false);
         }else{
             btnBronce.setEnabled(true);
         }
 
-        if(miViewModel.contador < miViewModel.precioPlata){
+        if(miViewModel.puntos < miViewModel.precioPlata){
             btnPlata.setEnabled(false);
         }else{
             btnPlata.setEnabled(true);
         }
 
-        if(miViewModel.contador < miViewModel.precioOro){
+        if(miViewModel.puntos < miViewModel.precioOro){
             btnOro.setEnabled(false);
         }else{
             btnOro.setEnabled(true);
         }
 
-        if(miViewModel.contador < miViewModel.precioPlatino){
+        if(miViewModel.puntos < miViewModel.precioPlatino){
             btnPlatino.setEnabled(false);
         }else{
             btnPlatino.setEnabled(true);
         }
 
-        if(miViewModel.contador < miViewModel.precioDiamante){
+        if(miViewModel.puntos < miViewModel.precioDiamante){
             btnDiamante.setEnabled(false);
         }else{
             btnDiamante.setEnabled(true);
@@ -177,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     public void run(){
                         miViewModel.sumatron();
-                        displayForPuntos(miViewModel.contador);
+                        displayForPuntos(miViewModel.puntos);
                     }
                 });
             }

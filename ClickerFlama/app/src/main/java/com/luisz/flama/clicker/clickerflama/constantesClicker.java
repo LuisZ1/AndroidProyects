@@ -5,28 +5,28 @@ public class constantesClicker {
     public static final double MULTIPLICADOR = 1.07;
 
     public static final long BASE_PRECIO_COBRE = 50;
-    public static final long BASE_INGRESOS_COBRE = 5;
-    public static final long minimoSumadorCobre = 1;
+    public static final long BASE_INGRESOS_COBRE = 7;
+    public static final long MINIMO_SUMADOR_COBRE = 1;
 
     public static final long BASE_PRECIO_BRONCE = 1000;
-    public static final long BASE_INGRESOS_BRONCE = 20;
-    public static final long minimoSumadorBronce = 10;
+    public static final long BASE_INGRESOS_BRONCE = 25;
+    public static final long MINIMO_SUMADOR_BRONCE = 10;
 
-    public static final long BASE_PRECIO_PLATA = 2500;
-    public static final long BASE_INGRESOS_PLATA = 70;
-    public static final long minimoSumadorPlata = 100;
+    public static final long BASE_PRECIO_PLATA = 3000;
+    public static final long BASE_INGRESOS_PLATA = 75;
+    public static final long MINIMO_SUMADOR_PLATA = 100;
 
-    public static final long BASE_PRECIO_ORO= 5700;
-    public static final long BASE_INGRESOS_ORO = 180;
-    public static final long minimoSumadorOro = 1000;
+    public static final long BASE_PRECIO_ORO= 6000;
+    public static final long BASE_INGRESOS_ORO = 190;
+    public static final long MINIMO_SUMADOR_ORO = 1000;
 
-    public static final long BASE_PRECIO_PLATINO = 15000;
-    public static final long BASE_INGRESOS_PLATINO = 500;
-    public static final long minimoSumadorPlatino = 10000;
+    public static final long BASE_PRECIO_PLATINO = 17000;
+    public static final long BASE_INGRESOS_PLATINO = 600;
+    public static final long MINIMO_SUMADOR_PLATINO = 10000;
 
-    public static final long BASE_PRECIO_DIAMANTE = 90000;
-    public static final long BASE_INGRESOS_DIAMANTE = 1300;
-    public static final long minimoSumadorDiamante = 100000;
+    public static final long BASE_PRECIO_DIAMANTE = 100000;
+    public static final long BASE_INGRESOS_DIAMANTE = 1500;
+    public static final long MINIMO_SUMADOR_DIAMANTE = 100000;
 
 /*
 
@@ -48,28 +48,28 @@ public class constantesClicker {
     public final double basePotenciaPrecioCobre = 1.1;
     public final double multiplicadorSumadorCobre = 0.25;
     public final double basePotenciaSumadorCobre = 1.07;
-    public final long minimoSumadorCobre = 1;
+    public final long MINIMO_SUMADOR_COBRE = 1;
 
     //BRONCE
     public final long multiplicadorPrecioBronce = 150;
     public final double basePotenciaPrecioBronce = 1.11;
     public final double multiplicadorSumadorBronce = 2.5;
     public final double basePotenciaSumadorBronce = 1.07;
-    public final long minimoSumadorBronce = 10;
+    public final long MINIMO_SUMADOR_BRONCE = 10;
 
     //PLATA
     public final long multiplicadorPrecioPlata = 15500;
     public final double basePotenciaPrecioPlata = 1.111;
     public final double multiplicadorSumadorPlata = 25;
     public final double basePotenciaSumadorPlata = 1.07;
-    public final long minimoSumadorPlata = 100;
+    public final long MINIMO_SUMADOR_PLATA = 100;
 
     //ORO //TODO
     public final long multiplicadorPrecioOro = 155000;
     public final double basePotenciaPrecioOro = 1.1111;
     public final double multiplicadorSumadorOro = 250;
     public final double basePotenciaSumadorOro = 1.07;
-    public final long minimoSumadorOro = 1000;
+    public final long MINIMO_SUMADOR_ORO = 1000;
 
 
     //PLATINO  //TODO
@@ -77,14 +77,14 @@ public class constantesClicker {
     public final double basePotenciaPrecioPlatino = 1.11111;
     public final double multiplicadorSumadorPlatino = 2500;
     public final double basePotenciaSumadorPlatino = 1.07;
-    public final long minimoSumadorPlatino = 10000;
+    public final long MINIMO_SUMADOR_PLATINO = 10000;
 
     //DIAMANTE  //TODO
     public final long multiplicadorPrecioDiamante = 1550000;
     public final double basePotenciaPrecioDiamante = 1.111111;
     public final double multiplicadorSumadorDiamante = 25000;
     public final double basePotenciaSumadorDiamante = 1.07;
-    public final long minimoSumadorDiamante = 100000;
+    public final long MINIMO_SUMADOR_DIAMANTE = 100000;
 */
 
 }
