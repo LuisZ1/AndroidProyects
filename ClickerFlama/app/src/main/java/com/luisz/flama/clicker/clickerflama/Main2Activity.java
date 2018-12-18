@@ -51,8 +51,9 @@ public class Main2Activity extends AppCompatActivity {
         adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                miRecyclerView.getChildAdapterPosition(view);
-                Toast.makeText(getApplicationContext(), "Hola", Toast.LENGTH_SHORT).show();
+                gestionClickRecycler (miRecyclerView.getChildAdapterPosition(view));
+
+                //Toast.makeText(getApplicationContext(), "Hola", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -69,6 +70,18 @@ public class Main2Activity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         //guardarPartida();
+    }
+
+    public void gestionClickRecycler(int item){
+        switch (item){
+            case 0:
+                miViewModel.sumadorCobre();
+                break;
+            case 1:
+                miViewModel.sumadorBronce();
+                break;
+        }
+        displayForPuntos(miViewModel.puntos);
     }
 
     public void onClickSumar(View view){
