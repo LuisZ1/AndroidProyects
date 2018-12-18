@@ -49,13 +49,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), activity_pokemon_details.class);
-
                 Pokemon pokemon = (Pokemon) listaPokemon.get(recyclerView.getChildAdapterPosition(view));
-
                 obtenerPokemon(pokemon.getNumber());
-
                 intent.putExtra("objPokemon", pokemon);
-
                 startActivity(intent);
             }
         });

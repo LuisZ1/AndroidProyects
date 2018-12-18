@@ -9,7 +9,6 @@ public class mejora {
     private String nombre;
     private long nivel;
     private String colorFondo;
-    private Color color;
 
     private long precioBase;
     private long precio;
@@ -25,7 +24,6 @@ public class mejora {
         this.minimoSumador = minimoSumador;
         this.colorFondo = colorFondo;
         this.precio = precioBase;
-        this.color = Color.valueOf(0xffff0000);
     }
 
     public String getNombre() {
@@ -78,9 +76,5 @@ public class mejora {
 
     public void setPrecio(long precio) {
         this.precio = precio;
-    }
-
-    public Color getColor() {
-        return color;
     }
 }

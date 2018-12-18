@@ -15,19 +15,20 @@ import com.luisz.flama.clicker.clickerflama.modelos.mejora;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHolderMejoras> {
+public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHolderMejoras> implements View.OnClickListener{
 
     private ArrayList<mejora> listaMejoras;
+    private View.OnClickListener listener;
     DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
     public AdapterMejoras(ArrayList<mejora> listaMejoras) {
         this.listaMejoras = listaMejoras;
     }
 
-
     @Override
     public ViewHolderMejoras onCreateViewHolder(ViewGroup parent, int i) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_layout,null,false);
+        view.setOnClickListener(this);
         return new ViewHolderMejoras(view);
     }
 
@@ -36,7 +37,18 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
         viewHolderMejoras.txtNombreMejora.setText(listaMejoras.get(i).getNombre());
         viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejoras.get(i).getPrecio()));
         viewHolderMejoras.txtLevel.setText(formatter.format(listaMejoras.get(i).getNivel()));
-        viewHolderMejoras.miCardView.setCardBackgroundColor(Color.BLUE);
+        viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejoras.get(i).getColorFondo()));
+    }
+
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(listener != null){
+            listener.onClick(view);
+        }
     }
 
     @Override
