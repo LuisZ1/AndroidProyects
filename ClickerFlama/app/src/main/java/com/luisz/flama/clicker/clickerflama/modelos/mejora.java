@@ -1,5 +1,6 @@
-package com.luisz.flama.clicker.clickerflama;
+package com.luisz.flama.clicker.clickerflama.modelos;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 
 public class mejora {
@@ -8,12 +9,14 @@ public class mejora {
     private String nombre;
     private long nivel;
     private String colorFondo;
+    private Color color;
 
     private long precioBase;
     private long precio;
     private long ingresosBase;
     private int minimoSumador;
 
+    @SuppressLint("NewApi")
     public mejora(String nombre, long nivel, long precioBase, long ingresosBase, int minimoSumador, String colorFondo) {
         this.nombre = nombre;
         this.nivel = nivel;
@@ -21,6 +24,8 @@ public class mejora {
         this.ingresosBase = ingresosBase;
         this.minimoSumador = minimoSumador;
         this.colorFondo = colorFondo;
+        this.precio = precioBase;
+        this.color = Color.valueOf(0xffff0000);
     }
 
     public String getNombre() {
@@ -73,5 +78,9 @@ public class mejora {
 
     public void setPrecio(long precio) {
         this.precio = precio;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

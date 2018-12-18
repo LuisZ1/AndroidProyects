@@ -17,12 +17,13 @@
 
             <TextView
                 android:id="@+id/txtPrecio"
-                android:layout_width="10dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/_0"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline7"
                 app:layout_constraintStart_toEndOf="@+id/lblPrecio"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +36,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Precio:"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline7"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +49,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Nivel:"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline8" />
@@ -74,6 +77,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/_0"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/lblNivel"
                 app:layout_constraintTop_toTopOf="@+id/guideline8" />
