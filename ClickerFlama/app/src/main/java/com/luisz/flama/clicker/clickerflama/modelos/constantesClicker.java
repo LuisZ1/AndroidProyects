@@ -1,4 +1,4 @@
-package com.luisz.flama.clicker.clickerflama;
+package com.luisz.flama.clicker.clickerflama.modelos;
 
 public class constantesClicker {
 

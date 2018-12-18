@@ -1,4 +1,9 @@
-package com.luisz.flama.clicker.clickerflama;
+package com.luisz.flama.clicker.clickerflama.ViewModels;
+
+import com.luisz.flama.clicker.clickerflama.modelos.constantesClicker;
+import com.luisz.flama.clicker.clickerflama.modelos.mejora;
+
+import java.util.ArrayList;
 
 public class ViewModel extends android.arch.lifecycle.ViewModel{
 
@@ -15,6 +20,8 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
 
     public long contadorPulsaciones=0, contadorCobre = 0, contadorBronce = 0, contadorPlata = 0;
     public long contadorPulsacionesParcial=0, contadorOro = 0, contadorPlatino = 0, contadorDiamante = 0;
+
+    public ArrayList<mejora> listaMejoras = new ArrayList<mejora>();
 
 
     public ViewModel(){
@@ -34,8 +41,8 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
         contadorOro = 0;
         contadorPlatino = 0;
         contadorDiamante = 0;
+        rellenarListaMejoras();
     }
-
 
     public long sumatron (){
         puntos = puntos + sumador;
@@ -104,4 +111,26 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
         }
     }
 
+    public ArrayList<mejora> rellenarListaMejoras(){
+
+        mejora miMejora = new mejora("cobre",0,cons.BASE_PRECIO_COBRE,7,1, "#CC8F60");
+        mejora miMejora1 = new mejora("bronce",0,cons.BASE_PRECIO_BRONCE,25,10,"#CD7F32");
+        mejora miMejora2 = new mejora("plata",0,cons.BASE_PRECIO_PLATA,75,100,"#B3B6AF");
+        mejora miMejora3 = new mejora("oro",0,cons.BASE_PRECIO_ORO,190,1000,"#C39738");
+        mejora miMejora4 = new mejora("platino",0,cons.BASE_PRECIO_PLATINO,600,10000,"#D9D6CE");
+        mejora miMejora5 = new mejora("diamante",0,cons.BASE_PRECIO_DIAMANTE,1500,100000,"#7FBFFF");
+
+        listaMejoras.add(miMejora);
+        listaMejoras.add(miMejora1);
+        listaMejoras.add(miMejora2);
+        listaMejoras.add(miMejora3);
+        listaMejoras.add(miMejora4);
+        listaMejoras.add(miMejora5);
+
+        return listaMejoras;
+    }
+
+    public ArrayList<mejora> getListaMejoras() {
+        return listaMejoras;
+    }
 }
