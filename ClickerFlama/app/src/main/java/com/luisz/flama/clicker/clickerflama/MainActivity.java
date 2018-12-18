@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     private int delay = 1000;
     private int period = delay;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
