@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="cobre"> #FFB74D</color>
+    <color name="bronce"> #EF6C00 </color>
+    <color name="plata">#9E9E9E</color>
+    <color name="oro">#FFD600</color>
+    <color name="platino">#BDBDBD</color>
+    <color name="diamante">#29B6F6</color>
+</resources>

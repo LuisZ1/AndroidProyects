@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Simple Clicker</string>
+
+    <string name="_0">0</string>
+    <string name="_10">10</string>
+    <string name="autominer">AutoMiner</string>
+    <string name="puntos">Tus puntos:</string>
+    <string name="click">CLICK</string>
+    <string name="n_clicks">Número de clicks:</string>
+
+
+    <string name="precio_bronce">Precio bronce:</string>
+    <string name="precio_platino">Precio Platino:</string>
+    <string name="precio_plata">Precio plata:</string>
+    <string name="precio_diamante">Precio Diamante:</string>
+    <string name="precio_oro">Precio Oro:</string>
+    <string name="precio_cobre">Precio cobre:</string>
+
+    <string name="plata">Plata</string>
+    <string name="cobre">Cobre</string>
+    <string name="bronce">Bronce</string>
+    <string name="sumador">Sumador:</string>
+    <string name="diamante">Diamante</string>
+    <string name="oro">Oro</string>
+    <string name="platino">Platino</string>
+    <string name="precio">Precio:</string>
+    <string name="nivel">Nivel:</string>
+</resources>

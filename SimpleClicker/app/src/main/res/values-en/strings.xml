@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple Clicker</string>
+
+    <string name="_0">0</string>
+    <string name="_10">10</string>
+    <string name="puntos">Your points:</string>
+    <string name="autominer">AutoMiner</string>
+    <string name="click">CLICK</string>
+    <string name="n_clicks">Num of clicks:</string>
+    <string name="sumador">Adder:</string>
+
+
+    <string name="precio_bronce">Bronze prize:</string>
+    <string name="precio_platino">Platinum prize:</string>
+    <string name="precio_plata">Silver prize:</string>
+    <string name="precio_diamante">Diamond prize:</string>
+    <string name="precio_oro">Gold prize:</string>
+    <string name="precio_cobre">Copper prize:</string>
+
+    <string name="plata">Silver</string>
+    <string name="cobre">Copper</string>
+    <string name="bronce">Bronze</string>
+    <string name="diamante">Diamond</string>
+    <string name="oro">Gold</string>
+    <string name="platino">Platinum</string>
+    <string name="precio">Prize:</string>
+    <string name="nivel">Level:</string>
+</resources>
