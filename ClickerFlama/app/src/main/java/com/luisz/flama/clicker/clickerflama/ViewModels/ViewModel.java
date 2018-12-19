@@ -1,5 +1,8 @@
 package com.luisz.flama.clicker.clickerflama.ViewModels;
 
+import android.arch.lifecycle.MutableLiveData;
+import android.widget.Toast;
+
 import com.luisz.flama.clicker.clickerflama.modelos.constantesClicker;
 import com.luisz.flama.clicker.clickerflama.modelos.mejora;
 
@@ -17,11 +20,14 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
     public long precioOro = cons.BASE_PRECIO_ORO;
     public long precioPlatino = cons.BASE_PRECIO_PLATINO;
     public long precioDiamante = cons.BASE_PRECIO_DIAMANTE;
+    public long contadorCobre = 0, contadorBronce = 0, contadorPlata = 0;
+    public long contadorOro = 0, contadorPlatino = 0, contadorDiamante = 0;
 
-    public long contadorPulsaciones=0, contadorCobre = 0, contadorBronce = 0, contadorPlata = 0;
-    public long contadorPulsacionesParcial=0, contadorOro = 0, contadorPlatino = 0, contadorDiamante = 0;
+    public long contadorPulsaciones=0;
+    public long contadorPulsacionesParcial=0;
 
-    public ArrayList<mejora> listaMejoras = new ArrayList<mejora>();
+    private MutableLiveData<ArrayList<mejora>> listaMejorasMutable = new MutableLiveData<ArrayList<mejora>>();
+    private ArrayList<mejora> listaMejoras = new ArrayList<mejora>();
 
 
     public ViewModel(){
@@ -111,14 +117,33 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
         }
     }
 
-    public ArrayList<mejora> rellenarListaMejoras(){
+    public boolean sumadorMejora(mejora mejora){
 
-        mejora miMejora = new mejora("cobre",0,cons.BASE_PRECIO_COBRE,7,1, "#CC8F60");
-        mejora miMejora1 = new mejora("bronce",0,cons.BASE_PRECIO_BRONCE,25,10,"#CD7F32");
-        mejora miMejora2 = new mejora("plata",0,cons.BASE_PRECIO_PLATA,75,100,"#B3B6AF");
-        mejora miMejora3 = new mejora("oro",0,cons.BASE_PRECIO_ORO,190,1000,"#C39738");
-        mejora miMejora4 = new mejora("platino",0,cons.BASE_PRECIO_PLATINO,600,10000,"#D9D6CE");
-        mejora miMejora5 = new mejora("diamante",0,cons.BASE_PRECIO_DIAMANTE,1500,100000,"#7FBFFF");
+        boolean veredicto = false;
+
+        if(puntos >= mejora.getPrecio()) {
+            mejora.setNivel(mejora.getNivel()+1);
+            puntos = puntos - mejora.getPrecio();
+            mejora.setPrecio((long) Math.ceil(mejora.getPrecioBase() * Math.pow(cons.MULTIPLICADOR, mejora.getNivel())));
+            sumador = sumador +((long) Math.ceil(Math.max(mejora.getMinimoSumador(), mejora.getIngresosBase() * mejora.getNivel())));
+            contadorPulsacionesParcial = 0;
+
+            listaMejorasMutable.setValue(listaMejoras);
+
+            veredicto = true;
+        }
+
+        return veredicto;
+    }
+
+    public void rellenarListaMejoras(){
+
+        mejora miMejora = new mejora(1,"cobre",0,cons.BASE_PRECIO_COBRE,7,1, "#CC8F60");
+        mejora miMejora1 = new mejora(2,"bronce",0,cons.BASE_PRECIO_BRONCE,25,10,"#CD7F32");
+        mejora miMejora2 = new mejora(3,"plata",0,cons.BASE_PRECIO_PLATA,75,50,"#B3B6AF");
+        mejora miMejora3 = new mejora(4,"oro",0,cons.BASE_PRECIO_ORO,190,180,"#C39738");
+        mejora miMejora4 = new mejora(5,"platino",0,cons.BASE_PRECIO_PLATINO,600,500,"#D9D6CE");
+        mejora miMejora5 = new mejora(6,"diamante",0,cons.BASE_PRECIO_DIAMANTE,1500,1000,"#7FBFFF");
 
         listaMejoras.add(miMejora);
         listaMejoras.add(miMejora1);
@@ -127,10 +152,10 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
         listaMejoras.add(miMejora4);
         listaMejoras.add(miMejora5);
 
-        return listaMejoras;
+        listaMejorasMutable.setValue(listaMejoras);
     }
 
-    public ArrayList<mejora> getListaMejoras() {
-        return listaMejoras;
+    public MutableLiveData<ArrayList<mejora>> getListaMejoras() {
+        return listaMejorasMutable;
     }
 }

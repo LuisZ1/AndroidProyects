@@ -5,7 +5,7 @@ import android.graphics.Color;
 
 public class mejora {
 
-
+    private int id;
     private String nombre;
     private long nivel;
     private String colorFondo;
@@ -16,7 +16,8 @@ public class mejora {
     private int minimoSumador;
 
     @SuppressLint("NewApi")
-    public mejora(String nombre, long nivel, long precioBase, long ingresosBase, int minimoSumador, String colorFondo) {
+    public mejora(int id, String nombre, long nivel, long precioBase, long ingresosBase, int minimoSumador, String colorFondo) {
+        this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
         this.precioBase = precioBase;
@@ -76,5 +77,9 @@ public class mejora {
 
     public void setPrecio(long precio) {
         this.precio = precio;
+    }
+
+    public int getId() {
+        return id;
     }
 }

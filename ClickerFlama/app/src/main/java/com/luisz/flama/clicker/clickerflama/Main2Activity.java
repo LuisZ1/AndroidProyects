@@ -1,9 +1,11 @@
 package com.luisz.flama.clicker.clickerflama;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,7 +31,8 @@ public class Main2Activity extends AppCompatActivity {
 
     ViewModel miViewModel = new ViewModel();
     RecyclerView miRecyclerView;
-    ArrayList<mejora> listaMejoras;
+    AdapterMejoras adaptador;
+    //ArrayList<mejora> listaMejoras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +46,26 @@ public class Main2Activity extends AppCompatActivity {
         miRecyclerView = findViewById(R.id.myRecyclerView);
         miRecyclerView.setLayoutManager(new GridLayoutManager(this,2,LinearLayoutManager.HORIZONTAL,false));
 
-        listaMejoras = miViewModel.getListaMejoras();
-
-        AdapterMejoras adaptador = new AdapterMejoras(listaMejoras);
+        adaptador = new AdapterMejoras(miViewModel.getListaMejoras().getValue());
         miRecyclerView.setAdapter(adaptador);
 
         adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gestionClickRecycler (miRecyclerView.getChildAdapterPosition(view));
-
-                //Toast.makeText(getApplicationContext(), "Hola", Toast.LENGTH_SHORT).show();
+                int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
+                gestionClickRecycler ( miViewModel.getListaMejoras().getValue().get(mejoraSeleccionada) ) ;
             }
         });
+
+
+        final Observer<ArrayList<mejora>> miVMobserver = new Observer<ArrayList<mejora>>() {
+            @Override
+            public void onChanged(@Nullable ArrayList<mejora> listadoMejoras) {
+                adaptador.setListaMejoras(listadoMejoras);
+            }
+        };
+
+        miViewModel.getListaMejoras().observe(this, miVMobserver);
 
         displayForPuntos(miViewModel.puntos);
     }
@@ -72,58 +82,19 @@ public class Main2Activity extends AppCompatActivity {
         //guardarPartida();
     }
 
-    public void gestionClickRecycler(int item){
-        switch (item){
-            case 0:
-                miViewModel.sumadorCobre();
-                break;
-            case 1:
-                miViewModel.sumadorBronce();
-                break;
-        }
-        displayForPuntos(miViewModel.puntos);
-    }
-
     public void onClickSumar(View view){
         miViewModel.sumatron();
         displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
-    public void onClickSumadorCobre(View view){
-        miViewModel.sumadorCobre();
+    public void gestionClickRecycler(mejora item){
+        if(!miViewModel.sumadorMejora(item)){
+            Toast.makeText(getApplicationContext(), "Ere un tieso", Toast.LENGTH_SHORT).show();
+        }else{
+            //Toast.makeText(getApplicationContext(), "Comprado", Toast.LENGTH_SHORT).show();
+        }
         displayForPuntos(miViewModel.puntos);
-//        comprobarPrecios();
-    }
-
-    public void onClickSumadorBronce(View view){
-        miViewModel.sumadorBronce();
-        displayForPuntos(miViewModel.puntos);
-//        comprobarPrecios();
-    }
-
-    public void onClickSumadorPlata(View view){
-        miViewModel.sumadorPlata();
-        displayForPuntos(miViewModel.puntos);
-//        comprobarPrecios();
-    }
-
-    public void onClickSumadorOro(View view){
-        miViewModel.sumadorOro();
-        displayForPuntos(miViewModel.puntos);
-//        comprobarPrecios();
-    }
-
-    public void onClickSumadorPlatino(View view){
-        miViewModel.sumadorPlatino();
-        displayForPuntos(miViewModel.puntos);
-//        comprobarPrecios();
-    }
-
-    public void onClickSumadorDiamante(View view){
-        miViewModel.sumadorDiamante();
-        displayForPuntos(miViewModel.puntos);
-//        comprobarPrecios();
     }
 
     public void displayForPuntos(long puntos){

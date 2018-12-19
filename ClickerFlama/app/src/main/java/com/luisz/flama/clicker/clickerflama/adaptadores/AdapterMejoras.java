@@ -1,5 +1,6 @@
 package com.luisz.flama.clicker.clickerflama.adaptadores;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.graphics.Color;
 import android.support.annotation.ColorRes;
 import android.support.v7.widget.CardView;
@@ -68,5 +69,9 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
             txtLevel = itemView.findViewById(R.id.txtLevel);
             miCardView = itemView.findViewById(R.id.miCardView);
         }
+    }
+
+    public void setListaMejoras(ArrayList<mejora> listaMejoras) {
+        this.listaMejoras = listaMejoras;
     }
 }
