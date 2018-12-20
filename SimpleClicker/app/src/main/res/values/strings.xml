@@ -7,6 +7,11 @@
     <string name="puntos">Tus puntos:</string>
     <string name="click">CLICK</string>
     <string name="n_clicks">Clicks:</string>
+    <string name="n_clicks_icon">&#xf0a6;</string>
+    <string name="sumador">Sumador:</string>
+    <string name="sumador_icon">&#xf3bf;</string>
+    <string name="run">&#xf70c;</string>
+    <string name="walk">&#xf554;</string>
 
 
     <string name="precio_bronce">Precio bronce:</string>
@@ -19,11 +24,10 @@
     <string name="plata">Plata</string>
     <string name="cobre">Cobre</string>
     <string name="bronce">Bronce</string>
-    <string name="sumador">Sumador:</string>
     <string name="diamante">Diamante</string>
     <string name="oro">Oro</string>
     <string name="platino">Platino</string>
     <string name="precio">Precio:</string>
-    <string name="nivel">"&#xf3bf;"</string>
-    <string name="billete">"&#xf0d6;"</string>
+    <string name="nivel">Nivel</string>
+    <string name="billete">Precio</string>
 </resources>

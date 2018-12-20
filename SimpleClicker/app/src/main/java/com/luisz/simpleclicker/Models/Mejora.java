@@ -1,4 +1,4 @@
-package com.luisz.simpleclicker;
+package com.luisz.simpleclicker.Models;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;

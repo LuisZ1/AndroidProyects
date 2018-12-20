@@ -2,6 +2,9 @@ package com.luisz.simpleclicker;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.luisz.simpleclicker.Models.Constantes;
+import com.luisz.simpleclicker.Models.Mejora;
+
 import java.util.ArrayList;
 
 public class ViewModel extends android.arch.lifecycle.ViewModel{
@@ -19,8 +22,8 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
 
     public ViewModel(){
         sumador = 1;
-        puntos = 50;
-        contadorPulsaciones=0;
+        puntos = 100;
+        contadorPulsaciones=100;
         contadorPulsacionesParcial=0;
         rellenarListaMejoras();
     }
@@ -37,8 +40,9 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
         return puntos;
     }
 
-    /*  public boolean sumadorMejora(int mejoraSeleccionada)
-    *   DESCRIPCIÓN: calcula los nuevos precios y sumadores de la mejora pulsada
+    /*  synchronized boolean sumadorMejora(int mejoraSeleccionada)
+    *   DESCRIPCIÓN: calcula los nuevos precios y sumadores de la mejora pulsada, declarado
+    *   synchronized para protegerlo en multihilos
     *   ENTRADA: indice de la posicion que ocupa la mejora en el array de mejoras
     *   SALIDA: true en caso de que haya ido todo bien
     */
@@ -55,7 +59,7 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
             mejora.setNivel(mejora.getNivel()+1);
             puntos = puntos - mejora.getPrecio();
             mejora.setPrecio((long) Math.ceil(mejora.getPrecioBase() * Math.pow(cons.MULTIPLICADOR, mejora.getNivel())));
-            sumador = sumador +((long) Math.ceil(Math.max(mejora.getMinimoSumador(), mejora.getIngresosBase() * mejora.getNivel())));
+            sumador = sumador +((long) Math.ceil( mejora.getIngresosBase()/* * mejora.getNivel()*/));
             contadorPulsacionesParcial = 0;
 
             listaMejoras.remove(mejoraSeleccionada);
