@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.luisz.simpleclicker.Adapter.AdapterMejoras;
 import com.luisz.simpleclicker.Models.Mejora;
+import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.io.IOException;
 import java.text.DecimalFormat;

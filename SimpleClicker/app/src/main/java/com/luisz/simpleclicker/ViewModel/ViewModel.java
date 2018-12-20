@@ -1,4 +1,4 @@
-package com.luisz.simpleclicker;
+package com.luisz.simpleclicker.ViewModel;
 
 import android.arch.lifecycle.MutableLiveData;
 

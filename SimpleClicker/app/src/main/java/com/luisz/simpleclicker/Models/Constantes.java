@@ -22,6 +22,9 @@ public class Constantes {
     public static final long BASE_PRECIO_DIAMANTE   = 550000;
     public static final long BASE_INGRESOS_DIAMANTE = 900;
 
+    //hierro, estaño
+    //adamantio, tungsteno, uranio, iridio,
+
 
     public static final int MINIMO_SUMADOR_COBRE    = 1;
     public static final int MINIMO_SUMADOR_BRONCE   = 10;
