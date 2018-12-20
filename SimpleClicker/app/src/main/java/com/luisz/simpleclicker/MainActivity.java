@@ -3,6 +3,7 @@ package com.luisz.simpleclicker;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,18 +25,20 @@ public class MainActivity extends AppCompatActivity {
     ViewModel miViewModel = new ViewModel();
     RecyclerView miRecyclerView;
     AdapterMejoras adaptador;
+    Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
+        font = Typeface.createFromAsset(getAssets(), "FontAwesome.ttf");
 
         txtPuntos = findViewById(R.id.txtPuntos);
         txtSumador = findViewById(R.id.txtSumador);
 
         miRecyclerView = findViewById(R.id.myRecyclerView);
-        miRecyclerView.setLayoutManager(new GridLayoutManager(this,2,LinearLayoutManager.HORIZONTAL,false));
+        miRecyclerView.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
 
         adaptador = new AdapterMejoras(miViewModel.getListaMejorasMutable().getValue());
         miRecyclerView.setAdapter(adaptador);
@@ -46,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
-                gestionClickRecycler( mejoraSeleccionada ) ;
+                if (mejoraSeleccionada != -1) {
+                    gestionClickRecycler(mejoraSeleccionada);
+                }
             }
         });
 
@@ -75,23 +80,18 @@ public class MainActivity extends AppCompatActivity {
         guardarPartida();
     }
 
-    public void onClickSumar(View view){
+    public void onClickSumar(View view) {
         miViewModel.sumatron();
         displayForPuntos(miViewModel.puntos);
 //        comprobarPrecios();
     }
 
-    public void gestionClickRecycler(int item){
+    synchronized void gestionClickRecycler(int item) {
         miViewModel.sumadorMejora(item);
-//        if(!miViewModel.sumadorMejora(item)){
-//            Toast.makeText(getApplicationContext(), "Ere un tieso", Toast.LENGTH_SHORT).show();
-//        }else{
-//            //Toast.makeText(getApplicationContext(), "Comprado", Toast.LENGTH_SHORT).show();
-//        }
         displayForPuntos(miViewModel.puntos);
     }
 
-    public void displayForPuntos(long puntos){
+    public void displayForPuntos(long puntos) {
 
         //comprobarPrecios();
         DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
@@ -107,96 +107,58 @@ public class MainActivity extends AppCompatActivity {
 
     }
 /*
-    public void comprobarPrecios(){
-        if(miViewModel.puntos < miViewModel.precioCobre){
-            btnCobre.setEnabled(false);
-        }else{
-            btnCobre.setEnabled(true);
-        }
+        //MINERO AUTOMATICO
 
-        if(miViewModel.puntos < miViewModel.precioBronce){
-            btnBronce.setEnabled(false);
-        }else{
-            btnBronce.setEnabled(true);
-        }
+        private Timer timer;
+        private TimerTask timerTask;
+        private Handler handler = new Handler();
 
-        if(miViewModel.puntos < miViewModel.precioPlata){
-            btnPlata.setEnabled(false);
-        }else{
-            btnPlata.setEnabled(true);
-        }
-
-        if(miViewModel.puntos < miViewModel.precioOro){
-            btnOro.setEnabled(false);
-        }else{
-            btnOro.setEnabled(true);
-        }
-
-        if(miViewModel.puntos < miViewModel.precioPlatino){
-            btnPlatino.setEnabled(false);
-        }else{
-            btnPlatino.setEnabled(true);
-        }
-
-        if(miViewModel.puntos < miViewModel.precioDiamante){
-            btnDiamante.setEnabled(false);
-        }else{
-            btnDiamante.setEnabled(true);
-        }
-    }
-
-    //MINERO AUTOMATICO
-
-    private Timer timer;
-    private TimerTask timerTask;
-    private Handler handler = new Handler();
-
-    public void stopTimer(){
-        if(timer != null){
-            timer.cancel();
-            timer.purge();
-        }
-    }
-
-    public void startTimer(){
-        timer = new Timer();
-        timerTask = new TimerTask() {
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run(){
-                        miViewModel.sumatron();
-                        displayForPuntos(miViewModel.puntos);
-                    }
-                });
+        public void stopTimer(){
+            if(timer != null){
+                timer.cancel();
+                timer.purge();
             }
-        };
-        timer.schedule(timerTask, delay, period);
-    }
-
-    public void onSwitchClicked(View v){
-        //Is the switch on?
-        boolean on = ((Switch) v).isChecked();
-
-        if(on)
-        {
-            startTimer();
         }
-        else
-        {
-            stopTimer();
-        }
-    }
-*/
-    private void guardarPartida(){
 
-        SharedPreferences preferences = getSharedPreferences("partida",MODE_PRIVATE);
+        public void startTimer(){
+            timer = new Timer();
+            timerTask = new TimerTask() {
+                public void run() {
+                    handler.post(new Runnable() {
+                        public void run(){
+                            miViewModel.sumatron();
+                            displayForPuntos(miViewModel.puntos);
+                        }
+                    });
+                }
+            };
+            timer.schedule(timerTask, delay, period);
+        }
+
+        public void onSwitchClicked(View v){
+            //Is the switch on?
+            boolean on = ((Switch) v).isChecked();
+
+            if(on)
+            {
+                startTimer();
+            }
+            else
+            {
+                stopTimer();
+            }
+        }
+    */
+    private void guardarPartida() {
+
+        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putLong("puntos", miViewModel.puntos);
         editor.putLong("sumador", miViewModel.sumador);
         editor.putLong("contadorPulsaciones", miViewModel.contadorPulsaciones);
         editor.putLong("contadorPulsacionesParcial", miViewModel.contadorPulsacionesParcial);
-        try{
+        try {
             editor.putString("listadoDeMejoras", ObjectSerializer.serialize(miViewModel.getListaMejoras()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -206,14 +168,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void cargarPartida(){
-        SharedPreferences preferences = getSharedPreferences("partida",MODE_PRIVATE);
-        preferences = getSharedPreferences("partida",MODE_PRIVATE);
+    private void cargarPartida() {
+        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
+        preferences = getSharedPreferences("partida", MODE_PRIVATE);
 
-        miViewModel.puntos = preferences.getLong("puntos",0);
-        miViewModel.sumador = preferences.getLong("sumador",1);
-        miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones",0);
-        miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial",0);
+        miViewModel.puntos = preferences.getLong("puntos", 0);
+        miViewModel.sumador = preferences.getLong("sumador", 1);
+        miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones", 0);
+        miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial", 0);
         try {
             miViewModel.listaMejoras = (ArrayList<Mejora>) ObjectSerializer.deserialize(preferences.getString("listadoDeMejoras", ObjectSerializer.serialize(new ArrayList<Mejora>())));
         } catch (IOException e) {

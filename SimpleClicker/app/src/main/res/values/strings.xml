@@ -6,7 +6,7 @@
     <string name="autominer">AutoMiner</string>
     <string name="puntos">Tus puntos:</string>
     <string name="click">CLICK</string>
-    <string name="n_clicks">Número de clicks:</string>
+    <string name="n_clicks">Clicks:</string>
 
 
     <string name="precio_bronce">Precio bronce:</string>
@@ -24,5 +24,6 @@
     <string name="oro">Oro</string>
     <string name="platino">Platino</string>
     <string name="precio">Precio:</string>
-    <string name="nivel">Nivel:</string>
+    <string name="nivel">"&#xf3bf;"</string>
+    <string name="billete">"&#xf0d6;"</string>
 </resources>
