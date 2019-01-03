@@ -21,6 +21,11 @@
     <string name="precio_oro">Precio Oro:</string>
     <string name="precio_cobre">Precio cobre:</string>
 
+    <string name="aluminio">Aluminio</string>
+    <string name="zinc">Zinc</string>
+    <string name="niquel">Niquel</string>
+    <string name="iridio">Iridio</string>
+    <string name="uranio">Uranio</string>
     <string name="plata">Plata</string>
     <string name="cobre">Cobre</string>
     <string name="bronce">Bronce</string>

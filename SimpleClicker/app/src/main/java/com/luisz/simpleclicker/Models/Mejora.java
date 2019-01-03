@@ -13,9 +13,9 @@ public class Mejora {
     private long precioBase;
     private long precio;
     private long ingresosBase;
-    private int minimoSumador;
+    private long minimoSumador;
 
-    public Mejora(int id, String nombre, long nivel, long precioBase, long ingresosBase, int minimoSumador, String colorFondo) {
+    public Mejora(int id, String nombre, long nivel, long precioBase, long ingresosBase, long minimoSumador, String colorFondo) {
         this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
@@ -54,7 +54,7 @@ public class Mejora {
         this.ingresosBase = ingresosBase;
     }
 
-    public int getMinimoSumador() {
+    public long getMinimoSumador() {
         return minimoSumador;
     }
 

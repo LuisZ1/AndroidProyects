@@ -2,8 +2,11 @@ package com.luisz.simpleclicker.ViewModel;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.luisz.simpleclicker.Models.Constantes;
 import com.luisz.simpleclicker.Models.Mejora;
+import com.luisz.simpleclicker.R;
 
 import java.util.ArrayList;
 
@@ -11,19 +14,35 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
 
     Constantes cons = new Constantes();
 
-    public long sumador = 1, puntos = 0;
+    @SerializedName("sumador")
+    @Expose
+    public long sumador = 1;
 
+    @SerializedName("puntos")
+    @Expose
+    public long puntos = 0;
+
+    @SerializedName("contadorPulsaciones")
+    @Expose
     public long contadorPulsaciones=0;
+
+    @SerializedName("contadorPulsacionesParcial")
+    @Expose
     public long contadorPulsacionesParcial=0;
 
+    @SerializedName("listaMejorasMutable")
+    @Expose
     public MutableLiveData<ArrayList<Mejora>> listaMejorasMutable = new MutableLiveData<ArrayList<Mejora>>();
+
+    @SerializedName("listaMejoras")
+    @Expose
     public ArrayList<Mejora> listaMejoras = new ArrayList<Mejora>();
 
 
     public ViewModel(){
         sumador = 1;
-        puntos = 100;
-        contadorPulsaciones=100;
+        puntos = 0;
+        contadorPulsaciones=0;
         contadorPulsacionesParcial=0;
         rellenarListaMejoras();
     }
@@ -46,7 +65,7 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
     *   ENTRADA: indice de la posicion que ocupa la mejora en el array de mejoras
     *   SALIDA: true en caso de que haya ido todo bien
     */
-    synchronized boolean sumadorMejora(int mejoraSeleccionada){
+    public synchronized boolean sumadorMejora(int mejoraSeleccionada){
 
         boolean veredicto = false;
         Mejora mejora = new Mejora(1,"Cobre",0,cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE,cons.MINIMO_SUMADOR_COBRE, "#CC8F60");
@@ -77,7 +96,7 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
      *   ENTRADA:
      *   SALIDA:
      */
-    public void rellenarListaMejoras(){
+    public void rellenarListaMejorasV1(){
 
         Mejora miMejora = new Mejora(1,"Cobre",0,cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE,cons.MINIMO_SUMADOR_COBRE, "#CC8F60");
         Mejora miMejora1 = new Mejora(2,"Bronce",0,cons.BASE_PRECIO_BRONCE, cons.BASE_INGRESOS_BRONCE,cons.MINIMO_SUMADOR_BRONCE,"#CD7F32");
@@ -95,6 +114,27 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
 
         listaMejorasMutable.setValue(listaMejoras);
     }
+    /*  public void rellenarListaMejoras()
+     *   DESCRIPCIÓN:
+     *   ENTRADA:
+     *   SALIDA:
+     */
+    public void rellenarListaMejoras(){
+
+        ;
+        listaMejoras.add(new Mejora(1, "Aluminio" ,0,cons.BASE_PRECIO_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO,cons.BASE_INGRESOS_ALUMINIO, "#D0D8D9"));
+        listaMejoras.add(new Mejora(1,"Zinc",0,cons.BASE_PRECIO_ZINC, cons.BASE_INGRESOS_ZINC,cons.BASE_INGRESOS_ZINC, "#B6B6B6"));
+        listaMejoras.add(new Mejora(1,"Cobre",0,cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE,cons.BASE_INGRESOS_COBRE, "#FFB74D"));
+        listaMejoras.add(new Mejora(1,"Niquel",0,cons.BASE_PRECIO_NIQUEL, cons.BASE_INGRESOS_NIQUEL,cons.BASE_INGRESOS_NIQUEL, "#FFE57F"));
+        listaMejoras.add(new Mejora(1,"Bronce",0,cons.BASE_PRECIO_BRONCE, cons.BASE_INGRESOS_BRONCE,cons.BASE_INGRESOS_BRONCE, "#EF6C00"));
+        listaMejoras.add(new Mejora(1,"Plata",0,cons.BASE_PRECIO_PLATA, cons.BASE_INGRESOS_PLATA,cons.BASE_INGRESOS_PLATA, "#9E9E9E"));
+        listaMejoras.add(new Mejora(1,"Iridio",0,cons.BASE_PRECIO_IRIDIO, cons.BASE_INGRESOS_IRIDIO,cons.BASE_INGRESOS_IRIDIO, "#FFFF8D"));
+        listaMejoras.add(new Mejora(1,"Oro",0,cons.BASE_PRECIO_ORO, cons.BASE_INGRESOS_ORO,cons.BASE_INGRESOS_ORO, "#FFD600"));
+        listaMejoras.add(new Mejora(1,"Platino",0,cons.BASE_PRECIO_PLATINO, cons.BASE_INGRESOS_PLATINO,cons.BASE_INGRESOS_PLATINO, "#BDBDBD"));
+        listaMejoras.add(new Mejora(1,"Uranio",0,cons.BASE_PRECIO_URANIO, cons.BASE_INGRESOS_URANIO,cons.BASE_INGRESOS_URANIO, "#137656"));
+
+        listaMejorasMutable.setValue(listaMejoras);
+    }
 
     /*  public ArrayList<Mejora> getListaPredefinida()
      *   DESCRIPCIÓN:
@@ -105,19 +145,16 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
 
         ArrayList<Mejora> misMejorasPred = new ArrayList<>();
 
-        Mejora miMejora = new Mejora(1,"cobre",0,cons.BASE_PRECIO_COBRE,7,1, "#CC8F60");
-        Mejora miMejora1 = new Mejora(2,"bronce",0,cons.BASE_PRECIO_BRONCE,25,10,"#CD7F32");
-        Mejora miMejora2 = new Mejora(3,"plata",0,cons.BASE_PRECIO_PLATA,75,50,"#B3B6AF");
-        Mejora miMejora3 = new Mejora(4,"oro",0,cons.BASE_PRECIO_ORO,190,180,"#C39738");
-        Mejora miMejora4 = new Mejora(5,"platino",0,cons.BASE_PRECIO_PLATINO,600,500,"#D9D6CE");
-        Mejora miMejora5 = new Mejora(6,"diamante",0,cons.BASE_PRECIO_DIAMANTE,1500,1000,"#7FBFFF");
-
-        misMejorasPred.add(miMejora);
-        misMejorasPred.add(miMejora1);
-        misMejorasPred.add(miMejora2);
-        misMejorasPred.add(miMejora3);
-        misMejorasPred.add(miMejora4);
-        misMejorasPred.add(miMejora5);
+        misMejorasPred.add(new Mejora(1,"Aluminio",0,cons.BASE_PRECIO_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO,cons.BASE_INGRESOS_ALUMINIO, "#D0D8D9"));
+        misMejorasPred.add(new Mejora(1,"Zinc",0,cons.BASE_PRECIO_ZINC, cons.BASE_INGRESOS_ZINC,cons.BASE_INGRESOS_ZINC, "#B6B6B6"));
+        misMejorasPred.add(new Mejora(1,"Cobre",0,cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE,cons.BASE_INGRESOS_COBRE, "#FFB74D"));
+        misMejorasPred.add(new Mejora(1,"Niquel",0,cons.BASE_PRECIO_NIQUEL, cons.BASE_INGRESOS_NIQUEL,cons.BASE_INGRESOS_NIQUEL, "#FFE57F"));
+        misMejorasPred.add(new Mejora(1,"Bronce",0,cons.BASE_PRECIO_BRONCE, cons.BASE_INGRESOS_BRONCE,cons.BASE_INGRESOS_BRONCE, "#EF6C00"));
+        misMejorasPred.add(new Mejora(1,"Plata",0,cons.BASE_PRECIO_PLATA, cons.BASE_INGRESOS_PLATA,cons.BASE_INGRESOS_PLATA, "#9E9E9E"));
+        misMejorasPred.add(new Mejora(1,"Iridio",0,cons.BASE_PRECIO_IRIDIO, cons.BASE_INGRESOS_IRIDIO,cons.BASE_INGRESOS_IRIDIO, "#FFFF8D"));
+        misMejorasPred.add(new Mejora(1,"Oro",0,cons.BASE_PRECIO_ORO, cons.BASE_INGRESOS_ORO,cons.BASE_INGRESOS_ORO, "#FFD600"));
+        misMejorasPred.add(new Mejora(1,"Platino",0,cons.BASE_PRECIO_PLATINO, cons.BASE_INGRESOS_PLATINO,cons.BASE_INGRESOS_PLATINO, "#BDBDBD"));
+        misMejorasPred.add(new Mejora(1,"Uranio",0,cons.BASE_PRECIO_URANIO, cons.BASE_INGRESOS_URANIO,cons.BASE_INGRESOS_URANIO, "#137656"));
 
         return misMejorasPred;
     }

@@ -1,5 +1,6 @@
 package com.luisz.simpleclicker;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
@@ -15,11 +16,14 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.luisz.simpleclicker.Adapter.AdapterMejoras;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -90,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        guardarPartida();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
         guardarPartida();
     }
 
@@ -185,6 +194,36 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String jsonVM = gson.toJson(miViewModel);
+
+        editor.putString("vm", jsonVM);
+
+        editor.commit();
+    }
+
+    private void guardarPartidav2() {
+
+        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String jsonMejoras = gson.toJson(miViewModel.getListaMejoras());
+        String jsonMejorasMutable = gson.toJson(miViewModel.listaMejorasMutable);
+
+        editor.putLong("puntos", miViewModel.puntos);
+        editor.putLong("sumador", miViewModel.sumador);
+        editor.putLong("contadorPulsaciones", miViewModel.contadorPulsaciones);
+        editor.putLong("contadorPulsacionesParcial", miViewModel.contadorPulsacionesParcial);
+        editor.putString("listadoDeMejoras", jsonMejoras);
+        editor.putString("listadoDeMejorasMutable", jsonMejorasMutable);
+
+        editor.commit();
+    }
+
+    private void guardarPartidav1() {
+
+        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
 
         editor.putLong("puntos", miViewModel.puntos);
         editor.putLong("sumador", miViewModel.sumador);
@@ -197,23 +236,50 @@ public class MainActivity extends AppCompatActivity {
         }
 
         editor.commit();
-
     }
 
     private void cargarPartida() {
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         preferences = getSharedPreferences("partida", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String jsonVM = "";
+
+        jsonVM = preferences.getString("vm", null);
+
+        Type type = new TypeToken<ViewModel>(){}.getType();
+        miViewModel = gson.fromJson(jsonVM,type);
+    }
+
+    private void cargarPartidav2() {
+        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
+        preferences = getSharedPreferences("partida", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String jsonMejoras = "";
+        String jsonMejorasMutable = "";
+        ArrayList<Mejora> miListaGuardada;
+        MutableLiveData<ArrayList<Mejora>> listaMejorasMutable;
 
         miViewModel.puntos = preferences.getLong("puntos", 0);
         miViewModel.sumador = preferences.getLong("sumador", 1);
         miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones", 0);
         miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial", 0);
-        try {
-            miViewModel.listaMejoras = (ArrayList<Mejora>) ObjectSerializer.deserialize(preferences.getString("listadoDeMejoras", ObjectSerializer.serialize(new ArrayList<Mejora>())));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
+        jsonMejoras = preferences.getString("listadoDeMejoras", null);
+        Type type = new TypeToken<ArrayList<Mejora>>(){}.getType();
+        miListaGuardada = gson.fromJson(jsonMejoras,type);
+
+        if(miListaGuardada != null){
+            miViewModel.listaMejoras = miListaGuardada;
+        }
+
+        //mutable
+
+        jsonMejorasMutable = preferences.getString("listadoDeMejorasMutable", null);
+        Type type2 = new TypeToken<MutableLiveData<ArrayList<Mejora>>>(){}.getType();
+        listaMejorasMutable = gson.fromJson(jsonMejorasMutable,type2);
+
+        if(listaMejorasMutable != null){
+            miViewModel.listaMejorasMutable = listaMejorasMutable;
         }
     }
 }

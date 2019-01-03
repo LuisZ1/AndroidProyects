@@ -26,4 +26,10 @@
     <string name="platino">Platinum</string>
     <string name="precio">Prize:</string>
     <string name="nivel">Level:</string>
+
+    <string name="aluminio">Aluminium</string>
+    <string name="zinc">Zinc</string>
+    <string name="niquel">Nickel</string>
+    <string name="iridio">Iridium</string>
+    <string name="uranio">Uranium</string>
 </resources>
