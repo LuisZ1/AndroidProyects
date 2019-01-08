@@ -90,4 +90,12 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
         notifyDataSetChanged();
     }
 
+    public ArrayList<Mejora> getListaMejoras() {
+        return listaMejoras;
+    }
+
+    public void notifyChange(){
+        notifyDataSetChanged();
+    }
+
 }

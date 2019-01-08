@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.luisz.simpleclicker.Adapter.AdapterMejoras;
 import com.luisz.simpleclicker.Models.Constantes;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.R;
@@ -121,7 +122,6 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
      */
     public void rellenarListaMejoras(){
 
-        ;
         listaMejoras.add(new Mejora(1, "Aluminio" ,0,cons.BASE_PRECIO_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO,cons.BASE_INGRESOS_ALUMINIO, "#D0D8D9"));
         listaMejoras.add(new Mejora(1,"Zinc",0,cons.BASE_PRECIO_ZINC, cons.BASE_INGRESOS_ZINC,cons.BASE_INGRESOS_ZINC, "#B6B6B6"));
         listaMejoras.add(new Mejora(1,"Cobre",0,cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE,cons.BASE_INGRESOS_COBRE, "#FFB74D"));
