@@ -34,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
     TextView txtSumador, txtPuntos, lblClicks, lblSumador;
     Switch swAutoWalk, swAutoRun;
 
-    ViewModel miViewModel = new ViewModel(this.getApplication());
+    int x = 0;
+
+
+    ViewModel miViewModel;
     RecyclerView miRecyclerView;
     AdapterMejoras adaptador;
     Typeface font;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
+        miViewModel = new ViewModel(this.getApplication());
         font = Typeface.createFromAsset(getAssets(), "awesome.ttf");
 
         txtPuntos = findViewById(R.id.txtPuntos);
