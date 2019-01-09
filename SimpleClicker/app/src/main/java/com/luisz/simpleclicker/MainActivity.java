@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtSumador, txtPuntos, lblClicks, lblSumador;
     Switch swAutoWalk, swAutoRun;
 
-    ViewModel miViewModel = new ViewModel();
+    ViewModel miViewModel = new ViewModel(this.getApplication());
     RecyclerView miRecyclerView;
     AdapterMejoras adaptador;
     Typeface font;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         adaptador = new AdapterMejoras(miViewModel.getListaMejorasMutable().getValue());
         miRecyclerView.setAdapter(adaptador);
 
-        cargarPartida(); //TODO
+        cargarPartida();
 
         adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         miViewModel.getListaMejorasMutable().observe(this, miVMobserver);
 
         displayForPuntos(miViewModel.puntos);
-        //adaptador.notifyChange();
     }
 
     @Override

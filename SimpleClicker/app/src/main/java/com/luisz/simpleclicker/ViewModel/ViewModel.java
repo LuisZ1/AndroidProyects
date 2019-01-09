@@ -1,17 +1,22 @@
 package com.luisz.simpleclicker.ViewModel;
 
+import android.app.Activity;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.luisz.simpleclicker.Adapter.AdapterMejoras;
+import com.luisz.simpleclicker.MainActivity;
 import com.luisz.simpleclicker.Models.Constantes;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.R;
 
 import java.util.ArrayList;
 
-public class ViewModel extends android.arch.lifecycle.ViewModel{
+public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewModel{
 
     Constantes cons = new Constantes();
 
@@ -39,8 +44,11 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
     @Expose
     public ArrayList<Mejora> listaMejoras = new ArrayList<Mejora>();
 
+    private Context miAppContext;
 
-    public ViewModel(){
+    public ViewModel(Application application){
+        super(application);
+        /*miAppContext = application.getApplicationContext();*/
         sumador = 1;
         puntos = 0;
         contadorPulsaciones=0;
@@ -115,6 +123,7 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
 
         listaMejorasMutable.setValue(listaMejoras);
     }
+
     /*  public void rellenarListaMejoras()
      *   DESCRIPCIÓN:
      *   ENTRADA:
@@ -122,7 +131,7 @@ public class ViewModel extends android.arch.lifecycle.ViewModel{
      */
     public void rellenarListaMejoras(){
 
-        listaMejoras.add(new Mejora(1, "Aluminio" ,0,cons.BASE_PRECIO_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO,cons.BASE_INGRESOS_ALUMINIO, "#D0D8D9"));
+        listaMejoras.add(new Mejora(1, /*miAppContext.getString(R.string.aluminio)*/"Aluminio",0,cons.BASE_PRECIO_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO,cons.BASE_INGRESOS_ALUMINIO, "#D0D8D9"));
         listaMejoras.add(new Mejora(1,"Zinc",0,cons.BASE_PRECIO_ZINC, cons.BASE_INGRESOS_ZINC,cons.BASE_INGRESOS_ZINC, "#B6B6B6"));
         listaMejoras.add(new Mejora(1,"Cobre",0,cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE,cons.BASE_INGRESOS_COBRE, "#FFB74D"));
         listaMejoras.add(new Mejora(1,"Niquel",0,cons.BASE_PRECIO_NIQUEL, cons.BASE_INGRESOS_NIQUEL,cons.BASE_INGRESOS_NIQUEL, "#FFE57F"));
