@@ -6,14 +6,21 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/inicio"
-            android:title="@string/inicio"/>
+            android:id="@+id/nav_inicio"
+            android:title="@string/inicio"
+            android:icon="@drawable/ic_home_black_24dp"/>
         <item
-            android:id="@+id/ajustes"
-            android:title="@string/ajustes"/>
+            android:id="@+id/nav_mejoras"
+            android:title="@string/mejoras"
+            android:icon="@drawable/ic_control_point_duplicate_black_24dp"/>
         <item
-            android:id="@+id/ayuda"
-            android:title="@string/ayuda"/>
+            android:id="@+id/nav_ajustes"
+            android:title="@string/ajustes"
+            android:icon="@drawable/ic_settings_black_24dp" />
+        <item
+            android:id="@+id/nav_ayuda"
+            android:title="@string/ayuda"
+            android:icon="@drawable/ic_help_black_24dp"/>
 
     </group>
 

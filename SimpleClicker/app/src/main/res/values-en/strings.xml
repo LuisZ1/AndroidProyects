@@ -32,5 +32,6 @@
     <string name="desc">Most simple clicker ever</string>
     <string name="nav_drawer_open">Open nav drawer</string>
     <string name="nav_drawer_close">Close nav Drawer</string>
+    <string name="mejoras">Upgrades</string>
 
 </resources>
