@@ -1,4 +1,4 @@
-package com.luisz.simpleclicker.Fragments;
+package com.luisz.simpleclicker;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,16 +10,13 @@ import android.view.ViewGroup;
 
 import com.luisz.simpleclicker.R;
 
-public class HomeFragment extends Fragment {
+public class HelpFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
 
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_help, container, false);
     }
-
-
-
 }

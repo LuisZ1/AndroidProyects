@@ -1,5 +1,6 @@
 package com.luisz.simpleclicker;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,11 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-import com.luisz.simpleclicker.Fragments.HelpFragment;
-import com.luisz.simpleclicker.Fragments.HomeFragment;
-import com.luisz.simpleclicker.Fragments.SettingsFragment;
+import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

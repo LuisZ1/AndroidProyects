@@ -4,16 +4,18 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.luisz.simpleclicker.Adapter.AdapterMejoras;
 import com.luisz.simpleclicker.Models.Mejora;
+import com.luisz.simpleclicker.R;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.lang.reflect.Type;
@@ -29,10 +32,11 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity_OLD extends AppCompatActivity {
+public class HomeFragment extends Fragment {
 
-    TextView txtSumador, txtPuntos, lblClicks, lblSumador;
+    TextView txtSumador, txtPuntos, lblClicks, lblSumador,txtContadorPulsaciones;
     Switch swAutoWalk, swAutoRun;
+    Button btnClick;
 
     int x = 0;
 
@@ -44,33 +48,47 @@ public class MainActivity_OLD extends AppCompatActivity {
     int delay = 1000;
     int period = delay;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_old);
-        miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
-        miViewModel = new ViewModel(this.getApplication());
-        font = Typeface.createFromAsset(getAssets(), "awesome.ttf");
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        txtPuntos = findViewById(R.id.txtPuntos);
-        txtSumador = findViewById(R.id.txtSumador);
-        lblClicks = findViewById(R.id.lblN_clicks);
-        lblSumador = findViewById(R.id.lblSumador);
-        swAutoWalk = findViewById(R.id.swAutoWalk);
-        swAutoRun = findViewById(R.id.swAutoRun);
+        miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
+        miViewModel = new ViewModel(getActivity().getApplication());
+        font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
+
+        txtPuntos = view.findViewById(R.id.txtPuntos);
+        txtSumador = view.findViewById(R.id.txtSumador);
+        lblClicks = view.findViewById(R.id.lblN_clicks);
+        lblSumador = view.findViewById(R.id.lblSumador);
+        swAutoWalk = view.findViewById(R.id.swAutoWalk);
+        swAutoRun = view.findViewById(R.id.swAutoRun);
+
+        btnClick = view.findViewById(R.id.btnClick);
+        btnClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miViewModel.sumatron();
+                displayForPuntos(miViewModel.puntos);
+            }
+        });
+
+         txtPuntos = view.findViewById(R.id.txtPuntos);
+         txtSumador = view.findViewById(R.id.txtSumador);
+         txtContadorPulsaciones = view.findViewById(R.id.txtPulsaciones);
 
         lblClicks.setTypeface(font);
         lblSumador.setTypeface(font);
         swAutoWalk.setTypeface(font);
         swAutoRun.setTypeface(font);
 
-        miRecyclerView = findViewById(R.id.myRecyclerView);
-        miRecyclerView.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
+        miRecyclerView = view.findViewById(R.id.myRecyclerView);
+        miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 2, LinearLayoutManager.HORIZONTAL, false));
 
         adaptador = new AdapterMejoras(miViewModel.getListaMejorasMutable().getValue());
         miRecyclerView.setAdapter(adaptador);
 
-        cargarPartida();
+        //cargarPartida();
 
         adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,37 +111,31 @@ public class MainActivity_OLD extends AppCompatActivity {
         miViewModel.getListaMejorasMutable().observe(this, miVMobserver);
 
         displayForPuntos(miViewModel.puntos);
+
+        return view;
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option_menu, menu);
-        return true;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        guardarPartida();
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        guardarPartida();
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        guardarPartida();
-    }
-
-//    public void onClickSumar(View view) {
-//        miViewModel.sumatron();
-//        displayForPuntos(miViewModel.puntos);
-////        comprobarPrecios();
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        guardarPartida();
 //    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        guardarPartida();
+//    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        guardarPartida();
+//    }
+
+    public void onClickSumar(View view) {
+        miViewModel.sumatron();
+        displayForPuntos(miViewModel.puntos);
+//        comprobarPrecios();
+    }
 
     synchronized void gestionClickRecycler(int item) {
         miViewModel.sumadorMejora(item);
@@ -135,13 +147,8 @@ public class MainActivity_OLD extends AppCompatActivity {
         //comprobarPrecios();
         DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
-        TextView txtPuntos = findViewById(R.id.txtPuntos);
         txtPuntos.setText(formatter.format(puntos));
-
-        TextView txtSumador = findViewById(R.id.txtSumador);
         txtSumador.setText(formatter.format(miViewModel.sumador));
-
-        TextView txtContadorPulsaciones = findViewById(R.id.txtPulsaciones);
         txtContadorPulsaciones.setText(formatter.format(miViewModel.contadorPulsaciones));
 
     }
@@ -202,40 +209,43 @@ public class MainActivity_OLD extends AppCompatActivity {
     }
 
     private void guardarPartida() {
-
-        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        Gson gson = new Gson();
-        String jsonMejoras = gson.toJson(miViewModel.getListaMejoras());
-
-        editor.putLong("puntos", miViewModel.puntos);
-        editor.putLong("sumador", miViewModel.sumador);
-        editor.putLong("contadorPulsaciones", miViewModel.contadorPulsaciones);
-        editor.putLong("contadorPulsacionesParcial", miViewModel.contadorPulsacionesParcial);
-        editor.putString("listadoDeMejoras", jsonMejoras);
-
-        editor.commit();
+//
+//        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        Gson gson = new Gson();
+//        String jsonMejoras = gson.toJson(miViewModel.getListaMejoras());
+//
+//        editor.putLong("puntos", miViewModel.puntos);
+//        editor.putLong("sumador", miViewModel.sumador);
+//        editor.putLong("contadorPulsaciones", miViewModel.contadorPulsaciones);
+//        editor.putLong("contadorPulsacionesParcial", miViewModel.contadorPulsacionesParcial);
+//        editor.putString("listadoDeMejoras", jsonMejoras);
+//
+//        editor.commit();
     }
 
     private void cargarPartida() {
-        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
-        preferences = getSharedPreferences("partida", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String jsonMejoras = "";
-        ArrayList<Mejora> miListaGuardada;
-
-        miViewModel.puntos = preferences.getLong("puntos", 0);
-        miViewModel.sumador = preferences.getLong("sumador", 1);
-        miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones", 0);
-        miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial", 0);
-
-        jsonMejoras = preferences.getString("listadoDeMejoras", null);
-        Type type = new TypeToken<ArrayList<Mejora>>(){}.getType();
-        miListaGuardada = gson.fromJson(jsonMejoras,type);
-
-        if(miListaGuardada != null){
-            miViewModel.listaMejoras = miListaGuardada;
-            miViewModel.listaMejorasMutable.setValue(miListaGuardada);
-        }
+//        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
+//        preferences = getSharedPreferences("partida", MODE_PRIVATE);
+//        Gson gson = new Gson();
+//        String jsonMejoras = "";
+//        ArrayList<Mejora> miListaGuardada;
+//
+//        miViewModel.puntos = preferences.getLong("puntos", 0);
+//        miViewModel.sumador = preferences.getLong("sumador", 1);
+//        miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones", 0);
+//        miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial", 0);
+//
+//        jsonMejoras = preferences.getString("listadoDeMejoras", null);
+//        Type type = new TypeToken<ArrayList<Mejora>>(){}.getType();
+//        miListaGuardada = gson.fromJson(jsonMejoras,type);
+//
+//        if(miListaGuardada != null){
+//            miViewModel.listaMejoras = miListaGuardada;
+//            miViewModel.listaMejorasMutable.setValue(miListaGuardada);
+//        }
     }
+
+
+
 }

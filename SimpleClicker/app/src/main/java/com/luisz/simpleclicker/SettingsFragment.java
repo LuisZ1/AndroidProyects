@@ -1,4 +1,4 @@
-package com.luisz.simpleclicker.Fragments;
+package com.luisz.simpleclicker;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

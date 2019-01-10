@@ -27,7 +27,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity_OLD"
+    tools:context=".HomeFragment"
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
@@ -116,7 +116,6 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="6dp"
         android:backgroundTint="@color/colorAccent"
-        android:onClick="onClickSumar"
         android:text="CLICK"
         android:textColor="@android:color/white"
         android:textSize="30dp"
