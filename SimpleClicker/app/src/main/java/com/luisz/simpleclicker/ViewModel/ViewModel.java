@@ -1,6 +1,5 @@
 package com.luisz.simpleclicker.ViewModel;
 
-import android.app.Activity;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
@@ -8,8 +7,6 @@ import android.content.Context;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.luisz.simpleclicker.Adapter.AdapterMejoras;
-import com.luisz.simpleclicker.MainActivity;
 import com.luisz.simpleclicker.Models.Constantes;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.R;

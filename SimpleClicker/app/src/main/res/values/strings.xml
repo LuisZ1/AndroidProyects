@@ -7,20 +7,27 @@
     <string name="puntos">Tus puntos:</string>
     <string name="click">CLICK</string>
     <string name="n_clicks">Clicks:</string>
-    <string name="n_clicks_icon">&#xf0a6;</string>
     <string name="sumador">Sumador:</string>
-    <string name="sumador_icon">&#xf3bf;</string>
-    <string name="run">&#xf70c;</string>
-    <string name="walk">&#xf554;</string>
+    <string name="precio">Precio:</string>
+    <string name="nivel">Nivel</string>
+    <string name="billete" translatable="false">Precio</string>
 
+    <string name="nav_drawer_open">Open nav Drawer</string>
+    <string name="nav_drawer_close">Close nav Drawer</string>
 
-    <string name="precio_bronce">Precio bronce:</string>
-    <string name="precio_platino">Precio Platino:</string>
-    <string name="precio_plata">Precio plata:</string>
-    <string name="precio_diamante">Precio Diamante:</string>
-    <string name="precio_oro">Precio Oro:</string>
-    <string name="precio_cobre">Precio cobre:</string>
+    <!--Iconos-->
+    <string name="sumador_icon" translatable="false">&#xf067;</string>
+    <string name="run" translatable="false">&#xf70c;</string>
+    <string name="walk" translatable="false">&#xf554;</string>
+    <string name="n_clicks_icon" translatable="false">&#xf0a6;</string>
 
+    <!--Nav Bar-->
+    <string name="desc">El clicker más simple</string>
+    <string name="inicio">Inicio</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="ajustes">Ajustes</string>
+
+    <!--Metales-->
     <string name="aluminio">Aluminio</string>
     <string name="zinc">Zinc</string>
     <string name="niquel">Niquel</string>
@@ -32,7 +39,5 @@
     <string name="diamante">Diamante</string>
     <string name="oro">Oro</string>
     <string name="platino">Platino</string>
-    <string name="precio">Precio:</string>
-    <string name="nivel">Nivel</string>
-    <string name="billete">Precio</string>
+
 </resources>

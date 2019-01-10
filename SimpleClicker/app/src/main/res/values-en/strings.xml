@@ -9,28 +9,28 @@
     <string name="click">CLICK</string>
     <string name="n_clicks">Num of clicks:</string>
     <string name="sumador">Adder:</string>
+    <string name="precio">Prize:</string>
+    <string name="nivel">Level:</string>
 
+    <!--Nav Bar-->
+    <string name="inicio">Home</string>
+    <string name="ayuda">Help</string>
+    <string name="ajustes">Settings</string>
 
-    <string name="precio_bronce">Bronze prize:</string>
-    <string name="precio_platino">Platinum prize:</string>
-    <string name="precio_plata">Silver prize:</string>
-    <string name="precio_diamante">Diamond prize:</string>
-    <string name="precio_oro">Gold prize:</string>
-    <string name="precio_cobre">Copper prize:</string>
-
+    <!--Metals-->
+    <string name="aluminio">Aluminium</string>
+    <string name="zinc">Zinc</string>
+    <string name="niquel">Nickel</string>
+    <string name="iridio">Iridium</string>
+    <string name="uranio">Uranium</string>
     <string name="plata">Silver</string>
     <string name="cobre">Copper</string>
     <string name="bronce">Bronze</string>
     <string name="diamante">Diamond</string>
     <string name="oro">Gold</string>
     <string name="platino">Platinum</string>
-    <string name="precio">Prize:</string>
-    <string name="nivel">Level:</string>
-
-    <string name="aluminio">Aluminium</string>
-    <string name="zinc">Zinc</string>
-    <string name="niquel">Nickel</string>
-    <string name="iridio">Iridium</string>
-    <string name="uranio">Uranium</string>
+    <string name="desc">Most simple clicker ever</string>
+    <string name="nav_drawer_open">Open nav drawer</string>
+    <string name="nav_drawer_close">Close nav Drawer</string>
 
 </resources>
