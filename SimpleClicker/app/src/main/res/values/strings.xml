@@ -5,15 +5,15 @@
     <string name="_10">10</string>
     <string name="autominer">AutoMiner</string>
     <string name="puntos">Tus puntos:</string>
-    <string name="click">CLICK</string>
-    <string name="n_clicks">Clicks:</string>
+    <string name="click">CLIC</string>
+    <string name="n_clicks">Clics:</string>
     <string name="sumador">Sumador:</string>
     <string name="precio">Precio:</string>
-    <string name="nivel">Nivel</string>
-    <string name="billete" translatable="false">Precio</string>
+    <string name="nivel">&#xf201;</string>
+    <string name="billete">&#xf3d1;</string>
 
-    <string name="nav_drawer_open">Open nav Drawer</string>
-    <string name="nav_drawer_close">Close nav Drawer</string>
+    <string name="nav_drawer_open">Abrir menú lateral</string>
+    <string name="nav_drawer_close">Cerrar menú lateral</string>
 
     <!--Iconos-->
     <string name="sumador_icon" translatable="false">&#xf067;</string>
@@ -40,5 +40,19 @@
     <string name="diamante">Diamante</string>
     <string name="oro">Oro</string>
     <string name="platino">Platino</string>
+
+    <!--Ayuda strings-->
+    <string name="Objetivo">Objetivo:</string>
+    <string name="objetivo_text">Conseguir el mayor número de puntos posible en el menor número de clics</string>
+    <string name="comoJugar">¿Cómo se juega?</string>
+    <string name="comoJugar_text">\t- Pulsa el boton rosa que dice "Clic" para obtener puntos.\n\n
+	\t- Gasta tus puntos en comprar mejoras para ganar cada vez más puntos.\n\n
+	\t- Cuanto más cueste la mejora, más aumentará el sumador &#xf067;.\n\n
+	\t- Cada mejora tiene un nivel &#xf201; y un precio &#xf3d1;, cuánto mayor sea el nivel mayor será el precio y la recompensa.\n\n
+	\t- Hay 10 Mejoras de sumador &#xf067;, ordenadas de menor a mayor. Situadas encima de el boton "Clic", con nombres de metales.\n\n
+	\t- En el apartado de "Mejoras" hay dos mejoras llamadas "AutoClicker" las cuales darán clics por ti, para que ganes más puntos.</string>
+    <string name="faq">Preguntas frecuentes:</string>
+    <string name="faq_text">- ¿Cómo guardo la partida? \n\t\tSe guarda automáticamente \n\n
+	- ¿Cómo reinicio la partida?\n\t\t Ve a "Ajustes / Reiniciar partida", ten en cuenta que es irreversible</string>
 
 </resources>

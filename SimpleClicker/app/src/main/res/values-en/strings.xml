@@ -29,9 +29,10 @@
     <string name="diamante">Diamond</string>
     <string name="oro">Gold</string>
     <string name="platino">Platinum</string>
-    <string name="desc">Most simple clicker ever</string>
+    <string name="desc">Most simple clicker</string>
     <string name="nav_drawer_open">Open nav drawer</string>
     <string name="nav_drawer_close">Close nav Drawer</string>
     <string name="mejoras">Upgrades</string>
+    <string name="billete" translatable="false">Prize</string>
 
 </resources>

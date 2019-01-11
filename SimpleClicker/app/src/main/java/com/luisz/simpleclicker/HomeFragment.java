@@ -34,14 +34,15 @@ import java.util.TimerTask;
 
 public class HomeFragment extends Fragment {
 
-    TextView txtSumador, txtPuntos, lblClicks, lblSumador,txtContadorPulsaciones;
+    TextView txtSumador, txtPuntos, lblClicks, lblSumador, txtContadorPulsaciones;
     Switch swAutoWalk, swAutoRun;
     Button btnClick;
+    ViewModel miViewModel;
 
     int x = 0;
 
 
-    ViewModel miViewModel;
+    //    ViewModel miViewModel;
     RecyclerView miRecyclerView;
     AdapterMejoras adaptador;
     Typeface font;
@@ -53,8 +54,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
-        miViewModel = new ViewModel(getActivity().getApplication());
+        miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
+//        miViewModel = new ViewModel(getActivity().getApplication());
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
 
         txtPuntos = view.findViewById(R.id.txtPuntos);
@@ -73,9 +74,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
-         txtPuntos = view.findViewById(R.id.txtPuntos);
-         txtSumador = view.findViewById(R.id.txtSumador);
-         txtContadorPulsaciones = view.findViewById(R.id.txtPulsaciones);
+        txtPuntos = view.findViewById(R.id.txtPuntos);
+        txtSumador = view.findViewById(R.id.txtSumador);
+        txtContadorPulsaciones = view.findViewById(R.id.txtPulsaciones);
 
         lblClicks.setTypeface(font);
         lblSumador.setTypeface(font);
@@ -87,8 +88,6 @@ public class HomeFragment extends Fragment {
 
         adaptador = new AdapterMejoras(miViewModel.getListaMejorasMutable().getValue());
         miRecyclerView.setAdapter(adaptador);
-
-        //cargarPartida();
 
         adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,29 +111,14 @@ public class HomeFragment extends Fragment {
 
         displayForPuntos(miViewModel.puntos);
 
+        //cargarPartida();
+
         return view;
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        guardarPartida();
-//    }
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        guardarPartida();
-//    }
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        guardarPartida();
-//    }
 
     public void onClickSumar(View view) {
         miViewModel.sumatron();
         displayForPuntos(miViewModel.puntos);
-//        comprobarPrecios();
     }
 
     synchronized void gestionClickRecycler(int item) {
@@ -144,7 +128,6 @@ public class HomeFragment extends Fragment {
 
     public void displayForPuntos(long puntos) {
 
-        //comprobarPrecios();
         DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
         txtPuntos.setText(formatter.format(puntos));
@@ -207,45 +190,4 @@ public class HomeFragment extends Fragment {
             stopTimer();
         }
     }
-
-    private void guardarPartida() {
-//
-//        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        Gson gson = new Gson();
-//        String jsonMejoras = gson.toJson(miViewModel.getListaMejoras());
-//
-//        editor.putLong("puntos", miViewModel.puntos);
-//        editor.putLong("sumador", miViewModel.sumador);
-//        editor.putLong("contadorPulsaciones", miViewModel.contadorPulsaciones);
-//        editor.putLong("contadorPulsacionesParcial", miViewModel.contadorPulsacionesParcial);
-//        editor.putString("listadoDeMejoras", jsonMejoras);
-//
-//        editor.commit();
-    }
-
-    private void cargarPartida() {
-//        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
-//        preferences = getSharedPreferences("partida", MODE_PRIVATE);
-//        Gson gson = new Gson();
-//        String jsonMejoras = "";
-//        ArrayList<Mejora> miListaGuardada;
-//
-//        miViewModel.puntos = preferences.getLong("puntos", 0);
-//        miViewModel.sumador = preferences.getLong("sumador", 1);
-//        miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones", 0);
-//        miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial", 0);
-//
-//        jsonMejoras = preferences.getString("listadoDeMejoras", null);
-//        Type type = new TypeToken<ArrayList<Mejora>>(){}.getType();
-//        miListaGuardada = gson.fromJson(jsonMejoras,type);
-//
-//        if(miListaGuardada != null){
-//            miViewModel.listaMejoras = miListaGuardada;
-//            miViewModel.listaMejorasMutable.setValue(miListaGuardada);
-//        }
-    }
-
-
-
 }
