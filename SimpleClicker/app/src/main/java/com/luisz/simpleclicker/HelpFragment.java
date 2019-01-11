@@ -20,8 +20,9 @@ public class HelpFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_help, container, false);
+
+        getActivity().setTitle(getActivity().getApplicationContext().getString(R.string.ayuda));
 
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
         txtComoJugar = view.findViewById(R.id.txtcomoJugar);

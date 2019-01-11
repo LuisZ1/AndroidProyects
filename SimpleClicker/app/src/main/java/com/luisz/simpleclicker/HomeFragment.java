@@ -53,9 +53,9 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        getActivity().setTitle(getActivity().getApplicationContext().getString(R.string.inicio));
 
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
-//        miViewModel = new ViewModel(getActivity().getApplication());
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
 
         txtPuntos = view.findViewById(R.id.txtPuntos);
@@ -64,6 +64,14 @@ public class HomeFragment extends Fragment {
         lblSumador = view.findViewById(R.id.lblSumador);
         swAutoWalk = view.findViewById(R.id.swAutoWalk);
         swAutoRun = view.findViewById(R.id.swAutoRun);
+        txtPuntos = view.findViewById(R.id.txtPuntos);
+        txtSumador = view.findViewById(R.id.txtSumador);
+        txtContadorPulsaciones = view.findViewById(R.id.txtPulsaciones);
+
+        lblClicks.setTypeface(font);
+        lblSumador.setTypeface(font);
+        swAutoWalk.setTypeface(font);
+        swAutoRun.setTypeface(font);
 
         btnClick = view.findViewById(R.id.btnClick);
         btnClick.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +82,37 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        txtPuntos = view.findViewById(R.id.txtPuntos);
-        txtSumador = view.findViewById(R.id.txtSumador);
-        txtContadorPulsaciones = view.findViewById(R.id.txtPulsaciones);
+        swAutoWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean on = ((Switch) v).isChecked();
+                swAutoRun.setChecked(false);
+                delay = 1000;
+                period = 1000;
+                if (on) {
+                    stopTimer();
+                    startTimer();
+                } else {
+                    stopTimer();
+                }
+            }
+        });
 
-        lblClicks.setTypeface(font);
-        lblSumador.setTypeface(font);
-        swAutoWalk.setTypeface(font);
-        swAutoRun.setTypeface(font);
+        swAutoRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean on = ((Switch) v).isChecked();
+                swAutoWalk.setChecked(false);
+                delay = 100;
+                period = 100;
+                if (on) {
+                    stopTimer();
+                    startTimer();
+                } else {
+                    stopTimer();
+                }
+            }
+        });
 
         miRecyclerView = view.findViewById(R.id.myRecyclerView);
         miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 2, LinearLayoutManager.HORIZONTAL, false));
@@ -116,9 +147,10 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public void onClickSumar(View view) {
-        miViewModel.sumatron();
-        displayForPuntos(miViewModel.puntos);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        stopTimer();
     }
 
     synchronized void gestionClickRecycler(int item) {

@@ -143,4 +143,20 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     public void setListaMejoras(ArrayList<Mejora> listaMejoras) {
         this.listaMejoras = listaMejoras;
     }
+
+    public boolean reiniciarPartida(){
+        boolean resultado = false;
+        try{
+            sumador = 1;
+            puntos = 0;
+            contadorPulsaciones=0;
+            contadorPulsacionesParcial=0;
+            listaMejoras.clear();
+            rellenarListaMejoras();
+
+            resultado = true;
+        }catch (Exception e){}
+
+        return resultado;
+    }
 }
