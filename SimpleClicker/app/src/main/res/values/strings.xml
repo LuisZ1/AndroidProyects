@@ -27,6 +27,7 @@
     <string name="ayuda">Ayuda</string>
     <string name="ajustes">Ajustes</string>
     <string name="mejoras">Mejoras</string>
+    <string name="stats">Estadísticas</string>
 
     <!--Metales-->
     <string name="aluminio">Aluminio</string>
@@ -42,17 +43,24 @@
     <string name="platino">Platino</string>
 
     <!--Ayuda strings-->
-    <string name="Objetivo">Objetivo:</string>
+    <string name="objetivo">Objetivo:</string>
     <string name="objetivo_text">Conseguir el mayor número de puntos posible en el menor número de clics</string>
     <string name="comoJugar">¿Cómo se juega?</string>
-    <string name="comoJugar_text">\t- Pulsa el boton rosa que dice "Clic" para obtener puntos.\n\n
-	\t- Gasta tus puntos en comprar mejoras para ganar cada vez más puntos.\n\n
-	\t- Cuanto más cueste la mejora, más aumentará el sumador &#xf067;.\n\n
-	\t- Cada mejora tiene un nivel &#xf201; y un precio &#xf3d1;, cuánto mayor sea el nivel mayor será el precio y la recompensa.\n\n
-	\t- Hay 10 Mejoras de sumador &#xf067;, ordenadas de menor a mayor. Situadas encima de el boton "Clic", con nombres de metales.\n\n
-	\t- En el apartado de "Mejoras" hay dos mejoras llamadas "AutoClicker" las cuales darán clics por ti, para que ganes más puntos.</string>
+    <string name="comoJugar_text">\t- Pulsa el boton rosa que dice Clic para obtener puntos.\n\n
+        \t- Gasta tus puntos en comprar mejoras para ganar cada vez más puntos.\n\n
+        \t- Cuanto más cueste la mejora, más aumentará el sumador &#xf067;.\n\n
+        \t- Cada mejora tiene un nivel &#xf201; y un precio &#xf3d1;, cuánto mayor sea el nivel, mayor será el precio y la recompensa. \n\n
+        \t- Hay 10 Mejoras de sumador &#xf067;, ordenadas de menor a mayor. Situadas encima de el boton Clic, con nombres de metales.\n\n
+        \t- En el apartado de Mejoras hay dos mejoras llamadas AutoClickerlas cuales darán clics por ti, para que ganes más puntos.</string>
     <string name="faq">Preguntas frecuentes:</string>
     <string name="faq_text">- ¿Cómo guardo la partida? \n\t\tSe guarda automáticamente \n\n
 	- ¿Cómo reinicio la partida?\n\t\t Ve a "Ajustes / Reiniciar partida", ten en cuenta que es irreversible</string>
+
+    <!--Settings-->
+    <string name="btn_reiniciar">Reiniciar partida</string>
+    <string name="btn_tema">Cambiar tema</string>
+    <string name="txt_tema">Pulsa el botón para cambiar entre tema oscuro y claro</string>
+    <string name="txt_reiniciar">Pulsa el botón para reiniciar la partida, ten en cuenta de que es una acción irreversible</string>
+
 
 </resources>

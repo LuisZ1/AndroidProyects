@@ -1,4 +1,4 @@
-package com.luisz.simpleclicker;
+package com.luisz.simpleclicker.Fragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.luisz.simpleclicker.Adapter.AdapterMejoras;
 import com.luisz.simpleclicker.Models.Mejora;
+import com.luisz.simpleclicker.R;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.text.DecimalFormat;

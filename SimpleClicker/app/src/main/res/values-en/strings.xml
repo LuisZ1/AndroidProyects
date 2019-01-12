@@ -11,11 +11,18 @@
     <string name="sumador">Adder:</string>
     <string name="precio">Prize:</string>
     <string name="nivel">Level:</string>
+    <string name="billete" translatable="false">Prize</string>
 
     <!--Nav Bar-->
     <string name="inicio">Home</string>
     <string name="ayuda">Help</string>
     <string name="ajustes">Settings</string>
+    <string name="desc">Most simple clicker</string>
+    <string name="nav_drawer_open">Open nav drawer</string>
+    <string name="nav_drawer_close">Close nav Drawer</string>
+    <string name="mejoras">Upgrades</string>
+    <string name="stats">Stats</string>
+
 
     <!--Metals-->
     <string name="aluminio">Aluminium</string>
@@ -29,10 +36,25 @@
     <string name="diamante">Diamond</string>
     <string name="oro">Gold</string>
     <string name="platino">Platinum</string>
-    <string name="desc">Most simple clicker</string>
-    <string name="nav_drawer_open">Open nav drawer</string>
-    <string name="nav_drawer_close">Close nav Drawer</string>
-    <string name="mejoras">Upgrades</string>
-    <string name="billete" translatable="false">Prize</string>
+
+    <!--help-->
+    <string name="objetivo">Objetive:</string>
+    <string name="objetivo_text">"Get as many points as possible in the least number of clicks "</string>
+    <string name="comoJugar">How do you play?</string>
+    <string name="comoJugar_text">\t- Press the pink button that says Click to get points.\n\n
+        \t- Spend your points on buying upgrades to earn more and more points.\n\n
+        \t- The more the upgrade costs, the more the adder will increase &#xf067;.\n\n
+        \t- Each upgrade has a level &#xf201; and a prize &#xf3d1;, The higher the level, the higher the price and the reward. \n\n
+        \t- There are 10 adder upgrades &#xf067;, ordered from least to greatest. Located above the Clic button, with metal names.\n\n
+        \t- In the Upgrades section there are two improvements called AutoClicker which will click on you, so you can earn more points.</string>
+    <string name="faq">Frequenly asked questions:</string>
+    <string name="faq_text">- How do I save the game? \n\t\t The game has auto-save. \n\n
+	- Can I restart the game?\n\t\t Go to "Settings / Restart game"</string>
+
+    <!--Settings-->
+    <string name="btn_reiniciar">Restart game</string>
+    <string name="btn_tema">Change theme</string>
+    <string name="txt_tema">Pulsa el botón para cambiar entre tema oscuro y claro</string>
+    <string name="txt_reiniciar">Pulsa el botón para reiniciar la partida, ten en cuenta de que es una acción irreversible</string>
 
 </resources>

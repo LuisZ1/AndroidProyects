@@ -12,11 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.luisz.simpleclicker.Fragments.HelpFragment;
+import com.luisz.simpleclicker.Fragments.HomeFragment;
+import com.luisz.simpleclicker.Fragments.SettingsFragment;
+import com.luisz.simpleclicker.Fragments.StatsFragment;
+import com.luisz.simpleclicker.Fragments.UpgradesFragment;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
@@ -28,24 +31,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private Typeface font;
     private ViewModel miViewModel;
-    private TextView toolbarTextView;
-
-    /*
-    https://www.youtube.com/watch?v=zYVEMCiDcmY
-    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Temas
+        setTheme(getFlag() ? R.style.ThemeOverlay_AppCompat_Dark : R.style.ThemeOverlay_AppCompat_Light);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
-        //miViewModel = new ViewModel(getApplication());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -85,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new UpgradesFragment()).commit();
                 break;
+            case R.id.nav_stats:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new StatsFragment()).commit();
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
 
@@ -96,7 +99,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            Fragment miFragment = this.getFragmentManager().findFragmentById(R.id.fragment_container);
+//            int id = miFragment.getId();
+//            if (id != HomeFragment ) {
+//                // add your code here
+//            }
+//            if(){
+//
+//            }else {
+                super.onBackPressed();
+//            }
         }
     }
 
@@ -112,10 +124,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Gson gson = new Gson();
         String jsonMejoras = gson.toJson(miViewModel.getListaMejoras());
 
-        editor.putLong("puntos", miViewModel.puntos);
-        editor.putLong("sumador", miViewModel.sumador);
-        editor.putLong("contadorPulsaciones", miViewModel.contadorPulsaciones);
-        editor.putLong("contadorPulsacionesParcial", miViewModel.contadorPulsacionesParcial);
+        editor.putLong("puntos", miViewModel.getPuntos());
+        editor.putLong("sumador", miViewModel.getSumador());
+        editor.putLong("contadorPulsacionesPartida", miViewModel.getContadorPulsacionesPartida());
+        editor.putLong("contadorPulsacionesTotal", miViewModel.getContadorPulsacionesTotal());
+        editor.putLong("contadorPulsacionesParcial", miViewModel.getContadorPulsacionesParcial());
+        editor.putLong("contadorMejorasPartida", miViewModel.getContadorMejorasPartida());
+        editor.putLong("contadorMejorasTotal", miViewModel.getContadorMejorasTotal());
         editor.putString("listadoDeMejoras", jsonMejoras);
 
         editor.commit();
@@ -128,10 +143,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String jsonMejoras = "";
         ArrayList<Mejora> miListaGuardada;
 
-        miViewModel.puntos = preferences.getLong("puntos", 0);
-        miViewModel.sumador = preferences.getLong("sumador", 1);
-        miViewModel.contadorPulsaciones = preferences.getLong("contadorPulsaciones", 0);
-        miViewModel.contadorPulsacionesParcial = preferences.getLong("contadorPulsacionesParcial", 0);
+        miViewModel.setPuntos(preferences.getLong("puntos", 0));
+        miViewModel.setSumador(preferences.getLong("sumador", 1));
+        miViewModel.setContadorPulsacionesPartida(preferences.getLong("contadorPulsacionesPartida", 0));
+        miViewModel.setContadorPulsacionesTotal(preferences.getLong("contadorPulsacionesTotal", 0));
+        miViewModel.setContadorPulsacionesParcial(preferences.getLong("contadorPulsacionesParcial", 0));
+        miViewModel.setContadorMejorasPartida(preferences.getLong("contadorMejorasPartida", 0));
+        miViewModel.setContadorMejorasTotal(preferences.getLong("contadorMejorasTotal", 0));
 
         jsonMejoras = preferences.getString("listadoDeMejoras", null);
         Type type = new TypeToken<ArrayList<Mejora>>() {
@@ -143,5 +161,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             miViewModel.listaMejorasMutable.setValue(miListaGuardada);
         }
 
+    }
+
+    public boolean getFlag(){
+        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
+        return preferences.getBoolean("dark",false);
     }
 }

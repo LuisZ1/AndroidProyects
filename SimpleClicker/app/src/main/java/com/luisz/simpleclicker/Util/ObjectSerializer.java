@@ -1,4 +1,4 @@
-package com.luisz.simpleclicker;
+package com.luisz.simpleclicker.Util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

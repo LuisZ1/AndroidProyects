@@ -1,4 +1,4 @@
-package com.luisz.simpleclicker;
+package com.luisz.simpleclicker.Util;
 
 import android.view.View;
 

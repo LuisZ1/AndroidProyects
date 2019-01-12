@@ -1,8 +1,7 @@
-package com.luisz.simpleclicker;
+package com.luisz.simpleclicker.Fragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,14 +18,11 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.luisz.simpleclicker.Adapter.AdapterMejoras;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.R;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
-import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -78,7 +74,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 miViewModel.sumatron();
-                displayForPuntos(miViewModel.puntos);
+                displayForPuntos(miViewModel.getPuntos());
             }
         });
 
@@ -140,7 +136,7 @@ public class HomeFragment extends Fragment {
 
         miViewModel.getListaMejorasMutable().observe(this, miVMobserver);
 
-        displayForPuntos(miViewModel.puntos);
+        displayForPuntos(miViewModel.getPuntos());
 
         //cargarPartida();
 
@@ -155,7 +151,7 @@ public class HomeFragment extends Fragment {
 
     synchronized void gestionClickRecycler(int item) {
         miViewModel.sumadorMejora(item);
-        displayForPuntos(miViewModel.puntos);
+        displayForPuntos(miViewModel.getPuntos());
     }
 
     public void displayForPuntos(long puntos) {
@@ -163,8 +159,8 @@ public class HomeFragment extends Fragment {
         DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
         txtPuntos.setText(formatter.format(puntos));
-        txtSumador.setText(formatter.format(miViewModel.sumador));
-        txtContadorPulsaciones.setText(formatter.format(miViewModel.contadorPulsaciones));
+        txtSumador.setText(formatter.format(miViewModel.getSumador()));
+        txtContadorPulsaciones.setText(formatter.format(miViewModel.getContadorPulsacionesPartida()));
 
     }
 
@@ -188,7 +184,7 @@ public class HomeFragment extends Fragment {
                 handler.post(new Runnable() {
                     public void run() {
                         miViewModel.sumatron();
-                        displayForPuntos(miViewModel.puntos);
+                        displayForPuntos(miViewModel.getPuntos());
                     }
                 });
             }

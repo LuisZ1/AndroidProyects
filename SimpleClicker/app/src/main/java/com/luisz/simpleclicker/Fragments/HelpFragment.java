@@ -1,4 +1,4 @@
-package com.luisz.simpleclicker;
+package com.luisz.simpleclicker.Fragments;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
