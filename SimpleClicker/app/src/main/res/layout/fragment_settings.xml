@@ -1,68 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/ajustes"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <Button
-        android:id="@+id/btnReiniciarPartida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/btn_reiniciar"
-        app:layout_constraintEnd_toEndOf="@+id/txtReiniciar"
-        app:layout_constraintStart_toStartOf="@+id/txtReiniciar"
-        app:layout_constraintTop_toBottomOf="@+id/txtReiniciar" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cambiar tema"
+            android:textSize="14sp"
+            style="?android:attr/listSeparatorTextViewStyle"/>
 
-    <Button
-        android:id="@+id/btnCambiarTema"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/btn_tema"
-        app:layout_constraintEnd_toEndOf="@+id/txtTema"
-        app:layout_constraintStart_toStartOf="@+id/txtTema"
-        app:layout_constraintTop_toBottomOf="@+id/txtTema" />
+        <TextView
+            android:id="@+id/txtTema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_tema"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/txtTema"
-        android:layout_width="253dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/txt_tema"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnReiniciarPartida" />
+        <Button
+            android:id="@+id/btnCambiarTema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_tema"
+            android:layout_gravity="center" />
 
-    <TextView
-        android:id="@+id/txtReiniciar"
-        android:layout_width="252dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/txt_reiniciar"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reiniciar partida"
+            android:textSize="14sp"
+            style="?android:attr/listSeparatorTextViewStyle"/>
+
+        <TextView
+            android:id="@+id/txtReiniciarPartida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_reiniciarPartida"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/btnReiniciarPartida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/btn_reiniciarPartida"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reiniciar estadisticas"
+            android:textSize="14sp"
+            style="?android:attr/listSeparatorTextViewStyle"/>
+
+        <TextView
+            android:id="@+id/txtReiniciarEstadisticas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_reiniciarEstadisticas"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/btnReiniciarEstadisticas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/btn_reiniciarEstadisticas"/>
+
+    </LinearLayout>
+</ScrollView>

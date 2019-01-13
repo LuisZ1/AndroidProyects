@@ -21,6 +21,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     private long puntos = 0;
     private long contadorPulsacionesPartida = 0, contadorPulsacionesTotal = 0, contadorPulsacionesParcial = 0;
     private long contadorMejorasPartida = 0, contadorMejorasTotal = 0;
+    private long contadorPuntosGastadosTotal = 0, contadorPuntosGastadosPartida = 0;
 
     public MutableLiveData<ArrayList<Mejora>> listaMejorasMutable = new MutableLiveData<ArrayList<Mejora>>();
 
@@ -38,10 +39,11 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         rellenarListaMejoras();
     }
 
-    /**  public long sumatron ()
-     *   DESCRIPCIÓN: es el encargado de aumentar los puntos y los contadores
-     *   ENTRADA: -- será llamado desde el evento click
-     *   SALIDA: -- aumenta los contadores
+    /**
+     * public long sumatron ()
+     * DESCRIPCIÓN: es el encargado de aumentar los puntos y los contadores
+     * ENTRADA: -- será llamado desde el evento click
+     * SALIDA: -- aumenta los contadores
      */
     public long sumatron() {
         try {
@@ -54,11 +56,12 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return puntos;
     }
 
-    /**  synchronized boolean sumadorMejora(int mejoraSeleccionada)
-     *   DESCRIPCIÓN: calcula los nuevos precios y sumadores de la mejora pulsada, declarado
-     *   synchronized para protegerlo en multihilos
-     *   ENTRADA: indice de la posicion que ocupa la mejora en el array de mejoras
-     *   SALIDA: true en caso de que haya ido todo bien
+    /**
+     * synchronized boolean sumadorMejora(int mejoraSeleccionada)
+     * DESCRIPCIÓN: calcula los nuevos precios y sumadores de la mejora pulsada, declarado
+     * synchronized para protegerlo en multihilos
+     * ENTRADA: indice de la posicion que ocupa la mejora en el array de mejoras
+     * SALIDA: true en caso de que haya ido todo bien
      */
     public synchronized boolean sumadorMejora(int mejoraSeleccionada) {
 
@@ -73,6 +76,8 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
             try {
                 mejora.setNivel(mejora.getNivel() + 1);
                 puntos = puntos - mejora.getPrecio();
+                contadorPuntosGastadosPartida = contadorPuntosGastadosPartida + mejora.getPrecio();
+                contadorPuntosGastadosTotal = contadorPuntosGastadosTotal + mejora.getPrecio();
                 mejora.setPrecio((long) Math.ceil(mejora.getPrecioBase() * Math.pow(cons.MULTIPLICADOR, mejora.getNivel())));
                 sumador = sumador + ((long) Math.ceil(mejora.getIngresosBase()/* * mejora.getNivel()*/));
                 contadorPulsacionesParcial = 0;
@@ -91,10 +96,11 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return veredicto;
     }
 
-    /**  public void rellenarListaMejoras()
-     *   DESCRIPCIÓN:
-     *   ENTRADA:
-     *   SALIDA:
+    /**
+     * public void rellenarListaMejoras()
+     * DESCRIPCIÓN:
+     * ENTRADA:
+     * SALIDA:
      */
     public void rellenarListaMejoras() {
 
@@ -112,19 +118,21 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         listaMejorasMutable.setValue(listaMejoras);
     }
 
-    /** public MutableLiveData<ArrayList<Mejora>> getListaMejorasMutable()
-     *   DESCRIPCIÓN:
-     *   ENTRADA:
-     *   SALIDA:
+    /**
+     * public MutableLiveData<ArrayList<Mejora>> getListaMejorasMutable()
+     * DESCRIPCIÓN:
+     * ENTRADA:
+     * SALIDA:
      */
     public MutableLiveData<ArrayList<Mejora>> getListaMejorasMutable() {
         return listaMejorasMutable;
     }
 
-    /**  public ArrayList<Mejora> getListaMejoras()
-     *   DESCRIPCIÓN:
-     *   ENTRADA:
-     *   SALIDA:
+    /**
+     * public ArrayList<Mejora> getListaMejoras()
+     * DESCRIPCIÓN:
+     * ENTRADA:
+     * SALIDA:
      */
     public ArrayList<Mejora> getListaMejoras() {
         return listaMejoras;
@@ -138,8 +146,23 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
             contadorPulsacionesPartida = 0;
             contadorPulsacionesParcial = 0;
             contadorMejorasPartida = 0;
+            contadorPuntosGastadosPartida = 0;
             listaMejoras.clear();
             rellenarListaMejoras();
+
+            resultado = true;
+        } catch (Exception e) {
+        }
+
+        return resultado;
+    }
+
+    public boolean reiniciarEstadisticasTotales(){
+        boolean resultado = false;
+        try {
+            contadorPulsacionesTotal = 0;
+            contadorMejorasTotal = 0;
+            contadorPuntosGastadosTotal = 0;
 
             resultado = true;
         } catch (Exception e) {
@@ -178,6 +201,14 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return contadorMejorasPartida;
     }
 
+    public long getContadorPuntosGastadosTotal() {
+        return contadorPuntosGastadosTotal;
+    }
+
+    public long getContadorPuntosGastadosPartida() {
+        return contadorPuntosGastadosPartida;
+    }
+
     //Setters
     public void setSumador(long sumador) {
         this.sumador = sumador;
@@ -213,5 +244,13 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     public void setContadorMejorasPartida(long contadorMejorasPartida) {
         this.contadorMejorasPartida = contadorMejorasPartida;
+    }
+
+    public void setContadorPuntosGastadosTotal(long contadorPuntosGastadosTotal) {
+        this.contadorPuntosGastadosTotal = contadorPuntosGastadosTotal;
+    }
+
+    public void setContadorPuntosGastadosPartida(long contadorPuntosGastadosPartida) {
+        this.contadorPuntosGastadosPartida = contadorPuntosGastadosPartida;
     }
 }

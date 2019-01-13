@@ -57,10 +57,14 @@
 	- ¿Cómo reinicio la partida?\n\t\t Ve a "Ajustes / Reiniciar partida", ten en cuenta que es irreversible</string>
 
     <!--Settings-->
-    <string name="btn_reiniciar">Reiniciar partida</string>
+    <string name="btn_reiniciarPartida">Reiniciar partida</string>
+    <string name="txt_reiniciarPartida">Pulsa el botón para reiniciar la partida, ten en cuenta de que es una acción irreversible</string>
+
+    <string name="btn_reiniciarEstadisticas">Reiniciar estadísticas</string>
+    <string name="txt_reiniciarEstadisticas">Pulsa el botón para reiniciar las estadisticas totales, ten en cuenta de que es una acción irreversible</string>
+
     <string name="btn_tema">Cambiar tema</string>
     <string name="txt_tema">Pulsa el botón para cambiar entre tema oscuro y claro</string>
-    <string name="txt_reiniciar">Pulsa el botón para reiniciar la partida, ten en cuenta de que es una acción irreversible</string>
 
 
 </resources>

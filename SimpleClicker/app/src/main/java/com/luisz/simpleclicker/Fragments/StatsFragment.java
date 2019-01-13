@@ -24,6 +24,7 @@ public class StatsFragment extends Fragment {
 
     TextView txtStats_PulsacionesTotales, txtStats_PulsacionesPartida;
     TextView txtStats_MejorasCompradas, txtStats_MejorasPartida;
+    TextView txtStats_puntosGastadosTotal, txtStats_puntosGastadosPartida;
 
     @Nullable
     @Override
@@ -44,6 +45,12 @@ public class StatsFragment extends Fragment {
 
         txtStats_MejorasPartida = view.findViewById(R.id.txtStats_MejorasPartida);
         txtStats_MejorasPartida.setText(formatter.format(miViewModel.getContadorMejorasPartida()));
+
+        txtStats_puntosGastadosTotal = view.findViewById(R.id.txtStats_puntosGastadosTotal);
+        txtStats_puntosGastadosTotal.setText(formatter.format(miViewModel.getContadorPuntosGastadosTotal()));
+
+        txtStats_puntosGastadosPartida = view.findViewById(R.id.txtStats_puntosGastadosPartida);
+        txtStats_puntosGastadosPartida.setText(formatter.format(miViewModel.getContadorPuntosGastadosPartida()));
 
         return view;
     }

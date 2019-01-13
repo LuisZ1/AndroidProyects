@@ -12,9 +12,9 @@
         android:padding="20dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estadísticas de todas las partidas:"
+            android:text="Estadísticas de todas las partidas"
             android:textSize="14sp"
             style="?android:attr/listSeparatorTextViewStyle"/>
 
@@ -64,14 +64,39 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Puntos gastados:"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtStats_puntosGastadosTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+        <!--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="21dp" />
+            android:layout_height="40dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estadísticas de la partida actual:"
+            android:text="Estadísticas de la partida actual"
             android:textSize="14sp"
             style="?android:attr/listSeparatorTextViewStyle"/>
 
@@ -121,10 +146,28 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Puntos gastados:"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/txtStats_puntosGastadosPartida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"/>
 
-
+        </LinearLayout>
 
     </LinearLayout>
 

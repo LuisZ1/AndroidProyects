@@ -131,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putLong("contadorPulsacionesParcial", miViewModel.getContadorPulsacionesParcial());
         editor.putLong("contadorMejorasPartida", miViewModel.getContadorMejorasPartida());
         editor.putLong("contadorMejorasTotal", miViewModel.getContadorMejorasTotal());
+        editor.putLong("puntosGastadosPartida", miViewModel.getContadorPuntosGastadosPartida());
+        editor.putLong("puntosGastadosTotal", miViewModel.getContadorPuntosGastadosTotal());
         editor.putString("listadoDeMejoras", jsonMejoras);
 
         editor.commit();
@@ -146,10 +148,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         miViewModel.setPuntos(preferences.getLong("puntos", 0));
         miViewModel.setSumador(preferences.getLong("sumador", 1));
         miViewModel.setContadorPulsacionesPartida(preferences.getLong("contadorPulsacionesPartida", 0));
-        miViewModel.setContadorPulsacionesTotal(preferences.getLong("contadorPulsacionesTotal", 0));
+        miViewModel.setContadorPulsacionesTotal(preferences.getLong("contadorPulsacionesTotal", miViewModel.getContadorPulsacionesTotal()));
         miViewModel.setContadorPulsacionesParcial(preferences.getLong("contadorPulsacionesParcial", 0));
         miViewModel.setContadorMejorasPartida(preferences.getLong("contadorMejorasPartida", 0));
-        miViewModel.setContadorMejorasTotal(preferences.getLong("contadorMejorasTotal", 0));
+        miViewModel.setContadorMejorasTotal(preferences.getLong("contadorMejorasTotal", miViewModel.getContadorMejorasPartida()));
+        miViewModel.setContadorPuntosGastadosPartida(preferences.getLong("puntosGastadosPartida", 0));
+        miViewModel.setContadorPuntosGastadosTotal(preferences.getLong("puntosGastadosTotal", miViewModel.getContadorPuntosGastadosPartida()));
 
         jsonMejoras = preferences.getString("listadoDeMejoras", null);
         Type type = new TypeToken<ArrayList<Mejora>>() {

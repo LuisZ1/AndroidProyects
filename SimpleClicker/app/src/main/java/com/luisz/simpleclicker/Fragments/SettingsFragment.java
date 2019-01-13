@@ -22,7 +22,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SettingsFragment extends Fragment {
 
-    Button btnReiniciar, btnTema;
+    Button btnReiniciar, btnTema, btnReiniciarEstadisticas;
     ViewModel miViewModel;
     View view;
     private TextView toolbarTextView;
@@ -55,6 +55,18 @@ public class SettingsFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        btnReiniciarEstadisticas = view.findViewById(R.id.btnReiniciarEstadisticas);
+        btnReiniciarEstadisticas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(miViewModel.reiniciarEstadisticasTotales()){
+                    Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+                };
             }
         });
 

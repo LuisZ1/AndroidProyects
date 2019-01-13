@@ -52,9 +52,13 @@
 	- Can I restart the game?\n\t\t Go to "Settings / Restart game"</string>
 
     <!--Settings-->
-    <string name="btn_reiniciar">Restart game</string>
+    <string name="btn_reiniciarPartida">Restart game</string>
+    <string name="txt_reiniciarPartida">Press the button to restart the game, keep in mind that it is an irreversible action</string>
+
+    <string name="btn_reiniciarEstadisticas">Restart stats</string>
+    <string name="txt_reiniciarEstadisticas">Press the button to reset the total stats, keep in mind that it is an irreversible action</string>
+
     <string name="btn_tema">Change theme</string>
-    <string name="txt_tema">Pulsa el botón para cambiar entre tema oscuro y claro</string>
-    <string name="txt_reiniciar">Pulsa el botón para reiniciar la partida, ten en cuenta de que es una acción irreversible</string>
+    <string name="txt_tema">Press the button to switch between dark and light theme</string>
 
 </resources>
