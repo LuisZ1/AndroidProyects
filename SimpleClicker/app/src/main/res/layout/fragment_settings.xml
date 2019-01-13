@@ -12,9 +12,9 @@
         android:padding="20dp">
 
         <TextView
+            android:text="Cambiar tema"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cambiar tema"
             android:textSize="14sp"
             style="?android:attr/listSeparatorTextViewStyle"/>
 

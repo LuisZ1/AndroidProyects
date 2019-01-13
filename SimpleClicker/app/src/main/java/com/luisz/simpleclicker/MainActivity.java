@@ -133,7 +133,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putLong("contadorMejorasTotal", miViewModel.getContadorMejorasTotal());
         editor.putLong("puntosGastadosPartida", miViewModel.getContadorPuntosGastadosPartida());
         editor.putLong("puntosGastadosTotal", miViewModel.getContadorPuntosGastadosTotal());
+        editor.putLong("puntuacionMaximaPartida", miViewModel.getPuntuacionMaximaPartida());
+        editor.putLong("puntuacionMaximaTotal", miViewModel.getPuntuacionMaximaTotal());
+
+        editor.putLong("contadorAluminioTotal", miViewModel.getContadorAluminioTotal());
+        editor.putLong("contadorZincTotal", miViewModel.getContadorZincTotal());
+        editor.putLong("contadorNiquelTotal", miViewModel.getContadorNiquelTotal());
+        editor.putLong("contadorCobreTotal", miViewModel.getContadorCobreTotal());
+        editor.putLong("contadorBronceTotal", miViewModel.getContadorBronceTotal());
+        editor.putLong("contadorPlataTotal", miViewModel.getContadorPlataTotal());
+        editor.putLong("contadorIridioTotal", miViewModel.getContadorIridioTotal());
+        editor.putLong("contadorOroTotal", miViewModel.getContadorOroTotal());
+        editor.putLong("contadorPlatinoTotal", miViewModel.getContadorPlatinoTotal());
+        editor.putLong("contadorUranioTotal", miViewModel.getContadorUranioTotal());
+
+        editor.putLong("contadorAluminioPartida", miViewModel.getContadorAluminioPartida());
+        editor.putLong("contadorZincPartida", miViewModel.getContadorZincPartida());
+        editor.putLong("contadorNiquelPartida", miViewModel.getContadorNiquelPartida());
+        editor.putLong("contadorCobrePartida", miViewModel.getContadorCobrePartida());
+        editor.putLong("contadorBroncePartida", miViewModel.getContadorBroncePartida());
+        editor.putLong("contadorPlataPartida", miViewModel.getContadorPlataPartida());
+        editor.putLong("contadorIridioPartida", miViewModel.getContadorIridioPartida());
+        editor.putLong("contadorOroPartida", miViewModel.getContadorOroPartida());
+        editor.putLong("contadorPlatinoPartida", miViewModel.getContadorPlatinoPartida());
+        editor.putLong("contadorUranioPartida", miViewModel.getContadorUranioPartida());
+
         editor.putString("listadoDeMejoras", jsonMejoras);
+
 
         editor.commit();
     }
@@ -145,16 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String jsonMejoras = "";
         ArrayList<Mejora> miListaGuardada;
 
-        miViewModel.setPuntos(preferences.getLong("puntos", 0));
-        miViewModel.setSumador(preferences.getLong("sumador", 1));
-        miViewModel.setContadorPulsacionesPartida(preferences.getLong("contadorPulsacionesPartida", 0));
-        miViewModel.setContadorPulsacionesTotal(preferences.getLong("contadorPulsacionesTotal", miViewModel.getContadorPulsacionesTotal()));
-        miViewModel.setContadorPulsacionesParcial(preferences.getLong("contadorPulsacionesParcial", 0));
-        miViewModel.setContadorMejorasPartida(preferences.getLong("contadorMejorasPartida", 0));
-        miViewModel.setContadorMejorasTotal(preferences.getLong("contadorMejorasTotal", miViewModel.getContadorMejorasPartida()));
-        miViewModel.setContadorPuntosGastadosPartida(preferences.getLong("puntosGastadosPartida", 0));
-        miViewModel.setContadorPuntosGastadosTotal(preferences.getLong("puntosGastadosTotal", miViewModel.getContadorPuntosGastadosPartida()));
-
         jsonMejoras = preferences.getString("listadoDeMejoras", null);
         Type type = new TypeToken<ArrayList<Mejora>>() {
         }.getType();
@@ -164,6 +180,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             miViewModel.listaMejoras = miListaGuardada;
             miViewModel.listaMejorasMutable.setValue(miListaGuardada);
         }
+
+        miViewModel.setPuntos(preferences.getLong("puntos", 0));
+        miViewModel.setSumador(preferences.getLong("sumador", 1));
+        miViewModel.setContadorPulsacionesPartida(preferences.getLong("contadorPulsacionesPartida", 0));
+        miViewModel.setContadorPulsacionesTotal(preferences.getLong("contadorPulsacionesTotal", miViewModel.getContadorPulsacionesPartida()));
+        miViewModel.setContadorPulsacionesParcial(preferences.getLong("contadorPulsacionesParcial", 0));
+        miViewModel.setContadorMejorasPartida(preferences.getLong("contadorMejorasPartida", 0));
+        miViewModel.setContadorMejorasTotal(preferences.getLong("contadorMejorasTotal", miViewModel.getContadorMejorasPartida()));
+        miViewModel.setContadorPuntosGastadosPartida(preferences.getLong("puntosGastadosPartida", 0));
+        miViewModel.setContadorPuntosGastadosTotal(preferences.getLong("puntosGastadosTotal", miViewModel.getContadorPuntosGastadosPartida()));
+        miViewModel.setPuntuacionMaximaPartida(preferences.getLong("puntuacionMaximaPartida", miViewModel.getPuntos()));
+        miViewModel.setPuntuacionMaximaTotal(preferences.getLong("puntuacionMaximaTotal", miViewModel.getPuntos()));
+
+        miViewModel.setContadorAluminioTotal(preferences.getLong("contadorAluminioTotal", miViewModel.getListaMejoras().get(0).getNivel()));
+        miViewModel.setContadorZincTotal(preferences.getLong("contadorZincTotal", miViewModel.getListaMejoras().get(1).getNivel()));
+        miViewModel.setContadorNiquelTotal(preferences.getLong("contadorNiquelTotal", miViewModel.getListaMejoras().get(2).getNivel()));
+        miViewModel.setContadorCobreTotal(preferences.getLong("contadorCobreTotal", miViewModel.getListaMejoras().get(3).getNivel()));
+        miViewModel.setContadorBronceTotal(preferences.getLong("contadorBronceTotal", miViewModel.getListaMejoras().get(4).getNivel()));
+        miViewModel.setContadorPlataTotal(preferences.getLong("contadorPlataTotal", miViewModel.getListaMejoras().get(5).getNivel()));
+        miViewModel.setContadorIridioTotal(preferences.getLong("contadorIridioTotal", miViewModel.getListaMejoras().get(6).getNivel()));
+        miViewModel.setContadorOroTotal(preferences.getLong("contadorOroTotal", miViewModel.getListaMejoras().get(7).getNivel()));
+        miViewModel.setContadorPlatinoTotal(preferences.getLong("contadorPlatinoTotal", miViewModel.getListaMejoras().get(8).getNivel()));
+        miViewModel.setContadorUranioTotal(preferences.getLong("contadorUranioTotal", miViewModel.getListaMejoras().get(9).getNivel()));
+
+        miViewModel.setContadorAluminioPartida(preferences.getLong("contadorAluminioPartida", miViewModel.getListaMejoras().get(0).getNivel()));
+        miViewModel.setContadorZincPartida(preferences.getLong("contadorZincPartida", miViewModel.getListaMejoras().get(1).getNivel()));
+        miViewModel.setContadorNiquelPartida(preferences.getLong("contadorNiquelPartida", miViewModel.getListaMejoras().get(2).getNivel()));
+        miViewModel.setContadorCobrePartida(preferences.getLong("contadorCobrePartida", miViewModel.getListaMejoras().get(3).getNivel()));
+        miViewModel.setContadorBroncePartida(preferences.getLong("contadorBroncePartida", miViewModel.getListaMejoras().get(4).getNivel()));
+        miViewModel.setContadorPlataPartida(preferences.getLong("contadorPlataPartida", miViewModel.getListaMejoras().get(5).getNivel()));
+        miViewModel.setContadorIridioPartida(preferences.getLong("contadorIridioPartida", miViewModel.getListaMejoras().get(6).getNivel()));
+        miViewModel.setContadorOroPartida(preferences.getLong("contadorOroPartida", miViewModel.getListaMejoras().get(7).getNivel()));
+        miViewModel.setContadorPlatinoPartida(preferences.getLong("contadorPlatinoPartida", miViewModel.getListaMejoras().get(8).getNivel()));
+        miViewModel.setContadorUranioPartida(preferences.getLong("contadorUranioPartida", miViewModel.getListaMejoras().get(9).getNivel()));
 
     }
 

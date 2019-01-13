@@ -23,11 +23,11 @@
 
             <!--OBJETIVO-->
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/objetivo"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                style="?android:attr/listSeparatorTextViewStyle"/>
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="10sp" />
@@ -39,15 +39,15 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20sp" />
+                android:layout_height="40sp" />
 
             <!--COMO JUGAR-->
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/comoJugar"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                style="?android:attr/listSeparatorTextViewStyle"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -61,15 +61,15 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20sp" />
+                android:layout_height="40sp" />
 
             <!--FAQ-->
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/faq"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                style="?android:attr/listSeparatorTextViewStyle"/>
 
             <Space
                 android:layout_width="match_parent"

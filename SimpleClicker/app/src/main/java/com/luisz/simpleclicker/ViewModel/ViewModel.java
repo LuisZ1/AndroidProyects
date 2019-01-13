@@ -23,6 +23,14 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     private long contadorMejorasPartida = 0, contadorMejorasTotal = 0;
     private long contadorPuntosGastadosTotal = 0, contadorPuntosGastadosPartida = 0;
 
+    private long contadorAluminioPartida = 0, contadorZincPartida = 0, contadorCobrePartida = 0, contadorNiquelPartida = 0, contadorBroncePartida = 0,
+            contadorPlataPartida = 0, contadorIridioPartida = 0, contadorOroPartida = 0, contadorPlatinoPartida = 0, contadorUranioPartida = 0;
+
+    private long contadorAluminioTotal = 0, contadorZincTotal = 0, contadorCobreTotal = 0, contadorNiquelTotal = 0, contadorBronceTotal = 0,
+            contadorPlataTotal = 0, contadorIridioTotal = 0, contadorOroTotal = 0, contadorPlatinoTotal = 0, contadorUranioTotal = 0;
+
+    private long puntuacionMaximaTotal = 0, puntuacionMaximaPartida = 0;
+
     public MutableLiveData<ArrayList<Mejora>> listaMejorasMutable = new MutableLiveData<ArrayList<Mejora>>();
 
     public ArrayList<Mejora> listaMejoras = new ArrayList<Mejora>();
@@ -51,6 +59,15 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
             contadorPulsacionesPartida++;
             contadorPulsacionesParcial++;
             contadorPulsacionesTotal++;
+
+            if(puntos > puntuacionMaximaTotal){
+                puntuacionMaximaTotal = puntos;
+            }
+
+            if(puntos > puntuacionMaximaPartida){
+                puntuacionMaximaPartida = puntos;
+            }
+
         } catch (Exception e) {
         }
         return puntos;
@@ -79,21 +96,73 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
                 contadorPuntosGastadosPartida = contadorPuntosGastadosPartida + mejora.getPrecio();
                 contadorPuntosGastadosTotal = contadorPuntosGastadosTotal + mejora.getPrecio();
                 mejora.setPrecio((long) Math.ceil(mejora.getPrecioBase() * Math.pow(cons.MULTIPLICADOR, mejora.getNivel())));
-                sumador = sumador + ((long) Math.ceil(mejora.getIngresosBase()/* * mejora.getNivel()*/));
+                sumador = sumador + ((long) Math.ceil(mejora.getIngresosBase() + mejora.getNivel()));
                 contadorPulsacionesParcial = 0;
 
                 listaMejoras.remove(mejoraSeleccionada);
                 listaMejoras.add(mejoraSeleccionada, mejora);
 
                 listaMejorasMutable.setValue(listaMejoras);
-                contadorMejorasTotal++;
-                contadorMejorasPartida++;
+                aumentarContadoresClicMejora(mejora);
 
                 veredicto = true;
             } catch (Exception e) {
             }
         }
         return veredicto;
+    }
+
+    private void aumentarContadoresClicMejora(Mejora mejora) {
+        try {
+            contadorMejorasTotal++;
+            contadorMejorasPartida++;
+        } catch (Exception e) {
+        }
+
+        switch (mejora.getId()) {
+            case 1:
+                contadorAluminioPartida++;
+                contadorAluminioTotal++;
+                break;
+            case 2:
+
+                contadorZincPartida++;
+                contadorZincTotal++;
+                break;
+            case 3:
+                contadorCobrePartida++;
+                contadorCobreTotal++;
+                break;
+            case 4:
+                contadorNiquelPartida++;
+                contadorNiquelTotal++;
+                break;
+            case 5:
+                contadorBroncePartida++;
+                contadorBronceTotal++;
+                break;
+            case 6:
+                contadorPlataPartida++;
+                contadorPlataTotal++;
+                break;
+            case 7:
+                contadorIridioPartida++;
+                contadorIridioTotal++;
+                break;
+            case 8:
+                contadorOroPartida++;
+                contadorOroTotal++;
+                break;
+            case 9:
+                contadorPlatinoPartida++;
+                contadorPlatinoTotal++;
+                break;
+            case 10:
+                contadorUranioPartida++;
+                contadorUranioTotal++;
+                break;
+        }
+
     }
 
     /**
@@ -147,6 +216,19 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
             contadorPulsacionesParcial = 0;
             contadorMejorasPartida = 0;
             contadorPuntosGastadosPartida = 0;
+            puntuacionMaximaPartida = 0;
+
+            contadorAluminioPartida = 0;
+            contadorZincPartida = 0;
+            contadorCobrePartida = 0;
+            contadorNiquelPartida = 0;
+            contadorBroncePartida = 0;
+            contadorPlataPartida = 0;
+            contadorIridioPartida = 0;
+            contadorOroPartida = 0;
+            contadorPlatinoPartida = 0;
+            contadorUranioPartida = 0;
+
             listaMejoras.clear();
             rellenarListaMejoras();
 
@@ -157,12 +239,24 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return resultado;
     }
 
-    public boolean reiniciarEstadisticasTotales(){
+    public boolean reiniciarEstadisticasTotales() {
         boolean resultado = false;
         try {
             contadorPulsacionesTotal = 0;
             contadorMejorasTotal = 0;
             contadorPuntosGastadosTotal = 0;
+            puntuacionMaximaTotal = 0;
+
+            contadorAluminioTotal = 0;
+            contadorZincTotal = 0;
+            contadorCobreTotal = 0;
+            contadorNiquelTotal = 0;
+            contadorBronceTotal = 0;
+            contadorPlataTotal = 0;
+            contadorIridioTotal = 0;
+            contadorOroTotal = 0;
+            contadorPlatinoTotal = 0;
+            contadorUranioTotal = 0;
 
             resultado = true;
         } catch (Exception e) {
@@ -209,6 +303,94 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return contadorPuntosGastadosPartida;
     }
 
+    public long getContadorAluminioPartida() {
+        return contadorAluminioPartida;
+    }
+
+    public long getContadorZincPartida() {
+        return contadorZincPartida;
+    }
+
+    public long getContadorCobrePartida() {
+        return contadorCobrePartida;
+    }
+
+    public long getContadorNiquelPartida() {
+        return contadorNiquelPartida;
+    }
+
+    public long getContadorBroncePartida() {
+        return contadorBroncePartida;
+    }
+
+    public long getContadorPlataPartida() {
+        return contadorPlataPartida;
+    }
+
+    public long getContadorIridioPartida() {
+        return contadorIridioPartida;
+    }
+
+    public long getContadorOroPartida() {
+        return contadorOroPartida;
+    }
+
+    public long getContadorPlatinoPartida() {
+        return contadorPlatinoPartida;
+    }
+
+    public long getContadorUranioPartida() {
+        return contadorUranioPartida;
+    }
+
+    public long getContadorAluminioTotal() {
+        return contadorAluminioTotal;
+    }
+
+    public long getContadorZincTotal() {
+        return contadorZincTotal;
+    }
+
+    public long getContadorCobreTotal() {
+        return contadorCobreTotal;
+    }
+
+    public long getContadorNiquelTotal() {
+        return contadorNiquelTotal;
+    }
+
+    public long getContadorBronceTotal() {
+        return contadorBronceTotal;
+    }
+
+    public long getContadorPlataTotal() {
+        return contadorPlataTotal;
+    }
+
+    public long getContadorIridioTotal() {
+        return contadorIridioTotal;
+    }
+
+    public long getContadorOroTotal() {
+        return contadorOroTotal;
+    }
+
+    public long getContadorPlatinoTotal() {
+        return contadorPlatinoTotal;
+    }
+
+    public long getContadorUranioTotal() {
+        return contadorUranioTotal;
+    }
+
+    public long getPuntuacionMaximaTotal() {
+        return puntuacionMaximaTotal;
+    }
+
+    public long getPuntuacionMaximaPartida() {
+        return puntuacionMaximaPartida;
+    }
+
     //Setters
     public void setSumador(long sumador) {
         this.sumador = sumador;
@@ -252,5 +434,93 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     public void setContadorPuntosGastadosPartida(long contadorPuntosGastadosPartida) {
         this.contadorPuntosGastadosPartida = contadorPuntosGastadosPartida;
+    }
+
+    public void setContadorAluminioPartida(long contadorAluminioPartida) {
+        this.contadorAluminioPartida = contadorAluminioPartida;
+    }
+
+    public void setContadorZincPartida(long contadorZincPartida) {
+        this.contadorZincPartida = contadorZincPartida;
+    }
+
+    public void setContadorCobrePartida(long contadorCobrePartida) {
+        this.contadorCobrePartida = contadorCobrePartida;
+    }
+
+    public void setContadorNiquelPartida(long contadorNiquelPartida) {
+        this.contadorNiquelPartida = contadorNiquelPartida;
+    }
+
+    public void setContadorBroncePartida(long contadorBroncePartida) {
+        this.contadorBroncePartida = contadorBroncePartida;
+    }
+
+    public void setContadorPlataPartida(long contadorPlataPartida) {
+        this.contadorPlataPartida = contadorPlataPartida;
+    }
+
+    public void setContadorIridioPartida(long contadorIridioPartida) {
+        this.contadorIridioPartida = contadorIridioPartida;
+    }
+
+    public void setContadorOroPartida(long contadorOroPartida) {
+        this.contadorOroPartida = contadorOroPartida;
+    }
+
+    public void setContadorPlatinoPartida(long contadorPlatinoPartida) {
+        this.contadorPlatinoPartida = contadorPlatinoPartida;
+    }
+
+    public void setContadorUranioPartida(long contadorUranioPartida) {
+        this.contadorUranioPartida = contadorUranioPartida;
+    }
+
+    public void setContadorAluminioTotal(long contadorAluminioTotal) {
+        this.contadorAluminioTotal = contadorAluminioTotal;
+    }
+
+    public void setContadorZincTotal(long contadorZincTotal) {
+        this.contadorZincTotal = contadorZincTotal;
+    }
+
+    public void setContadorCobreTotal(long contadorCobreTotal) {
+        this.contadorCobreTotal = contadorCobreTotal;
+    }
+
+    public void setContadorNiquelTotal(long contadorNiquelTotal) {
+        this.contadorNiquelTotal = contadorNiquelTotal;
+    }
+
+    public void setContadorBronceTotal(long contadorBronceTotal) {
+        this.contadorBronceTotal = contadorBronceTotal;
+    }
+
+    public void setContadorPlataTotal(long contadorPlataTotal) {
+        this.contadorPlataTotal = contadorPlataTotal;
+    }
+
+    public void setContadorIridioTotal(long contadorIridioTotal) {
+        this.contadorIridioTotal = contadorIridioTotal;
+    }
+
+    public void setContadorOroTotal(long contadorOroTotal) {
+        this.contadorOroTotal = contadorOroTotal;
+    }
+
+    public void setContadorPlatinoTotal(long contadorPlatinoTotal) {
+        this.contadorPlatinoTotal = contadorPlatinoTotal;
+    }
+
+    public void setContadorUranioTotal(long contadorUranioTotal) {
+        this.contadorUranioTotal = contadorUranioTotal;
+    }
+
+    public void setPuntuacionMaximaTotal(long puntuacionMaximaTotal) {
+        this.puntuacionMaximaTotal = puntuacionMaximaTotal;
+    }
+
+    public void setPuntuacionMaximaPartida(long puntuacionMaximaPartida) {
+        this.puntuacionMaximaPartida = puntuacionMaximaPartida;
     }
 }
