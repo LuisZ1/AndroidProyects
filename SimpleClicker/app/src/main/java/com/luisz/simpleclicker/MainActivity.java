@@ -1,10 +1,13 @@
 package com.luisz.simpleclicker;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private Typeface font;
     private ViewModel miViewModel;
+    private int lastMenuItemSelected;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +52,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        this.getSupportFragmentManager().addOnBackStackChangedListener(
+                new android.support.v4.app.FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+                        Fragment current = getCurrentFragment();
+                        if (current instanceof HomeFragment) {
+                            navigationView.setCheckedItem(R.id.nav_inicio);
+                        } else if (current instanceof SettingsFragment) {
+                            navigationView.setCheckedItem(R.id.nav_ajustes);
+                        } else if (current instanceof StatsFragment) {
+                            navigationView.setCheckedItem(R.id.nav_stats);
+                        } else if (current instanceof HelpFragment) {
+                            navigationView.setCheckedItem(R.id.nav_ayuda);
+                        } else if (current instanceof UpgradesFragment) {
+                            navigationView.setCheckedItem(R.id.nav_mejoras);
+                        }
+                    }
+                });
 
         font = Typeface.createFromAsset(getAssets(), "awesome.ttf");
 
@@ -60,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_inicio);
+            lastMenuItemSelected = R.id.nav_inicio;
         }
 
         cargarPartida();
@@ -70,25 +94,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.nav_inicio:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).commit();
+                        new HomeFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_ajustes:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingsFragment()).commit();
+                        new SettingsFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_ayuda:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HelpFragment()).commit();
+                        new HelpFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_mejoras:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new UpgradesFragment()).commit();
+                        new UpgradesFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_stats:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new StatsFragment()).commit();
+                        new StatsFragment()).addToBackStack(null).commit();
                 break;
         }
+        lastMenuItemSelected = menuItem.getItemId();
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
@@ -99,15 +124,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-//            Fragment miFragment = this.getFragmentManager().findFragmentById(R.id.fragment_container);
-//            int id = miFragment.getId();
-//            if (id != HomeFragment ) {
-//                // add your code here
-//            }
-//            if(){
-//
+//            if (lastMenuItemSelected != R.id.nav_inicio ) {
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new HomeFragment()).commit();
+//                navigationView.getMenu().getItem(0).setChecked(true);
+//                lastMenuItemSelected = R.id.nav_inicio;
 //            }else {
-                super.onBackPressed();
+            super.onBackPressed();
 //            }
         }
     }
@@ -116,6 +139,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onPause() {
         super.onPause();
         guardarPartida();
+    }
+
+    public Fragment getCurrentFragment() {
+        return this.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
     }
 
     private void guardarPartida() {
@@ -217,8 +244,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public boolean getFlag(){
+    public boolean getFlag() {
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
-        return preferences.getBoolean("dark",false);
+        return preferences.getBoolean("dark", false);
     }
 }

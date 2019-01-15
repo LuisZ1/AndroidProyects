@@ -13,28 +13,25 @@ import java.util.ArrayList;
 
 public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewModel {
 
-    Constantes cons = new Constantes();
+    private Constantes cons = new Constantes();
 
-    //    @SerializedName("sumador")
-//    @Expose
+    //variables
     private long sumador = 1;
     private long puntos = 0;
+
+    //contadores
     private long contadorPulsacionesPartida = 0, contadorPulsacionesTotal = 0, contadorPulsacionesParcial = 0;
     private long contadorMejorasPartida = 0, contadorMejorasTotal = 0;
     private long contadorPuntosGastadosTotal = 0, contadorPuntosGastadosPartida = 0;
-
-    private long contadorAluminioPartida = 0, contadorZincPartida = 0, contadorCobrePartida = 0, contadorNiquelPartida = 0, contadorBroncePartida = 0,
-            contadorPlataPartida = 0, contadorIridioPartida = 0, contadorOroPartida = 0, contadorPlatinoPartida = 0, contadorUranioPartida = 0;
-
-    private long contadorAluminioTotal = 0, contadorZincTotal = 0, contadorCobreTotal = 0, contadorNiquelTotal = 0, contadorBronceTotal = 0,
-            contadorPlataTotal = 0, contadorIridioTotal = 0, contadorOroTotal = 0, contadorPlatinoTotal = 0, contadorUranioTotal = 0;
-
+    private long contadorAluminioPartida = 0, contadorZincPartida = 0, contadorCobrePartida = 0, contadorNiquelPartida = 0, contadorBroncePartida = 0, contadorPlataPartida = 0, contadorIridioPartida = 0, contadorOroPartida = 0, contadorPlatinoPartida = 0, contadorUranioPartida = 0;
+    private long contadorAluminioTotal = 0, contadorZincTotal = 0, contadorCobreTotal = 0, contadorNiquelTotal = 0, contadorBronceTotal = 0, contadorPlataTotal = 0, contadorIridioTotal = 0, contadorOroTotal = 0, contadorPlatinoTotal = 0, contadorUranioTotal = 0;
     private long puntuacionMaximaTotal = 0, puntuacionMaximaPartida = 0;
 
+    //lista
     public MutableLiveData<ArrayList<Mejora>> listaMejorasMutable = new MutableLiveData<ArrayList<Mejora>>();
-
     public ArrayList<Mejora> listaMejoras = new ArrayList<Mejora>();
 
+    //contexto
     private Context miAppContext;
 
     public ViewModel(Application application) {
@@ -185,26 +182,6 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         listaMejoras.add(new Mejora(10, miAppContext.getString(R.string.uranio), 0, cons.BASE_PRECIO_URANIO, cons.BASE_INGRESOS_URANIO, cons.BASE_INGRESOS_URANIO, "#137656"));
 
         listaMejorasMutable.setValue(listaMejoras);
-    }
-
-    /**
-     * public MutableLiveData<ArrayList<Mejora>> getListaMejorasMutable()
-     * DESCRIPCIÓN:
-     * ENTRADA:
-     * SALIDA:
-     */
-    public MutableLiveData<ArrayList<Mejora>> getListaMejorasMutable() {
-        return listaMejorasMutable;
-    }
-
-    /**
-     * public ArrayList<Mejora> getListaMejoras()
-     * DESCRIPCIÓN:
-     * ENTRADA:
-     * SALIDA:
-     */
-    public ArrayList<Mejora> getListaMejoras() {
-        return listaMejoras;
     }
 
     public boolean reiniciarPartida() {
@@ -389,6 +366,14 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     public long getPuntuacionMaximaPartida() {
         return puntuacionMaximaPartida;
+    }
+
+    public MutableLiveData<ArrayList<Mejora>> getListaMejorasMutable() {
+        return listaMejorasMutable;
+    }
+
+    public ArrayList<Mejora> getListaMejoras() {
+        return listaMejoras;
     }
 
     //Setters
