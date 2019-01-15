@@ -10,7 +10,7 @@ public class MejoraAutoClick {
     private int delay;
     private int period;
 
-    public MejoraAutoClick(int id, String nombre, String colorFondo, long precio, int delay) {
+    public MejoraAutoClick(int id, String nombre, long precio, int delay, String colorFondo) {
         this.id = id;
         this.nombre = nombre;
         this.colorFondo = colorFondo;
