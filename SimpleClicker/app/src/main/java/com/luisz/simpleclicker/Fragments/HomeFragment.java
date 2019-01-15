@@ -64,6 +64,10 @@ public class HomeFragment extends Fragment {
         txtSumador = view.findViewById(R.id.txtSumador);
         txtContadorPulsaciones = view.findViewById(R.id.txtPulsaciones);
 
+        //ocultar switches temporalmente TODO
+        swAutoWalk.setVisibility(View.INVISIBLE);
+        swAutoRun.setVisibility(View.INVISIBLE);
+
         lblClicks.setTypeface(font);
         lblSumador.setTypeface(font);
         swAutoWalk.setTypeface(font);
