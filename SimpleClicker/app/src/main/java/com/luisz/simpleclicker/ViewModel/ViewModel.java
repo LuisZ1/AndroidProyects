@@ -19,6 +19,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     //variables
     private long sumador = 1;
     private long puntos = 0;
+    private boolean autoClickComprado;
 
     //contadores
     private long contadorPulsacionesPartida = 0, contadorPulsacionesTotal = 0, contadorPulsacionesParcial = 0;
@@ -45,6 +46,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         puntos = 0;
         contadorPulsacionesPartida = 0;
         contadorPulsacionesParcial = 0;
+        rellenarListaMejorasAutoClick();
         rellenarListaMejoras();
     }
 
@@ -166,6 +168,16 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     }
 
+    public boolean clickCompraMejoraAutoClick(int mejoraAutoClickSeleccionada){
+        boolean resultado = false;
+
+            try{
+                autoClickComprado = true;
+            }catch(Exception e){}
+
+        return resultado;
+    }
+
     /**
      * public void rellenarListaMejoras()
      * DESCRIPCIÓN:
@@ -188,8 +200,11 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     }
 
     public void rellenarListaMejorasAutoClick(){
-        listaMejoraAutoClick.add(new MejoraAutoClick(1, "Nivel 1", 1000000, 1000,"#D0D8D9"));
-        listaMejoraAutoClick.add(new MejoraAutoClick(2, "Nivel 2", 10000000, 500,"#D0D8D9"));
+        long precioGrande1 = 10000000000l;
+        listaMejoraAutoClick.add(new MejoraAutoClick(1, "Nivel 1", 10000000, 1000,"#03A9F4"));
+        listaMejoraAutoClick.add(new MejoraAutoClick(2, "Nivel 2", 100000000, 500,"#009688"));
+        listaMejoraAutoClick.add(new MejoraAutoClick(3, "Nivel 3", 1000000000, 100,"#673AB7"));
+        listaMejoraAutoClick.add(new MejoraAutoClick(4, "Nivel 4", precioGrande1, 50,"#FF5722"));
 
         listaMejoraAutoClickMutable.setValue(listaMejoraAutoClick);
     }
@@ -392,6 +407,10 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     public ArrayList<MejoraAutoClick> getListaMejoraAutoClick() {
         return listaMejoraAutoClick;
+    }
+
+    public boolean isAutoClickComprado() {
+        return autoClickComprado;
     }
 
     //Setters

@@ -10,25 +10,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.luisz.simpleclicker.Models.Mejora;
+import com.luisz.simpleclicker.Models.MejoraAutoClick;
 import com.luisz.simpleclicker.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHolderMejoras> implements View.OnClickListener{
-    
-    private ArrayList<Mejora> listaMejoras;
+public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejorasAutoClick.ViewHolderMejoras> implements View.OnClickListener{
+
+    private ArrayList<MejoraAutoClick> listaMejorasAutoClick;
     private View.OnClickListener listener;
     DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
-    public AdapterMejoras(ArrayList<Mejora> listaMejoras) {
-        this.listaMejoras = listaMejoras;
+    public AdapterMejorasAutoClick(ArrayList<MejoraAutoClick> listaMejoras) {
+        this.listaMejorasAutoClick = listaMejoras;
     }
 
     @Override
     public ViewHolderMejoras onCreateViewHolder(ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_layout_mejora,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_layout_mejoraautoclick,null,false);
         view.setOnClickListener(this);
 
         return new ViewHolderMejoras(view);
@@ -37,13 +37,13 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
     @Override
     public void onBindViewHolder(ViewHolderMejoras viewHolderMejoras, int i) {
 
-        viewHolderMejoras.txtNombreMejora.setText(listaMejoras.get(i).getNombre());
-        viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejoras.get(i).getPrecio()));
-        viewHolderMejoras.txtLevel.setText(formatter.format(listaMejoras.get(i).getNivel()));
-        viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejoras.get(i).getColorFondo()));
+        viewHolderMejoras.txtNombreMejora.setText(listaMejorasAutoClick.get(i).getNombre());
+        viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejorasAutoClick.get(i).getPrecio()));
+        //viewHolderMejoras.txtLevel.setText(formatter.format(listaMejorasAutoClick.get(i).getNivel()));
+        viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejorasAutoClick.get(i).getColorFondo()));
 
         viewHolderMejoras.lblPrecio.setText(Html.fromHtml("&#xf3d1;"));
-        viewHolderMejoras.lblLevel.setText(Html.fromHtml("&#xf201;"));
+        viewHolderMejoras.lblLevel.setText(Html.fromHtml("&#xf017;"));
     }
 
     public void setOnClickListener(View.OnClickListener listener){
@@ -59,7 +59,7 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
 
     @Override
     public int getItemCount() {
-        return listaMejoras.size();
+        return listaMejorasAutoClick.size();
     }
 
     public class ViewHolderMejoras extends RecyclerView.ViewHolder {
@@ -75,7 +75,7 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
 
             txtNombreMejora = itemView.findViewById(R.id.txtNombreMejora);
             txtPrecio = itemView.findViewById(R.id.txtPrecio);
-            txtLevel = itemView.findViewById(R.id.txtLevel);
+            //txtLevel = itemView.findViewById(R.id.txtLevel);
             miCardView = itemView.findViewById(R.id.miCardView);
             lblPrecio = itemView.findViewById(R.id.lblPrecio);
             lblLevel = itemView.findViewById(R.id.lblNivel);
@@ -85,17 +85,36 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
         }
     }
 
-    public void setListaMejoras(ArrayList<Mejora> listaMejoras) {
-        this.listaMejoras = listaMejoras;
+    public void setListaMejorasAutoClick(ArrayList<MejoraAutoClick> listaMejoras) {
+        this.listaMejorasAutoClick = listaMejoras;
         notifyDataSetChanged();
     }
 
-    public ArrayList<Mejora> getListaMejoras() {
-        return listaMejoras;
+    public ArrayList<MejoraAutoClick> getListaMejorasAutoClick() {
+        return listaMejorasAutoClick;
     }
 
     public void notifyChange(){
         notifyDataSetChanged();
+    }
+
+    public boolean eliminarMejoraComprada(int posicionMejoraAutoClickComprada){
+        boolean resultado = false;
+
+        try {
+            listaMejorasAutoClick.remove(posicionMejoraAutoClickComprada);
+            notifyItemRemoved(posicionMejoraAutoClickComprada);
+            for(int i=0; i<posicionMejoraAutoClickComprada;i++){
+                listaMejorasAutoClick.remove(0);
+                notifyItemRemoved(0);
+            }
+
+//            listaMejorasAutoClick.remove(posicionMejoraAutoClickComprada);
+//            notifyItemRemoved(posicionMejoraAutoClickComprada);
+            resultado = true;
+        }catch(Exception e){}
+
+        return resultado;
     }
 
 }

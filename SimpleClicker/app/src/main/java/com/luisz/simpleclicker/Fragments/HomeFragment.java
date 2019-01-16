@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment {
     Switch swAutoWalk, swAutoRun;
     Button btnClick;
     ViewModel miViewModel;
+    boolean isAutoClickComprado;
 
     int x = 0;
 
@@ -65,8 +66,14 @@ public class HomeFragment extends Fragment {
         txtContadorPulsaciones = view.findViewById(R.id.txtPulsaciones);
 
         //ocultar switches temporalmente TODO
-        swAutoWalk.setVisibility(View.INVISIBLE);
-        swAutoRun.setVisibility(View.INVISIBLE);
+        isAutoClickComprado = miViewModel.isAutoClickComprado();
+        if(isAutoClickComprado){
+            //swAutoWalk.setVisibility(View.VISIBLE);
+            swAutoRun.setVisibility(View.VISIBLE);
+        }else{
+            //swAutoWalk.setVisibility(View.INVISIBLE);
+            swAutoRun.setVisibility(View.INVISIBLE);
+        }
 
         lblClicks.setTypeface(font);
         lblSumador.setTypeface(font);
@@ -139,10 +146,7 @@ public class HomeFragment extends Fragment {
         };
 
         miViewModel.getListaMejorasMutable().observe(this, miVMobserver);
-
         displayForPuntos(miViewModel.getPuntos());
-
-        //cargarPartida();
 
         return view;
     }
