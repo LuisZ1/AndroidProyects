@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estas mejoras harán clics por ti para que ganes más puntos. Cuándo compres una, parecerá un botón en la pantalla de Inicio para activarlo y desactivarlo cuando quieras."/>
+                android:text="Estas mejoras harán clics por ti para que ganes más puntos. Cuándo compres una, aparecerá un interruptor en la pantalla de Inicio para activarlo y desactivarlo cuando quieras."/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mejora los metales actuales para que agregueb más puntos al sumador y así poder conseguir más puntos"/>
+                android:text="Mejora los metales actuales para que agreguen más puntos al sumador y así poder conseguir más puntos por cada clic que des."/>
 
             <!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
             <Space
