@@ -30,21 +30,23 @@ import java.util.TimerTask;
 
 public class HomeFragment extends Fragment {
 
-    TextView txtSumador, txtPuntos, lblClicks, lblSumador, txtContadorPulsaciones;
-    Switch swAutoWalk, swAutoRun;
-    Button btnClick;
-    ViewModel miViewModel;
-    boolean isAutoClickComprado;
+    private TextView txtSumador, txtPuntos, lblClicks, lblSumador, txtContadorPulsaciones;
+    private Switch swAutoClick;
+    private Button btnClick;
+    private ViewModel miViewModel;
+    private boolean isAutoClickComprado;
 
-    int x = 0;
+    //minero auto
+    private Timer timer;
+    private TimerTask timerTask;
+    private Handler handler = new Handler();
 
-
-    //    ViewModel miViewModel;
-    RecyclerView miRecyclerView;
-    AdapterMejoras adaptador;
-    Typeface font;
-    int delay = 1000;
-    int period = delay;
+    //ViewModel miViewModel;
+    private RecyclerView miRecyclerView;
+    private AdapterMejoras adaptador;
+    private Typeface font;
+    private int delay;
+    private int period;
 
     @Nullable
     @Override
@@ -55,12 +57,14 @@ public class HomeFragment extends Fragment {
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
 
+        delay = miViewModel.getDelay();
+        period = delay;
+
         txtPuntos = view.findViewById(R.id.txtPuntos);
         txtSumador = view.findViewById(R.id.txtSumador);
         lblClicks = view.findViewById(R.id.lblN_clicks);
         lblSumador = view.findViewById(R.id.lblSumador);
-        swAutoWalk = view.findViewById(R.id.swAutoWalk);
-        swAutoRun = view.findViewById(R.id.swAutoRun);
+        swAutoClick = view.findViewById(R.id.swAutoClick);
         txtPuntos = view.findViewById(R.id.txtPuntos);
         txtSumador = view.findViewById(R.id.txtSumador);
         txtContadorPulsaciones = view.findViewById(R.id.txtPulsaciones);
@@ -68,17 +72,14 @@ public class HomeFragment extends Fragment {
         //ocultar switches temporalmente TODO
         isAutoClickComprado = miViewModel.isAutoClickComprado();
         if(isAutoClickComprado){
-            //swAutoWalk.setVisibility(View.VISIBLE);
-            swAutoRun.setVisibility(View.VISIBLE);
+            swAutoClick.setVisibility(View.VISIBLE);
         }else{
-            //swAutoWalk.setVisibility(View.INVISIBLE);
-            swAutoRun.setVisibility(View.INVISIBLE);
+            swAutoClick.setVisibility(View.INVISIBLE);
         }
 
         lblClicks.setTypeface(font);
         lblSumador.setTypeface(font);
-        swAutoWalk.setTypeface(font);
-        swAutoRun.setTypeface(font);
+        swAutoClick.setTypeface(font);
 
         btnClick = view.findViewById(R.id.btnClick);
         btnClick.setOnClickListener(new View.OnClickListener() {
@@ -89,29 +90,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        swAutoWalk.setOnClickListener(new View.OnClickListener() {
+        swAutoClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean on = ((Switch) v).isChecked();
-                swAutoRun.setChecked(false);
-                delay = 1000;
-                period = 1000;
-                if (on) {
-                    stopTimer();
-                    startTimer();
-                } else {
-                    stopTimer();
-                }
-            }
-        });
-
-        swAutoRun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean on = ((Switch) v).isChecked();
-                swAutoWalk.setChecked(false);
-                delay = 100;
-                period = 100;
                 if (on) {
                     stopTimer();
                     startTimer();
@@ -174,10 +156,6 @@ public class HomeFragment extends Fragment {
 
     //MINERO AUTOMATICO
 
-    private Timer timer;
-    private TimerTask timerTask;
-    private Handler handler = new Handler();
-
     public void stopTimer() {
         if (timer != null) {
             timer.cancel();
@@ -201,29 +179,4 @@ public class HomeFragment extends Fragment {
         timer.schedule(timerTask, delay, period);
     }
 
-    public void onSwitchWalkClicked(View v) {
-        boolean on = ((Switch) v).isChecked();
-        swAutoRun.setChecked(false);
-        delay = 1000;
-        period = 1000;
-        if (on) {
-            stopTimer();
-            startTimer();
-        } else {
-            stopTimer();
-        }
-    }
-
-    public void onSwitchRunClicked(View v) {
-        boolean on = ((Switch) v).isChecked();
-        swAutoWalk.setChecked(false);
-        delay = 100;
-        period = 100;
-        if (on) {
-            stopTimer();
-            startTimer();
-        } else {
-            stopTimer();
-        }
-    }
 }

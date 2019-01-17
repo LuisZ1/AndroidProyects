@@ -1,7 +1,5 @@
 package com.luisz.simpleclicker;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -24,6 +22,7 @@ import com.luisz.simpleclicker.Fragments.SettingsFragment;
 import com.luisz.simpleclicker.Fragments.StatsFragment;
 import com.luisz.simpleclicker.Fragments.UpgradesFragment;
 import com.luisz.simpleclicker.Models.Mejora;
+import com.luisz.simpleclicker.Models.MejoraAutoClick;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.lang.reflect.Type;
@@ -34,14 +33,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private Typeface font;
     private ViewModel miViewModel;
-    private int lastMenuItemSelected;
     private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //Temas
-        setTheme(getFlag() ? R.style.ThemeOverlay_AppCompat_Dark : R.style.ThemeOverlay_AppCompat_Light);
+        setTheme(getThemeFlag() ? R.style.ThemeOverlay_AppCompat_Dark : R.style.ThemeOverlay_AppCompat_Light);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_inicio);
-            lastMenuItemSelected = R.id.nav_inicio;
+            //lastMenuItemSelected = R.id.nav_inicio;
         }
 
         cargarPartida();
@@ -113,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new StatsFragment()).addToBackStack(null).commit();
                 break;
         }
-        lastMenuItemSelected = menuItem.getItemId();
+        //lastMenuItemSelected = menuItem.getItemId();
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
@@ -124,14 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-//            if (lastMenuItemSelected != R.id.nav_inicio ) {
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new HomeFragment()).commit();
-//                navigationView.getMenu().getItem(0).setChecked(true);
-//                lastMenuItemSelected = R.id.nav_inicio;
-//            }else {
             super.onBackPressed();
-//            }
         }
     }
 
@@ -150,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String jsonMejoras = gson.toJson(miViewModel.getListaMejoras());
+        String jsonMejorasAutoClick = gson.toJson(miViewModel.getListaMejoraAutoClick());
 
         editor.putLong("puntos", miViewModel.getPuntos());
         editor.putLong("sumador", miViewModel.getSumador());
@@ -186,7 +178,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putLong("contadorUranioPartida", miViewModel.getContadorUranioPartida());
 
         editor.putString("listadoDeMejoras", jsonMejoras);
-
+        editor.putString("listadoDeMejorasAutoClick", jsonMejorasAutoClick);
+        editor.putBoolean("autoClickComprado", miViewModel.isAutoClickComprado());
+        editor.putInt("delay", miViewModel.getDelay());
 
         editor.commit();
     }
@@ -196,8 +190,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         preferences = getSharedPreferences("partida", MODE_PRIVATE);
         Gson gson = new Gson();
         String jsonMejoras = "";
+        String jsonMejorasAutoClick = "";
         ArrayList<Mejora> miListaGuardada;
+        ArrayList<MejoraAutoClick> miListaGuardadaAutoClick;
 
+        //lista mejoras
         jsonMejoras = preferences.getString("listadoDeMejoras", null);
         Type type = new TypeToken<ArrayList<Mejora>>() {
         }.getType();
@@ -208,6 +205,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             miViewModel.listaMejorasMutable.setValue(miListaGuardada);
         }
 
+        //lista mejoras autoclick
+        jsonMejorasAutoClick = preferences.getString("listadoDeMejorasAutoClick", null);
+        Type type2 = new TypeToken<ArrayList<MejoraAutoClick>>() { }.getType();
+        miListaGuardadaAutoClick = gson.fromJson(jsonMejorasAutoClick, type2);
+
+        if (miListaGuardadaAutoClick != null) {
+            miViewModel.listaMejoras = miListaGuardada;
+            miViewModel.listaMejoraAutoClick = miListaGuardadaAutoClick;
+            miViewModel.listaMejoraAutoClickMutable.setValue(miListaGuardadaAutoClick);
+        }
+
+        miViewModel.setDelay(preferences.getInt("delay",100000));
+        miViewModel.setAutoClickComprado(preferences.getBoolean("autoClickComprado",false));
         miViewModel.setPuntos(preferences.getLong("puntos", 0));
         miViewModel.setSumador(preferences.getLong("sumador", 1));
         miViewModel.setContadorPulsacionesPartida(preferences.getLong("contadorPulsacionesPartida", 0));
@@ -241,10 +251,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         miViewModel.setContadorOroPartida(preferences.getLong("contadorOroPartida", miViewModel.getListaMejoras().get(7).getNivel()));
         miViewModel.setContadorPlatinoPartida(preferences.getLong("contadorPlatinoPartida", miViewModel.getListaMejoras().get(8).getNivel()));
         miViewModel.setContadorUranioPartida(preferences.getLong("contadorUranioPartida", miViewModel.getListaMejoras().get(9).getNivel()));
-
     }
 
-    public boolean getFlag() {
+    public boolean getThemeFlag() {
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         return preferences.getBoolean("dark", false);
     }

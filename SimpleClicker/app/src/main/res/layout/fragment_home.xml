@@ -162,7 +162,7 @@
         app:layout_constraintTop_toTopOf="@+id/lblN_clicks" />
 
     <Switch
-        android:id="@+id/swAutoWalk"
+        android:id="@+id/swAutoClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -171,16 +171,5 @@
         android:text="@string/walk"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/swAutoRun"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="onSwitchRunClicked"
-        android:text="@string/run"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/swAutoWalk" />
 
 </android.support.constraint.ConstraintLayout>

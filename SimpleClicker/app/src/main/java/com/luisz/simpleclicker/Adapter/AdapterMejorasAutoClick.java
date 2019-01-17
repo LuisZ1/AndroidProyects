@@ -39,11 +39,11 @@ public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejoras
 
         viewHolderMejoras.txtNombreMejora.setText(listaMejorasAutoClick.get(i).getNombre());
         viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejorasAutoClick.get(i).getPrecio()));
-        //viewHolderMejoras.txtLevel.setText(formatter.format(listaMejorasAutoClick.get(i).getNivel()));
+        viewHolderMejoras.txtTiempo.setText(formatter.format(listaMejorasAutoClick.get(i).getDelay()));
         viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejorasAutoClick.get(i).getColorFondo()));
 
         viewHolderMejoras.lblPrecio.setText(Html.fromHtml("&#xf3d1;"));
-        viewHolderMejoras.lblLevel.setText(Html.fromHtml("&#xf017;"));
+        viewHolderMejoras.lblTiempo.setText(Html.fromHtml("&#xf017;"));
     }
 
     public void setOnClickListener(View.OnClickListener listener){
@@ -64,8 +64,8 @@ public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejoras
 
     public class ViewHolderMejoras extends RecyclerView.ViewHolder {
 
-        TextView txtNombreMejora, txtPrecio, txtLevel;
-        TextView lblPrecio, lblLevel;
+        TextView txtNombreMejora, txtPrecio, txtTiempo;
+        TextView lblPrecio, lblTiempo;
         CardView miCardView;
 
         public ViewHolderMejoras(View itemView) {
@@ -75,13 +75,13 @@ public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejoras
 
             txtNombreMejora = itemView.findViewById(R.id.txtNombreMejora);
             txtPrecio = itemView.findViewById(R.id.txtPrecio);
-            //txtLevel = itemView.findViewById(R.id.txtLevel);
+            txtTiempo = itemView.findViewById(R.id.txtTiempo);
             miCardView = itemView.findViewById(R.id.miCardView);
             lblPrecio = itemView.findViewById(R.id.lblPrecio);
-            lblLevel = itemView.findViewById(R.id.lblNivel);
+            lblTiempo = itemView.findViewById(R.id.lblTiempo);
 
             this.lblPrecio.setTypeface(typeface);
-            this.lblLevel.setTypeface(typeface);
+            this.lblTiempo.setTypeface(typeface);
         }
     }
 
@@ -108,9 +108,6 @@ public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejoras
                 listaMejorasAutoClick.remove(0);
                 notifyItemRemoved(0);
             }
-
-//            listaMejorasAutoClick.remove(posicionMejoraAutoClickComprada);
-//            notifyItemRemoved(posicionMejoraAutoClickComprada);
             resultado = true;
         }catch(Exception e){}
 

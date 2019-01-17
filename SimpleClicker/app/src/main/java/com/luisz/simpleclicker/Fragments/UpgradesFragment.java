@@ -47,8 +47,6 @@ public class UpgradesFragment extends Fragment {
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
 
-        //miViewModel.rellenarListaMejorasAutoClick();
-
         //manejando recicler y adapter
         miRecyclerView = view.findViewById(R.id.recyclerMejorasAutoClick);
         miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
@@ -62,7 +60,7 @@ public class UpgradesFragment extends Fragment {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
                     miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada);
-                    Toast.makeText(getActivity().getApplicationContext(), "Has hecho clic en la mejora: "+mejoraSeleccionada, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada "+mejoraSeleccionada+1, Toast.LENGTH_SHORT).show();
                     adaptador.eliminarMejoraComprada(mejoraSeleccionada);
                 }
             }

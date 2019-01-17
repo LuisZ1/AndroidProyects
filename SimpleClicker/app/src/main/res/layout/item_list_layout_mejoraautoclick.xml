@@ -40,7 +40,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/lblNivel"
+                android:id="@+id/lblTiempo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -67,15 +67,14 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
             <TextView
-                android:id="@+id/txtLevel"
+                android:id="@+id/txtTiempo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
                 android:text="@string/_0"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/lblNivel"
-                app:layout_constraintTop_toTopOf="@+id/guideline8" />
+                app:layout_constraintStart_toEndOf="@+id/lblTiempo"
+                app:layout_constraintTop_toTopOf="@+id/lblTiempo" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline7"
