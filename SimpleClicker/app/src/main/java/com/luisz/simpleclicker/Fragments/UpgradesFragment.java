@@ -33,10 +33,13 @@ import java.util.TimerTask;
 
 public class UpgradesFragment extends Fragment {
 
-    ViewModel miViewModel;
-    AdapterMejorasAutoClick adaptador;
-    Typeface font;
-    RecyclerView miRecyclerView;
+    private ViewModel miViewModel;
+    private AdapterMejorasAutoClick adaptador;
+    private Typeface font;
+    private RecyclerView miRecyclerView;
+    private DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
+
+    private TextView txtPuntos;
 
     @Nullable
     @Override
@@ -46,6 +49,9 @@ public class UpgradesFragment extends Fragment {
 
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
+
+        txtPuntos = view.findViewById(R.id.txtPuntos);
+        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
 
         //manejando recicler y adapter
         miRecyclerView = view.findViewById(R.id.recyclerMejorasAutoClick);
@@ -59,9 +65,13 @@ public class UpgradesFragment extends Fragment {
             public void onClick(View view) {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
-                    miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada);
-                    Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada "+mejoraSeleccionada+1, Toast.LENGTH_SHORT).show();
-                    adaptador.eliminarMejoraComprada(mejoraSeleccionada);
+                    if(miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada)) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada" , Toast.LENGTH_SHORT).show();
+                        adaptador.eliminarMejoraComprada(mejoraSeleccionada);
+                        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
+                    }else{
+                        Toast.makeText(getActivity().getApplicationContext(), "No puedes comprar esa mejora", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

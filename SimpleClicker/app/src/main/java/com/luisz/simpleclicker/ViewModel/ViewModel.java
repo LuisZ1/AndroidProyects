@@ -61,16 +61,16 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
      */
     public long sumatron() {
         try {
-            puntos = puntos + sumador;
+            puntos = puntos + sumador ;
             contadorPulsacionesPartida++;
             contadorPulsacionesParcial++;
             contadorPulsacionesTotal++;
 
-            if(puntos > puntuacionMaximaTotal){
+            if (puntos > puntuacionMaximaTotal) {
                 puntuacionMaximaTotal = puntos;
             }
 
-            if(puntos > puntuacionMaximaPartida){
+            if (puntos > puntuacionMaximaPartida) {
                 puntuacionMaximaPartida = puntos;
             }
 
@@ -171,14 +171,16 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     }
 
-    public boolean clickCompraMejoraAutoClick(int mejoraAutoClickSeleccionada){
+    public boolean clickCompraMejoraAutoClick(int mejoraAutoClickSeleccionada) {
         boolean resultado = false;
+        MejoraAutoClick mejoraSeleccionada = listaMejoraAutoClick.get(mejoraAutoClickSeleccionada);
 
-            try{
-                delay = listaMejoraAutoClick.get(mejoraAutoClickSeleccionada).getDelay();
-                autoClickComprado = true;
-
-            }catch(Exception e){}
+        if (puntos >= mejoraSeleccionada.getPrecio()) {
+            puntos = puntos - mejoraSeleccionada.getPrecio();
+            delay = mejoraSeleccionada.getDelay();
+            autoClickComprado = true;
+            resultado = true;
+        }
 
         return resultado;
     }
@@ -204,11 +206,11 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         listaMejorasMutable.setValue(listaMejoras);
     }
 
-    public void rellenarListaMejorasAutoClick(){
-        listaMejoraAutoClick.add(new MejoraAutoClick(1, "Nivel 1", 10000000, 1000,"#42A5F5"));
-        listaMejoraAutoClick.add(new MejoraAutoClick(2, "Nivel 2", 100000000, 500,"#1E88E5"));
-        listaMejoraAutoClick.add(new MejoraAutoClick(3, "Nivel 3", 1000000000, 100,"#1565C0"));
-        listaMejoraAutoClick.add(new MejoraAutoClick(4, "Nivel 4", 10000000000l, 50,"#0D47A1"));
+    public void rellenarListaMejorasAutoClick() {
+        listaMejoraAutoClick.add(new MejoraAutoClick(1, "Nivel 1", 10000000, 1000, "#90CAF9"));
+        listaMejoraAutoClick.add(new MejoraAutoClick(2, "Nivel 2", 100000000, 500, "#42A5F5"));
+        listaMejoraAutoClick.add(new MejoraAutoClick(3, "Nivel 3", 1000000000, 100, "#1E88E5"));
+        listaMejoraAutoClick.add(new MejoraAutoClick(4, "Nivel 4", 10000000000l, 50, "#1565C0"));
 
         listaMejoraAutoClickMutable.setValue(listaMejoraAutoClick);
     }
@@ -223,7 +225,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
             contadorMejorasPartida = 0;
             contadorPuntosGastadosPartida = 0;
             puntuacionMaximaPartida = 0;
-            autoClickComprado=false;
+            autoClickComprado = false;
             delay = 1000000;
 
             contadorAluminioPartida = 0;

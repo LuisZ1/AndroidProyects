@@ -24,8 +24,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mejoras, en construcción"
-                android:textSize="18sp"
+                android:text="Puntos que puedes gastar:"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txtPuntos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -39,10 +47,50 @@
                 android:layout_height="wrap_content"
                 android:text="Estas mejoras harán clics por ti para que ganes más puntos. Cuándo compres una, parecerá un botón en la pantalla de Inicio para activarlo y desactivarlo cuando quieras."/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:padding="5dp"
+                android:text="El reloj (en milisegundos) representa cada cuanto tiempo va a dar un clic automáticamente, por ejemplo, la primera mejora da clic cada 1000 ms y la segunda cada 500ms"/>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerMejorasAutoClick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <TextView
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mejoras de Metales (Próximamente)"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mejora los metales actuales para que agregueb más puntos al sumador y así poder conseguir más puntos"/>
+
+            <!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <TextView
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nuevos Metales (Próximamente)"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Compra nuevos metales con los que podrás ganar más puntos y gastarlos en otras mejoras."/>
+
 
         </LinearLayout>
     </ScrollView>
