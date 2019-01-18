@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:padding="5dp"
-                android:text="El reloj (en milisegundos) representa cada cuanto tiempo va a dar un clic automáticamente, por ejemplo, la primera mejora da clic cada 1000 ms y la segunda cada 500ms"/>
+                android:text="El reloj representa cuantos clics por segundo dará automáticamente"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerMejorasAutoClick"

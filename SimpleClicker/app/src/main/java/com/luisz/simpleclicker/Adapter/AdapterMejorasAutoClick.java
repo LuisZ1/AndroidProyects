@@ -39,7 +39,7 @@ public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejoras
 
         viewHolderMejoras.txtNombreMejora.setText(listaMejorasAutoClick.get(i).getNombre());
         viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejorasAutoClick.get(i).getPrecio()));
-        viewHolderMejoras.txtTiempo.setText(formatter.format(listaMejorasAutoClick.get(i).getDelay()));
+        viewHolderMejoras.txtTiempo.setText(formatter.format(1000/listaMejorasAutoClick.get(i).getDelay()));
         viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejorasAutoClick.get(i).getColorFondo()));
 
         viewHolderMejoras.lblPrecio.setText(Html.fromHtml("&#xf3d1;"));
