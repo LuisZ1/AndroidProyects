@@ -3,16 +3,14 @@ package com.luisz.simpleclicker;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,102 +26,59 @@ import com.luisz.simpleclicker.ViewModel.ViewModel;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity_BottomMenu extends AppCompatActivity {
 
-    private DrawerLayout drawer;
     private Typeface font;
     private ViewModel miViewModel;
-    private NavigationView navigationView;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_bottom_home:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new HomeFragment()).addToBackStack(null).commit();
+                    return true;
+                case R.id.navigation_bottom_ajustes:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new SettingsFragment()).addToBackStack(null).commit();
+                    return true;
+                case R.id.navigation_bottom_ayuda:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new HelpFragment()).addToBackStack(null).commit();
+                    return true;
+                case R.id.navigation_bottom_mejoras:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new UpgradesFragment()).addToBackStack(null).commit();
+                    return true;
+                case R.id.navigation_bottom_stats:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new StatsFragment()).addToBackStack(null).commit();
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //Temas
-        setTheme(getThemeFlag() ? R.style.ThemeOverlay_AppCompat_Dark : R.style.ThemeOverlay_AppCompat_Light);
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_bottom_menu);
 
         miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        this.getSupportFragmentManager().addOnBackStackChangedListener(
-                new android.support.v4.app.FragmentManager.OnBackStackChangedListener() {
-                    public void onBackStackChanged() {
-                        Fragment current = getCurrentFragment();
-                        if (current instanceof HomeFragment) {
-                            navigationView.setCheckedItem(R.id.nav_inicio);
-                        } else if (current instanceof SettingsFragment) {
-                            navigationView.setCheckedItem(R.id.nav_ajustes);
-                        } else if (current instanceof StatsFragment) {
-                            navigationView.setCheckedItem(R.id.nav_stats);
-                        } else if (current instanceof HelpFragment) {
-                            navigationView.setCheckedItem(R.id.nav_ayuda);
-                        } else if (current instanceof UpgradesFragment) {
-                            navigationView.setCheckedItem(R.id.nav_mejoras);
-                        }
-                    }
-                });
-
-        font = Typeface.createFromAsset(getAssets(), "awesome.ttf");
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.nav_drawer_open, R.string.nav_drawer_close);
-        toggle.syncState();
+        final BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_inicio);
-            //lastMenuItemSelected = R.id.nav_inicio;
         }
+        //TODO boton back
 
         cargarPartida();
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.nav_inicio:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).addToBackStack(null).commit();
-                break;
-            case R.id.nav_ajustes:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingsFragment()).addToBackStack(null).commit();
-                break;
-            case R.id.nav_ayuda:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HelpFragment()).addToBackStack(null).commit();
-                break;
-            case R.id.nav_mejoras:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new UpgradesFragment()).addToBackStack(null).commit();
-                break;
-            case R.id.nav_stats:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new StatsFragment()).addToBackStack(null).commit();
-                break;
-        }
-        //lastMenuItemSelected = menuItem.getItemId();
-        drawer.closeDrawer(GravityCompat.START);
-
-        return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
     }
 
     @Override
@@ -136,7 +91,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return this.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
     }
 
-    public void guardarPartida() {
+    @Override
+    public void onBackPressed() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        int seletedItemId = bottomNavigationView.getSelectedItemId();
+        if (R.id.navigation_bottom_home != seletedItemId) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).addToBackStack(null).commit();
+            bottomNavigationView.setSelectedItemId(R.id.navigation_bottom_home);
+        } else {
+            //super.onBackPressed();
+        }
+    }
+
+    private void guardarPartida() {
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
@@ -185,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.commit();
     }
 
-    public void cargarPartida() {
+    private void cargarPartida() {
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         preferences = getSharedPreferences("partida", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -253,8 +221,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         miViewModel.setContadorUranioPartida(preferences.getLong("contadorUranioPartida", miViewModel.getListaMejoras().get(9).getNivel()));
     }
 
-    public boolean getThemeFlag() {
-        SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
-        return preferences.getBoolean("dark", false);
-    }
+
 }
