@@ -2,6 +2,7 @@ package com.luisz.simpleclicker.Fragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.luisz.simpleclicker.Adapter.AdapterMejoras;
 import com.luisz.simpleclicker.Models.Mejora;
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment {
     private Typeface font;
     private int delay;
     private int period;
+    private int rowNumber;
 
     @Nullable
     @Override
@@ -56,6 +59,7 @@ public class HomeFragment extends Fragment {
 
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
+        rowNumber = miViewModel.getRowNumber();
 
         delay = miViewModel.getDelay();
         period = delay;
@@ -103,8 +107,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            miViewModel.setRowNumber(2);
+        } else {
+            miViewModel.setRowNumber(1);
+        }
+
         miRecyclerView = view.findViewById(R.id.myRecyclerView);
-        miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 2, LinearLayoutManager.HORIZONTAL, false));
+        miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(),miViewModel.getRowNumber() , LinearLayoutManager.HORIZONTAL, false));
 
         adaptador = new AdapterMejoras(miViewModel.getListaMejorasMutable().getValue());
         miRecyclerView.setAdapter(adaptador);
@@ -134,6 +145,21 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            miViewModel.setRowNumber(1);
+            miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), miViewModel.getRowNumber(), LinearLayoutManager.HORIZONTAL, false));
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+//            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+            miViewModel.setRowNumber(2);
+            miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), miViewModel.getRowNumber(), LinearLayoutManager.HORIZONTAL, false));
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         stopTimer();
@@ -151,7 +177,6 @@ public class HomeFragment extends Fragment {
         txtPuntos.setText(formatter.format(puntos));
         txtSumador.setText(formatter.format(miViewModel.getSumador()));
         txtContadorPulsaciones.setText(formatter.format(miViewModel.getContadorPulsacionesPartida()));
-
     }
 
     //MINERO AUTOMATICO

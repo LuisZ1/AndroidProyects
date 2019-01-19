@@ -568,4 +568,14 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     public void setDelay(int delay) {
         this.delay = delay;
     }
+
+    private int rowNumber = 2;
+
+    public int getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(int rowNumber) {
+        this.rowNumber = rowNumber;
+    }
 }

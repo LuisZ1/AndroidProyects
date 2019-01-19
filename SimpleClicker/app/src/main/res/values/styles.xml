@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
@@ -21,6 +21,8 @@
     <style name="textonegro" parent="Theme.AppCompat.Dialog">
         <item name="android:textColor">@android:color/black</item>
     </style>
+
+    <!--android:background="?android:attr/colorPrimaryDark"-->
 
     <!--<style name="DrawerHamburgerStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">-->
         <!--<item name="spinBars">true</item>-->
