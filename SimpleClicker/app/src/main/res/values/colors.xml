@@ -7,14 +7,15 @@
     <color name="colorPrimary">#795548</color>
     <color name="colorPrimaryDark">#5D4037</color>
     <color name="primary_light">#D7CCC8</color>
-    <color name="colorPrimaryDarkLight">#43A047</color>
     <color name="colorAccent">#FFC107</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
-    <color name="background">#BDBDBD</color>
+    <!--<color name="background">#EEEEEE</color>-->
+    <color name="background">#A47A6A</color>
+    <color name="textoGris">#212121</color>
 
     <!--<color name="cobre"> #FFB74D</color>-->
     <!--<color name="bronce"> #EF6C00 </color>-->
