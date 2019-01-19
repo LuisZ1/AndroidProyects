@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,17 +106,6 @@
 
     </LinearLayout>
 
-    <com.alespero.expandablecardview.ExpandableCardView
-        android:id="@+id/cv_mejorasglobalescompradas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:animationDuration="300"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp"
-        app:expandOnClick="true"
-        app:icon="@android:color/transparent"
-        app:inner_view="@layout/cardv_mejorasglobalescompradas"
-        app:startExpanded="false"
-        app:title="Mejoras compradas" />
+
 
 </LinearLayout>

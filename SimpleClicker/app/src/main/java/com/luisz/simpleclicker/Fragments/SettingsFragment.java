@@ -72,11 +72,12 @@ public class SettingsFragment extends Fragment {
         btnTema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            saveFlag(!getFlag());
-
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            getActivity().finish();
+                Toast.makeText(getActivity(), "Próximamente", Toast.LENGTH_SHORT).show();
+//                saveFlag(!getFlag());
+//
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                startActivity(intent);
+//                getActivity().finish();
             }
         });
 

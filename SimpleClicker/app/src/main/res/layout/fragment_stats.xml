@@ -12,7 +12,6 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-
         <com.alespero.expandablecardview.ExpandableCardView
             android:id="@+id/cv_statspartida"
             android:layout_width="wrap_content"
@@ -37,7 +36,7 @@
         <com.alespero.expandablecardview.ExpandableCardView
             android:id="@+id/cv_estadisticasglobales"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:animationDuration="300"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp"
@@ -45,8 +44,29 @@
             app:icon="@android:color/transparent"
             app:inner_view="@layout/cardv_statsglobales"
             app:startExpanded="false"
-            app:title="Todas las partidas" />
+            app:title="Todas las partidas"
+            android:layout_below="@id/cv_statspartida"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <com.alespero.expandablecardview.ExpandableCardView
+            android:id="@+id/cv_mejorasglobalescompradas"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:animationDuration="300"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            app:expandOnClick="true"
+            app:icon="@android:color/transparent"
+            app:inner_view="@layout/cardv_mejorasglobalescompradas"
+            app:startExpanded="false"
+            app:title="Mejoras compradas" />
 
     </LinearLayout>
+
 
 </ScrollView>

@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
-        android:id="@+id/navigation_bottom_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:id="@+id/navigation_bottom_ayuda"
+        android:title="@string/ayuda"
+        android:icon="@drawable/ic_help_black_24dp"/>
 
     <item
         android:id="@+id/navigation_bottom_mejoras"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/mejoras" />
+
+    <item
+        android:id="@+id/navigation_bottom_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_bottom_stats"
@@ -20,10 +26,5 @@
         android:id="@+id/navigation_bottom_ajustes"
         android:title="@string/ajustes"
         android:icon="@drawable/ic_settings_black_24dp" />
-
-    <item
-        android:id="@+id/navigation_bottom_ayuda"
-        android:title="@string/ayuda"
-        android:icon="@drawable/ic_help_black_24dp"/>
 
 </menu>

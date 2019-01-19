@@ -75,6 +75,7 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
+            navigation.setSelectedItemId(R.id.navigation_bottom_home);
         }
         //TODO boton back
 
