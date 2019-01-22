@@ -7,7 +7,7 @@ import android.content.Context;
 
 import com.luisz.simpleclicker.Models.Constantes;
 import com.luisz.simpleclicker.Models.Mejora;
-import com.luisz.simpleclicker.Models.MejoraAutoClick;
+import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.R;
 
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     public MutableLiveData<ArrayList<Mejora>> listaMejorasMutable = new MutableLiveData<ArrayList<Mejora>>();
     public ArrayList<Mejora> listaMejoras = new ArrayList<Mejora>();
 
-    public MutableLiveData<ArrayList<MejoraAutoClick>> listaMejoraAutoClickMutable = new MutableLiveData<ArrayList<MejoraAutoClick>>();
-    public ArrayList<MejoraAutoClick> listaMejoraAutoClick = new ArrayList<MejoraAutoClick>();
+    public MutableLiveData<ArrayList<Mejora_AutoClick>> listaMejoraAutoClickMutable = new MutableLiveData<ArrayList<Mejora_AutoClick>>();
+    public ArrayList<Mejora_AutoClick> listaMejoraAutoClick = new ArrayList<Mejora_AutoClick>();
 
     //contexto
     private Context miAppContext;
@@ -173,7 +173,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     public boolean clickCompraMejoraAutoClick(int mejoraAutoClickSeleccionada) {
         boolean resultado = false;
-        MejoraAutoClick mejoraSeleccionada = listaMejoraAutoClick.get(mejoraAutoClickSeleccionada);
+        Mejora_AutoClick mejoraSeleccionada = listaMejoraAutoClick.get(mejoraAutoClickSeleccionada);
 
         if (puntos >= mejoraSeleccionada.getPrecio()) {
             puntos = puntos - mejoraSeleccionada.getPrecio();
@@ -207,10 +207,10 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     }
 
     public void rellenarListaMejorasAutoClick() {
-        listaMejoraAutoClick.add(new MejoraAutoClick(1, "Nivel 1", 10000000, 1000, "#90CAF9"));
-        listaMejoraAutoClick.add(new MejoraAutoClick(2, "Nivel 2", 100000000, 500, "#42A5F5"));
-        listaMejoraAutoClick.add(new MejoraAutoClick(3, "Nivel 3", 1000000000, 100, "#1E88E5"));
-        listaMejoraAutoClick.add(new MejoraAutoClick(4, "Nivel 4", 10000000000l, 50, "#1565C0"));
+        listaMejoraAutoClick.add(new Mejora_AutoClick(1, "Nivel 1", 10000000, 1000, "#90CAF9"));
+        listaMejoraAutoClick.add(new Mejora_AutoClick(2, "Nivel 2", 100000000, 500, "#42A5F5"));
+        listaMejoraAutoClick.add(new Mejora_AutoClick(3, "Nivel 3", 1000000000, 100, "#1E88E5"));
+        listaMejoraAutoClick.add(new Mejora_AutoClick(4, "Nivel 4", 10000000000l, 50, "#1565C0"));
 
         listaMejoraAutoClickMutable.setValue(listaMejoraAutoClick);
     }
@@ -412,11 +412,11 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return listaMejoras;
     }
 
-    public MutableLiveData<ArrayList<MejoraAutoClick>> getListaMejoraAutoClickMutable() {
+    public MutableLiveData<ArrayList<Mejora_AutoClick>> getListaMejoraAutoClickMutable() {
         return listaMejoraAutoClickMutable;
     }
 
-    public ArrayList<MejoraAutoClick> getListaMejoraAutoClick() {
+    public ArrayList<Mejora_AutoClick> getListaMejoraAutoClick() {
         return listaMejoraAutoClick;
     }
 

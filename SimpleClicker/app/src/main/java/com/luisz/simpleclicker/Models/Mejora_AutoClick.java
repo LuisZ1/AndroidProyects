@@ -1,6 +1,6 @@
 package com.luisz.simpleclicker.Models;
 
-public class MejoraAutoClick {
+public class Mejora_AutoClick {
 
     private int id;
     private String nombre;
@@ -10,7 +10,7 @@ public class MejoraAutoClick {
     private int delay;
     private int period;
 
-    public MejoraAutoClick(int id, String nombre, long precio, int delay, String colorFondo) {
+    public Mejora_AutoClick(int id, String nombre, long precio, int delay, String colorFondo) {
         this.id = id;
         this.nombre = nombre;
         this.colorFondo = colorFondo;

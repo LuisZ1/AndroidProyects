@@ -22,7 +22,7 @@ import com.luisz.simpleclicker.Fragments.SettingsFragment;
 import com.luisz.simpleclicker.Fragments.StatsFragment;
 import com.luisz.simpleclicker.Fragments.UpgradesFragment;
 import com.luisz.simpleclicker.Models.Mejora;
-import com.luisz.simpleclicker.Models.MejoraAutoClick;
+import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.lang.reflect.Type;
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String jsonMejoras = "";
         String jsonMejorasAutoClick = "";
         ArrayList<Mejora> miListaGuardada;
-        ArrayList<MejoraAutoClick> miListaGuardadaAutoClick;
+        ArrayList<Mejora_AutoClick> miListaGuardadaAutoClick;
 
         //lista mejoras
         jsonMejoras = preferences.getString("listadoDeMejoras", null);
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //lista mejoras autoclick
         jsonMejorasAutoClick = preferences.getString("listadoDeMejorasAutoClick", null);
-        Type type2 = new TypeToken<ArrayList<MejoraAutoClick>>() { }.getType();
+        Type type2 = new TypeToken<ArrayList<Mejora_AutoClick>>() { }.getType();
         miListaGuardadaAutoClick = gson.fromJson(jsonMejorasAutoClick, type2);
 
         if (miListaGuardadaAutoClick != null) {

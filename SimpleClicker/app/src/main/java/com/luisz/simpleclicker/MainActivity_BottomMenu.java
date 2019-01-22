@@ -2,16 +2,13 @@ package com.luisz.simpleclicker;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,7 +18,7 @@ import com.luisz.simpleclicker.Fragments.SettingsFragment;
 import com.luisz.simpleclicker.Fragments.StatsFragment;
 import com.luisz.simpleclicker.Fragments.UpgradesFragment;
 import com.luisz.simpleclicker.Models.Mejora;
-import com.luisz.simpleclicker.Models.MejoraAutoClick;
+import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.lang.reflect.Type;
@@ -162,7 +159,7 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         String jsonMejoras = "";
         String jsonMejorasAutoClick = "";
         ArrayList<Mejora> miListaGuardada;
-        ArrayList<MejoraAutoClick> miListaGuardadaAutoClick;
+        ArrayList<Mejora_AutoClick> miListaGuardadaAutoClick;
 
         //lista mejoras
         jsonMejoras = preferences.getString("listadoDeMejoras", null);
@@ -177,7 +174,7 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
 
         //lista mejoras autoclick
         jsonMejorasAutoClick = preferences.getString("listadoDeMejorasAutoClick", null);
-        Type type2 = new TypeToken<ArrayList<MejoraAutoClick>>() { }.getType();
+        Type type2 = new TypeToken<ArrayList<Mejora_AutoClick>>() { }.getType();
         miListaGuardadaAutoClick = gson.fromJson(jsonMejorasAutoClick, type2);
 
         if (miListaGuardadaAutoClick != null) {

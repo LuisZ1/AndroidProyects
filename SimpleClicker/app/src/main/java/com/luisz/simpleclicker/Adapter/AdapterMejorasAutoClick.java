@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.luisz.simpleclicker.Models.MejoraAutoClick;
+import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.R;
 
 import java.text.DecimalFormat;
@@ -18,11 +18,11 @@ import java.util.ArrayList;
 
 public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejorasAutoClick.ViewHolderMejoras> implements View.OnClickListener{
 
-    private ArrayList<MejoraAutoClick> listaMejorasAutoClick;
+    private ArrayList<Mejora_AutoClick> listaMejorasAutoClick;
     private View.OnClickListener listener;
     DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
-    public AdapterMejorasAutoClick(ArrayList<MejoraAutoClick> listaMejoras) {
+    public AdapterMejorasAutoClick(ArrayList<Mejora_AutoClick> listaMejoras) {
         this.listaMejorasAutoClick = listaMejoras;
     }
 
@@ -85,12 +85,12 @@ public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejoras
         }
     }
 
-    public void setListaMejorasAutoClick(ArrayList<MejoraAutoClick> listaMejoras) {
+    public void setListaMejorasAutoClick(ArrayList<Mejora_AutoClick> listaMejoras) {
         this.listaMejorasAutoClick = listaMejoras;
         notifyDataSetChanged();
     }
 
-    public ArrayList<MejoraAutoClick> getListaMejorasAutoClick() {
+    public ArrayList<Mejora_AutoClick> getListaMejorasAutoClick() {
         return listaMejorasAutoClick;
     }
 
