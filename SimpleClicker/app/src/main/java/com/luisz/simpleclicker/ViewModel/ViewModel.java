@@ -61,7 +61,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
      */
     public long sumatron() {
         try {
-            puntos = puntos + sumador ;
+            puntos = puntos + sumador;
             contadorPulsacionesPartida++;
             contadorPulsacionesParcial++;
             contadorPulsacionesTotal++;
@@ -101,8 +101,8 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
                 puntos = puntos - mejora.getPrecio();
                 contadorPuntosGastadosPartida = contadorPuntosGastadosPartida + mejora.getPrecio();
                 contadorPuntosGastadosTotal = contadorPuntosGastadosTotal + mejora.getPrecio();
-                mejora.setPrecio((long) Math.ceil(mejora.getPrecioBase() * Math.pow(cons.MULTIPLICADOR, mejora.getNivel())));
-                sumador = sumador + ((long) Math.ceil(mejora.getIngresosBase() + mejora.getNivel()));
+                mejora.setPrecio((long) Math.ceil(mejora.getPrecioBase() * Math.pow(cons.MULTIPLICADOR, mejora.getNivel() / cons.DIVISOR_EXP_INICIAL)));
+                sumador = sumador + ((long) Math.ceil(mejora.getIngresosBase()));
                 contadorPulsacionesParcial = 0;
 
                 listaMejoras.remove(mejoraSeleccionada);

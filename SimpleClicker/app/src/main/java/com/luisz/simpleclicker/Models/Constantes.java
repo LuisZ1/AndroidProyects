@@ -3,22 +3,10 @@ package com.luisz.simpleclicker.Models;
 public class Constantes {
 
     public static final double MULTIPLICADOR = 1.11;
+    public static final double DIVISOR_EXP_INICIAL = 1.7;
+    public static final double DIVISOR_EXP_MEDIO = 2;
+    public static final double DIVISOR_EXP_FINAL = 2.8;
 
-//    public static final long BASE_PRECIO_COBRE      = 100;
-//    public static final long BASE_INGRESOS_COBRE    = 5;
-//
-//    public static final long BASE_PRECIO_BRONCE     = 2000;
-//    public static final long BASE_INGRESOS_BRONCE   = 15;
-//
-//    public static final long BASE_PRECIO_PLATA      = 6000;
-//    public static final long BASE_INGRESOS_PLATA    = 45;
-//
-//    public static final long BASE_PRECIO_ORO        = 12000;
-//    public static final long BASE_INGRESOS_ORO      = 90;
-//
-//    public static final long BASE_PRECIO_PLATINO    = 50000;
-//    public static final long BASE_INGRESOS_PLATINO  = 400;
-//
     public static final long BASE_PRECIO_DIAMANTE   = 550000;
     public static final long BASE_INGRESOS_DIAMANTE = 900;
 
@@ -53,7 +41,7 @@ public class Constantes {
     public static final long BASE_INGRESOS_URANIO = 10000;
 
     //hierro, estaño
-    //adamantio, tungsteno, uranio, iridio,
+    //adamantio, tungsteno,
 
 
     public static final int MINIMO_SUMADOR_COBRE    = 1;
