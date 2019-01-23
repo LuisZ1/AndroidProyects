@@ -19,6 +19,7 @@ import com.luisz.simpleclicker.Fragments.StatsFragment;
 import com.luisz.simpleclicker.Fragments.UpgradesFragment;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.Models.Mejora_AutoClick;
+import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.lang.reflect.Type;
@@ -110,6 +111,10 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         String jsonMejoras = gson.toJson(miViewModel.getListaMejoras());
         String jsonMejorasAutoClick = gson.toJson(miViewModel.getListaMejoraAutoClick());
 
+        String jsonMejorasPersonal = gson.toJson(miViewModel.getListaMejoraPersonal());
+        String jsonMejorasMaquinaria = gson.toJson(miViewModel.getListaMejoraMaquinaria());
+        String jsonMejorasHerramienatas = gson.toJson(miViewModel.getListaMejoraHerramientas());
+
         editor.putLong("puntos", miViewModel.getPuntos());
         editor.putLong("sumador", miViewModel.getSumador());
         editor.putLong("contadorPulsacionesPartida", miViewModel.getContadorPulsacionesPartida());
@@ -146,6 +151,11 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
 
         editor.putString("listadoDeMejoras", jsonMejoras);
         editor.putString("listadoDeMejorasAutoClick", jsonMejorasAutoClick);
+
+        editor.putString("listadoDeMejorasPersonal", jsonMejorasPersonal);
+        editor.putString("listadoDeMejorasMaquinaria", jsonMejorasMaquinaria);
+        editor.putString("listadoDeMejorasHerramientas", jsonMejorasHerramienatas);
+
         editor.putBoolean("autoClickComprado", miViewModel.isAutoClickComprado());
         editor.putInt("delay", miViewModel.getDelay());
 
@@ -156,10 +166,12 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         preferences = getSharedPreferences("partida", MODE_PRIVATE);
         Gson gson = new Gson();
-        String jsonMejoras = "";
-        String jsonMejorasAutoClick = "";
+        String jsonMejoras = "", jsonMejorasAutoClick = "", jsonMejorasPersonal = "" ,jsonMejorasMaquinaria = "" ,jsonMejorasHerramientas = "";
         ArrayList<Mejora> miListaGuardada;
         ArrayList<Mejora_AutoClick> miListaGuardadaAutoClick;
+        ArrayList<Mejora_Per_Maq_Her> miListaGuardadaPersonal;
+        ArrayList<Mejora_Per_Maq_Her> miListaGuardadaMaquinaria;
+        ArrayList<Mejora_Per_Maq_Her> miListaGuardadaHerramientas;
 
         //lista mejoras
         jsonMejoras = preferences.getString("listadoDeMejoras", null);
@@ -174,13 +186,40 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
 
         //lista mejoras autoclick
         jsonMejorasAutoClick = preferences.getString("listadoDeMejorasAutoClick", null);
-        Type type2 = new TypeToken<ArrayList<Mejora_AutoClick>>() { }.getType();
-        miListaGuardadaAutoClick = gson.fromJson(jsonMejorasAutoClick, type2);
+        Type typeAuto = new TypeToken<ArrayList<Mejora_AutoClick>>() { }.getType();
+        miListaGuardadaAutoClick = gson.fromJson(jsonMejorasAutoClick, typeAuto);
 
         if (miListaGuardadaAutoClick != null) {
-            miViewModel.listaMejoras = miListaGuardada;
             miViewModel.listaMejoraAutoClick = miListaGuardadaAutoClick;
             miViewModel.listaMejoraAutoClickMutable.setValue(miListaGuardadaAutoClick);
+        }
+
+        //lista mejoras personal
+        jsonMejorasPersonal = preferences.getString("listadoDeMejorasPersonal", null);
+        Type typePMH = new TypeToken<ArrayList<Mejora_Per_Maq_Her>>() { }.getType();
+        miListaGuardadaPersonal = gson.fromJson(jsonMejorasPersonal, typePMH);
+
+        if (miListaGuardadaPersonal != null) {
+            miViewModel.listaMejoraPersonal = miListaGuardadaPersonal;
+            miViewModel.listaMejoraPersonalMutable.setValue(miListaGuardadaPersonal);
+        }
+
+        //lista mejoras maquinaria
+        jsonMejorasMaquinaria = preferences.getString("listadoDeMejorasMaquinaria", null);
+        miListaGuardadaMaquinaria = gson.fromJson(jsonMejorasMaquinaria, typePMH);
+
+        if (miListaGuardadaMaquinaria != null) {
+            miViewModel.listaMejoraMaquinaria = miListaGuardadaMaquinaria;
+            miViewModel.listaMejoraMaquinariaMutable.setValue(miListaGuardadaMaquinaria);
+        }
+
+        //lista mejoras herramientas
+        jsonMejorasHerramientas = preferences.getString("listadoDeMejorasHerramientas", null);
+        miListaGuardadaHerramientas = gson.fromJson(jsonMejorasHerramientas, typePMH);
+
+        if (miListaGuardadaHerramientas != null) {
+            miViewModel.listaMejoraHerramientas = miListaGuardadaHerramientas;
+            miViewModel.listaMejoraHerramientasMutable.setValue(miListaGuardadaHerramientas);
         }
 
         miViewModel.setDelay(preferences.getInt("delay",100000));

@@ -8,19 +8,21 @@ import android.content.Context;
 import com.luisz.simpleclicker.Models.Constantes;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.Models.Mejora_AutoClick;
-import com.luisz.simpleclicker.R;
+import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
 
 import java.util.ArrayList;
 
 public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewModel {
 
     private Constantes cons = new Constantes();
+    private Util_Listas util_listas = new Util_Listas();
 
     //variables
     private long sumador = 1;
     private long puntos = 0;
     private boolean autoClickComprado;
     private int delay;
+    private int rowNumber = 2;
 
     //contadores
     private long contadorPulsacionesPartida = 0, contadorPulsacionesTotal = 0, contadorPulsacionesParcial = 0;
@@ -37,8 +39,17 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     public MutableLiveData<ArrayList<Mejora_AutoClick>> listaMejoraAutoClickMutable = new MutableLiveData<ArrayList<Mejora_AutoClick>>();
     public ArrayList<Mejora_AutoClick> listaMejoraAutoClick = new ArrayList<Mejora_AutoClick>();
 
+    public MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> listaMejoraPersonalMutable = new MutableLiveData<ArrayList<Mejora_Per_Maq_Her>>();
+    public ArrayList<Mejora_Per_Maq_Her> listaMejoraPersonal = new ArrayList<Mejora_Per_Maq_Her>();
+
+    public MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> listaMejoraMaquinariaMutable = new MutableLiveData<ArrayList<Mejora_Per_Maq_Her>>();
+    public ArrayList<Mejora_Per_Maq_Her> listaMejoraMaquinaria = new ArrayList<Mejora_Per_Maq_Her>();
+
+    public MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> listaMejoraHerramientasMutable = new MutableLiveData<ArrayList<Mejora_Per_Maq_Her>>();
+    public ArrayList<Mejora_Per_Maq_Her> listaMejoraHerramientas = new ArrayList<Mejora_Per_Maq_Her>();
+
     //contexto
-    private Context miAppContext;
+    private static Context miAppContext;
 
     public ViewModel(Application application) {
         super(application);
@@ -192,27 +203,46 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
      * SALIDA:
      */
     public void rellenarListaMejoras() {
-        listaMejoras.add(new Mejora(1, miAppContext.getString(R.string.aluminio), 0, cons.BASE_PRECIO_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO, "#D0D8D9"));
-        listaMejoras.add(new Mejora(2, miAppContext.getString(R.string.zinc), 0, cons.BASE_PRECIO_ZINC, cons.BASE_INGRESOS_ZINC, cons.BASE_INGRESOS_ZINC, "#B6B6B6"));
-        listaMejoras.add(new Mejora(3, miAppContext.getString(R.string.cobre), 0, cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE, cons.BASE_INGRESOS_COBRE, "#FFB74D"));
-        listaMejoras.add(new Mejora(4, miAppContext.getString(R.string.niquel), 0, cons.BASE_PRECIO_NIQUEL, cons.BASE_INGRESOS_NIQUEL, cons.BASE_INGRESOS_NIQUEL, "#FFE57F"));
-        listaMejoras.add(new Mejora(5, miAppContext.getString(R.string.bronce), 0, cons.BASE_PRECIO_BRONCE, cons.BASE_INGRESOS_BRONCE, cons.BASE_INGRESOS_BRONCE, "#EF6C00"));
-        listaMejoras.add(new Mejora(6, miAppContext.getString(R.string.plata), 0, cons.BASE_PRECIO_PLATA, cons.BASE_INGRESOS_PLATA, cons.BASE_INGRESOS_PLATA, "#9E9E9E"));
-        listaMejoras.add(new Mejora(7, miAppContext.getString(R.string.iridio), 0, cons.BASE_PRECIO_IRIDIO, cons.BASE_INGRESOS_IRIDIO, cons.BASE_INGRESOS_IRIDIO, "#FFFF8D"));
-        listaMejoras.add(new Mejora(8, miAppContext.getString(R.string.oro), 0, cons.BASE_PRECIO_ORO, cons.BASE_INGRESOS_ORO, cons.BASE_INGRESOS_ORO, "#FFD600"));
-        listaMejoras.add(new Mejora(9, miAppContext.getString(R.string.platino), 0, cons.BASE_PRECIO_PLATINO, cons.BASE_INGRESOS_PLATINO, cons.BASE_INGRESOS_PLATINO, "#BDBDBD"));
-        listaMejoras.add(new Mejora(10, miAppContext.getString(R.string.uranio), 0, cons.BASE_PRECIO_URANIO, cons.BASE_INGRESOS_URANIO, cons.BASE_INGRESOS_URANIO, "#137656"));
+//        listaMejoras.add(new Mejora(1, miAppContext.getString(R.string.aluminio), 0, cons.BASE_PRECIO_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO, "#D0D8D9"));
+//        listaMejoras.add(new Mejora(2, miAppContext.getString(R.string.zinc), 0, cons.BASE_PRECIO_ZINC, cons.BASE_INGRESOS_ZINC, cons.BASE_INGRESOS_ZINC, "#B6B6B6"));
+//        listaMejoras.add(new Mejora(3, miAppContext.getString(R.string.cobre), 0, cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE, cons.BASE_INGRESOS_COBRE, "#FFB74D"));
+//        listaMejoras.add(new Mejora(4, miAppContext.getString(R.string.niquel), 0, cons.BASE_PRECIO_NIQUEL, cons.BASE_INGRESOS_NIQUEL, cons.BASE_INGRESOS_NIQUEL, "#FFE57F"));
+//        listaMejoras.add(new Mejora(5, miAppContext.getString(R.string.bronce), 0, cons.BASE_PRECIO_BRONCE, cons.BASE_INGRESOS_BRONCE, cons.BASE_INGRESOS_BRONCE, "#EF6C00"));
+//        listaMejoras.add(new Mejora(6, miAppContext.getString(R.string.plata), 0, cons.BASE_PRECIO_PLATA, cons.BASE_INGRESOS_PLATA, cons.BASE_INGRESOS_PLATA, "#9E9E9E"));
+//        listaMejoras.add(new Mejora(7, miAppContext.getString(R.string.iridio), 0, cons.BASE_PRECIO_IRIDIO, cons.BASE_INGRESOS_IRIDIO, cons.BASE_INGRESOS_IRIDIO, "#FFFF8D"));
+//        listaMejoras.add(new Mejora(8, miAppContext.getString(R.string.oro), 0, cons.BASE_PRECIO_ORO, cons.BASE_INGRESOS_ORO, cons.BASE_INGRESOS_ORO, "#FFD600"));
+//        listaMejoras.add(new Mejora(9, miAppContext.getString(R.string.platino), 0, cons.BASE_PRECIO_PLATINO, cons.BASE_INGRESOS_PLATINO, cons.BASE_INGRESOS_PLATINO, "#BDBDBD"));
+//        listaMejoras.add(new Mejora(10, miAppContext.getString(R.string.uranio), 0, cons.BASE_PRECIO_URANIO, cons.BASE_INGRESOS_URANIO, cons.BASE_INGRESOS_URANIO, "#137656"));
+
+        listaMejoras = util_listas.rellenarListaMejoras(miAppContext);
 
         listaMejorasMutable.setValue(listaMejoras);
     }
 
     public void rellenarListaMejorasAutoClick() {
-        listaMejoraAutoClick.add(new Mejora_AutoClick(1, "Nivel 1", 10000000, 1000, "#90CAF9"));
-        listaMejoraAutoClick.add(new Mejora_AutoClick(2, "Nivel 2", 100000000, 500, "#42A5F5"));
-        listaMejoraAutoClick.add(new Mejora_AutoClick(3, "Nivel 3", 1000000000, 100, "#1E88E5"));
-        listaMejoraAutoClick.add(new Mejora_AutoClick(4, "Nivel 4", 10000000000l, 50, "#1565C0"));
+//        listaMejoraAutoClick.add(new Mejora_AutoClick(1, "Nivel 1", 10000000, 1000, "#90CAF9"));
+//        listaMejoraAutoClick.add(new Mejora_AutoClick(2, "Nivel 2", 100000000, 500, "#42A5F5"));
+//        listaMejoraAutoClick.add(new Mejora_AutoClick(3, "Nivel 3", 1000000000, 100, "#1E88E5"));
+//        listaMejoraAutoClick.add(new Mejora_AutoClick(4, "Nivel 4", 10000000000l, 50, "#1565C0"));
+
+        listaMejoraAutoClick = util_listas.rellenarListaMejorasAutoClick(miAppContext);
 
         listaMejoraAutoClickMutable.setValue(listaMejoraAutoClick);
+    }
+
+    public void rellenarListaMejorasPersonal() {
+        listaMejoraPersonal = util_listas.rellenarListaMejorasPersonal(miAppContext);
+        listaMejoraPersonalMutable.setValue(listaMejoraPersonal);
+    }
+
+    public void rellenarListaMejorasMaquinaria() {
+        listaMejoraMaquinaria = util_listas.rellenarListaMejorasMaquinaria(miAppContext);
+        listaMejoraMaquinariaMutable.setValue(listaMejoraMaquinaria);
+    }
+
+    public void rellenarListaMejorasHerramientas() {
+        listaMejoraHerramientas = util_listas.rellenarListaMejorasHerramientas(miAppContext);
+        listaMejoraHerramientasMutable.setValue(listaMejoraHerramientas);
     }
 
     public boolean reiniciarPartida() {
@@ -244,6 +274,15 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
             listaMejoraAutoClick.clear();
             rellenarListaMejorasAutoClick();
+
+            listaMejoraPersonal.clear();
+            rellenarListaMejorasPersonal();
+
+            listaMejoraMaquinaria.clear();
+            rellenarListaMejorasMaquinaria();
+
+            listaMejoraHerramientas.clear();
+            rellenarListaMejorasHerramientas();
 
             resultado = true;
         } catch (Exception e) {
@@ -428,6 +467,30 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return delay;
     }
 
+    public ArrayList<Mejora_Per_Maq_Her> getListaMejoraPersonal() {
+        return listaMejoraPersonal;
+    }
+
+    public ArrayList<Mejora_Per_Maq_Her> getListaMejoraMaquinaria() {
+        return listaMejoraMaquinaria;
+    }
+
+    public ArrayList<Mejora_Per_Maq_Her> getListaMejoraHerramientas() {
+        return listaMejoraHerramientas;
+    }
+
+    public MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> getListaMejoraPersonalMutable() {
+        return listaMejoraPersonalMutable;
+    }
+
+    public MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> getListaMejoraMaquinariaMutable() {
+        return listaMejoraMaquinariaMutable;
+    }
+
+    public MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> getListaMejoraHerramientasMutable() {
+        return listaMejoraHerramientasMutable;
+    }
+
     //Setters
     public void setSumador(long sumador) {
         this.sumador = sumador;
@@ -569,13 +632,23 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         this.delay = delay;
     }
 
-    private int rowNumber = 2;
-
     public int getRowNumber() {
         return rowNumber;
     }
 
     public void setRowNumber(int rowNumber) {
         this.rowNumber = rowNumber;
+    }
+
+    public void setListaMejoraPersonalMutable(MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> listaMejoraPersonalMutable) {
+        this.listaMejoraPersonalMutable = listaMejoraPersonalMutable;
+    }
+
+    public void setListaMejoraMaquinariaMutable(MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> listaMejoraMaquinariaMutable) {
+        this.listaMejoraMaquinariaMutable = listaMejoraMaquinariaMutable;
+    }
+
+    public void setListaMejoraHerramientasMutable(MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> listaMejoraHerramientasMutable) {
+        this.listaMejoraHerramientasMutable = listaMejoraHerramientasMutable;
     }
 }

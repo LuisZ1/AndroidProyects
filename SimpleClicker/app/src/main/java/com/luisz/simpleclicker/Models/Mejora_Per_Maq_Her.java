@@ -1,6 +1,6 @@
 package com.luisz.simpleclicker.Models;
 
-public class Mejora_Personal_Maquinaria_Herramientas {
+public class Mejora_Per_Maq_Her {
 
     private int id;
     private String nombre;
@@ -9,8 +9,9 @@ public class Mejora_Personal_Maquinaria_Herramientas {
     private long precio;
     private double porcentajeAumento;
     private int limiteDeCompra;
+    private int mejorasCompradas;
 
-    public Mejora_Personal_Maquinaria_Herramientas(int id, String nombre, long precio, double porcentajeAumento, int limiteDeCompra, String colorFondo) {
+    public Mejora_Per_Maq_Her(int id, String nombre, long precio, double porcentajeAumento, int limiteDeCompra, String colorFondo) {
         this.id = id;
         this.nombre = nombre;
         this.colorFondo = colorFondo;
@@ -60,4 +61,12 @@ public class Mejora_Personal_Maquinaria_Herramientas {
     }
 
     public int getId() {return id;}
+
+    public int getMejorasCompradas() {
+        return mejorasCompradas;
+    }
+
+    public void setMejorasCompradas(int mejorasCompradas) {
+        this.mejorasCompradas = mejorasCompradas;
+    }
 }

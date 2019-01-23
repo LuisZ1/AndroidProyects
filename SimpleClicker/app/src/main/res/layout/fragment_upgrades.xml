@@ -80,6 +80,11 @@
                 android:layout_height="wrap_content"
                 android:text="Mejora los metales actuales para que agreguen más puntos al sumador y así poder conseguir más puntos por cada clic que des."/>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerMejorasPersonal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
             <Space
                 android:layout_width="match_parent"

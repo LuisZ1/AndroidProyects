@@ -17,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luisz.simpleclicker.Adapter.AdapterMejorasAutoClick;
+import com.luisz.simpleclicker.Adapter.AdapterMejorasPersonal;
 import com.luisz.simpleclicker.Models.Mejora_AutoClick;
+import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
 import com.luisz.simpleclicker.R;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
@@ -28,8 +30,10 @@ public class UpgradesFragment extends Fragment {
 
     private ViewModel miViewModel;
     private AdapterMejorasAutoClick adaptador;
+    private AdapterMejorasPersonal adaptadorPersonal;
     private Typeface font;
     private RecyclerView miRecyclerView;
+    private RecyclerView miRecyclerViewPersonal;
     private DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
     private TextView txtPuntos;
@@ -46,7 +50,7 @@ public class UpgradesFragment extends Fragment {
         txtPuntos = view.findViewById(R.id.txtPuntos);
         txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
 
-        //manejando recicler y adapter
+        //manejando recicler y adapter AUTOCLICK
         miRecyclerView = view.findViewById(R.id.recyclerMejorasAutoClick);
         miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
 
@@ -78,6 +82,40 @@ public class UpgradesFragment extends Fragment {
         };
 
         miViewModel.getListaMejoraAutoClickMutable().observe(this, miVMobserver);
+
+        //manejando recicler y adapter PERSONAL
+        miRecyclerViewPersonal = view.findViewById(R.id.recyclerMejorasPersonal);
+        miRecyclerViewPersonal.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
+
+        adaptadorPersonal = new AdapterMejorasPersonal(miViewModel.getListaMejoraPersonalMutable().getValue());
+        miRecyclerViewPersonal.setAdapter(adaptadorPersonal);
+
+        adaptadorPersonal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
+                if (mejoraSeleccionada != -1) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Hola" , Toast.LENGTH_SHORT).show();
+//                    if(miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada)) {
+//                        Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada" , Toast.LENGTH_SHORT).show();
+//                        adaptador.eliminarMejoraComprada(mejoraSeleccionada);
+//                        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
+//                    }else{
+//                        Toast.makeText(getActivity().getApplicationContext(), "No puedes comprar esa mejora", Toast.LENGTH_SHORT).show();
+//                    }
+                }
+            }
+        });
+
+
+        final Observer<ArrayList<Mejora_Per_Maq_Her>> miVMobserverPersonal = new Observer<ArrayList<Mejora_Per_Maq_Her>>() {
+            @Override
+            public void onChanged(@Nullable ArrayList<Mejora_Per_Maq_Her> listadoMejorasPersonal) {
+                adaptadorPersonal.setListaMejorasPersonal(listadoMejorasPersonal);
+            }
+        };
+
+        miViewModel.getListaMejoraPersonalMutable().observe(this, miVMobserverPersonal);
 
 
         return view;
