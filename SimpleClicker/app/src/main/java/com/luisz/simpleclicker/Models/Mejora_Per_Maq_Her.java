@@ -19,6 +19,7 @@ public class Mejora_Per_Maq_Her {
         this.porcentajeAumento = porcentajeAumento;
         this.limiteDeCompra = limiteDeCompra;
     }
+    public Mejora_Per_Maq_Her() {    }
 
     public String getNombre() {
         return nombre;

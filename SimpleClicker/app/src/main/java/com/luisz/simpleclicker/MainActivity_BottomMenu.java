@@ -20,6 +20,7 @@ import com.luisz.simpleclicker.Fragments.UpgradesFragment;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
+import com.luisz.simpleclicker.ViewModel.Util_Listas;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
 import java.lang.reflect.Type;
@@ -166,6 +167,7 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         preferences = getSharedPreferences("partida", MODE_PRIVATE);
         Gson gson = new Gson();
+        Util_Listas util_listas = new Util_Listas();
         String jsonMejoras = "", jsonMejorasAutoClick = "", jsonMejorasPersonal = "" ,jsonMejorasMaquinaria = "" ,jsonMejorasHerramientas = "";
         ArrayList<Mejora> miListaGuardada;
         ArrayList<Mejora_AutoClick> miListaGuardadaAutoClick;
@@ -192,6 +194,9 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         if (miListaGuardadaAutoClick != null) {
             miViewModel.listaMejoraAutoClick = miListaGuardadaAutoClick;
             miViewModel.listaMejoraAutoClickMutable.setValue(miListaGuardadaAutoClick);
+        }else{
+            miViewModel.listaMejoraAutoClick = util_listas.rellenarListaMejorasAutoClick(this);
+            miViewModel.listaMejoraAutoClickMutable.setValue(util_listas.rellenarListaMejorasAutoClick(this));
         }
 
         //lista mejoras personal
@@ -202,6 +207,8 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         if (miListaGuardadaPersonal != null) {
             miViewModel.listaMejoraPersonal = miListaGuardadaPersonal;
             miViewModel.listaMejoraPersonalMutable.setValue(miListaGuardadaPersonal);
+        }else{
+            miViewModel.listaMejoraPersonalMutable.setValue(miViewModel.listaMejoraPersonal = util_listas.rellenarListaMejorasPersonal(this));
         }
 
         //lista mejoras maquinaria
@@ -211,6 +218,8 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         if (miListaGuardadaMaquinaria != null) {
             miViewModel.listaMejoraMaquinaria = miListaGuardadaMaquinaria;
             miViewModel.listaMejoraMaquinariaMutable.setValue(miListaGuardadaMaquinaria);
+        }else{
+            miViewModel.listaMejoraMaquinariaMutable.setValue(miViewModel.listaMejoraMaquinaria = util_listas.rellenarListaMejorasMaquinaria(this));
         }
 
         //lista mejoras herramientas
@@ -220,6 +229,8 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         if (miListaGuardadaHerramientas != null) {
             miViewModel.listaMejoraHerramientas = miListaGuardadaHerramientas;
             miViewModel.listaMejoraHerramientasMutable.setValue(miListaGuardadaHerramientas);
+        }else{
+            miViewModel.listaMejoraHerramientasMutable.setValue(miViewModel.listaMejoraHerramientas = util_listas.rellenarListaMejorasHerramientas(this));
         }
 
         miViewModel.setDelay(preferences.getInt("delay",100000));

@@ -23,6 +23,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     private boolean autoClickComprado;
     private int delay;
     private int rowNumber = 2;
+    private double multiplicador = 1;
 
     //contadores
     private long contadorPulsacionesPartida = 0, contadorPulsacionesTotal = 0, contadorPulsacionesParcial = 0;
@@ -72,7 +73,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
      */
     public long sumatron() {
         try {
-            puntos = puntos + sumador;
+            puntos = puntos + (sumador * (long) multiplicador);
             contadorPulsacionesPartida++;
             contadorPulsacionesParcial++;
             contadorPulsacionesTotal++;
@@ -113,7 +114,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
                 contadorPuntosGastadosPartida = contadorPuntosGastadosPartida + mejora.getPrecio();
                 contadorPuntosGastadosTotal = contadorPuntosGastadosTotal + mejora.getPrecio();
                 mejora.setPrecio((long) Math.ceil(mejora.getPrecioBase() * Math.pow(cons.MULTIPLICADOR, mejora.getNivel() / cons.DIVISOR_EXP_INICIAL)));
-                sumador = sumador + ((long) Math.ceil(mejora.getIngresosBase()));
+                sumador =sumador + ((long) Math.ceil(mejora.getIngresosBase()));
                 contadorPulsacionesParcial = 0;
 
                 listaMejoras.remove(mejoraSeleccionada);
@@ -196,6 +197,47 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return resultado;
     }
 
+    public boolean clickCompraMejora_Per_Maq_Her(String tipoMejora, int IDmejoraSeleccionada) {
+        boolean resultado = false;
+        Mejora_Per_Maq_Her mejoraSeleccionada = new Mejora_Per_Maq_Her();
+
+        switch (tipoMejora){
+            case "personal": mejoraSeleccionada = listaMejoraPersonal.get(IDmejoraSeleccionada);
+                break;
+            case "maquinaria": mejoraSeleccionada = listaMejoraMaquinaria.get(IDmejoraSeleccionada);
+                break;
+            case "herramientas": mejoraSeleccionada = listaMejoraHerramientas.get(IDmejoraSeleccionada);
+                break;
+        }
+        if (puntos >= mejoraSeleccionada.getPrecio() && mejoraSeleccionada.getMejorasCompradas() < mejoraSeleccionada.getLimiteDeCompra()) {
+            puntos = puntos - mejoraSeleccionada.getPrecio();
+            multiplicador = multiplicador + (mejoraSeleccionada.getPorcentajeAumento()/10); //TODO revisar
+            mejoraSeleccionada.setMejorasCompradas(mejoraSeleccionada.getMejorasCompradas()+1);
+
+            switch (tipoMejora){
+                case "personal":
+                    listaMejoraPersonal.remove(IDmejoraSeleccionada);
+                    listaMejoraPersonal.add(IDmejoraSeleccionada, mejoraSeleccionada);
+                    listaMejoraPersonalMutable.setValue(listaMejoraPersonal);
+                    break;
+                case "maquinaria":
+                    listaMejoraMaquinaria.remove(IDmejoraSeleccionada);
+                    listaMejoraMaquinaria.add(IDmejoraSeleccionada, mejoraSeleccionada);
+                    listaMejoraMaquinariaMutable.setValue(listaMejoraMaquinaria);
+                    break;
+                case "herramientas":
+                    listaMejoraHerramientas.remove(IDmejoraSeleccionada);
+                    listaMejoraHerramientas.add(IDmejoraSeleccionada, mejoraSeleccionada);
+                    listaMejoraHerramientasMutable.setValue(listaMejoraHerramientas);
+                    break;
+            }
+
+            resultado = true;
+        }
+
+        return resultado;
+    }
+
     /**
      * public void rellenarListaMejoras()
      * DESCRIPCIÓN:
@@ -203,30 +245,12 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
      * SALIDA:
      */
     public void rellenarListaMejoras() {
-//        listaMejoras.add(new Mejora(1, miAppContext.getString(R.string.aluminio), 0, cons.BASE_PRECIO_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO, cons.BASE_INGRESOS_ALUMINIO, "#D0D8D9"));
-//        listaMejoras.add(new Mejora(2, miAppContext.getString(R.string.zinc), 0, cons.BASE_PRECIO_ZINC, cons.BASE_INGRESOS_ZINC, cons.BASE_INGRESOS_ZINC, "#B6B6B6"));
-//        listaMejoras.add(new Mejora(3, miAppContext.getString(R.string.cobre), 0, cons.BASE_PRECIO_COBRE, cons.BASE_INGRESOS_COBRE, cons.BASE_INGRESOS_COBRE, "#FFB74D"));
-//        listaMejoras.add(new Mejora(4, miAppContext.getString(R.string.niquel), 0, cons.BASE_PRECIO_NIQUEL, cons.BASE_INGRESOS_NIQUEL, cons.BASE_INGRESOS_NIQUEL, "#FFE57F"));
-//        listaMejoras.add(new Mejora(5, miAppContext.getString(R.string.bronce), 0, cons.BASE_PRECIO_BRONCE, cons.BASE_INGRESOS_BRONCE, cons.BASE_INGRESOS_BRONCE, "#EF6C00"));
-//        listaMejoras.add(new Mejora(6, miAppContext.getString(R.string.plata), 0, cons.BASE_PRECIO_PLATA, cons.BASE_INGRESOS_PLATA, cons.BASE_INGRESOS_PLATA, "#9E9E9E"));
-//        listaMejoras.add(new Mejora(7, miAppContext.getString(R.string.iridio), 0, cons.BASE_PRECIO_IRIDIO, cons.BASE_INGRESOS_IRIDIO, cons.BASE_INGRESOS_IRIDIO, "#FFFF8D"));
-//        listaMejoras.add(new Mejora(8, miAppContext.getString(R.string.oro), 0, cons.BASE_PRECIO_ORO, cons.BASE_INGRESOS_ORO, cons.BASE_INGRESOS_ORO, "#FFD600"));
-//        listaMejoras.add(new Mejora(9, miAppContext.getString(R.string.platino), 0, cons.BASE_PRECIO_PLATINO, cons.BASE_INGRESOS_PLATINO, cons.BASE_INGRESOS_PLATINO, "#BDBDBD"));
-//        listaMejoras.add(new Mejora(10, miAppContext.getString(R.string.uranio), 0, cons.BASE_PRECIO_URANIO, cons.BASE_INGRESOS_URANIO, cons.BASE_INGRESOS_URANIO, "#137656"));
-
         listaMejoras = util_listas.rellenarListaMejoras(miAppContext);
-
         listaMejorasMutable.setValue(listaMejoras);
     }
 
     public void rellenarListaMejorasAutoClick() {
-//        listaMejoraAutoClick.add(new Mejora_AutoClick(1, "Nivel 1", 10000000, 1000, "#90CAF9"));
-//        listaMejoraAutoClick.add(new Mejora_AutoClick(2, "Nivel 2", 100000000, 500, "#42A5F5"));
-//        listaMejoraAutoClick.add(new Mejora_AutoClick(3, "Nivel 3", 1000000000, 100, "#1E88E5"));
-//        listaMejoraAutoClick.add(new Mejora_AutoClick(4, "Nivel 4", 10000000000l, 50, "#1565C0"));
-
         listaMejoraAutoClick = util_listas.rellenarListaMejorasAutoClick(miAppContext);
-
         listaMejoraAutoClickMutable.setValue(listaMejoraAutoClick);
     }
 

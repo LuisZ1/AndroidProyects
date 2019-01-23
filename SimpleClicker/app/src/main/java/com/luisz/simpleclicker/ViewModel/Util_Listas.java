@@ -51,7 +51,7 @@ public class Util_Listas {
     /**
      * Devuelve lista predeterminada de Mejoras de Personal
      * */
-    public static ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasPersonal(Context contexto){
+    public ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasPersonal(Context contexto){
         ArrayList<Mejora_Per_Maq_Her> listaMejorasPersonal = new ArrayList<Mejora_Per_Maq_Her>();
 
         listaMejorasPersonal.add(new Mejora_Per_Maq_Her(1,"Peón",3000000,0.5,70,"#FFC107"));
@@ -64,7 +64,7 @@ public class Util_Listas {
     /**
      * Devuelve lista predeterminada de Mejoras de Maquinaria
      * */
-    public static ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasMaquinaria(Context contexto){
+    public ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasMaquinaria(Context contexto){
         ArrayList<Mejora_Per_Maq_Her> listaMejorasMaquinaria = new ArrayList<Mejora_Per_Maq_Her>();
 
         listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(1,"Pico",1000000,0.15,75,"#90A4AE"));
@@ -79,14 +79,14 @@ public class Util_Listas {
     /**
      * Devuelve lista predeterminada de Mejoras de Herramientas
      * */
-    public static ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasHerramientas(Context contexto){
+    public ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasHerramientas(Context contexto){
         ArrayList<Mejora_Per_Maq_Her> listaMejorasHerramientas = new ArrayList<Mejora_Per_Maq_Her>();
 
         listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(1,"Madera",1000000,2,1,"#795548"));
         listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(2,"Piedra",2500000,5,1,"#B0BEC5"));
         listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(3,"Hierro",4000000,10,1,"#78909C"));
         listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(4,"Oro",5500000,15,1,"#FFD600"));
-        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(5,"Dinamita",7000000,20,1,"#00BCD4"));
+        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(5,"Diamante",7000000,20,1,"#00BCD4"));
 
         return listaMejorasHerramientas;
     }

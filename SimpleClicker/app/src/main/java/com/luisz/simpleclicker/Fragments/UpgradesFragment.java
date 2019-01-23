@@ -30,10 +30,9 @@ public class UpgradesFragment extends Fragment {
 
     private ViewModel miViewModel;
     private AdapterMejorasAutoClick adaptador;
-    private AdapterMejorasPersonal adaptadorPersonal;
+    private AdapterMejorasPersonal adaptadorPersonal, adaptadorMaquinaria, adaptadorHerramientas;
     private Typeface font;
-    private RecyclerView miRecyclerView;
-    private RecyclerView miRecyclerViewPersonal;
+    private RecyclerView miRecyclerView, miRecyclerViewPersonal, miRecyclerViewMaquinaria, miRecyclerViewHermientas;
     private DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
     private TextView txtPuntos;
@@ -95,27 +94,60 @@ public class UpgradesFragment extends Fragment {
             public void onClick(View view) {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Hola" , Toast.LENGTH_SHORT).show();
-//                    if(miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada)) {
-//                        Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada" , Toast.LENGTH_SHORT).show();
-//                        adaptador.eliminarMejoraComprada(mejoraSeleccionada);
-//                        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
-//                    }else{
-//                        Toast.makeText(getActivity().getApplicationContext(), "No puedes comprar esa mejora", Toast.LENGTH_SHORT).show();
-//                    }
+                   if(miViewModel.clickCompraMejora_Per_Maq_Her("personal",mejoraSeleccionada)){
+                       Toast.makeText(getActivity().getApplicationContext(), "ok" , Toast.LENGTH_SHORT).show();
+                   }else{
+                       Toast.makeText(getActivity().getApplicationContext(), "error" , Toast.LENGTH_SHORT).show();
+                   }
+                }
+            }
+        });
+
+        //TODO observador personal
+
+        //manejando recicler y adapter MAQUINARIA
+        miRecyclerViewMaquinaria = view.findViewById(R.id.recyclerMejorasMaquinaria);
+        miRecyclerViewMaquinaria.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
+
+        adaptadorMaquinaria = new AdapterMejorasPersonal(miViewModel.getListaMejoraMaquinariaMutable().getValue());
+        miRecyclerViewMaquinaria.setAdapter(adaptadorMaquinaria);
+
+        adaptadorMaquinaria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
+                if (mejoraSeleccionada != -1) {
+                    if(miViewModel.clickCompraMejora_Per_Maq_Her("maquinaria",mejoraSeleccionada)){
+                        Toast.makeText(getActivity().getApplicationContext(), "ok" , Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getActivity().getApplicationContext(), "error" , Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
 
 
-        final Observer<ArrayList<Mejora_Per_Maq_Her>> miVMobserverPersonal = new Observer<ArrayList<Mejora_Per_Maq_Her>>() {
-            @Override
-            public void onChanged(@Nullable ArrayList<Mejora_Per_Maq_Her> listadoMejorasPersonal) {
-                adaptadorPersonal.setListaMejorasPersonal(listadoMejorasPersonal);
-            }
-        };
+        //manejando recicler y adapter HERRAMIENTAS
+        miRecyclerViewHermientas = view.findViewById(R.id.recyclerMejorasHerramientas);
+        miRecyclerViewHermientas.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
 
-        miViewModel.getListaMejoraPersonalMutable().observe(this, miVMobserverPersonal);
+        adaptadorHerramientas = new AdapterMejorasPersonal(miViewModel.getListaMejoraHerramientasMutable().getValue());
+        miRecyclerViewHermientas.setAdapter(adaptadorHerramientas);
+
+        adaptadorHerramientas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
+                if (mejoraSeleccionada != -1) {
+                    if(miViewModel.clickCompraMejora_Per_Maq_Her("herramientas",mejoraSeleccionada)){
+                        Toast.makeText(getActivity().getApplicationContext(), "ok" , Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getActivity().getApplicationContext(), "error" , Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
 
 
         return view;
