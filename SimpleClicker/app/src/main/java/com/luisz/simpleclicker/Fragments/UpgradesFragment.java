@@ -17,9 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luisz.simpleclicker.Adapter.AdapterMejorasAutoClick;
-import com.luisz.simpleclicker.Adapter.AdapterMejorasPersonal;
+import com.luisz.simpleclicker.Adapter.AdapterMejoras_Per_Maqr_Her;
 import com.luisz.simpleclicker.Models.Mejora_AutoClick;
-import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
 import com.luisz.simpleclicker.R;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 
@@ -30,7 +29,7 @@ public class UpgradesFragment extends Fragment {
 
     private ViewModel miViewModel;
     private AdapterMejorasAutoClick adaptador;
-    private AdapterMejorasPersonal adaptadorPersonal, adaptadorMaquinaria, adaptadorHerramientas;
+    private AdapterMejoras_Per_Maqr_Her adaptadorPersonal, adaptadorMaquinaria, adaptadorHerramientas;
     private Typeface font;
     private RecyclerView miRecyclerView, miRecyclerViewPersonal, miRecyclerViewMaquinaria, miRecyclerViewHermientas;
     private DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
@@ -86,7 +85,7 @@ public class UpgradesFragment extends Fragment {
         miRecyclerViewPersonal = view.findViewById(R.id.recyclerMejorasPersonal);
         miRecyclerViewPersonal.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
 
-        adaptadorPersonal = new AdapterMejorasPersonal(miViewModel.getListaMejoraPersonalMutable().getValue());
+        adaptadorPersonal = new AdapterMejoras_Per_Maqr_Her(miViewModel.getListaMejoraPersonalMutable().getValue());
         miRecyclerViewPersonal.setAdapter(adaptadorPersonal);
 
         adaptadorPersonal.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +108,7 @@ public class UpgradesFragment extends Fragment {
         miRecyclerViewMaquinaria = view.findViewById(R.id.recyclerMejorasMaquinaria);
         miRecyclerViewMaquinaria.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
 
-        adaptadorMaquinaria = new AdapterMejorasPersonal(miViewModel.getListaMejoraMaquinariaMutable().getValue());
+        adaptadorMaquinaria = new AdapterMejoras_Per_Maqr_Her(miViewModel.getListaMejoraMaquinariaMutable().getValue());
         miRecyclerViewMaquinaria.setAdapter(adaptadorMaquinaria);
 
         adaptadorMaquinaria.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +130,7 @@ public class UpgradesFragment extends Fragment {
         miRecyclerViewHermientas = view.findViewById(R.id.recyclerMejorasHerramientas);
         miRecyclerViewHermientas.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
 
-        adaptadorHerramientas = new AdapterMejorasPersonal(miViewModel.getListaMejoraHerramientasMutable().getValue());
+        adaptadorHerramientas = new AdapterMejoras_Per_Maqr_Her(miViewModel.getListaMejoraHerramientasMutable().getValue());
         miRecyclerViewHermientas.setAdapter(adaptadorHerramientas);
 
         adaptadorHerramientas.setOnClickListener(new View.OnClickListener() {

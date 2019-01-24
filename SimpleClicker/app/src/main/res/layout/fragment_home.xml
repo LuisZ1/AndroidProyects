@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:padding="0dp"
     tools:context=".Fragments.HomeFragment"
-    tools:layout_editor_absoluteY="25dp"
-    android:background="@color/background">
+    tools:layout_editor_absoluteY="25dp">
 
     <TextView
         android:id="@+id/lblPuntos"
@@ -57,6 +57,28 @@
         app:layout_constraintEnd_toStartOf="@+id/lblSumador"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/lblMultiplicador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:rotation="45"
+        android:text="@string/multiplicador_icon"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSumador" />
+
+    <TextView
+        android:id="@+id/txtMultiplicador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/lblMultiplicador"
+        app:layout_constraintTop_toBottomOf="@+id/txtSumador" />
+
 
     <android.support.constraint.Guideline
         android:id="@+id/central"
@@ -80,11 +102,11 @@
         app:layout_constraintGuide_percent="0.3333333" />
 
     <!--<android.support.constraint.Guideline-->
-        <!--android:id="@+id/guideline5"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--app:layout_constraintGuide_percent="0.80" />-->
+    <!--android:id="@+id/guideline5"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--app:layout_constraintGuide_percent="0.80" />-->
 
 
     <Button
@@ -94,6 +116,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorAccent2"
         android:text="@string/click"
         android:textColor="@android:color/white"
@@ -102,7 +125,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myRecyclerView" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -115,7 +138,9 @@
         android:id="@+id/myRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:clipToPadding="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
@@ -149,5 +174,12 @@
         android:text="@string/walk"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
 </android.support.constraint.ConstraintLayout>

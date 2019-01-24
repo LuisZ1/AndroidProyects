@@ -515,6 +515,10 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return listaMejoraHerramientasMutable;
     }
 
+    public double getMultiplicador() {
+        return multiplicador;
+    }
+
     //Setters
     public void setSumador(long sumador) {
         this.sumador = sumador;
@@ -674,5 +678,9 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     public void setListaMejoraHerramientasMutable(MutableLiveData<ArrayList<Mejora_Per_Maq_Her>> listaMejoraHerramientasMutable) {
         this.listaMejoraHerramientasMutable = listaMejoraHerramientasMutable;
+    }
+
+    public void setMultiplicador(double multiplicador) {
+        this.multiplicador = multiplicador;
     }
 }

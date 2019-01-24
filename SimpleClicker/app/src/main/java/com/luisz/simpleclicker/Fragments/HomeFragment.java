@@ -32,7 +32,7 @@ import java.util.TimerTask;
 
 public class HomeFragment extends Fragment {
 
-    private TextView txtSumador, txtPuntos, lblClicks, lblSumador, txtContadorPulsaciones;
+    private TextView txtSumador, txtPuntos, lblClicks, lblSumador, txtContadorPulsaciones, lblMultiplicador, txtMultiplicador;
     private Switch swAutoClick;
     private Button btnClick;
     private ViewModel miViewModel;
@@ -68,6 +68,8 @@ public class HomeFragment extends Fragment {
         txtSumador = view.findViewById(R.id.txtSumador);
         lblClicks = view.findViewById(R.id.lblN_clicks);
         lblSumador = view.findViewById(R.id.lblSumador);
+        lblMultiplicador = view.findViewById(R.id.lblMultiplicador);
+        txtMultiplicador = view.findViewById(R.id.txtMultiplicador);
         swAutoClick = view.findViewById(R.id.swAutoClick);
         txtPuntos = view.findViewById(R.id.txtPuntos);
         txtSumador = view.findViewById(R.id.txtSumador);
@@ -84,6 +86,7 @@ public class HomeFragment extends Fragment {
         lblClicks.setTypeface(font);
         lblSumador.setTypeface(font);
         swAutoClick.setTypeface(font);
+        lblMultiplicador.setTypeface(font);
 
         btnClick = view.findViewById(R.id.btnClick);
         btnClick.setOnClickListener(new View.OnClickListener() {
@@ -173,9 +176,11 @@ public class HomeFragment extends Fragment {
     public void displayForPuntos(long puntos) {
 
         DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
+        DecimalFormat formatterDecimales = new DecimalFormat("###,###.###");
 
         txtPuntos.setText(formatter.format(puntos));
         txtSumador.setText(formatter.format(miViewModel.getSumador()));
+        txtMultiplicador.setText(formatterDecimales.format(miViewModel.getMultiplicador()));
         txtContadorPulsaciones.setText(formatter.format(miViewModel.getContadorPulsacionesPartida()));
     }
 

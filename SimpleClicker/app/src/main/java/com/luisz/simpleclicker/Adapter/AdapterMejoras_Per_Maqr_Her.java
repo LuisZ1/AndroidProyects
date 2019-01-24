@@ -10,20 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
 import com.luisz.simpleclicker.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class AdapterMejorasPersonal extends RecyclerView.Adapter<AdapterMejorasPersonal.ViewHolderMejoras> implements View.OnClickListener{
+public class AdapterMejoras_Per_Maqr_Her extends RecyclerView.Adapter<AdapterMejoras_Per_Maqr_Her.ViewHolderMejoras> implements View.OnClickListener{
 
     private ArrayList<Mejora_Per_Maq_Her> listaMejorasPersonal;
     private View.OnClickListener listener;
     DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
-    public AdapterMejorasPersonal(ArrayList<Mejora_Per_Maq_Her> listaMejorasPersonal) {
+    public AdapterMejoras_Per_Maqr_Her(ArrayList<Mejora_Per_Maq_Her> listaMejorasPersonal) {
         this.listaMejorasPersonal = listaMejorasPersonal;
     }
 
@@ -40,11 +39,11 @@ public class AdapterMejorasPersonal extends RecyclerView.Adapter<AdapterMejorasP
 
         viewHolderMejoras.txtNombreMejora.setText(listaMejorasPersonal.get(i).getNombre());
         viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejorasPersonal.get(i).getPrecio()));
-        viewHolderMejoras.txtTiempo.setText(formatter.format(listaMejorasPersonal.get(i).getMejorasCompradas()));
+        viewHolderMejoras.txtTiempo.setText(listaMejorasPersonal.get(i).getMejorasCompradas()+" / "+listaMejorasPersonal.get(i).getLimiteDeCompra());
         viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejorasPersonal.get(i).getColorFondo()));
 // +" / "+listaMejorasPersonal.get(i).getLimiteDeCompra()
         viewHolderMejoras.lblPrecio.setText(Html.fromHtml("&#xf3d1;"));
-        viewHolderMejoras.lblTiempo.setText(Html.fromHtml("&#xf017;"));
+        viewHolderMejoras.lblTiempo.setText(Html.fromHtml(/*"&#xf017;"*/""));
     }
 
     public void setOnClickListener(View.OnClickListener listener){

@@ -118,6 +118,7 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
 
         editor.putLong("puntos", miViewModel.getPuntos());
         editor.putLong("sumador", miViewModel.getSumador());
+        editor.putString("multiplicador", String.valueOf(miViewModel.getMultiplicador()));
         editor.putLong("contadorPulsacionesPartida", miViewModel.getContadorPulsacionesPartida());
         editor.putLong("contadorPulsacionesTotal", miViewModel.getContadorPulsacionesTotal());
         editor.putLong("contadorPulsacionesParcial", miViewModel.getContadorPulsacionesParcial());
@@ -237,6 +238,7 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         miViewModel.setAutoClickComprado(preferences.getBoolean("autoClickComprado",false));
         miViewModel.setPuntos(preferences.getLong("puntos", 0));
         miViewModel.setSumador(preferences.getLong("sumador", 1));
+        miViewModel.setMultiplicador(Double.parseDouble(preferences.getString("multiplicador", "1")));
         miViewModel.setContadorPulsacionesPartida(preferences.getLong("contadorPulsacionesPartida", 0));
         miViewModel.setContadorPulsacionesTotal(preferences.getLong("contadorPulsacionesTotal", miViewModel.getContadorPulsacionesPartida()));
         miViewModel.setContadorPulsacionesParcial(preferences.getLong("contadorPulsacionesParcial", 0));
