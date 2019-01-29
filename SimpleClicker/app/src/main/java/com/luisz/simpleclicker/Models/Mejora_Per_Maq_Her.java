@@ -5,19 +5,21 @@ public class Mejora_Per_Maq_Her {
     private int id;
     private String nombre;
     private String colorFondo;
+    private int imgFondo;
 
     private long precio;
     private double porcentajeAumento;
     private int limiteDeCompra;
     private int mejorasCompradas;
 
-    public Mejora_Per_Maq_Her(int id, String nombre, long precio, double porcentajeAumento, int limiteDeCompra, String colorFondo) {
+    public Mejora_Per_Maq_Her(int id, String nombre, long precio, double porcentajeAumento, int limiteDeCompra, String colorFondo, int imgFondo) {
         this.id = id;
         this.nombre = nombre;
         this.colorFondo = colorFondo;
         this.precio = precio;
         this.porcentajeAumento = porcentajeAumento;
         this.limiteDeCompra = limiteDeCompra;
+        this.imgFondo = imgFondo;
     }
     public Mejora_Per_Maq_Her() {    }
 
@@ -69,5 +71,13 @@ public class Mejora_Per_Maq_Her {
 
     public void setMejorasCompradas(int mejorasCompradas) {
         this.mejorasCompradas = mejorasCompradas;
+    }
+
+    public int getImgFondo() {
+        return imgFondo;
+    }
+
+    public void setImgFondo(int imgFondo) {
+        this.imgFondo = imgFondo;
     }
 }

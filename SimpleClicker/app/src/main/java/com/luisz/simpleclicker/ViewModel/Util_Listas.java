@@ -43,7 +43,7 @@ public class Util_Listas {
         listaMejorasAutoClick.add(new Mejora_AutoClick(1, "Nivel 1", 10000000, 1000, "#90CAF9"));
         listaMejorasAutoClick.add(new Mejora_AutoClick(2, "Nivel 2", 100000000, 500, "#42A5F5"));
         listaMejorasAutoClick.add(new Mejora_AutoClick(3, "Nivel 3", 1000000000, 100, "#1E88E5"));
-        listaMejorasAutoClick.add(new Mejora_AutoClick(4, "Nivel 4", 10000000000l, 50, "#1565C0"));
+        listaMejorasAutoClick.add(new Mejora_AutoClick(4, "Nivel 4", 10000000000L, 50, "#1565C0"));
 
         return listaMejorasAutoClick;
     }
@@ -54,12 +54,14 @@ public class Util_Listas {
     public ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasPersonal(Context contexto){
         ArrayList<Mejora_Per_Maq_Her> listaMejorasPersonal = new ArrayList<Mejora_Per_Maq_Her>();
 
-        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(1,"Peón",3000000,0.5,70,"#FFC107"));
-        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(2,"Minero",5500000,2,20,"#FFA000"));
-        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(3,"Jefe de mina",10000000,3,15,"#FF6F00"));
+        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(1,"Peón",30000000,0.5,70,"#FFC107",R.drawable.it_peon));
+        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(2,"Minero",55000000,2,20,"#FFA000",R.drawable.it_minero));
+        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(3,"Arquitecto",1000000000,3,10,"#FF6F00", R.drawable.it_arquitecto));
+        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(4,"Jefazo",15000000000L,8,5,"#E65100", R.drawable.it_jefazo));
 
         return listaMejorasPersonal;
     }
+
 
     /**
      * Devuelve lista predeterminada de Mejoras de Maquinaria
@@ -67,11 +69,11 @@ public class Util_Listas {
     public ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasMaquinaria(Context contexto){
         ArrayList<Mejora_Per_Maq_Her> listaMejorasMaquinaria = new ArrayList<Mejora_Per_Maq_Her>();
 
-        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(1,"Pico",1000000,0.15,75,"#90A4AE"));
-        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(2,"Martillo neumático",3500000,1.5,25,"#607D8B"));
-        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(3,"Tuneladora",7500000,3,3,"#455A64"));
-        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(4,"Tuneladora BIG",15000000,8.5,2,"#263238"));
-        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(5,"Dinamita",3000000000l,35,1,"#d50000"));
+        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(1,"Pico",1000000,0.15,75,"#90A4AE", R.drawable.it_pico));
+        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(2,"Martillo neumático",350000000,1.5,20,"#607D8B", R.drawable.it_pico));
+        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(3,"Vagoneta",750000000,3,3,"#455A64", R.drawable.it_vagon));
+        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(4,"Tuneladora",1500000000,8.5,2,"#263238", R.drawable.it_tuneladora));
+        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(5,"Dinamita",3000000000L,35,1,"#d50000", R.drawable.it_pico));
 
         return listaMejorasMaquinaria;
     }
@@ -82,11 +84,11 @@ public class Util_Listas {
     public ArrayList<Mejora_Per_Maq_Her> rellenarListaMejorasHerramientas(Context contexto){
         ArrayList<Mejora_Per_Maq_Her> listaMejorasHerramientas = new ArrayList<Mejora_Per_Maq_Her>();
 
-        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(1,"Madera",1000000,2,1,"#795548"));
-        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(2,"Piedra",2500000,5,1,"#B0BEC5"));
-        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(3,"Hierro",4000000,10,1,"#78909C"));
-        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(4,"Oro",5500000,15,1,"#FFD600"));
-        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(5,"Diamante",7000000,20,1,"#00BCD4"));
+        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(1,"Madera",1000000,2,2,"#795548", R.drawable.it_piedra));
+        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(2,"Piedra",25000000,5,2,"#B0BEC5", R.drawable.it_piedra));
+        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(3,"Hierro",400000000,10,1,"#78909C", R.drawable.it_piedra));
+        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(4,"Oro",5500000000L,15,1,"#FFD600", R.drawable.it_piedra));
+        listaMejorasHerramientas.add(new Mejora_Per_Maq_Her(5,"Diamante",20000000000L,20,1,"#00BCD4", R.drawable.it_piedra));
 
         return listaMejorasHerramientas;
     }

@@ -8,6 +8,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
@@ -41,9 +42,9 @@ public class AdapterMejoras_Per_Maqr_Her extends RecyclerView.Adapter<AdapterMej
         viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejorasPersonal.get(i).getPrecio()));
         viewHolderMejoras.txtTiempo.setText(listaMejorasPersonal.get(i).getMejorasCompradas()+" / "+listaMejorasPersonal.get(i).getLimiteDeCompra());
         viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejorasPersonal.get(i).getColorFondo()));
-// +" / "+listaMejorasPersonal.get(i).getLimiteDeCompra()
         viewHolderMejoras.lblPrecio.setText(Html.fromHtml("&#xf3d1;"));
         viewHolderMejoras.lblTiempo.setText(Html.fromHtml(/*"&#xf017;"*/""));
+        viewHolderMejoras.img_mejora.setImageResource(listaMejorasPersonal.get(i).getImgFondo());
     }
 
     public void setOnClickListener(View.OnClickListener listener){
@@ -67,6 +68,7 @@ public class AdapterMejoras_Per_Maqr_Her extends RecyclerView.Adapter<AdapterMej
         TextView txtNombreMejora, txtPrecio, txtTiempo;
         TextView lblPrecio, lblTiempo;
         CardView miCardView;
+        private ImageView img_mejora;
 
         public ViewHolderMejoras(View itemView) {
             super(itemView);
@@ -79,6 +81,7 @@ public class AdapterMejoras_Per_Maqr_Her extends RecyclerView.Adapter<AdapterMej
             miCardView = itemView.findViewById(R.id.miCardView);
             lblPrecio = itemView.findViewById(R.id.lblPrecio);
             lblTiempo = itemView.findViewById(R.id.lblTiempo);
+            img_mejora = itemView.findViewById(R.id.img_mejora);
 
             this.lblPrecio.setTypeface(typeface);
             this.lblTiempo.setTypeface(typeface);
