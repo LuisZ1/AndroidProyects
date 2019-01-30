@@ -55,18 +55,18 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
             <TextView
-                style="@style/textoGris"
                 android:id="@+id/txtNombreMejora"
+                style="@style/textoGris"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Mejora"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline8"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
