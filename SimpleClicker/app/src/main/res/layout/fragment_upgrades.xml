@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -59,7 +59,7 @@
                 android:padding="5dp"
                 android:text="El reloj representa cuantos clics por segundo dará automáticamente"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMejorasAutoClick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="Mejoras de Personal"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMejorasPersonal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:text="Mejoras de Maquinaria"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMejorasMaquinaria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:text="Mejoras de Herramientas"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMejorasHerramientas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -115,4 +115,4 @@
 
         </LinearLayout>
     </ScrollView>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
