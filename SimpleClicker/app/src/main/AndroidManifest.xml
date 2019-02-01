@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icono_simpleclicker_v2"
+        android:icon="@drawable/it_diamante"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icono_simpleclicker_v2"
+        android:roundIcon="@drawable/it_diamante"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

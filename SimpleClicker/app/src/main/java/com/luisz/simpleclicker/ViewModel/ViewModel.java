@@ -138,44 +138,44 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         }
 
         switch (mejora.getId()) {
-            case 1:
+            case 101:
                 contadorAluminioPartida++;
                 contadorAluminioTotal++;
                 break;
-            case 2:
+            case 102:
 
                 contadorZincPartida++;
                 contadorZincTotal++;
                 break;
-            case 3:
+            case 103:
                 contadorCobrePartida++;
                 contadorCobreTotal++;
                 break;
-            case 4:
+            case 104:
                 contadorNiquelPartida++;
                 contadorNiquelTotal++;
                 break;
-            case 5:
+            case 105:
                 contadorBroncePartida++;
                 contadorBronceTotal++;
                 break;
-            case 6:
+            case 106:
                 contadorPlataPartida++;
                 contadorPlataTotal++;
                 break;
-            case 7:
+            case 107:
                 contadorIridioPartida++;
                 contadorIridioTotal++;
                 break;
-            case 8:
+            case 108:
                 contadorOroPartida++;
                 contadorOroTotal++;
                 break;
-            case 9:
+            case 109:
                 contadorPlatinoPartida++;
                 contadorPlatinoTotal++;
                 break;
-            case 10:
+            case 110:
                 contadorUranioPartida++;
                 contadorUranioTotal++;
                 break;
@@ -273,6 +273,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         boolean resultado = false;
         try {
             sumador = 1;
+            multiplicador = 1;
             puntos = 0;
             contadorPulsacionesPartida = 0;
             contadorPulsacionesParcial = 0;

@@ -1,14 +1,18 @@
 package com.luisz.simpleclicker;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,6 +30,8 @@ import com.luisz.simpleclicker.ViewModel.ViewModel;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+//https://github.com/TakuSemba/Spotlight
+
 public class MainActivity_BottomMenu extends AppCompatActivity {
 
     private Typeface font;
@@ -39,23 +45,23 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_bottom_home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new HomeFragment()).addToBackStack(null).commit();
+                            new HomeFragment())/*.addToBackStack(null)*/.commit();
                     return true;
                 case R.id.navigation_bottom_ajustes:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new SettingsFragment()).addToBackStack(null).commit();
+                            new SettingsFragment())/*.addToBackStack(null)*/.commit();
                     return true;
                 case R.id.navigation_bottom_ayuda:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new HelpFragment()).addToBackStack(null).commit();
+                            new HelpFragment())/*.addToBackStack(null)*/.commit();
                     return true;
                 case R.id.navigation_bottom_mejoras:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new UpgradesFragment()).addToBackStack(null).commit();
+                            new UpgradesFragment())/*.addToBackStack(null)*/.commit();
                     return true;
                 case R.id.navigation_bottom_stats:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new StatsFragment()).addToBackStack(null).commit();
+                            new StatsFragment())/*.addToBackStack(null)*/.commit();
                     return true;
             }
             return false;
@@ -77,7 +83,6 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
                     new HomeFragment()).commit();
             navigation.setSelectedItemId(R.id.navigation_bottom_home);
         }
-        //TODO boton back
 
         cargarPartida();
     }
@@ -101,7 +106,30 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
                     new HomeFragment()).addToBackStack(null).commit();
             bottomNavigationView.setSelectedItemId(R.id.navigation_bottom_home);
         } else {
-            //super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
+
+            builder.setCancelable(true);
+            builder.setTitle("Salir del juego");
+            builder.setMessage("¿Estás seguro de que quieres salir?");
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    guardarPartida();
+                    finish();
+                    //super.onBackPressed();
+                }
+            });
+            builder.show();
+
+
         }
     }
 
@@ -169,7 +197,7 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         preferences = getSharedPreferences("partida", MODE_PRIVATE);
         Gson gson = new Gson();
         Util_Listas util_listas = new Util_Listas();
-        String jsonMejoras = "", jsonMejorasAutoClick = "", jsonMejorasPersonal = "" ,jsonMejorasMaquinaria = "" ,jsonMejorasHerramientas = "";
+        String jsonMejoras = "", jsonMejorasAutoClick = "", jsonMejorasPersonal = "", jsonMejorasMaquinaria = "", jsonMejorasHerramientas = "";
         ArrayList<Mejora> miListaGuardada;
         ArrayList<Mejora_AutoClick> miListaGuardadaAutoClick;
         ArrayList<Mejora_Per_Maq_Her> miListaGuardadaPersonal;
@@ -189,26 +217,28 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
 
         //lista mejoras autoclick
         jsonMejorasAutoClick = preferences.getString("listadoDeMejorasAutoClick", null);
-        Type typeAuto = new TypeToken<ArrayList<Mejora_AutoClick>>() { }.getType();
+        Type typeAuto = new TypeToken<ArrayList<Mejora_AutoClick>>() {
+        }.getType();
         miListaGuardadaAutoClick = gson.fromJson(jsonMejorasAutoClick, typeAuto);
 
         if (miListaGuardadaAutoClick != null) {
             miViewModel.listaMejoraAutoClick = miListaGuardadaAutoClick;
             miViewModel.listaMejoraAutoClickMutable.setValue(miListaGuardadaAutoClick);
-        }else{
+        } else {
             miViewModel.listaMejoraAutoClick = util_listas.rellenarListaMejorasAutoClick(this);
             miViewModel.listaMejoraAutoClickMutable.setValue(util_listas.rellenarListaMejorasAutoClick(this));
         }
 
         //lista mejoras personal
         jsonMejorasPersonal = preferences.getString("listadoDeMejorasPersonal", null);
-        Type typePMH = new TypeToken<ArrayList<Mejora_Per_Maq_Her>>() { }.getType();
+        Type typePMH = new TypeToken<ArrayList<Mejora_Per_Maq_Her>>() {
+        }.getType();
         miListaGuardadaPersonal = gson.fromJson(jsonMejorasPersonal, typePMH);
 
         if (miListaGuardadaPersonal != null) {
             miViewModel.listaMejoraPersonal = miListaGuardadaPersonal;
             miViewModel.listaMejoraPersonalMutable.setValue(miListaGuardadaPersonal);
-        }else{
+        } else {
             miViewModel.listaMejoraPersonalMutable.setValue(miViewModel.listaMejoraPersonal = util_listas.rellenarListaMejorasPersonal(this));
         }
 
@@ -219,7 +249,7 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         if (miListaGuardadaMaquinaria != null) {
             miViewModel.listaMejoraMaquinaria = miListaGuardadaMaquinaria;
             miViewModel.listaMejoraMaquinariaMutable.setValue(miListaGuardadaMaquinaria);
-        }else{
+        } else {
             miViewModel.listaMejoraMaquinariaMutable.setValue(miViewModel.listaMejoraMaquinaria = util_listas.rellenarListaMejorasMaquinaria(this));
         }
 
@@ -230,12 +260,12 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         if (miListaGuardadaHerramientas != null) {
             miViewModel.listaMejoraHerramientas = miListaGuardadaHerramientas;
             miViewModel.listaMejoraHerramientasMutable.setValue(miListaGuardadaHerramientas);
-        }else{
+        } else {
             miViewModel.listaMejoraHerramientasMutable.setValue(miViewModel.listaMejoraHerramientas = util_listas.rellenarListaMejorasHerramientas(this));
         }
 
-        miViewModel.setDelay(preferences.getInt("delay",100000));
-        miViewModel.setAutoClickComprado(preferences.getBoolean("autoClickComprado",false));
+        miViewModel.setDelay(preferences.getInt("delay", 100000));
+        miViewModel.setAutoClickComprado(preferences.getBoolean("autoClickComprado", false));
         miViewModel.setPuntos(preferences.getLong("puntos", 0));
         miViewModel.setSumador(preferences.getLong("sumador", 1));
         miViewModel.setMultiplicador(Double.parseDouble(preferences.getString("multiplicador", "1")));

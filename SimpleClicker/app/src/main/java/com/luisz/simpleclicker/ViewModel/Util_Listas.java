@@ -55,9 +55,10 @@ public class Util_Listas {
         ArrayList<Mejora_Per_Maq_Her> listaMejorasPersonal = new ArrayList<Mejora_Per_Maq_Her>();
 
         listaMejorasPersonal.add(new Mejora_Per_Maq_Her(301,"Peón",30000000,0.5,70,"#FFC107",R.drawable.it_peon));
-        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(302,"Minero",55000000,2,20,"#FFA000",R.drawable.it_minero));
-        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(303,"Arquitecto",1000000000,3,10,"#FF6F00", R.drawable.it_arquitecto));
-        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(304,"Jefazo",15000000000L,8,5,"#E65100", R.drawable.it_jefazo));
+        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(301,"Aprendiz",55000000,1,45,"#FFC107",R.drawable.it_aprendiz));
+        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(302,"Minero",2750000000L,2,20,"#FFA000",R.drawable.it_minero));
+        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(303,"Arquitecto",15000000000L,3,10,"#FF6F00", R.drawable.it_arquitecto));
+        listaMejorasPersonal.add(new Mejora_Per_Maq_Her(304,"Jefazo",100000000000L,8,5,"#E65100", R.drawable.it_jefazo));
 
         return listaMejorasPersonal;
     }
@@ -71,7 +72,7 @@ public class Util_Listas {
 
         listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(401,"Pico",1000000,0.15,75,"#90A4AE", R.drawable.it_pico));
         listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(402,"Martillo",350000000,1.5,20,"#607D8B", R.drawable.it_martillo));
-        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(403,"Vagoneta",750000000,3,3,"#455A64", R.drawable.it_vagoneta));
+        listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(403,"Vagoneta",750000000,3,15,"#455A64", R.drawable.it_vagoneta));
         listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(404,"Tuneladora",1500000000,8.5,2,"#37474F", R.drawable.it_tuneladora));
         listaMejorasMaquinaria.add(new Mejora_Per_Maq_Her(405,"Dinamita",3000000000L,35,1,"#d50000", R.drawable.it_dinamita));
 
