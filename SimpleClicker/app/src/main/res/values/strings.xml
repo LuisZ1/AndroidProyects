@@ -71,4 +71,14 @@
     <string name="txt_tema">Pulsa el botón para cambiar entre tema oscuro y claro</string>
 
 
+    <!-- Mensajes sistema -->
+    <string name="proximamente">Próximamente...</string>
+    <string name="mejora_comprada">Mejora comprada</string>
+    <string name="cant_comprar_mejora">No puedes comprar esa mejora</string>
+    <string name="partida_reiniciada_OK">Partida reiniciada</string>
+    <string name="partida_reiniciada_ERROR">No se ha podido reiniciar la partida</string>
+    <string name="estadisticas_reiniciadas_OK">Estadísticas reiniciadas</string>
+    <string name="estadisticas_reiniciadas_ERROR">No se han podido reiniciar las estadísticas</string>
+
+
 </resources>

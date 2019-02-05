@@ -2,14 +2,17 @@ package com.luisz.simpleclicker.Fragments;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +24,14 @@ import com.luisz.simpleclicker.Adapter.AdapterMejoras_Per_Maqr_Her;
 import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.R;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
+import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class UpgradesFragment extends Fragment {
+
+    private Toast miToast;
 
     private ViewModel miViewModel;
     private AdapterMejorasAutoClick adaptador;
@@ -60,13 +66,16 @@ public class UpgradesFragment extends Fragment {
             public void onClick(View view) {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
-                    if(miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada)) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada" , Toast.LENGTH_SHORT).show();
+                    if (miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada)) {
                         adaptador.eliminarMejoraComprada(mejoraSeleccionada);
                         txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
-                        //adaptador.notifyChange();
-                    }else{
-                        Toast.makeText(getActivity().getApplicationContext(), "No puedes comprar esa mejora", Toast.LENGTH_SHORT).show();
+                        if (miToast != null) { miToast.cancel(); }
+                        miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));
+                        miToast.show();
+                    } else {
+                        if (miToast != null) { miToast.cancel(); }
+                        miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
+                        miToast.show();
                     }
                 }
             }
@@ -94,13 +103,17 @@ public class UpgradesFragment extends Fragment {
             public void onClick(View view) {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
-                   if(miViewModel.clickCompraMejora_Per_Maq_Her("personal",mejoraSeleccionada)){
-                       Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada" , Toast.LENGTH_SHORT).show();
-                       txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
-                       adaptadorPersonal.notifyChange();
-                   }else{
-                       Toast.makeText(getActivity().getApplicationContext(), "No puedes comprar esa mejora" , Toast.LENGTH_SHORT).show();
-                   }
+                    if (miViewModel.clickCompraMejora_Per_Maq_Her("personal", mejoraSeleccionada)) {
+                        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
+                        adaptadorPersonal.notifyChange();
+                        if (miToast != null) { miToast.cancel(); }
+                        miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));
+                        miToast.show();
+                    } else {
+                        if (miToast != null) { miToast.cancel(); }
+                        miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
+                        miToast.show();
+                    }
                 }
             }
         });
@@ -119,12 +132,16 @@ public class UpgradesFragment extends Fragment {
             public void onClick(View view) {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
-                    if(miViewModel.clickCompraMejora_Per_Maq_Her("maquinaria",mejoraSeleccionada)){
-                        Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada" , Toast.LENGTH_SHORT).show();
+                    if (miViewModel.clickCompraMejora_Per_Maq_Her("maquinaria", mejoraSeleccionada)) {
                         txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
                         adaptadorMaquinaria.notifyChange();
-                    }else{
-                        Toast.makeText(getActivity().getApplicationContext(), "No puedes comprar esa mejora" , Toast.LENGTH_SHORT).show();
+                        if (miToast != null) { miToast.cancel(); }
+                        miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));
+                        miToast.show();
+                    } else {
+                        if (miToast != null) { miToast.cancel(); }
+                        miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
+                        miToast.show();
                     }
                 }
             }
@@ -143,17 +160,20 @@ public class UpgradesFragment extends Fragment {
             public void onClick(View view) {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
-                    if(miViewModel.clickCompraMejora_Per_Maq_Her("herramientas",mejoraSeleccionada)){
-                        Toast.makeText(getActivity().getApplicationContext(), "Mejora comprada" , Toast.LENGTH_SHORT).show();
+                    if (miViewModel.clickCompraMejora_Per_Maq_Her("herramientas", mejoraSeleccionada)) {
                         txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
                         adaptadorHerramientas.notifyChange();
-                    }else{
-                        Toast.makeText(getActivity().getApplicationContext(), "No puedes comprar esa mejora" , Toast.LENGTH_SHORT).show();
+                        if (miToast != null) { miToast.cancel(); }
+                        miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));
+                        miToast.show();
+                    } else {
+                        if (miToast != null) { miToast.cancel(); }
+                        miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
+                        miToast.show();
                     }
                 }
             }
         });
-
         return view;
     }
 

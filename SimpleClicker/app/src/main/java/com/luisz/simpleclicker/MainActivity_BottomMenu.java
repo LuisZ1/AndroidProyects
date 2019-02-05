@@ -12,6 +12,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,6 +28,11 @@ import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
 import com.luisz.simpleclicker.ViewModel.Util_Listas;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
+import com.takusemba.spotlight.OnSpotlightStateChangedListener;
+import com.takusemba.spotlight.OnTargetStateChangedListener;
+import com.takusemba.spotlight.Spotlight;
+import com.takusemba.spotlight.shape.Circle;
+import com.takusemba.spotlight.target.SimpleTarget;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -84,6 +92,42 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         }
 
         cargarPartida();
+
+        SimpleTarget simpleTarget = new SimpleTarget.Builder(this)
+                .setPoint(100f, 340f)
+                .setShape(new Circle(200f)) // or RoundedRectangle()
+                .setTitle("the title")
+                .setDescription("the description")
+                .setOverlayPoint(100f, 100f)
+                .setOnSpotlightStartedListener(new OnTargetStateChangedListener<SimpleTarget>() {
+                    @Override
+                    public void onStarted(SimpleTarget target) {
+                        // do something
+                    }
+                    @Override
+                    public void onEnded(SimpleTarget target) {
+                        // do something
+                    }
+                })
+                .build();
+        Spotlight.with(this)
+                .setOverlayColor(R.color.background_spotlight)
+                .setDuration(1000L)
+                .setAnimation(new DecelerateInterpolator(2f))
+                .setTargets(simpleTarget)
+                .setClosedOnTouchedOutside(true)
+                .setOnSpotlightStateListener(new OnSpotlightStateChangedListener() {
+                    @Override
+                    public void onStarted() {
+                        //Toast.makeText(, "spotlight is started", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onEnded() {
+                        //Toast.makeText(MainActivity.this, "spotlight is ended", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .start();
     }
 
     @Override

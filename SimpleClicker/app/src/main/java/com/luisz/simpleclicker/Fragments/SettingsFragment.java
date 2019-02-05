@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.luisz.simpleclicker.R;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
+import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -55,9 +56,9 @@ public class SettingsFragment extends Fragment {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if(miViewModel.reiniciarPartida()){
-                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
+                        DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.partida_reiniciada_OK)).show();
                     }else{
-                        Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+                        DynamicToast.makeError(getActivity().getApplicationContext(), getString(R.string.partida_reiniciada_ERROR)).show();
                     };
                 }
             });
@@ -69,7 +70,8 @@ public class SettingsFragment extends Fragment {
         btnTema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Próximamente", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Próximamente", Toast.LENGTH_SHORT).show();
+                DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.proximamente)).show();
 //                saveFlag(!getFlag());
 //
 //                Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -100,9 +102,9 @@ public class SettingsFragment extends Fragment {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if(miViewModel.reiniciarEstadisticasTotales()){
-                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
+                        DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.estadisticas_reiniciadas_OK)).show();
                     }else{
-                        Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+                        DynamicToast.makeError(getActivity().getApplicationContext(), getString(R.string.estadisticas_reiniciadas_ERROR)).show();
                     };
                 }
             });

@@ -15,6 +15,7 @@
 
     <!--<color name="background">#EEEEEE</color>-->
     <color name="background">#A47A6A</color>
+    <color name="background_spotlight">#E6000000</color>
     <color name="textoGris">#212121</color>
 
     <!--<color name="cobre"> #FFB74D</color>-->
