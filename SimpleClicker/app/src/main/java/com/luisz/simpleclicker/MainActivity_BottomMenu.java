@@ -126,8 +126,8 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
                     public void onEnded() {
                         //Toast.makeText(MainActivity.this, "spotlight is ended", Toast.LENGTH_SHORT).show();
                     }
-                })
-                .start();
+                });
+                //.start();
     }
 
     @Override

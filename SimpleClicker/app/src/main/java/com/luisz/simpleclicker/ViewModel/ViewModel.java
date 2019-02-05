@@ -274,7 +274,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         try {
             sumador = 1;
             multiplicador = 1;
-            puntos = 1000000000;
+            puntos = 0;
             contadorPulsacionesPartida = 0;
             contadorPulsacionesParcial = 0;
             contadorMejorasPartida = 0;
