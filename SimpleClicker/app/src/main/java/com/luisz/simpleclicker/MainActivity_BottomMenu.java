@@ -116,17 +116,17 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
 
             builder.setCancelable(true);
-            builder.setTitle("Salir del juego");
-            builder.setMessage("¿Estás seguro de que quieres salir?");
+            builder.setTitle(R.string.dialog_salir_titulo);
+            builder.setMessage(R.string.dialog_salir_mensaje);
 
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.dialog_salir_opt_negativo, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.cancel();
                 }
             });
 
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.dialog_salir_opt_afirmativa, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     guardarPartida();

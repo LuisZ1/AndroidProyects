@@ -46,6 +46,37 @@
     <string name="oro">Oro</string>
     <string name="platino">Platino</string>
 
+    <!-- Auto click -->
+    <string name="mejoras_autoclick">Mejoras de autoclick</string>
+    <string name="autoclick_nivel1">Nivel 1</string>
+    <string name="autoclick_nivel2">Nivel 2</string>
+    <string name="autoclick_nivel3">Nivel 3</string>
+    <string name="autoclick_nivel4">Nivel 4</string>
+
+    <!-- Personal -->
+    <string name="mejoras_personal">Mejoras de personal</string>
+    <string name="personal_peon">Peón</string>
+    <string name="personal_aprendiz">Aprendiz</string>
+    <string name="personal_minero">Minero</string>
+    <string name="personal_arquitecto">Arquitecto</string>
+    <string name="personal_Jefazo">Jefazo</string>
+
+    <!-- Maquinaria -->
+    <string name="mejoras_maquinaria">Mejoras de maquinaria</string>
+    <string name="maquinaria_pico">Pico</string>
+    <string name="maquinaria_martillo">Martillo</string>
+    <string name="maquinaria_vagoneta">Vagoneta</string>
+    <string name="maquinaria_tuneladora">Tuneladora</string>
+    <string name="maquinaria_dinamita">Dinamita</string>
+
+    <!-- Herramientas -->
+    <string name="mejoras_herramientas">Mejora calidad de las herramientas</string>
+    <string name="herramientas_madera">Madera</string>
+    <string name="herramientas_piedra">Piedra</string>
+    <string name="herramientas_hierro">Hierro</string>
+    <string name="herramientas_oro">Oro</string>
+    <string name="herramientas_diamante">Diamante</string>
+
     <!--Ayuda strings-->
     <string name="objetivo">Objetivo:</string>
     <string name="objetivo_text">Conseguir el mayor número de puntos posible en el menor número de clics</string>
@@ -80,5 +111,22 @@
     <string name="estadisticas_reiniciadas_OK">Estadísticas reiniciadas</string>
     <string name="estadisticas_reiniciadas_ERROR">No se han podido reiniciar las estadísticas</string>
 
+    <!-- Dialog cerrar partida-->
+    <string name="dialog_salir_titulo">Salir del juego</string>
+    <string name="dialog_salir_mensaje">¿Estás seguro de que quieres salir?</string>
+    <string name="dialog_salir_opt_afirmativa">Salir</string>
+    <string name="dialog_salir_opt_negativo">Cancelar</string>
+
+    <!-- Dialog reiniciar partida-->
+    <string name="dialog_reiniciar_partida_titulo">Reiniciar partida</string>
+    <string name="dialog_reiniciar_partida_mensaje">¿Estás seguro de que quieres reiniciar la partida? Perderás todo el progreso y las mejoras.</string>
+    <string name="dialog_reiniciar_partida_opt_afirmativa">Reiniciar</string>
+    <string name="dialog_reiniciar_partida_opt_negativo">Cancelar</string>
+
+    <!-- Dialog reiniciar estadisticas-->
+    <string name="dialog_reiniciar_estadisticas_titulo">Reiniciar estadisticas</string>
+    <string name="dialog_reiniciar_estadisticas_mensaje">¿Estás seguro de que quieres reiniciar las estadísticas? La partida actual NO se borrará.</string>
+    <string name="dialog_reiniciar_estadisticas_opt_afirmativa">Reiniciar</string>
+    <string name="dialog_reiniciar_estadisticas_opt_negativo">Cancelar</string>
 
 </resources>

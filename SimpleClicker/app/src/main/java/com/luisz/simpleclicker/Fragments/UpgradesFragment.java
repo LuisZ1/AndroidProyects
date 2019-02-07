@@ -118,8 +118,6 @@ public class UpgradesFragment extends Fragment {
             }
         });
 
-        //TODO observador personal
-
         //manejando recicler y adapter MAQUINARIA
         miRecyclerViewMaquinaria = view.findViewById(R.id.recyclerMejorasMaquinaria);
         miRecyclerViewMaquinaria.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));

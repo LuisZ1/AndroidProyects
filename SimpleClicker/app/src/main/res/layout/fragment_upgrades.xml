@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Puntos que puedes gastar:"
+                android:text="@string/puntos"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
@@ -45,7 +45,7 @@
                 style="?android:attr/listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mejoras de AutoClick"/>
+                android:text="@string/mejoras_autoclick"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
                 style="?android:attr/listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mejoras de Personal"/>
+                android:text="@string/mejoras_personal"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMejorasPersonal"
@@ -89,7 +89,7 @@
                 style="?android:attr/listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mejoras de Maquinaria"/>
+                android:text="@string/mejoras_maquinaria"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMejorasMaquinaria"
@@ -105,7 +105,7 @@
                 style="?android:attr/listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mejoras de Herramientas"/>
+                android:text="@string/mejoras_herramientas"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMejorasHerramientas"

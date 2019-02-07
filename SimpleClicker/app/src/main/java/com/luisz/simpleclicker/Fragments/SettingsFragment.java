@@ -42,17 +42,17 @@ public class SettingsFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.myDialog));
 
             builder.setCancelable(true);
-            builder.setTitle("Reiniciar partida");
-            builder.setMessage("¿Estás seguro de que quieres reiniciar la partida?");
+            builder.setTitle(R.string.dialog_reiniciar_partida_titulo);
+            builder.setMessage(R.string.dialog_reiniciar_partida_mensaje);
 
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.dialog_reiniciar_partida_opt_negativo, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.cancel();
                 }
             });
 
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.dialog_reiniciar_partida_opt_afirmativa, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if(miViewModel.reiniciarPartida()){
@@ -88,17 +88,17 @@ public class SettingsFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.myDialog));
 
             builder.setCancelable(true);
-            builder.setTitle("Reiniciar estadísticas");
-            builder.setMessage("¿Estás seguro de que quieres reiniciar las estadísticas globales?");
+            builder.setTitle(R.string.dialog_reiniciar_estadisticas_titulo);
+            builder.setMessage(R.string.dialog_reiniciar_estadisticas_mensaje);
 
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.dialog_reiniciar_estadisticas_opt_negativo, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.cancel();
                 }
             });
 
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.dialog_reiniciar_estadisticas_opt_afirmativa, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if(miViewModel.reiniciarEstadisticasTotales()){
