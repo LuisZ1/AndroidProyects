@@ -24,6 +24,7 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
     private int delay;
     private int rowNumber = 2;
     private double multiplicador = 1;
+    private boolean firstLauch = true;
 
     //contadores
     private long contadorPulsacionesPartida = 0, contadorPulsacionesTotal = 0, contadorPulsacionesParcial = 0;
@@ -520,6 +521,11 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
         return multiplicador;
     }
 
+    public boolean isFirstLauch() {
+        return firstLauch;
+    }
+
+
     //Setters
     public void setSumador(long sumador) {
         this.sumador = sumador;
@@ -683,5 +689,9 @@ public class ViewModel extends /*android.arch.lifecycle.ViewModel*/ AndroidViewM
 
     public void setMultiplicador(double multiplicador) {
         this.multiplicador = multiplicador;
+    }
+
+    public void setFirstLauch(boolean firstLauch) {
+        this.firstLauch = firstLauch;
     }
 }
