@@ -13,25 +13,27 @@
         android:padding="20dp">
 
         <TextView
-            android:text="Cambiar tema"
+            style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            style="?android:attr/listSeparatorTextViewStyle"/>
+            android:text="@string/btn_tutorial"
+            android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/txtTema"
+            android:id="@+id/txtTutorial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_tema"
+            android:text="@string/txt_tutorial"
             android:textAlignment="center" />
 
         <Button
-            android:id="@+id/btnCambiarTema"
+            android:id="@+id/btnTutorial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_tema"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/btn_tutorial" />
 
 
 

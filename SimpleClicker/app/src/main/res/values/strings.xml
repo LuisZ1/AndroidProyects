@@ -32,6 +32,7 @@
     <string name="ajustes">Ajustes</string>
     <string name="mejoras">Mejoras</string>
     <string name="stats">Estadísticas</string>
+    <string name="logros">Logros</string>
 
     <!--Metales-->
     <string name="aluminio">Aluminio</string>
@@ -98,8 +99,10 @@
     <string name="btn_reiniciarEstadisticas">Reiniciar estadísticas</string>
     <string name="txt_reiniciarEstadisticas">Pulsa el botón para reiniciar las estadisticas totales, ten en cuenta de que es una acción irreversible</string>
 
-    <string name="btn_tema">Cambiar tema</string>
-    <string name="txt_tema">Pulsa el botón para cambiar entre tema oscuro y claro</string>
+    <string name="btn_tutorial">Tutorial</string>
+    <string name="txt_tutorial">Pulsa el botón para volver a ver el tutorial</string>
+
+    <string name="toast_tutorial">Cuando vuelvas a la pantalla de juego verás el tutorial</string>
 
 
     <!-- Mensajes sistema -->

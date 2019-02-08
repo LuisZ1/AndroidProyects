@@ -11,10 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
+
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,11 +26,7 @@ import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
 import com.luisz.simpleclicker.ViewModel.Util_Listas;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
-import com.takusemba.spotlight.OnSpotlightStateChangedListener;
-import com.takusemba.spotlight.OnTargetStateChangedListener;
-import com.takusemba.spotlight.Spotlight;
-import com.takusemba.spotlight.shape.Circle;
-import com.takusemba.spotlight.target.SimpleTarget;
+import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -58,10 +52,11 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new SettingsFragment())/*.addToBackStack(null)*/.commit();
                     return true;
-                case R.id.navigation_bottom_ayuda:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new HelpFragment())/*.addToBackStack(null)*/.commit();
-                    return true;
+                case R.id.navigation_bottom_logros:
+                    /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new HelpFragment()).addToBackStack(null).commit(); */
+                    DynamicToast.makeWarning(getApplicationContext(), getString(R.string.proximamente)).show();
+                    return false;
                 case R.id.navigation_bottom_mejoras:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new UpgradesFragment())/*.addToBackStack(null)*/.commit();
@@ -308,6 +303,5 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
         miViewModel.setContadorPlatinoPartida(preferences.getLong("contadorPlatinoPartida", miViewModel.getListaMejoras().get(8).getNivel()));
         miViewModel.setContadorUranioPartida(preferences.getLong("contadorUranioPartida", miViewModel.getListaMejoras().get(9).getNivel()));
     }
-
 
 }

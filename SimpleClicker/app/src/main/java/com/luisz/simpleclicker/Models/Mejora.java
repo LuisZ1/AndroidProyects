@@ -1,8 +1,5 @@
 package com.luisz.simpleclicker.Models;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-
 public class Mejora {
 
     private int id;

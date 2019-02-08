@@ -11,7 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +25,10 @@ import com.luisz.simpleclicker.Adapter.AdapterMejorasAutoClick;
 import com.luisz.simpleclicker.Adapter.AdapterMejoras_Per_Maqr_Her;
 import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.R;
+import com.luisz.simpleclicker.Util.formateoDeNumeros;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class UpgradesFragment extends Fragment {
@@ -37,8 +39,7 @@ public class UpgradesFragment extends Fragment {
     private AdapterMejorasAutoClick adaptador;
     private AdapterMejoras_Per_Maqr_Her adaptadorPersonal, adaptadorMaquinaria, adaptadorHerramientas;
     private Typeface font;
-    private RecyclerView miRecyclerView, miRecyclerViewPersonal, miRecyclerViewMaquinaria, miRecyclerViewHermientas;
-    private DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
+    private RecyclerView miRecyclerView, miRecyclerViewPersonal, miRecyclerViewMaquinaria, miRecyclerViewHerramientas;
 
     private TextView txtPuntos;
 
@@ -52,11 +53,15 @@ public class UpgradesFragment extends Fragment {
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
 
         txtPuntos = view.findViewById(R.id.txtPuntos);
-        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
+        txtPuntos.setText(formateoDeNumeros.formatterV2(miViewModel.getPuntos()));
 
         //manejando recicler y adapter AUTOCLICK
         miRecyclerView = view.findViewById(R.id.recyclerMejorasAutoClick);
         miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
+
+
+        SnapHelper snapHelperClick = new LinearSnapHelper();
+        snapHelperClick.attachToRecyclerView(miRecyclerView);
 
         adaptador = new AdapterMejorasAutoClick(miViewModel.getListaMejoraAutoClickMutable().getValue());
         miRecyclerView.setAdapter(adaptador);
@@ -68,7 +73,7 @@ public class UpgradesFragment extends Fragment {
                 if (mejoraSeleccionada != -1) {
                     if (miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada)) {
                         adaptador.eliminarMejoraComprada(mejoraSeleccionada);
-                        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
+                        txtPuntos.setText(formateoDeNumeros.formatterV1.format(miViewModel.getPuntos()));
                         if (miToast != null) { miToast.cancel(); }
                         miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));
                         miToast.show();
@@ -95,6 +100,9 @@ public class UpgradesFragment extends Fragment {
         miRecyclerViewPersonal = view.findViewById(R.id.recyclerMejorasPersonal);
         miRecyclerViewPersonal.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
 
+        SnapHelper snapHelperPersonal = new LinearSnapHelper();
+        snapHelperPersonal.attachToRecyclerView(miRecyclerViewPersonal);
+
         adaptadorPersonal = new AdapterMejoras_Per_Maqr_Her(miViewModel.getListaMejoraPersonalMutable().getValue());
         miRecyclerViewPersonal.setAdapter(adaptadorPersonal);
 
@@ -104,7 +112,7 @@ public class UpgradesFragment extends Fragment {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
                     if (miViewModel.clickCompraMejora_Per_Maq_Her("personal", mejoraSeleccionada)) {
-                        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
+                        txtPuntos.setText(formateoDeNumeros.formatterV1.format(miViewModel.getPuntos()));
                         adaptadorPersonal.notifyChange();
                         if (miToast != null) { miToast.cancel(); }
                         miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));
@@ -122,6 +130,9 @@ public class UpgradesFragment extends Fragment {
         miRecyclerViewMaquinaria = view.findViewById(R.id.recyclerMejorasMaquinaria);
         miRecyclerViewMaquinaria.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
 
+        SnapHelper snapHelperMaquinaria = new LinearSnapHelper();
+        snapHelperMaquinaria.attachToRecyclerView(miRecyclerViewMaquinaria);
+
         adaptadorMaquinaria = new AdapterMejoras_Per_Maqr_Her(miViewModel.getListaMejoraMaquinariaMutable().getValue());
         miRecyclerViewMaquinaria.setAdapter(adaptadorMaquinaria);
 
@@ -131,7 +142,7 @@ public class UpgradesFragment extends Fragment {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
                     if (miViewModel.clickCompraMejora_Per_Maq_Her("maquinaria", mejoraSeleccionada)) {
-                        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
+                        txtPuntos.setText(formateoDeNumeros.formatterV1.format(miViewModel.getPuntos()));
                         adaptadorMaquinaria.notifyChange();
                         if (miToast != null) { miToast.cancel(); }
                         miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));
@@ -147,11 +158,14 @@ public class UpgradesFragment extends Fragment {
 
 
         //manejando recicler y adapter HERRAMIENTAS
-        miRecyclerViewHermientas = view.findViewById(R.id.recyclerMejorasHerramientas);
-        miRecyclerViewHermientas.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
+        miRecyclerViewHerramientas = view.findViewById(R.id.recyclerMejorasHerramientas);
+        miRecyclerViewHerramientas.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, LinearLayoutManager.HORIZONTAL, false));
+
+        SnapHelper snapHelperHerramientas = new LinearSnapHelper();
+        snapHelperHerramientas.attachToRecyclerView(miRecyclerViewHerramientas);
 
         adaptadorHerramientas = new AdapterMejoras_Per_Maqr_Her(miViewModel.getListaMejoraHerramientasMutable().getValue());
-        miRecyclerViewHermientas.setAdapter(adaptadorHerramientas);
+        miRecyclerViewHerramientas.setAdapter(adaptadorHerramientas);
 
         adaptadorHerramientas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +173,7 @@ public class UpgradesFragment extends Fragment {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
                     if (miViewModel.clickCompraMejora_Per_Maq_Her("herramientas", mejoraSeleccionada)) {
-                        txtPuntos.setText(formatter.format(miViewModel.getPuntos()));
+                        txtPuntos.setText(formateoDeNumeros.formatterV1.format(miViewModel.getPuntos()));
                         adaptadorHerramientas.notifyChange();
                         if (miToast != null) { miToast.cancel(); }
                         miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));

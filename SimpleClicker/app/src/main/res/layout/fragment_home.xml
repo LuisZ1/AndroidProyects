@@ -167,8 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="onSwitchWalkClicked"
+        android:layout_marginBottom="16dp"
         android:text="@string/walk"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent" />

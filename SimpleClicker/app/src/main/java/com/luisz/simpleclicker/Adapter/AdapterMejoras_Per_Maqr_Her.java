@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.luisz.simpleclicker.Models.Mejora_Per_Maq_Her;
 import com.luisz.simpleclicker.R;
+import com.luisz.simpleclicker.Util.formateoDeNumeros;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class AdapterMejoras_Per_Maqr_Her extends RecyclerView.Adapter<AdapterMej
     public void onBindViewHolder(ViewHolderMejoras viewHolderMejoras, int i) {
 
         viewHolderMejoras.txtNombreMejora.setText(listaMejorasPersonal.get(i).getNombre());
-        viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejorasPersonal.get(i).getPrecio()));
+        viewHolderMejoras.txtPrecio.setText(formateoDeNumeros.formatterV2(listaMejorasPersonal.get(i).getPrecio()));
         viewHolderMejoras.txtTiempo.setText(listaMejorasPersonal.get(i).getMejorasCompradas()+" / "+listaMejorasPersonal.get(i).getLimiteDeCompra());
         viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejorasPersonal.get(i).getColorFondo()));
         viewHolderMejoras.lblPrecio.setText(Html.fromHtml("&#xf3d1;"));

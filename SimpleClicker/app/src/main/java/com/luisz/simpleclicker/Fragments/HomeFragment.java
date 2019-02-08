@@ -21,12 +21,14 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.luisz.simpleclicker.Adapter.AdapterMejoras;
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.R;
+import com.luisz.simpleclicker.Util.formateoDeNumeros;
 import com.luisz.simpleclicker.ViewModel.ViewModel;
 import com.takusemba.spotlight.OnSpotlightStateChangedListener;
 import com.takusemba.spotlight.OnTargetStateChangedListener;
@@ -34,7 +36,6 @@ import com.takusemba.spotlight.Spotlight;
 import com.takusemba.spotlight.shape.Circle;
 import com.takusemba.spotlight.target.SimpleTarget;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,13 +52,13 @@ public class HomeFragment extends Fragment {
     private Timer timer;
     private TimerTask timerTask;
     private Handler handler = new Handler();
+    private int delay;
+    private int period;
 
     //ViewModel miViewModel;
     private RecyclerView miRecyclerView;
     private AdapterMejoras adaptador;
     private Typeface font;
-    private int delay;
-    private int period;
     private int rowNumber;
 
     //spotlight
@@ -108,16 +109,22 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        swAutoClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean on = ((Switch) v).isChecked();
-                if (on) {
+        swAutoClick.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(miViewModel.isAutoClickActivo()){
+                    swAutoClick.setChecked(true);
+                }
+
+                if (isChecked) {
                     stopTimer();
                     startTimer();
+                    miViewModel.setAutoClickActivo(true);
                 } else {
                     stopTimer();
+                    miViewModel.setAutoClickActivo(false);
                 }
+
             }
         });
 
@@ -303,10 +310,28 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        displayForPuntos(miViewModel.getPuntos());
 
         return view;
     }
 
+    @Override
+    public void onStart() {
+        if(miViewModel.isAutoClickActivo()){
+            swAutoClick.setChecked(true);
+        }
+
+        if (swAutoClick.isChecked()) {
+            stopTimer();
+            startTimer();
+            miViewModel.setAutoClickActivo(true);
+        } else {
+            stopTimer();
+            miViewModel.setAutoClickActivo(false);
+        }
+
+        super.onStart();
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -336,13 +361,10 @@ public class HomeFragment extends Fragment {
 
     public void displayForPuntos(long puntos) {
 
-        DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
-        DecimalFormat formatterDecimales = new DecimalFormat("###,###.###");
-
-        txtPuntos.setText(formatter.format(puntos));
-        txtSumador.setText(formatter.format(miViewModel.getSumador()));
-        txtMultiplicador.setText(formatterDecimales.format(miViewModel.getMultiplicador()));
-        txtContadorPulsaciones.setText(formatter.format(miViewModel.getContadorPulsacionesPartida()));
+        txtPuntos.setText(formateoDeNumeros.formatterV2(puntos));
+        txtSumador.setText(formateoDeNumeros.formatterV2(miViewModel.getSumador()));
+        txtMultiplicador.setText(formateoDeNumeros.formatterDecimales.format(miViewModel.getMultiplicador()));
+        txtContadorPulsaciones.setText(formateoDeNumeros.formatterV1.format(miViewModel.getContadorPulsacionesPartida()));
     }
 
     //MINERO AUTOMATICO
@@ -366,7 +388,6 @@ public class HomeFragment extends Fragment {
                 });
             }
         };
-
         timer.schedule(timerTask, delay, period);
     }
 

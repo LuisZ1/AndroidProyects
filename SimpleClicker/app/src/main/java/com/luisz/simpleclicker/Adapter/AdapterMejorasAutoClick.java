@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.luisz.simpleclicker.Models.Mejora_AutoClick;
 import com.luisz.simpleclicker.R;
+import com.luisz.simpleclicker.Util.formateoDeNumeros;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class AdapterMejorasAutoClick extends RecyclerView.Adapter<AdapterMejoras
     public void onBindViewHolder(ViewHolderMejoras viewHolderMejoras, int i) {
 
         viewHolderMejoras.txtNombreMejora.setText(listaMejorasAutoClick.get(i).getNombre());
-        viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejorasAutoClick.get(i).getPrecio()));
+        viewHolderMejoras.txtPrecio.setText(formateoDeNumeros.formatterV2(listaMejorasAutoClick.get(i).getPrecio()));
         viewHolderMejoras.txtTiempo.setText(formatter.format(1000/listaMejorasAutoClick.get(i).getDelay()));
         viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejorasAutoClick.get(i).getColorFondo()));
 

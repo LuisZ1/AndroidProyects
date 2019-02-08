@@ -2,8 +2,10 @@ package com.luisz.simpleclicker.Adapter;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +14,14 @@ import android.widget.TextView;
 
 import com.luisz.simpleclicker.Models.Mejora;
 import com.luisz.simpleclicker.R;
+import com.luisz.simpleclicker.Util.formateoDeNumeros;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHolderMejoras> implements View.OnClickListener{
-    
+public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHolderMejoras> implements View.OnClickListener {
+
     private ArrayList<Mejora> listaMejoras;
     private View.OnClickListener listener;
-    DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###,###,###");
 
     public AdapterMejoras(ArrayList<Mejora> listaMejoras) {
         this.listaMejoras = listaMejoras;
@@ -28,7 +29,7 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
 
     @Override
     public ViewHolderMejoras onCreateViewHolder(ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_layout_mejora,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_layout_mejora, null, false);
         view.setOnClickListener(this);
 
         return new ViewHolderMejoras(view);
@@ -38,21 +39,21 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
     public void onBindViewHolder(ViewHolderMejoras viewHolderMejoras, int i) {
 
         viewHolderMejoras.txtNombreMejora.setText(listaMejoras.get(i).getNombre());
-        viewHolderMejoras.txtPrecio.setText(formatter.format(listaMejoras.get(i).getPrecio()));
-        viewHolderMejoras.txtLevel.setText(formatter.format(listaMejoras.get(i).getNivel()));
+        viewHolderMejoras.txtPrecio.setText(formateoDeNumeros.formatterV2(listaMejoras.get(i).getPrecio()));
+        viewHolderMejoras.txtLevel.setText(formateoDeNumeros.formatterV2(listaMejoras.get(i).getNivel()));
         viewHolderMejoras.miCardView.setCardBackgroundColor(Color.parseColor(listaMejoras.get(i).getColorFondo()));
 
         viewHolderMejoras.lblPrecio.setText(Html.fromHtml("&#xf3d1;"));
         viewHolderMejoras.lblLevel.setText(Html.fromHtml("&#xf201;"));
     }
 
-    public void setOnClickListener(View.OnClickListener listener){
+    public void setOnClickListener(View.OnClickListener listener) {
         this.listener = listener;
     }
 
     @Override
     public void onClick(View view) {
-        if(listener != null){
+        if (listener != null) {
             listener.onClick(view);
         }
     }
@@ -94,7 +95,7 @@ public class AdapterMejoras extends RecyclerView.Adapter<AdapterMejoras.ViewHold
         return listaMejoras;
     }
 
-    public void notifyChange(){
+    public void notifyChange() {
         notifyDataSetChanged();
     }
 

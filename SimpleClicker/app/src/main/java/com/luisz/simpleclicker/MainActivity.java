@@ -258,4 +258,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences preferences = getSharedPreferences("partida", MODE_PRIVATE);
         return preferences.getBoolean("dark", false);
     }
+
+
+
 }
