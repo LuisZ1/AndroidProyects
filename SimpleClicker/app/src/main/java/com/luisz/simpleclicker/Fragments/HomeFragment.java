@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment  {
 
     private TextView txtSumador, txtPuntos, lblClicks, lblSumador, txtContadorPulsaciones, lblMultiplicador, txtMultiplicador;
     private Switch swAutoClick;
