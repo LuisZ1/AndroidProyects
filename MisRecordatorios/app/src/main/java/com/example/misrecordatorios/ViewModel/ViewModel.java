@@ -27,27 +27,27 @@ public class ViewModel extends AndroidViewModel {
     }
 
     private void rellenarListado(){
-        listadoRecordatorios.add(new Recordatorio(new Date(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus scelerisque at tellus ornare hendrerit. Donec laoreet faucibus sapien. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "Nullam porttitor fermentum nunc, semper condimentum sapien volutpat vel. Etiam rutrum eros at metus eleifend, nec cursus nulla lobortis."));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "Nullam porttitor fermentum nunc, semper condimentum sapien volutpat vel. Etiam rutrum eros at metus eleifend, nec cursus nulla lobortis.", "#f44336"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos", "#FFC107"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III", "#FFC107"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos", "#FFC107"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos", "#FFC107"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1", "#795548"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III", "#f44336"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1", "#f44336"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos", "#f44336"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota 1", "#f44336"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota dos", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "nota III", "#2196F3"));
 
         listadoRecordatoriosMutable.setValue(listadoRecordatorios);
     }

@@ -16,14 +16,31 @@
         android:background="#EAEAEA"
         android:padding="5dp">
 
+        <ImageView
+            android:id="@+id/myRectangleView"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rectangulo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/txtNota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:maxLines="2"
+
+
+            android:singleLine="true"
             android:text="Nota de prueba"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toEndOf="@+id/myRectangleView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -32,15 +49,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/myRectangleView"
             app:layout_constraintTop_toBottomOf="@+id/txtNota"
             app:srcCompat="@drawable/ic_event" />
 
         <TextView
             android:id="@+id/txtFecha"
-
-            style="@style/tres_puntos"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

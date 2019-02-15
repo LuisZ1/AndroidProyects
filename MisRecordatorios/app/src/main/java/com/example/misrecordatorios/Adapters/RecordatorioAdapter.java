@@ -1,5 +1,8 @@
 package com.example.misrecordatorios.Adapters;
 
+import android.content.ClipData;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +41,9 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
         //cargar datos del item
         viewHolderRecordatorio.txtNota.setText(listaRecordatorios.get(i).getContenido());
         viewHolderRecordatorio.txtFecha.setText(listaRecordatorios.get(i).getFecha().toString());
+        //viewHolderRecordatorio.rectangulo.setBackgroundColor(Color.parseColor(listaRecordatorios.get(i).getColor()));
+        viewHolderRecordatorio.rectangulito.setTint(Color.parseColor(listaRecordatorios.get(i).getColor()));
+        viewHolderRecordatorio.rectangulo.setBackgroundResource(R.drawable.rectangulo);
     }
 
     public void setOnClickListener(View.OnClickListener listener) {
@@ -59,11 +65,15 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
     public class ViewHolderRecordatorio extends RecyclerView.ViewHolder {
 
         TextView txtNota, txtFecha;
+        View rectangulo;
+        Drawable rectangulito;
 
         public ViewHolderRecordatorio(View itemView) {
             super(itemView);
             txtNota = itemView.findViewById(R.id.txtNota);
             txtFecha = itemView.findViewById(R.id.txtFecha);
+            rectangulo = itemView.findViewById(R.id.myRectangleView);
+            rectangulito = itemView.getResources().getDrawable(R.drawable.rectangulo);
         }
     }
 
