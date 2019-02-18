@@ -19,6 +19,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private ViewModel miViewModel;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +30,16 @@ public class MainActivity extends AppCompatActivity {
 
         miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_SHORT)
 //                        .setAction("Action", null).show();
+                cambiarBoton();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new crearRecordatorioFragment()).addToBackStack(null).commit();
+
 
             }
         });
@@ -44,6 +47,18 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new listFragment()).commit();
 
+    }
+
+    public void cambiarBoton(){
+        fab.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_check_black_24dp));
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Esto es pa guardá", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+
+            }
+        });
     }
 
     @Override

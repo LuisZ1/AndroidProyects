@@ -11,7 +11,10 @@ import android.widget.TextView;
 import com.example.misrecordatorios.Models.Recordatorio;
 import com.example.misrecordatorios.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,12 +41,15 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
     @Override
     public void onBindViewHolder(ViewHolderRecordatorio viewHolderRecordatorio, int i) {
 
+        Date fecha = (Date) listaRecordatorios.get(i).getFecha();
+        SimpleDateFormat ft = new SimpleDateFormat ("hh:mm 'h, ' dd/MM/yyyy");
+
         //cargar datos del item
         viewHolderRecordatorio.txtNota.setText(listaRecordatorios.get(i).getContenido());
-        viewHolderRecordatorio.txtFecha.setText(listaRecordatorios.get(i).getFecha().toString());
-        //viewHolderRecordatorio.rectangulo.setBackgroundColor(Color.parseColor(listaRecordatorios.get(i).getColor()));
-        viewHolderRecordatorio.rectangulito.setTint(Color.parseColor(listaRecordatorios.get(i).getColor()));
-        viewHolderRecordatorio.rectangulo.setBackgroundResource(R.drawable.rectangulo);
+        viewHolderRecordatorio.txtFecha.setText(ft.format(fecha));
+        viewHolderRecordatorio.rectangulo.setBackgroundColor(Color.parseColor(listaRecordatorios.get(i).getColor()));
+//        viewHolderRecordatorio.rectangulito.setTint(Color.parseColor(listaRecordatorios.get(i).getColor()));
+//        viewHolderRecordatorio.rectangulo.setBackgroundResource(viewHolderRecordatorio.rectangulito);
     }
 
     public void setOnClickListener(View.OnClickListener listener) {

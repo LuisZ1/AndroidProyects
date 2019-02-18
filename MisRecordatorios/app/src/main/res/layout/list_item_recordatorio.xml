@@ -35,13 +35,14 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:maxLines="2"
+            android:ellipsize="end"
 
-
-            android:singleLine="true"
             android:text="Nota de prueba"
             app:layout_constrainedWidth="true"
             app:layout_constraintStart_toEndOf="@+id/myRectangleView"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <!--android:singleLine="true"-->
 
         <ImageView
             android:id="@+id/imageView"

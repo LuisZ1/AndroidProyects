@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import com.example.misrecordatorios.R;
 import com.example.misrecordatorios.ViewModel.ViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

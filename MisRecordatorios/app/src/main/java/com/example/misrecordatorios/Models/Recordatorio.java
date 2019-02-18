@@ -2,11 +2,14 @@ package com.example.misrecordatorios.Models;
 
 import java.util.Date;
 
-import androidx.room.Entity;
+import androidx.annotation.NonNull;
+import androidx.room.*;
 
 @Entity
 public class Recordatorio {
 
+    @PrimaryKey
+    @NonNull
     private String idRecordatorio;
     private Date fecha;
     private String contenido;
