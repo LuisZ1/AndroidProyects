@@ -1,20 +1,20 @@
 package com.example.misrecordatorios;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.example.misrecordatorios.Fragments.crearRecordatorioFragment;
+import com.example.misrecordatorios.Fragments.detallesFragment;
 import com.example.misrecordatorios.Fragments.listFragment;
 import com.example.misrecordatorios.ViewModel.ViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,34 +31,66 @@ public class MainActivity extends AppCompatActivity {
         miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
 
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_SHORT)
-//                        .setAction("Action", null).show();
-                cambiarBoton();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new crearRecordatorioFragment()).addToBackStack(null).commit();
-
-
-            }
-        });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new listFragment()).commit();
 
+        gestionFloatingButton();
+
     }
 
-    public void cambiarBoton(){
-        fab.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_check_black_24dp));
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Esto es pa guardá", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        gestionFloatingButton();
+    }
+
+    private void gestionFloatingButton() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (currentFragment instanceof listFragment) {
+
+            fab.setImageResource(R.drawable.ic_add_black_24dp);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new crearRecordatorioFragment()).addToBackStack(null).commit();
+
+                    fab.setImageResource(R.drawable.ic_check_black_24dp);
+
+                    Snackbar.make(view, "Rellena los campos para añadir", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                }
+            });
+
+        } else {
+            if (currentFragment instanceof crearRecordatorioFragment) {
+
+                //fab.setImageResource(R.drawable.ic_check_black_24dp);
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Cambios guardados", Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
+                    }
+                });
+
+            } else {
+
+                if (currentFragment instanceof detallesFragment) {
+                    fab.setImageResource(R.drawable.ic_check_black_24dp);
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Snackbar.make(view, "Eso no sirve pa ná", Snackbar.LENGTH_SHORT)
+                                    .setAction("Action", null).show();
+                        }
+                    });
+                }
 
             }
-        });
+        }
     }
 
     @Override
