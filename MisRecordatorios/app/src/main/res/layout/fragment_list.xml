@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myRecyclerView"
@@ -15,6 +17,9 @@
         android:clipToPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:padding="8dp"/>
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
