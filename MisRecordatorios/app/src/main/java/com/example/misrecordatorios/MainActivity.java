@@ -4,13 +4,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.misrecordatorios.Fragments.crearRecordatorioFragment;
 import com.example.misrecordatorios.Fragments.detallesFragment;
 import com.example.misrecordatorios.Fragments.listFragment;
+import com.example.misrecordatorios.Models.Recordatorio;
 import com.example.misrecordatorios.ViewModel.ViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -45,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         gestionFloatingButton();
     }
 
-    private void gestionFloatingButton() {
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+    public void gestionFloatingButton() {
+        /*Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (currentFragment instanceof listFragment) {
 
             fab.setImageResource(R.drawable.ic_add_black_24dp);
@@ -70,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 fab.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        EditText miEdit = findViewById(R.id.EditorContenido);
+                        Recordatorio rec = new Recordatorio(new Date(), miEdit.getText().toString(), "#2196F3" );
+
+                        miViewModel.listadoRecordatorios.add(rec);
+
                         Snackbar.make(view, "Cambios guardados", Snackbar.LENGTH_SHORT)
                                 .setAction("Action", null).show();
                     }
@@ -90,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        }
+        }*/
     }
 
     @Override

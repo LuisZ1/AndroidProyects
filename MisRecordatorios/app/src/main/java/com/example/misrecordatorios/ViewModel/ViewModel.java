@@ -15,8 +15,8 @@ public class ViewModel extends AndroidViewModel {
 
     private static Context miAppContext;
 
-    private ArrayList<Recordatorio> listadoRecordatorios = new ArrayList<Recordatorio>();
-    private MutableLiveData<ArrayList<Recordatorio>> listadoRecordatoriosMutable = new MutableLiveData<ArrayList<Recordatorio>>();
+    public ArrayList<Recordatorio> listadoRecordatorios = new ArrayList<Recordatorio>();
+    public MutableLiveData<ArrayList<Recordatorio>> listadoRecordatoriosMutable = new MutableLiveData<ArrayList<Recordatorio>>();
 
 
 

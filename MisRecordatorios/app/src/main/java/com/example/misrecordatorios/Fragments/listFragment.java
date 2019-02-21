@@ -1,5 +1,6 @@
 package com.example.misrecordatorios.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.example.misrecordatorios.Adapters.RecordatorioAdapter;
 import com.example.misrecordatorios.Models.Recordatorio;
 import com.example.misrecordatorios.R;
 import com.example.misrecordatorios.ViewModel.ViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -27,9 +29,10 @@ public class listFragment extends Fragment {
     private ArrayList<Recordatorio> listadoRecordatorios;
     private RecyclerView miRecycler;
     private RecordatorioAdapter miAdapter;
+    private View view = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_list, container, false);
+        view = inflater.inflate(R.layout.fragment_list, container, false);
 
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
 
@@ -53,6 +56,18 @@ public class listFragment extends Fragment {
         return view;
     }
 
-
-
+//    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//        FloatingActionButton fab = view.findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new crearRecordatorioFragment()).addToBackStack(null).commit();
+//
+//                Snackbar.make(view, "Rellena los datos", Snackbar.LENGTH_SHORT)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+//    }
 }

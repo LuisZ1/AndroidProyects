@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.misrecordatorios.MainActivity;
 import com.example.misrecordatorios.R;
 import com.example.misrecordatorios.ViewModel.ViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +23,9 @@ public class detallesFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_detail, container, false);
 
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
+
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.hide();
 
         return view;
     }
