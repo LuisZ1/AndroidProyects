@@ -11,20 +11,22 @@ import android.widget.TextView;
 import com.example.misrecordatorios.Models.Recordatorio;
 import com.example.misrecordatorios.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapter.ViewHolderRecordatorio> implements View.OnClickListener {
 
-    private ArrayList<Recordatorio> listaRecordatorios;
+    private List<Recordatorio> listaRecordatorios;
     private View.OnClickListener listener;
 
-    public RecordatorioAdapter (ArrayList<Recordatorio> listaRecordatorios) {
+    public RecordatorioAdapter (List<Recordatorio> listaRecordatorios) {
         this.listaRecordatorios = listaRecordatorios;
     }
 
@@ -41,8 +43,14 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
     @Override
     public void onBindViewHolder(ViewHolderRecordatorio viewHolderRecordatorio, int i) {
 
-        Date fecha = (Date) listaRecordatorios.get(i).getFecha();
+        //Date fecha = new Date() listaRecordatorios.get(i).getFecha();
         SimpleDateFormat ft = new SimpleDateFormat ("hh:mm 'h, ' dd/MM/yyyy");
+        Date fecha = null;
+        try {
+            fecha = ft.parse(listaRecordatorios.get(i).getFecha());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         //cargar datos del item
         viewHolderRecordatorio.txtNota.setText(listaRecordatorios.get(i).getContenido());
@@ -88,7 +96,7 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
         notifyDataSetChanged();
     }
 
-    public ArrayList<Recordatorio> getListaRecordatorios() {
+    public List<Recordatorio> getListaRecordatorios() {
         return listaRecordatorios;
     }
 

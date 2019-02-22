@@ -3,31 +3,41 @@ package com.example.misrecordatorios.ViewModel;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.misrecordatorios.Database.RecordatorioDAO;
+import com.example.misrecordatorios.Database.RecordatorioRepository;
 import com.example.misrecordatorios.Models.Recordatorio;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 public class ViewModel extends AndroidViewModel {
 
     private static Context miAppContext;
 
-    public ArrayList<Recordatorio> listadoRecordatorios = new ArrayList<Recordatorio>();
-    public MutableLiveData<ArrayList<Recordatorio>> listadoRecordatoriosMutable = new MutableLiveData<ArrayList<Recordatorio>>();
-
+    public LiveData<List<Recordatorio>> listadoRecordatorios ;
+    //public MutableLiveData<ArrayList<Recordatorio>> listadoRecordatoriosMutable = new MutableLiveData<ArrayList<Recordatorio>>();
+    private RecordatorioRepository repo;
 
 
     public ViewModel(Application application) {
         super(application);
         miAppContext = application.getApplicationContext();
+        repo = new RecordatorioRepository();
+
         rellenarListado();
+
+        listadoRecordatorios = repo.getListaRecordatoriosPorId( miAppContext , 0);
+
+        listadoRecordatorios = repo.getListaRecordatorios( miAppContext );
     }
 
     private void rellenarListado(){
-        listadoRecordatorios.add(new Recordatorio(new Date(), "0 Azul Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "#2196F3"));
+       /* listadoRecordatorios.add(new Recordatorio(new Date(), "0 Azul Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "#2196F3"));
         listadoRecordatorios.add(new Recordatorio(new Date(), "1 Rojo Nullam porttitor fermentum nunc, semper condimentum sapien volutpat vel. Etiam rutrum eros at metus eleifend, nec cursus nulla lobortis.", "#f44336"));
         listadoRecordatorios.add(new Recordatorio(new Date(), "2 Azul", "#2196F3"));
         listadoRecordatorios.add(new Recordatorio(new Date(), "3 Azul", "#2196F3"));
@@ -47,24 +57,22 @@ public class ViewModel extends AndroidViewModel {
         listadoRecordatorios.add(new Recordatorio(new Date(), "17 Azul", "#2196F3"));
         listadoRecordatorios.add(new Recordatorio(new Date(), "18 Rojo", "#f44336"));
         listadoRecordatorios.add(new Recordatorio(new Date(), "19 Azul", "#2196F3"));
-        listadoRecordatorios.add(new Recordatorio(new Date(), "20 Azul", "#2196F3"));
+        listadoRecordatorios.add(new Recordatorio(new Date(), "20 Azul", "#2196F3"));*/
 
-        listadoRecordatoriosMutable.setValue(listadoRecordatorios);
+        repo.insertRecordatorio( miAppContext ,new Recordatorio( new Date().toString(), "0 Azul Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "#2196F3"));
+
+        //listadoRecordatoriosMutable.setValue(listadoRecordatorios);
     }
 
-    public ArrayList<Recordatorio> getListadoRecordatorios() {
+    public void recuperarRecordatorios(){
+        listadoRecordatorios = repo.getListaRecordatorios( miAppContext ); /*= repo.getListaRecordatorios( miAppContext );*/
+    }
+
+    public LiveData<List<Recordatorio>> getListadoRecordatorios() {
         return listadoRecordatorios;
     }
 
-    public void setListadoRecordatorios(ArrayList<Recordatorio> listadoRecordatorios) {
+    public void setListadoRecordatorios(LiveData<List<Recordatorio>> listadoRecordatorios) {
         this.listadoRecordatorios = listadoRecordatorios;
-    }
-
-    public MutableLiveData<ArrayList<Recordatorio>> getListadoRecordatoriosMutable() {
-        return listadoRecordatoriosMutable;
-    }
-
-    public void setListadoRecordatoriosMutable(MutableLiveData<ArrayList<Recordatorio>> listadoRecordatoriosMutable) {
-        this.listadoRecordatoriosMutable = listadoRecordatoriosMutable;
     }
 }

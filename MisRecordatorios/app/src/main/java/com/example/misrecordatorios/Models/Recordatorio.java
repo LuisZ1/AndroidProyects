@@ -8,24 +8,24 @@ import androidx.room.*;
 @Entity
 public class Recordatorio {
 
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     @NonNull
-    private String idRecordatorio;
-    private Date fecha;
+    private int idRecordatorio;
+    private String fecha;
     private String contenido;
     private String color;
 
-    public Recordatorio(Date fecha, String contenido, String color) {
+    public Recordatorio(String fecha, String contenido, String color) {
         this.fecha = fecha;
         this.contenido = contenido;
         this.color = color;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -37,11 +37,11 @@ public class Recordatorio {
         this.contenido = contenido;
     }
 
-    public String getIdRecordatorio() {
+    public int getIdRecordatorio() {
         return idRecordatorio;
     }
 
-    public void setIdRecordatorio(String idRecordatorio) {
+    public void setIdRecordatorio(int idRecordatorio) {
         this.idRecordatorio = idRecordatorio;
     }
 

@@ -54,9 +54,9 @@ public class crearRecordatorioFragment extends Fragment {
 
         EditText miEdit = view.findViewById(R.id.EditorContenido);
         if( !miEdit.getText().toString().equals("")) {
-            Recordatorio rec = new Recordatorio(new Date(), miEdit.getText().toString(), "#2196F3");
+            Recordatorio rec = new Recordatorio(new Date().toString(), miEdit.getText().toString(), "#2196F3");
 
-            miViewModel.listadoRecordatorios.add(rec);
+            //miViewModel.listadoRecordatorios.add(rec);
 
             Snackbar.make(view, "Cambios guardados", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();

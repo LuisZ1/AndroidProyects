@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class listFragment extends Fragment {
 
     private ViewModel miViewModel;
-    private ArrayList<Recordatorio> listadoRecordatorios;
+    private List<Recordatorio> listadoRecordatorios;
     private RecyclerView miRecycler;
     private RecordatorioAdapter miAdapter;
     private View view = null;
@@ -39,7 +40,9 @@ public class listFragment extends Fragment {
         miRecycler = view.findViewById(R.id.myRecyclerView);
         miRecycler.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, RecyclerView.VERTICAL, false));
 
-        miAdapter = new RecordatorioAdapter(miViewModel.getListadoRecordatoriosMutable().getValue());
+        listadoRecordatorios = miViewModel.getListadoRecordatorios().getValue();
+
+        miAdapter = new RecordatorioAdapter(listadoRecordatorios);
         miRecycler.setAdapter(miAdapter);
 
         miAdapter.setOnClickListener(new View.OnClickListener() {
