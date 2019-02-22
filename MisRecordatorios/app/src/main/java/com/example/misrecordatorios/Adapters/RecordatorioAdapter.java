@@ -30,6 +30,9 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
         this.listaRecordatorios = listaRecordatorios;
     }
 
+    public RecordatorioAdapter () {
+    }
+
     @Override
     public ViewHolderRecordatorio onCreateViewHolder(ViewGroup parent, int i) {
 
@@ -91,7 +94,7 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
         }
     }
 
-    public void setListaRecordatorios(ArrayList<Recordatorio> listaRecordatorios) {
+    public void setListaRecordatorios(List<Recordatorio> listaRecordatorios) {
         this.listaRecordatorios = listaRecordatorios;
         notifyDataSetChanged();
     }

@@ -59,13 +59,14 @@ public class ViewModel extends AndroidViewModel {
         listadoRecordatorios.add(new Recordatorio(new Date(), "19 Azul", "#2196F3"));
         listadoRecordatorios.add(new Recordatorio(new Date(), "20 Azul", "#2196F3"));*/
 
-        repo.insertRecordatorio( miAppContext ,new Recordatorio( new Date().toString(), "0 Azul Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "#2196F3"));
+       String fecha = new Date().toString();
+       repo.insertRecordatorio( miAppContext ,new Recordatorio( fecha , "0 Azul Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "#2196F3"));
 
         //listadoRecordatoriosMutable.setValue(listadoRecordatorios);
     }
 
-    public void recuperarRecordatorios(){
-        listadoRecordatorios = repo.getListaRecordatorios( miAppContext ); /*= repo.getListaRecordatorios( miAppContext );*/
+    public LiveData<List<Recordatorio>> recuperarRecordatorios(){
+        return repo.getListaRecordatorios( miAppContext ); /*= repo.getListaRecordatorios( miAppContext );*/
     }
 
     public LiveData<List<Recordatorio>> getListadoRecordatorios() {
