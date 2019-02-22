@@ -24,8 +24,8 @@ public class detallesFragment extends Fragment {
 
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
 
-        FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.hide();
+//        FloatingActionButton fab = view.findViewById(R.id.fab);
+//        fab.hide();
 
         return view;
     }
