@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class listFragment extends Fragment {
@@ -40,6 +41,9 @@ public class listFragment extends Fragment {
         miAdapter = new RecordatorioAdapter();
 
         miRecycler.setAdapter(miAdapter);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+        itemTouchHelper.attachToRecyclerView(miRecycler);
 
         return view;
     }
@@ -68,5 +72,38 @@ public class listFragment extends Fragment {
             }
         });
 
+    }
+
+    private ItemTouchHelper.Callback createHelperCallback() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            //not used, as the first parameter above is 0
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int position = viewHolder.getAdapterPosition();
+
+//                listItemCollectionViewModel.deleteListItem(
+//                        listOfData.get(position)
+//                );
+//
+//                //ensure View is consistent with underlying data
+//                listOfData.remove(position);
+//                adapter.notifyItemRemoved(position);
+
+                miViewModel.eliminarRecordatorioROOM(miViewModel.getRecordatorioPorId(position));
+
+                Snackbar.make(view, "Deslizado: " + position, Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+
+            }
+        };
+        return simpleItemTouchCallback;
     }
 }
