@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 if (currentFragment instanceof listFragment) {
                     fab.show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new crearRecordatorioFragment()).commit(); //.addToBackStack(null).commit();
+                            new crearRecordatorioFragment()).addToBackStack(null).commit();
                     fab.setImageResource(R.drawable.ic_check_black_24dp);
                 } else {
                     if (currentFragment instanceof crearRecordatorioFragment) {
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } else {
                         if (currentFragment instanceof detallesFragment) {
-                            fab.hide();
+                            //fab.hide();
                         }
                     }
                 }

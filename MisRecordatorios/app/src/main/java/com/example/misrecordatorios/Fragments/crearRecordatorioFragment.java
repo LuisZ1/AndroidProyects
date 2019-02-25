@@ -13,6 +13,7 @@ import com.example.misrecordatorios.ViewModel.ViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
@@ -56,7 +57,7 @@ public class crearRecordatorioFragment extends Fragment {
         if( !miEdit.getText().toString().equals("")) {
             Recordatorio rec = new Recordatorio(new Date().toString(), miEdit.getText().toString(), "#2196F3");
 
-            //miViewModel.listadoRecordatorios.add(rec);
+            miViewModel.guardarRecordatorioROOM(rec);
 
             Snackbar.make(view, "Cambios guardados", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();

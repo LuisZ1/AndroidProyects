@@ -11,13 +11,20 @@ import android.widget.TextView;
 import com.example.misrecordatorios.Models.Recordatorio;
 import com.example.misrecordatorios.R;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +38,7 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
     }
 
     public RecordatorioAdapter () {
+        this.listaRecordatorios = new ArrayList<Recordatorio>();
     }
 
     @Override
@@ -48,9 +56,10 @@ public class RecordatorioAdapter extends RecyclerView.Adapter<RecordatorioAdapte
 
         //Date fecha = new Date() listaRecordatorios.get(i).getFecha();
         SimpleDateFormat ft = new SimpleDateFormat ("hh:mm 'h, ' dd/MM/yyyy");
+        DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", new Locale("en"));
         Date fecha = null;
         try {
-            fecha = ft.parse(listaRecordatorios.get(i).getFecha());
+            fecha = format.parse(listaRecordatorios.get(i).getFecha());
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -54,16 +54,16 @@ public class listFragment extends Fragment {
                 //miAdapter = new RecordatorioAdapter(recordatorios);
                 miAdapter.setListaRecordatorios(recordatorios);
 
-//                miAdapter.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        int itemSeleccionado = miRecycler.getChildAdapterPosition(view);
-//                        Snackbar.make(view, "Seleccionado: " + itemSeleccionado, Snackbar.LENGTH_SHORT)
-//                                .setAction("Action", null).show();
-//                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                                new detallesFragment()).addToBackStack(null).commit();
-//                    }
-//                });
+                miAdapter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int itemSeleccionado = miRecycler.getChildAdapterPosition(view);
+                        Snackbar.make(view, "Seleccionado: " + itemSeleccionado, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new detallesFragment()).addToBackStack(null).commit();
+                    }
+                });
 
             }
         });
