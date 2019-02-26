@@ -64,8 +64,12 @@ public class listFragment extends Fragment {
                         int itemSeleccionado = miRecycler.getChildAdapterPosition(view);
                         Snackbar.make(view, "Seleccionado: " + itemSeleccionado, Snackbar.LENGTH_SHORT)
                                 .setAction("Action", null).show();
+
+                        Recordatorio r = miAdapter.getListaRecordatorios().get(itemSeleccionado);
+                        detallesFragment miDetalles = detallesFragment.newInstance(r);
+
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new detallesFragment()).addToBackStack(null).commit();
+                                miDetalles).addToBackStack(null).commit();
                     }
                 });
 
@@ -89,16 +93,11 @@ public class listFragment extends Fragment {
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
 
-//                listItemCollectionViewModel.deleteListItem(
-//                        listOfData.get(position)
-//                );
-//
-//                //ensure View is consistent with underlying data
-//                listOfData.remove(position);
-//                adapter.notifyItemRemoved(position);
+                Recordatorio r = miAdapter.getListaRecordatorios().get(position);
 
-                miViewModel.eliminarRecordatorioROOM(miViewModel.getRecordatorioPorId(position));
+                miViewModel.eliminarRecordatorioROOM(r);
 
+                miAdapter.notifyItemRemoved(position);
                 Snackbar.make(view, "Deslizado: " + position, Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
 

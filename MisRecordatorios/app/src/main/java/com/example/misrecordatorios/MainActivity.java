@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModelProviders;
 public class MainActivity extends AppCompatActivity {
 
     private ViewModel miViewModel;
-    FloatingActionButton fab;
+    public FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
