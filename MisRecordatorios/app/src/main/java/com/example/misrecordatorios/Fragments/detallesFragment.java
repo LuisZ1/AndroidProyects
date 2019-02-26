@@ -12,6 +12,12 @@ import com.example.misrecordatorios.R;
 import com.example.misrecordatorios.ViewModel.ViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -33,7 +39,17 @@ public class detallesFragment extends Fragment {
         txt_fecha = view.findViewById(R.id.txtFecha);
         txt_descripcion = view.findViewById(R.id.txtContenido);
 
-        txt_fecha.setText(miRec.getFecha().toString());
+
+        SimpleDateFormat ft = new SimpleDateFormat ("hh:mm 'h, ' dd/MM/yyyy");
+        DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", new Locale("en"));
+
+        Date fecha = null;
+        try {
+            fecha = format.parse(miRec.getFecha());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        txt_fecha.setText(ft.format(fecha));
         txt_descripcion.setText(miRec.getContenido().toString());
 
 
