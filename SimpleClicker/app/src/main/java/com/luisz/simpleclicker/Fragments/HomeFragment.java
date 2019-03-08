@@ -3,6 +3,7 @@ package com.luisz.simpleclicker.Fragments;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,13 +42,14 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomeFragment  {
+public class HomeFragment extends Fragment  {
 
     private TextView txtSumador, txtPuntos, lblClicks, lblSumador, txtContadorPulsaciones, lblMultiplicador, txtMultiplicador;
     private Switch swAutoClick;
     private Button btnClick;
     private ViewModel miViewModel;
     private boolean isAutoClickComprado;
+    private Vibrator vb;
 
     //minero auto
     private Timer timer;
@@ -68,6 +71,7 @@ public class HomeFragment  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         getActivity().setTitle(getActivity().getApplicationContext().getString(R.string.inicio));
+        vb = (Vibrator)   getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
@@ -146,7 +150,9 @@ public class HomeFragment  {
             public void onClick(View view) {
                 int mejoraSeleccionada = miRecyclerView.getChildAdapterPosition(view);
                 if (mejoraSeleccionada != -1) {
-                    gestionClickRecycler(mejoraSeleccionada);
+                    if(!gestionClickRecycler(mejoraSeleccionada)){
+                        vb.vibrate(100);
+                    }
                 }
             }
         });
@@ -354,9 +360,9 @@ public class HomeFragment  {
         stopTimer();
     }
 
-    synchronized void gestionClickRecycler(int item) {
-        miViewModel.sumadorMejora(item);
+    synchronized boolean gestionClickRecycler(int item) {
         displayForPuntos(miViewModel.getPuntos());
+        return miViewModel.sumadorMejora(item);
     }
 
     public void displayForPuntos(long puntos) {
