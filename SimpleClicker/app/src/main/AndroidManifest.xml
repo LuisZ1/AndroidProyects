@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.luisz.simpleclicker">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/it_diamante"
@@ -9,9 +10,14 @@
         android:roundIcon="@drawable/it_diamante"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+        <!--android:theme="@style/AppTheme.NoActionBar"-->
+
+
         <activity
             android:name=".MainActivity_BottomMenu"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/SplashTheme"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait">
             <intent-filter>

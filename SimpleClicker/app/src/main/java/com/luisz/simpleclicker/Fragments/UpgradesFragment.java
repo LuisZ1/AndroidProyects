@@ -3,6 +3,7 @@ package com.luisz.simpleclicker.Fragments;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ public class UpgradesFragment extends Fragment {
     private AdapterMejoras_Per_Maqr_Her adaptadorPersonal, adaptadorMaquinaria, adaptadorHerramientas;
     private Typeface font;
     private RecyclerView miRecyclerView, miRecyclerViewPersonal, miRecyclerViewMaquinaria, miRecyclerViewHerramientas;
-
+    private Vibrator vb;
     private TextView txtPuntos;
 
     @Nullable
@@ -48,7 +50,7 @@ public class UpgradesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_upgrades, container, false);
         getActivity().setTitle(getActivity().getApplicationContext().getString(R.string.mejoras));
-
+        vb = (Vibrator)   getActivity().getSystemService(Context.VIBRATOR_SERVICE);
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         font = Typeface.createFromAsset(getActivity().getAssets(), "awesome.ttf");
 
@@ -80,6 +82,7 @@ public class UpgradesFragment extends Fragment {
                     } else {
                         if (miToast != null) { miToast.cancel(); }
                         miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
+                        vb.vibrate(100);
                         miToast.show();
                     }
                 }
@@ -120,6 +123,7 @@ public class UpgradesFragment extends Fragment {
                     } else {
                         if (miToast != null) { miToast.cancel(); }
                         miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
+                        vb.vibrate(100);
                         miToast.show();
                     }
                 }
@@ -150,6 +154,7 @@ public class UpgradesFragment extends Fragment {
                     } else {
                         if (miToast != null) { miToast.cancel(); }
                         miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
+                        vb.vibrate(100);
                         miToast.show();
                     }
                 }
@@ -181,6 +186,7 @@ public class UpgradesFragment extends Fragment {
                     } else {
                         if (miToast != null) { miToast.cancel(); }
                         miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
+                        vb.vibrate(100);
                         miToast.show();
                     }
                 }

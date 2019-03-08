@@ -72,11 +72,13 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_bottom_menu);
 
         miViewModel = ViewModelProviders.of(this).get(ViewModel.class);
+        cargarPartida();
 
+        setContentView(R.layout.activity_main_bottom_menu);
         final BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -86,7 +88,8 @@ public class MainActivity_BottomMenu extends AppCompatActivity {
             navigation.setSelectedItemId(R.id.navigation_bottom_home);
         }
 
-        cargarPartida();
+
+
     }
 
     @Override
