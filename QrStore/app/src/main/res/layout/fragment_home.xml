@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/azulOscuro"
+    tools:context=".Fragments.Home">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgScanCode"
+            android:layout_width="205dp"
+            android:layout_height="205dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/codigo"
+            android:contentDescription="Imagen codigo"/>
+
+        <TextView
+            android:id="@+id/txtBienvenido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Bienvenido"
+            android:textColor="@color/textoBlanco"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="ToDo"
+            android:textColor="@color/textoBlanco"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/txtBienvenido"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/myRectangleView"
+            android:layout_width="79dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rectangleview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtBienvenido" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Escanear código"
+            android:textColor="@color/textoBlanco"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/imgScanCode"
+            app:layout_constraintStart_toStartOf="@+id/imgScanCode"
+            app:layout_constraintTop_toBottomOf="@+id/imgScanCode" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:text="Crear código de:"
+            android:textColor="@color/textoBlanco"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <ImageView
+            android:id="@+id/imgvEstanteria"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/estanteria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            android:contentDescription="imagen estanteria"/>
+
+        <ImageView
+            android:id="@+id/imgvCaja"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/caja"
+            app:layout_constraintBottom_toBottomOf="@+id/imgvEstanteria"
+            app:layout_constraintEnd_toStartOf="@+id/imgvObjeto"
+            app:layout_constraintStart_toEndOf="@+id/imgvEstanteria"
+            app:layout_constraintTop_toTopOf="@+id/imgvEstanteria"
+            app:layout_constraintVertical_bias="0.0"
+            android:contentDescription="imagen caja"/>
+
+        <ImageView
+            android:id="@+id/imgvObjeto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/server"
+            app:layout_constraintBottom_toBottomOf="@+id/imgvCaja"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgvCaja"
+            app:layout_constraintVertical_bias="0.0"
+            android:contentDescription="imagen objeto"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Estantería"
+            android:textColor="@color/textoBlanco"
+            app:layout_constraintEnd_toEndOf="@+id/imgvEstanteria"
+            app:layout_constraintStart_toStartOf="@+id/imgvEstanteria"
+            app:layout_constraintTop_toBottomOf="@+id/imgvEstanteria" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Caja"
+            android:textColor="@color/textoBlanco"
+            app:layout_constraintEnd_toEndOf="@+id/imgvCaja"
+            app:layout_constraintStart_toStartOf="@+id/imgvCaja"
+            app:layout_constraintTop_toBottomOf="@+id/imgvCaja" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Objeto"
+            android:textColor="@color/textoBlanco"
+            app:layout_constraintEnd_toEndOf="@+id/imgvObjeto"
+            app:layout_constraintStart_toStartOf="@+id/imgvObjeto"
+            app:layout_constraintTop_toBottomOf="@+id/imgvObjeto" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
