@@ -2,6 +2,8 @@ package com.luisz.qrstore;
 
 import android.os.Bundle;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.luisz.qrstore.Fragments.Home;
 
 import androidx.appcompat.app.AppCompatActivity;

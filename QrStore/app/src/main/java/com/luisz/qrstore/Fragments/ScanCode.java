@@ -24,6 +24,8 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.luisz.qrstore.MainActivity;
 import com.luisz.qrstore.R;
+import com.luisz.qrstore.Util.Utilidades;
+import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.io.IOException;
 
@@ -60,6 +62,7 @@ public class ScanCode extends Fragment {
                 }
                 try {
                     //cameraSource.start(holder);
+
                     cameraSource.start(surfaceView.getHolder());
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -88,13 +91,20 @@ public class ScanCode extends Fragment {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> qrCode = detections.getDetectedItems();
 
+
                 if(qrCode.size() != 0){
                     textoResultado.post(new Runnable() {
                         @Override
                         public void run() {
-                            Vibrator vibrator = (Vibrator)getContext().getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                            vibrator.vibrate(500);
-                            textoResultado.setText(qrCode.valueAt(0).displayValue);
+                            boolean vibrating = false;
+                            if(!vibrating) {
+                                Vibrator vibrator = (Vibrator) getContext().getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                                vibrator.vibrate(500);
+                                vibrating = true;
+                                
+                                DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Codigo: "+qrCode.valueAt(0).displayValue).show();
+                                Utilidades.consultarCodigo(view, qrCode.valueAt(0).displayValue);
+                            }
                         }
                     });
                 }

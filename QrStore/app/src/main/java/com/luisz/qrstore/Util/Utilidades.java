@@ -98,4 +98,19 @@ public class Utilidades {
         return veredicto;
     }
 
+    public static void consultarCodigo(View view, String codigo){
+        switch (codigo.charAt(0)){
+            case 'E':
+                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una estanteria").show();
+                break;
+            case 'C':
+                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una caja").show();
+                break;
+            case 'T':
+                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una cosa").show();
+                break;
+        }
+
+    }
+
 }

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.luisz.qrstore.R;
-import com.luisz.qrstore.activityCamara;
 
 public class Home extends Fragment {
 
@@ -37,10 +36,12 @@ public class Home extends Fragment {
         imgScanCode.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+              getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ScanCode()).addToBackStack(null).commit();
                 /*getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ScanCode()).addToBackStack(null).commit();*/
-                Intent intent = new Intent(view.getContext(), activityCamara.class);
-                startActivity(intent);
+                        new ScanFragment()).addToBackStack(null).commit();*/
+                /*Intent intent = new Intent(view.getContext(), activityCamara.class);
+                startActivity(intent);*/
             }
         });
 
