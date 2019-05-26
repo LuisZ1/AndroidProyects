@@ -4,19 +4,22 @@ public class Estanteria {
 
     private String idestanteria;
     private String nombre;
-    private String lugar;
+    private String ubicacion;
     private String descripcion;
 
-    public Estanteria(String idestanteria, String nombre, String lugar) {
-        this.idestanteria = idestanteria;
-        this.nombre = nombre;
-        this.lugar = lugar;
+    public Estanteria() {
     }
 
-    public Estanteria(String idestanteria, String nombre, String lugar, String descripcion) {
+    public Estanteria(String nombre, String ubicacion, String descripcion) {
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
+        this.descripcion = descripcion;
+    }
+
+    public Estanteria(String idestanteria, String nombre, String ubicacion, String descripcion) {
         this.idestanteria = idestanteria;
         this.nombre = nombre;
-        this.lugar = lugar;
+        this.ubicacion = ubicacion;
         this.descripcion = descripcion;
     }
 
@@ -36,19 +39,19 @@ public class Estanteria {
         this.nombre = nombre;
     }
 
-    public String getLugar() {
-        return lugar;
-    }
-
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }

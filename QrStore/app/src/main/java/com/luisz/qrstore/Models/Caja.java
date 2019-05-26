@@ -7,17 +7,13 @@ public class Caja {
     private String nombre;
     private String descripcion;
 
-    public Caja(String idCaja, String idestanteria, String nombre) {
-        this.idCaja = idCaja;
-        this.idestanteria = idestanteria;
-        this.nombre = nombre;
-    }
-
-    public Caja(String idCaja, String idestanteria, String nombre, String descripcion) {
-        this.idCaja = idCaja;
+    public Caja(String idestanteria, String nombre, String descripcion) {
         this.idestanteria = idestanteria;
         this.nombre = nombre;
         this.descripcion = descripcion;
+    }
+
+    public Caja() {
     }
 
     public String getIdCaja() {

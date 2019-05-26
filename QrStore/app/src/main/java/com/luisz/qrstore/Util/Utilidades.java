@@ -33,13 +33,14 @@ public class Utilidades {
         try {
             bitmap = qrgEncoder.encodeAsBitmap();
             qrImage.setImageBitmap(bitmap);
-        } catch (WriterException e) { }
+        } catch (WriterException e) {
+        }
 
         boolean save;
         String result;
 
-        String prefijo= "XX";
-        switch(contenido.charAt(0)){
+        String prefijo = "XX";
+        switch (contenido.charAt(0)) {
             case 'E':
                 prefijo = "Estanteria-";
                 break;
@@ -52,11 +53,11 @@ public class Utilidades {
         }
 
         try {
-            save = QRGSaver.save(savePath, prefijo+contenido, bitmap, QRGContents.ImageType.IMAGE_JPEG);
+            save = QRGSaver.save(savePath, prefijo + contenido, bitmap, QRGContents.ImageType.IMAGE_JPEG);
             result = save ? "Image Saved" : "Image Not Saved";
-            if(save){
+            if (save) {
                 DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Imagen guardada en la galería").show();
-            }else{
+            } else {
                 DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Imagen no guardada").show();
             }
         } catch (Exception e) {
@@ -85,7 +86,7 @@ public class Utilidades {
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST);
             }
-        }else{
+        } else {
             veredicto = true;
         }
 
@@ -98,19 +99,5 @@ public class Utilidades {
         return veredicto;
     }
 
-    public static void consultarCodigo(View view, String codigo){
-        switch (codigo.charAt(0)){
-            case 'E':
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una estanteria").show();
-                break;
-            case 'C':
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una caja").show();
-                break;
-            case 'T':
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una cosa").show();
-                break;
-        }
-
-    }
 
 }
