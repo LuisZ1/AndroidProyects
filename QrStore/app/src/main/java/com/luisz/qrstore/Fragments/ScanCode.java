@@ -68,6 +68,7 @@ public class ScanCode extends Fragment {
                 .setRequestedPreviewSize(1920, 1024)
                 .build();
 
+
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {

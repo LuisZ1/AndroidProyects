@@ -126,7 +126,6 @@ class ScanFragment : Fragment() {
                         val captureStateCallback = object : CameraCaptureSession.StateCallback() {
                             override fun onConfigured(session: CameraCaptureSession) {
                                 val builder = camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-
                                 builder.addTarget(binding.cameraPreview.holder.surface)
                                 builder.addTarget(imgReader.surface)
                                 session.setRepeatingRequest(builder.build(), null, null)

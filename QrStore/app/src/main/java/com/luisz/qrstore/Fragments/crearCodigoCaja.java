@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -50,6 +52,7 @@ public class crearCodigoCaja extends Fragment {
 
         listadoEstanterias = new ArrayList<Estanteria>();
         spinnerEstanterias = view.findViewById(R.id.spinner_estanterias);
+
         consultarTodasEstanterias();
 
         btnCrearCodigoCaja = view.findViewById(R.id.btnCrearCaja);
@@ -68,7 +71,8 @@ public class crearCodigoCaja extends Fragment {
         return view;
     }
 
-    public void consultarTodasEstanterias(){
+    private void consultarTodasEstanterias(){
+        listadoEstanterias.clear();
         db.collection("estanterias")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -76,14 +80,24 @@ public class crearCodigoCaja extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Estanteria est = new Estanteria(document.getId(), document.get("nombre").toString(), document.get("lugar").toString(),document.get("descripcion").toString());
+                                Estanteria est = new Estanteria(document.getId(), document.get("nombre").toString(), document.get("ubicacion").toString(),document.get("descripcion").toString());
                                 listadoEstanterias.add(est);
                             }
+
+                            ArrayAdapter<Estanteria> adaptador = new ArrayAdapter<Estanteria>(view.getContext(), android.R.layout.simple_spinner_item, listadoEstanterias);
+                            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+/*
+                            spinnerEstanterias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Elemento pulsado").show();
+                                }
+                            });
+*/
+                            spinnerEstanterias.setAdapter(adaptador);
                         } else {
                             DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay estanterías disponibles").show();
                         }
-                        //spinnerEstanterias.set
-                        //rellenar spinner de estanterias
                     }
                 });
     }
