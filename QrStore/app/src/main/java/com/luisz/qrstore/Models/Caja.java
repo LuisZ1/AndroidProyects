@@ -13,6 +13,13 @@ public class Caja {
         this.descripcion = descripcion;
     }
 
+    public Caja(String idCaja, String idestanteria, String nombre, String descripcion) {
+        this.idCaja = idCaja;
+        this.idestanteria = idestanteria;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     public Caja() {
     }
 

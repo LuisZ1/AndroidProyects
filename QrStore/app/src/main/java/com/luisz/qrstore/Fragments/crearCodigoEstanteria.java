@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +15,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.luisz.qrstore.MainActivity;
-import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Util.Utilidades;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
@@ -30,12 +27,11 @@ import java.util.UUID;
 
 public class crearCodigoEstanteria extends Fragment {
 
-    View view;
-    Button btnCrearCodigoEstanteria;
-    TextView txtNombre, txtLugar;
-
-    DatabaseReference referenceDB;
-    FirebaseFirestore db ;
+    private View view;
+    private Button btnCrearCodigoEstanteria;
+    private TextView txtNombre, txtLugar, txtDescripcion;
+    private DatabaseReference referenceDB;
+    private FirebaseFirestore db ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,14 +47,14 @@ public class crearCodigoEstanteria extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         txtLugar = view.findViewById(R.id.txtCrearUbicacionEstanteria);
+        txtDescripcion = view.findViewById(R.id.txtCrearDescripcionEstanteria);
         txtNombre = view.findViewById(R.id.txtCrearNombreEstanteria);
 
-        btnCrearCodigoEstanteria = view.findViewById(R.id.btnCrearCaja);
+        btnCrearCodigoEstanteria = view.findViewById(R.id.btnCrearEstanteria);
         btnCrearCodigoEstanteria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utilidades.checkPermisos((MainActivity) getActivity())) {
-                    //guardar en la base de datos y recuperar la ID
                     addEstanteria();
                 } else {
                     DynamicToast.makeError(view.getContext().getApplicationContext(), "No tiene permisos para guardar el código").show();
@@ -70,26 +66,15 @@ public class crearCodigoEstanteria extends Fragment {
     }
 
     private void addEstanteria(){
-        String nombreEstanteria = txtNombre.getText().toString();
-        String lugarEstanteria = txtLugar.getText().toString();
+
         String uuidAutogen = UUID.randomUUID().toString();
         final String idEstanteria = "E" + uuidAutogen;
-        boolean veredicto;
-
-        /*
-        String key = referenceDB.push().getKey();
-
-        Estanteria estanteria = new Estanteria(idEstanteria, nombreEstanteria, lugarEstanteria);
-
-        referenceDB.child(key).setValue(estanteria);
-        */
 
         // Create a new user with a first and last name
         Map<String, Object> estanteria = new HashMap<>();
-        //estanteria.put("idestanteria", idEstanteria);
-        estanteria.put("nombre", nombreEstanteria);
-        estanteria.put("ubicacion", lugarEstanteria);
-        estanteria.put("descripcion", "");
+        estanteria.put("nombre", txtNombre.getText().toString());
+        estanteria.put("ubicacion", txtLugar.getText().toString());
+        estanteria.put("descripcion", txtDescripcion.getText().toString());
 
         // Add a new document with a generated ID
         db.collection("estanterias")

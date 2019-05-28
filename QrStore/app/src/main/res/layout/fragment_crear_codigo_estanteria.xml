@@ -13,21 +13,21 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/txtCrearUbicacionEstanteria"
+            android:id="@+id/txtCrearDescripcionEstanteria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
-            android:hint="Ubicación"
+            android:hint="Descripción"
             android:inputType="textPersonName"
             android:textColor="@color/textoBlanco"
             android:textColorHint="@color/textoBlanco"
             android:textSize="24sp"
             app:backgroundTint="@color/textoBlanco"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtCrearNombreEstanteria" />
 
@@ -73,8 +73,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+        <EditText
+            android:id="@+id/txtCrearUbicacionEstanteria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Ubicación"
+            android:inputType="textPersonName"
+            android:textColor="@color/textoBlanco"
+            android:textColorHint="@color/textoBlanco"
+            android:textSize="24sp"
+            app:backgroundTint="@color/textoBlanco"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCrearDescripcionEstanteria" />
+
         <Button
-            android:id="@+id/btnCrearCaja"
+            android:id="@+id/btnCrearEstanteria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -94,12 +112,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/adt_ic_warning"
-            app:layout_constraintBottom_toTopOf="@+id/btnCrearCaja"
+            app:layout_constraintBottom_toTopOf="@+id/btnCrearEstanteria"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtCrearUbicacionEstanteria" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

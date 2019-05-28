@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,13 +43,18 @@ public class crearCodigoCaja extends Fragment {
     View view;
     Button btnCrearCodigoCaja;
     ArrayList<Estanteria> listadoEstanterias;
-    FirebaseFirestore db ;
+    FirebaseFirestore db;
     Spinner spinnerEstanterias;
+    EditText txtNombre, txtDescripcion;
+    Boolean botonPulsado = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_crear_codigo_caja, container, false);
         db = FirebaseFirestore.getInstance();
+
+        txtNombre = view.findViewById(R.id.txtCrearNombreCaja);
+        txtDescripcion = view.findViewById(R.id.txtCrearDescripcionCaja);
 
         listadoEstanterias = new ArrayList<Estanteria>();
         spinnerEstanterias = view.findViewById(R.id.spinner_estanterias);
@@ -60,8 +66,11 @@ public class crearCodigoCaja extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Utilidades.checkPermisos((MainActivity) getActivity())) {
-                    //guardar en la base de datos y recuperar la ID
-                    Utilidades.crearCodigoQR(view, "C15");
+                    if (!botonPulsado) {
+                        addCaja();
+                    }else{
+                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Ya has guardado esta caja, modifica algún campo").show();
+                    }
                 } else {
                     DynamicToast.makeError(view.getContext().getApplicationContext(), "No tiene permisos para guardar el código").show();
                 }
@@ -71,7 +80,7 @@ public class crearCodigoCaja extends Fragment {
         return view;
     }
 
-    private void consultarTodasEstanterias(){
+    private void consultarTodasEstanterias() {
         listadoEstanterias.clear();
         db.collection("estanterias")
                 .get()
@@ -80,7 +89,7 @@ public class crearCodigoCaja extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Estanteria est = new Estanteria(document.getId(), document.get("nombre").toString(), document.get("ubicacion").toString(),document.get("descripcion").toString());
+                                Estanteria est = new Estanteria(document.getId(), document.get("nombre").toString(), document.get("ubicacion").toString(), document.get("descripcion").toString());
                                 listadoEstanterias.add(est);
                             }
 
@@ -98,6 +107,40 @@ public class crearCodigoCaja extends Fragment {
                         } else {
                             DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay estanterías disponibles").show();
                         }
+                    }
+                });
+    }
+
+    private void addCaja() {
+        String nombreCaja = txtNombre.getText().toString();
+        String descripcionCaja = txtDescripcion.getText().toString();
+
+        Estanteria estanteriaSeleccionada = (Estanteria) spinnerEstanterias.getSelectedItem();
+        String idEstanteriaSeleccionada = estanteriaSeleccionada.getIdestanteria();
+
+        String uuidAutogen = UUID.randomUUID().toString();
+        final String idCaja = "C" + uuidAutogen;
+
+        Map<String, Object> caja = new HashMap<>();
+        caja.put("nombre", nombreCaja);
+        caja.put("idestanteria", idEstanteriaSeleccionada);
+        caja.put("descripcion", descripcionCaja);
+
+        // Add a new document with a generated ID
+        db.collection("cajas")
+                .document(idCaja)
+                .set(caja)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Utilidades.crearCodigoQR(view, idCaja);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar la Caja").show();
+                        botonPulsado = false;
                     }
                 });
     }
