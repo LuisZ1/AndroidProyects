@@ -4,13 +4,13 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="azulOscuro">#254f6e</color>
-    <color name="blanco">#FFFF</color>
+    <color name="azulOscuro">#254F6E</color>
+    <color name="blanco">#FFFFFF</color>
 
     <color name="textoAzulOscuro">#254F6E</color>
     <color name="textoBlanco">#FFFFFF</color>
 
-    <color name="black_overlay">#66000000</color>
+    <color name="black_overlay">#00000000</color>
 
 
 </resources>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Vibrator;
 import android.util.SparseArray;
@@ -36,24 +37,26 @@ import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Util.Utilidades;
+import com.luisz.qrstore.Viewmodel.ViewModel;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.io.IOException;
 
 public class ScanCode extends Fragment {
 
-    View view;
-    SurfaceView surfaceView;
-    CameraSource cameraSource;
-    BarcodeDetector barcodeDetector;
-    TextView textoResultado;
-    boolean vibrating = false;
-    FirebaseFirestore db;
+    private View view;
+    private SurfaceView surfaceView;
+    private CameraSource cameraSource;
+    private BarcodeDetector barcodeDetector;
+    private TextView textoResultado;
+    private boolean vibrating = false;
+    private FirebaseFirestore db;
+    private ViewModel miViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_scan_code, container, false);
-
+        miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         db = FirebaseFirestore.getInstance();
 
         textoResultado = (TextView) view.findViewById(R.id.txtCodigoEscaneado);
@@ -99,7 +102,8 @@ public class ScanCode extends Fragment {
 
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
-            public void release() { }
+            public void release() {
+            }
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
@@ -115,7 +119,7 @@ public class ScanCode extends Fragment {
                                 vibrator.vibrate(200);
                                 vibrating = true;
 
-                                DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Codigo: " + qrCode.valueAt(0).displayValue).show();
+                                DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Codigo detectado " ).show();
                                 consultarCodigo(qrCode.valueAt(0).displayValue);
                             }
                         }
@@ -130,7 +134,7 @@ public class ScanCode extends Fragment {
     public void consultarCodigo(String codigo) {
         switch (codigo.charAt(0)) {
             case 'E':
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una estanteria").show();
+                //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una estanteria").show();
 
                 DocumentReference docRef = db.collection("estanterias").document(codigo);
                 docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -138,8 +142,15 @@ public class ScanCode extends Fragment {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Estanteria estanteria = documentSnapshot.toObject(Estanteria.class);
                         estanteria.setIdestanteria(documentSnapshot.getId());
+
+                        miViewModel.setEstanteriaEscaneada(estanteria);
+
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new mostrarEstanteria()).addToBackStack(null).commit();
+
                     }
                 });
+                int i = 0;
 
                 break;
             case 'C':
@@ -157,7 +168,7 @@ public class ScanCode extends Fragment {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 Estanteria estanteria = documentSnapshot.toObject(Estanteria.class);
-                                estanteria. setIdestanteria(documentSnapshot.getId());
+                                estanteria.setIdestanteria(documentSnapshot.getId());
                             }
                         });
 
