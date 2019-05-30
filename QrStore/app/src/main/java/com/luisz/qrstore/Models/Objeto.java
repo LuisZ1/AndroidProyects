@@ -7,17 +7,13 @@ public class Objeto {
     private String nombre;
     private String descripcion;
 
-    public Objeto(String idobjeto, String idcaja, String nombre) {
-        this.idobjeto = idobjeto;
-        this.idcaja = idcaja;
-        this.nombre = nombre;
-    }
-
-    public Objeto(String idobjeto, String idcaja, String nombre, String descripcion) {
-        this.idobjeto = idobjeto;
+    public Objeto(String idcaja, String nombre, String descripcion) {
         this.idcaja = idcaja;
         this.nombre = nombre;
         this.descripcion = descripcion;
+    }
+
+    public Objeto() {
     }
 
     public String getIdobjeto() {

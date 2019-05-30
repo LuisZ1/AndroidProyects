@@ -35,6 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.MainActivity;
 import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
+import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Util.Utilidades;
 import com.luisz.qrstore.Viewmodel.ViewModel;
@@ -154,7 +155,7 @@ public class ScanCode extends Fragment {
 
                 break;
             case 'C':
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una caja").show();
+                //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una caja").show();
 
                 DocumentReference docRefCaja = db.collection("cajas").document(codigo);
                 docRefCaja.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -163,21 +164,46 @@ public class ScanCode extends Fragment {
                         Caja caja = documentSnapshot.toObject(Caja.class);
                         caja.setIdCaja(documentSnapshot.getId());
 
-                        DocumentReference docRef = db.collection("estanterias").document(caja.getIdestanteria());
+                        miViewModel.setCajaEscaneada(caja);
+                        miViewModel.setEstanteriaEscaneada(null);
+                        miViewModel.setObjetoEscaneado(null);
+
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new mostrarCaja()).addToBackStack(null).commit();
+
+                        /*DocumentReference docRef = db.collection("estanterias").document(caja.getIdestanteria());
                         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 Estanteria estanteria = documentSnapshot.toObject(Estanteria.class);
                                 estanteria.setIdestanteria(documentSnapshot.getId());
                             }
-                        });
+                        });*/
 
                     }
                 });
 
                 break;
             case 'T':
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una cosa").show();
+                //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una cosa").show();
+
+                DocumentReference docRefObjeto = db.collection("objetos").document(codigo);
+                docRefObjeto.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Objeto objeto = documentSnapshot.toObject(Objeto.class);
+                        objeto.setIdobjeto(documentSnapshot.getId());
+
+                        miViewModel.setCajaEscaneada(null);
+                        miViewModel.setEstanteriaEscaneada(null);
+                        miViewModel.setObjetoEscaneado(objeto);
+
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new mostrarObjeto()).addToBackStack(null).commit();
+
+                    }
+                });
+
                 break;
             default:
                 DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Código no reconocido").show();
