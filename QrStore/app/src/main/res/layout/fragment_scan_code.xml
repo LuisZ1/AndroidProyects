@@ -26,6 +26,7 @@
         android:layout_height="350dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/black_overlay"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/txtCodigoEscaneado"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
