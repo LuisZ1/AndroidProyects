@@ -88,40 +88,42 @@
 
         <ImageView
             android:id="@+id/imgvEstanteria"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
+            android:contentDescription="imagen estanteria"
             android:src="@drawable/estanteria"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            android:contentDescription="imagen estanteria"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <ImageView
             android:id="@+id/imgvCaja"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="imagen caja"
             android:src="@drawable/caja"
             app:layout_constraintBottom_toBottomOf="@+id/imgvEstanteria"
             app:layout_constraintEnd_toStartOf="@+id/imgvObjeto"
             app:layout_constraintStart_toEndOf="@+id/imgvEstanteria"
             app:layout_constraintTop_toTopOf="@+id/imgvEstanteria"
-            app:layout_constraintVertical_bias="0.0"
-            android:contentDescription="imagen caja"/>
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imgvObjeto"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/server"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="32dp"
+            android:contentDescription="imagen objeto"
+            android:foregroundTint="@color/blanco"
+            android:src="@drawable/billiard"
+            android:tint="@color/blanco"
             app:layout_constraintBottom_toBottomOf="@+id/imgvCaja"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgvCaja"
-            app:layout_constraintVertical_bias="0.0"
-            android:contentDescription="imagen objeto"/>
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView5"
