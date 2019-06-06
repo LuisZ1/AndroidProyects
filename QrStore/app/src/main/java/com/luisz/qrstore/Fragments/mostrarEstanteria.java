@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.luisz.qrstore.Adapter.ListadoCajasAdapter;
 import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Viewmodel.ViewModel;
@@ -14,6 +15,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class mostrarEstanteria extends Fragment {
 
@@ -21,15 +25,12 @@ public class mostrarEstanteria extends Fragment {
     private ViewModel miViewModel;
     private FragmentManager fragmentManager = getFragmentManager();
     private Estanteria estanteria;
-    private TextView txtNombreEstanteria, txtCajasEstanteria;
+    private TextView txtNombreEstanteria, txtIdEstanteria, txtnumerocajas;
+    private RecyclerView miRecyclerView;
+    private ListadoCajasAdapter adaptador;
 
     public mostrarEstanteria() {
     }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,8 +41,15 @@ public class mostrarEstanteria extends Fragment {
 
         txtNombreEstanteria = view.findViewById(R.id.txtNombreEstanteriaEscaneada);
         txtNombreEstanteria.setText(estanteria.getNombre());
-        txtCajasEstanteria = view.findViewById(R.id.txtIdEstanteriaEscaneada);
-        txtCajasEstanteria.setText(estanteria.getIdestanteria());
+        txtIdEstanteria = view.findViewById(R.id.txtIdEstanteriaEscaneada);
+        txtIdEstanteria.setText(estanteria.getIdestanteria());
+        txtnumerocajas = view.findViewById(R.id.txtCajasEstanteriaEscaneada);
+        txtnumerocajas.setText(String.valueOf(miViewModel.getListadoCajas().size()));
+
+        miRecyclerView = view.findViewById(R.id.recyclerCajas);
+        miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, RecyclerView.VERTICAL, false));
+        adaptador = new ListadoCajasAdapter(miViewModel.getListadoCajas());
+        miRecyclerView.setAdapter(adaptador);
 
         return view;
     }

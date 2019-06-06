@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.luisz.qrstore.Adapter.EstanteriaSpinnerAdapter;
 import com.luisz.qrstore.MainActivity;
 import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.R;
@@ -93,8 +94,10 @@ public class crearCodigoCaja extends Fragment {
                                 listadoEstanterias.add(est);
                             }
 
-                            ArrayAdapter<Estanteria> adaptador = new ArrayAdapter<Estanteria>(view.getContext(), android.R.layout.simple_spinner_item, listadoEstanterias);
-                            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            //ArrayAdapter<Estanteria> adaptador = new ArrayAdapter<Estanteria>(view.getContext(), android.R.layout.simple_spinner_item, listadoEstanterias);
+
+                            //adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 /*
                             spinnerEstanterias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
@@ -103,6 +106,7 @@ public class crearCodigoCaja extends Fragment {
                                 }
                             });
 */
+                            EstanteriaSpinnerAdapter adaptador = new EstanteriaSpinnerAdapter(view.getContext(), listadoEstanterias);
                             spinnerEstanterias.setAdapter(adaptador);
                         } else {
                             DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay estanterías disponibles").show();

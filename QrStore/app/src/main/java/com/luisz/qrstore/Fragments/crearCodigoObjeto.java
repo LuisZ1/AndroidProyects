@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.luisz.qrstore.Adapter.CajaSpinnerAdapter;
 import com.luisz.qrstore.MainActivity;
 import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
@@ -44,6 +45,7 @@ public class crearCodigoObjeto extends Fragment {
     private Spinner spinnerCajas;
     private Boolean botonPulsado;
     private TextView txtNombre, txtDescripcion;
+    private CajaSpinnerAdapter adaptador;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,8 +87,8 @@ public class crearCodigoObjeto extends Fragment {
                                 listadoCajas.add(caja);
                             }
 
-                            ArrayAdapter<Caja> adaptador = new ArrayAdapter<Caja>(view.getContext(), android.R.layout.simple_spinner_item, listadoCajas);
-                            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            //ArrayAdapter<Caja> adaptador = new ArrayAdapter<Caja>(view.getContext(), android.R.layout.simple_spinner_item, listadoCajas);
+                            //adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 /*
                             spinnerCajas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
@@ -95,6 +97,7 @@ public class crearCodigoObjeto extends Fragment {
                                 }
                             });
 */
+                            adaptador = new CajaSpinnerAdapter(view.getContext(), listadoCajas);
                             spinnerCajas.setAdapter(adaptador);
                         } else {
                             DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay estanterías disponibles").show();
@@ -108,7 +111,7 @@ public class crearCodigoObjeto extends Fragment {
         String descripcionObjeto = txtDescripcion.getText().toString();
 
         Caja cajaSeleccionada = (Caja) spinnerCajas.getSelectedItem();
-        String idCajaSeleccionada = cajaSeleccionada.getIdestanteria();
+        String idCajaSeleccionada = cajaSeleccionada.getIdCaja();
 
         String uuidAutogen = UUID.randomUUID().toString();
         final String idObjeto = "T" + uuidAutogen;

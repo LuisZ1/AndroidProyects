@@ -9,7 +9,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgCodigoGenerado"
+        app:layout_constraintStart_toStartOf="@+id/imgCodigoGenerado">
 
         <EditText
             android:id="@+id/txtCrearDescripcionCaja"
@@ -23,7 +25,7 @@
             android:inputType="text"
             android:textColor="@color/textoBlanco"
             android:textColorHint="@color/textoBlanco"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:backgroundTint="@color/textoBlanco"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
@@ -66,7 +68,7 @@
             android:inputType="textPersonName"
             android:textColor="@color/textoBlanco"
             android:textColorHint="@color/textoBlanco"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:backgroundTint="@color/textoBlanco"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,32 +96,44 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/btnCrearCaja"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-        <Spinner
-            android:id="@+id/spinner_estanterias"
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:outlineAmbientShadowColor="@color/textoBlanco"
-            android:outlineSpotShadowColor="@color/textoBlanco"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCrearDescripcionCaja">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Ubicación:"
-            android:textColor="@color/textoBlanco"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/txtCrearDescripcionCaja"
-            app:layout_constraintTop_toBottomOf="@+id/txtCrearDescripcionCaja" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubicación:"
+                android:textColor="@color/textoBlanco"
+                android:textSize="18sp"
+                android:padding="4dp"
+                app:layout_constraintStart_toStartOf="@+id/txtCrearDescripcionCaja"
+                app:layout_constraintTop_toBottomOf="@+id/txtCrearDescripcionCaja"
+                android:gravity="center"/>
+
+            <Spinner
+                android:layout_marginLeft="4dp"
+                android:id="@+id/spinner_estanterias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

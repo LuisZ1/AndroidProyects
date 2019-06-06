@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,7 +30,10 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.MainActivity;
@@ -42,6 +46,8 @@ import com.luisz.qrstore.Viewmodel.ViewModel;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScanCode extends Fragment {
 
@@ -120,7 +126,7 @@ public class ScanCode extends Fragment {
                                 vibrator.vibrate(200);
                                 vibrating = true;
 
-                                DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Codigo detectado " ).show();
+                                DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Codigo detectado ").show();
                                 consultarCodigo(qrCode.valueAt(0).displayValue);
                             }
                         }
@@ -132,12 +138,13 @@ public class ScanCode extends Fragment {
         return view;
     }
 
-    public void consultarCodigo(String codigo) {
+    public void consultarCodigo(final String codigo) {
         switch (codigo.charAt(0)) {
             case 'E':
                 //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una estanteria").show();
 
                 DocumentReference docRef = db.collection("estanterias").document(codigo);
+
                 docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -146,12 +153,29 @@ public class ScanCode extends Fragment {
 
                         miViewModel.setEstanteriaEscaneada(estanteria);
 
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new mostrarEstanteria()).addToBackStack(null).commit();
+                        //consultar Cajas de la estantería -----------------------------
 
+                        Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", codigo);
+
+                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot snapshot,
+                                                @Nullable FirebaseFirestoreException e) {
+                                if (e != null) {
+                                    // Handle error
+                                    return;
+                                }
+
+                                List<Caja> cajas = snapshot.toObjects(Caja.class);
+
+                                miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
+
+                                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                        new mostrarEstanteria()).addToBackStack(null).commit();
+                            }
+                        });
                     }
                 });
-                int i = 0;
 
                 break;
             case 'C':
@@ -168,18 +192,27 @@ public class ScanCode extends Fragment {
                         miViewModel.setEstanteriaEscaneada(null);
                         miViewModel.setObjetoEscaneado(null);
 
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new mostrarCaja()).addToBackStack(null).commit();
 
-                        /*DocumentReference docRef = db.collection("estanterias").document(caja.getIdestanteria());
-                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        //consultar Cajas de la estantería -----------------------------
+
+                        Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", codigo);
+
+                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Estanteria estanteria = documentSnapshot.toObject(Estanteria.class);
-                                estanteria.setIdestanteria(documentSnapshot.getId());
-                            }
-                        });*/
+                            public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                                if (e != null) {
+                                    // Handle error
+                                    return;
+                                }
 
+                                List<Objeto> objetos = snapshot.toObjects(Objeto.class);
+
+                                miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
+
+                                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                        new mostrarCaja()).addToBackStack(null).commit();
+                            }
+                        });
                     }
                 });
 
