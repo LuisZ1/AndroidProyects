@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
 

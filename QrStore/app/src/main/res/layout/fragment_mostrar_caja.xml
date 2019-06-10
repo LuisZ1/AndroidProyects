@@ -50,42 +50,38 @@
                 android:id="@+id/imageView3"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
                 android:backgroundTint="@color/blanco"
                 android:src="@drawable/caja"
                 android:tint="@color/azulOscuro"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/txtIdCajaEscaneada" />
 
             <TextView
                 android:id="@+id/txtNombreCajaEscaneada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/black_overlay"
                 android:text="nombreCaja"
                 android:textColor="@color/azulOscuro"
-                app:layout_constraintBottom_toTopOf="@+id/txtIdCajaEscaneada"
-                app:layout_constraintStart_toStartOf="@+id/txtIdCajaEscaneada" />
+                app:layout_constraintStart_toStartOf="@+id/txtIdCajaEscaneada"
+                app:layout_constraintTop_toBottomOf="@+id/txtIdCajaEscaneada" />
 
             <TextView
                 android:id="@+id/txtIdCajaEscaneada"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/black_overlay"
-                android:text="idCaja"
+                android:text="idcaja"
                 android:textColor="@color/azulOscuro"
-                android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="9sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.505" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtTextoCajas"
@@ -96,7 +92,7 @@
                 android:text="Numero de objetos: "
                 android:textColor="@color/azulOscuro"
                 app:layout_constraintStart_toStartOf="@+id/txtIdCajaEscaneada"
-                app:layout_constraintTop_toBottomOf="@+id/txtIdCajaEscaneada" />
+                app:layout_constraintTop_toBottomOf="@+id/txtNombreCajaEscaneada" />
 
             <TextView
                 android:id="@+id/txtNumeroObjetosCajaEscaneada"
@@ -109,6 +105,70 @@
                 app:layout_constraintBottom_toBottomOf="@+id/txtTextoCajas"
                 app:layout_constraintStart_toEndOf="@+id/txtTextoCajas"
                 app:layout_constraintTop_toTopOf="@+id/txtTextoCajas" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/black_overlay"
+                android:text="Descripción:"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintStart_toStartOf="@+id/txtTextoCajas"
+                app:layout_constraintTop_toBottomOf="@+id/txtTextoCajas" />
+
+            <TextView
+                android:id="@+id/txtDescripciónCaja"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black_overlay"
+                android:text="Sin descripción"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/black_overlay"
+                android:text="Estantería:"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+            <TextView
+                android:id="@+id/txtIdEstanteriaDeCaja"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/black_overlay"
+                android:text="Error"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnNavegarEstanteria"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+            <ImageView
+                android:id="@+id/btnNavegarEstanteria"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black_overlay"
+                android:src="@drawable/estanteria"
+                android:tint="@color/azulOscuro"
+                app:layout_constraintBottom_toBottomOf="@+id/txtIdEstanteriaDeCaja"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtIdEstanteriaDeCaja" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

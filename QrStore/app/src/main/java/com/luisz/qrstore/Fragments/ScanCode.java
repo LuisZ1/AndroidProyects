@@ -3,13 +3,12 @@ package com.luisz.qrstore.Fragments;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Vibrator;
@@ -21,9 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -34,14 +31,11 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.luisz.qrstore.MainActivity;
 import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
-import com.luisz.qrstore.Util.Utilidades;
 import com.luisz.qrstore.Viewmodel.ViewModel;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
@@ -135,6 +129,8 @@ public class ScanCode extends Fragment {
             }
         });
 
+        miViewModel.reiniciarVariables();
+
         return view;
     }
 
@@ -142,6 +138,12 @@ public class ScanCode extends Fragment {
         switch (codigo.charAt(0)) {
             case 'E':
                 //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una estanteria").show();
+                if (db == null) {
+                    db = FirebaseFirestore.getInstance();
+                }
+                if (miViewModel == null) {
+                    miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
+                }
 
                 DocumentReference docRef = db.collection("estanterias").document(codigo);
 
@@ -170,6 +172,8 @@ public class ScanCode extends Fragment {
 
                                 miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
 
+                                vibrating = false;
+
                                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                         new mostrarEstanteria()).addToBackStack(null).commit();
                             }
@@ -180,13 +184,19 @@ public class ScanCode extends Fragment {
                 break;
             case 'C':
                 //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una caja").show();
+                if (db == null) {
+                    db = FirebaseFirestore.getInstance();
+                }
+                if (miViewModel == null) {
+                    miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
+                }
 
                 DocumentReference docRefCaja = db.collection("cajas").document(codigo);
                 docRefCaja.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Caja caja = documentSnapshot.toObject(Caja.class);
-                        caja.setIdCaja(documentSnapshot.getId());
+                        caja.setidcaja(documentSnapshot.getId());
 
                         miViewModel.setCajaEscaneada(caja);
                         miViewModel.setEstanteriaEscaneada(null);
@@ -209,8 +219,9 @@ public class ScanCode extends Fragment {
 
                                 miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
 
-                                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                        new mostrarCaja()).addToBackStack(null).commit();
+                                vibrating = false;
+
+                                getFragmentManager().beginTransaction().replace(R.id.fragment_container,new mostrarCaja()).addToBackStack(null).commit();
                             }
                         });
                     }
@@ -219,17 +230,24 @@ public class ScanCode extends Fragment {
                 break;
             case 'T':
                 //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una cosa").show();
-
+                if (db == null) {
+                    db = FirebaseFirestore.getInstance();
+                }
+                if (miViewModel == null) {
+                    miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
+                }
                 DocumentReference docRefObjeto = db.collection("objetos").document(codigo);
                 docRefObjeto.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Objeto objeto = documentSnapshot.toObject(Objeto.class);
-                        objeto.setIdobjeto(documentSnapshot.getId());
+                        objeto.setidobjeto(documentSnapshot.getId());
 
                         miViewModel.setCajaEscaneada(null);
                         miViewModel.setEstanteriaEscaneada(null);
                         miViewModel.setObjetoEscaneado(objeto);
+
+                        vibrating = false;
 
                         getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new mostrarObjeto()).addToBackStack(null).commit();
@@ -240,6 +258,7 @@ public class ScanCode extends Fragment {
                 break;
             default:
                 DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Código no reconocido").show();
+                vibrating = false;
                 break;
         }
     }

@@ -1,7 +1,5 @@
 package com.luisz.qrstore.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,7 +22,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.Adapter.CajaSpinnerAdapter;
 import com.luisz.qrstore.MainActivity;
 import com.luisz.qrstore.Models.Caja;
-import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Util.Utilidades;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
@@ -111,12 +107,13 @@ public class crearCodigoObjeto extends Fragment {
         String descripcionObjeto = txtDescripcion.getText().toString();
 
         Caja cajaSeleccionada = (Caja) spinnerCajas.getSelectedItem();
-        String idCajaSeleccionada = cajaSeleccionada.getIdCaja();
+        String idCajaSeleccionada = cajaSeleccionada.getidcaja();
 
         String uuidAutogen = UUID.randomUUID().toString();
         final String idObjeto = "T" + uuidAutogen;
 
         Map<String, Object> objeto = new HashMap<>();
+        objeto.put("idobjeto", idObjeto);
         objeto.put("nombre", nombreObjeto);
         objeto.put("idcaja", idCajaSeleccionada);
         objeto.put("descripcion", descripcionObjeto);

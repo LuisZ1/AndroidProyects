@@ -10,17 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.luisz.qrstore.R;
+import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 public class Home extends Fragment {
 
-    View view;
-    FragmentManager fragmentManager = getFragmentManager();
+    private View view;
+    private FragmentManager fragmentManager = getFragmentManager();
+    private LinearLayout btnConsultarTodo;
+    private ImageView imgScanCode, imgCreateEstanteria, imgCrearCaja, imgCrearObjeto;
 
-    ImageView imgScanCode, imgCreateEstanteria, imgCrearCaja, imgCrearObjeto;
-
-    public Home() {}
+    public Home() {
+    }
 
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
@@ -33,20 +36,16 @@ public class Home extends Fragment {
 
         imgScanCode = (ImageView) view.findViewById(R.id.imgScanCode);
         imgScanCode.setImageResource(R.drawable.codigo);
-        imgScanCode.setOnClickListener(new View.OnClickListener(){
+        imgScanCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ScanCode()).addToBackStack(null).commit();
-                /*getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ScanFragment()).addToBackStack(null).commit();*/
-                /*Intent intent = new Intent(view.getContext(), activityCamara.class);
-                startActivity(intent);*/
             }
         });
 
         imgCreateEstanteria = (ImageView) view.findViewById(R.id.imgvEstanteria);
-        imgCreateEstanteria.setOnClickListener(new View.OnClickListener(){
+        imgCreateEstanteria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -55,7 +54,7 @@ public class Home extends Fragment {
         });
 
         imgCrearCaja = (ImageView) view.findViewById(R.id.imgvCaja);
-        imgCrearCaja.setOnClickListener(new View.OnClickListener(){
+        imgCrearCaja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -64,11 +63,21 @@ public class Home extends Fragment {
         });
 
         imgCrearObjeto = (ImageView) view.findViewById(R.id.imgvObjeto);
-        imgCrearObjeto.setOnClickListener(new View.OnClickListener(){
+        imgCrearObjeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new crearCodigoObjeto()).addToBackStack(null).commit();
+            }
+        });
+
+        btnConsultarTodo  = (LinearLayout) view.findViewById(R.id.btnConsultarTodo);
+        btnConsultarTodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Hola").show();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new menuConsultarTodo()).addToBackStack(null).commit();
             }
         });
 

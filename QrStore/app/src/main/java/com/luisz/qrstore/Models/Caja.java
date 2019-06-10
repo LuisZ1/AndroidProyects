@@ -2,7 +2,7 @@ package com.luisz.qrstore.Models;
 
 public class Caja {
 
-    private String idCaja;
+    private String idcaja;
     private String idestanteria;
     private String nombre;
     private String descripcion;
@@ -13,8 +13,8 @@ public class Caja {
         this.descripcion = descripcion;
     }
 
-    public Caja(String idCaja, String idestanteria, String nombre, String descripcion) {
-        this.idCaja = idCaja;
+    public Caja(String idcaja, String idestanteria, String nombre, String descripcion) {
+        this.idcaja = idcaja;
         this.idestanteria = idestanteria;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -23,12 +23,12 @@ public class Caja {
     public Caja() {
     }
 
-    public String getIdCaja() {
-        return idCaja;
+    public String getidcaja() {
+        return idcaja;
     }
 
-    public void setIdCaja(String idCaja) {
-        this.idCaja = idCaja;
+    public void setidcaja(String idcaja) {
+        this.idcaja = idcaja;
     }
 
     public String getIdestanteria() {

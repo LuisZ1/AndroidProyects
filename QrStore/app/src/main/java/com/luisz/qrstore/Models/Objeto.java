@@ -16,19 +16,19 @@ public class Objeto {
     public Objeto() {
     }
 
-    public String getIdobjeto() {
+    public String getidobjeto() {
         return idobjeto;
     }
 
-    public void setIdobjeto(String idobjeto) {
+    public void setidobjeto(String idobjeto) {
         this.idobjeto = idobjeto;
     }
 
-    public String getIdcaja() {
+    public String getidcaja() {
         return idcaja;
     }
 
-    public void setIdcaja(String idcaja) {
+    public void setidcaja(String idcaja) {
         this.idcaja = idcaja;
     }
 

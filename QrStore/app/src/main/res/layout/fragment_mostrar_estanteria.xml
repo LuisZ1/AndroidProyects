@@ -62,28 +62,30 @@
 
             <TextView
                 android:id="@+id/txtNombreEstanteriaEscaneada"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/black_overlay"
                 android:text="nombreEstanteria"
                 android:textColor="@color/azulOscuro"
-                app:layout_constraintBottom_toTopOf="@+id/txtIdEstanteriaEscaneada"
-                app:layout_constraintStart_toEndOf="@+id/imageView3" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/txtIdEstanteriaEscaneada" />
 
             <TextView
                 android:id="@+id/txtIdEstanteriaEscaneada"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/black_overlay"
                 android:text="idEstanteria"
                 android:textColor="@color/azulOscuro"
-                android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/txtNombreEstanteriaEscaneada"
+                android:textSize="9sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -95,7 +97,7 @@
                 android:text="Numero de cajas: "
                 android:textColor="@color/azulOscuro"
                 app:layout_constraintStart_toStartOf="@+id/txtNombreEstanteriaEscaneada"
-                app:layout_constraintTop_toBottomOf="@+id/txtIdEstanteriaEscaneada" />
+                app:layout_constraintTop_toBottomOf="@+id/txtNombreEstanteriaEscaneada" />
 
             <TextView
                 android:id="@+id/txtCajasEstanteriaEscaneada"
@@ -109,15 +111,68 @@
                 app:layout_constraintStart_toEndOf="@+id/txtTextoCajas"
                 app:layout_constraintTop_toTopOf="@+id/txtTextoCajas" />
 
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/black_overlay"
+                android:text="Lugar:"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintStart_toStartOf="@+id/txtTextoCajas"
+                app:layout_constraintTop_toBottomOf="@+id/txtTextoCajas" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/black_overlay"
+                android:text="Descripción:"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/txtLugasEstaneria" />
+
+            <TextView
+                android:id="@+id/txtLugasEstaneria"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black_overlay"
+                android:maxLines="4"
+                android:text="Desconocido"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+            <TextView
+                android:id="@+id/txtDescripcionEstanteria"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black_overlay"
+                android:text="Sin descripción"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintBottom_toBottomOf="@+id/textView10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="@+id/textView10" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCajas"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             android:background="@color/black_overlay"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -18,12 +18,22 @@ public class ViewModel extends AndroidViewModel {
     private Estanteria estanteriaEscaneada;
     private Caja cajaEscaneada;
     private Objeto objetoEscaneado;
+    private ArrayList<Estanteria> listadoEstanterias;
     private ArrayList<Caja> listadoCajas;
     private ArrayList<Objeto> listadoObjetos;
 
     public ViewModel(Application application) {
         super(application);
         miAppContext = application.getApplicationContext();
+    }
+
+    public void reiniciarVariables() {
+        estanteriaEscaneada = null;
+        cajaEscaneada = null;
+        objetoEscaneado = null;
+        listadoEstanterias = null;
+        listadoCajas = null;
+        listadoObjetos = null;
     }
 
     public Estanteria getEstanteriaEscaneada() {
@@ -64,5 +74,13 @@ public class ViewModel extends AndroidViewModel {
 
     public void setListadoObjetos(ArrayList<Objeto> listadoObjetos) {
         this.listadoObjetos = listadoObjetos;
+    }
+
+    public ArrayList<Estanteria> getListadoEstanterias() {
+        return listadoEstanterias;
+    }
+
+    public void setListadoEstanterias(ArrayList<Estanteria> listadoEstanterias) {
+        this.listadoEstanterias = listadoEstanterias;
     }
 }

@@ -72,6 +72,7 @@ public class crearCodigoEstanteria extends Fragment {
 
         // Create a new user with a first and last name
         Map<String, Object> estanteria = new HashMap<>();
+        estanteria.put("idestanteria", idEstanteria);
         estanteria.put("nombre", txtNombre.getText().toString());
         estanteria.put("ubicacion", txtLugar.getText().toString());
         estanteria.put("descripcion", txtDescripcion.getText().toString());

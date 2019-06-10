@@ -126,6 +126,7 @@ public class crearCodigoCaja extends Fragment {
         final String idCaja = "C" + uuidAutogen;
 
         Map<String, Object> caja = new HashMap<>();
+        caja.put("idcaja", idCaja);
         caja.put("nombre", nombreCaja);
         caja.put("idestanteria", idEstanteriaSeleccionada);
         caja.put("descripcion", descripcionCaja);
