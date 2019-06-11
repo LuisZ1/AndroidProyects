@@ -11,24 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/txtCrearDescripcionObjeto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:hint="Descripción"
-            android:inputType="textPersonName"
-            android:textColor="@color/textoBlanco"
-            android:textColorHint="@color/textoBlanco"
-            android:textSize="18sp"
-            app:backgroundTint="@color/textoBlanco"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCrearNombreObjeto" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="110dp"
@@ -40,19 +22,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Crear objeto"
-            android:textColor="@color/textoBlanco"
-            android:textSize="30sp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="@+id/imageView">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crear"
+                android:textColor="@color/textoBlanco"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textView321"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="objeto"
+                android:textColor="@color/textoBlanco"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/txtCrearDescripcionObjeto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Descripción"
+            android:inputType="textPersonName"
+            android:textColor="@color/textoBlanco"
+            android:textColorHint="@color/textoBlanco"
+            android:textSize="18sp"
+            app:backgroundTint="@color/textoBlanco"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCrearNombreObjeto" />
 
         <EditText
             android:id="@+id/txtCrearNombreObjeto"
@@ -78,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="@color/textoBlanco"
             android:text="Crear código objeto"
             android:textColor="@color/textoAzulOscuro"
@@ -93,32 +106,39 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/btnEditarObjeto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-        <Spinner
-            android:id="@+id/spinner_cajas"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintEnd_toEndOf="@+id/txtCrearDescripcionObjeto"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-        <TextView
-            android:id="@+id/textView2"
+        <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Caja:"
-            android:textColor="@color/textoBlanco"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/txtCrearDescripcionObjeto"
-            app:layout_constraintTop_toBottomOf="@+id/txtCrearDescripcionObjeto" />
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCrearDescripcionObjeto">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Caja:"
+                android:textColor="@color/textoBlanco"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="176dp"
+                tools:layout_editor_absoluteY="430dp" />
+
+            <Spinner
+                android:id="@+id/spinner_cajas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="225dp"
+                tools:layout_editor_absoluteY="430dp" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
