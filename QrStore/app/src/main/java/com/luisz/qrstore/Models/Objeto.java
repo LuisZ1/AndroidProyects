@@ -7,7 +7,8 @@ public class Objeto {
     private String nombre;
     private String descripcion;
 
-    public Objeto(String idcaja, String nombre, String descripcion) {
+    public Objeto(String idobjeto, String idcaja, String nombre, String descripcion) {
+        this.idobjeto = idobjeto;
         this.idcaja = idcaja;
         this.nombre = nombre;
         this.descripcion = descripcion;

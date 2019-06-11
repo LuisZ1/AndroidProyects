@@ -75,7 +75,6 @@ public class Home extends Fragment {
         btnConsultarTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Hola").show();
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new menuConsultarTodo()).addToBackStack(null).commit();
             }

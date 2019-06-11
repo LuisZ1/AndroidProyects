@@ -34,6 +34,7 @@
             app:layout_constraintGuide_percent="0.02" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/tarjetaMostrarObjeto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -49,26 +50,23 @@
                 android:id="@+id/imageView3"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
                 android:backgroundTint="@color/blanco"
                 android:src="@drawable/billiard"
                 android:tint="@color/azulOscuro"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/txtIdObjetoEscaneado" />
 
             <TextView
                 android:id="@+id/txtNombreObjetoEscaneado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/black_overlay"
                 android:text="nombreObjeto"
                 android:textColor="@color/azulOscuro"
-                app:layout_constraintBottom_toTopOf="@+id/txtIdObjetoEscaneado"
-                app:layout_constraintStart_toStartOf="@+id/txtIdObjetoEscaneado" />
+                app:layout_constraintStart_toStartOf="@+id/txtIdObjetoEscaneado"
+                app:layout_constraintTop_toBottomOf="@+id/txtIdObjetoEscaneado" />
 
             <TextView
                 android:id="@+id/txtIdObjetoEscaneado"
@@ -76,15 +74,75 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/black_overlay"
                 android:text="idObjeto"
                 android:textColor="@color/azulOscuro"
-                android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="9sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.505" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/black_overlay"
+                android:text="Descripción:"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintStart_toStartOf="@+id/txtNombreObjetoEscaneado"
+                app:layout_constraintTop_toBottomOf="@+id/txtNombreObjetoEscaneado" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/black_overlay"
+                android:text="Caja:"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+            <TextView
+                android:id="@+id/txtIdCajaObjeto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/black_overlay"
+                android:text="desconocida"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgConsultarCajaObjeto"
+                app:layout_constraintStart_toEndOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+            <TextView
+                android:id="@+id/txtDescripcionObjeto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black_overlay"
+                android:text="descripcion"
+                android:textColor="@color/azulOscuro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView17"
+                app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+            <ImageView
+                android:id="@+id/imgConsultarCajaObjeto"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/blanco"
+                android:src="@drawable/caja"
+                android:tint="@color/azulOscuro"
+                app:layout_constraintBottom_toBottomOf="@+id/txtIdCajaObjeto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtIdCajaObjeto" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

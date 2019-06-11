@@ -6,39 +6,72 @@
 
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imgConsultarTodasCajas"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/caja" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imgConsultarTodosObjetos"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         android:tint="@color/blanco"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="@+id/imgConsultarTodasCajas"
+        app:layout_constraintStart_toStartOf="@+id/imgConsultarTodasCajas"
         app:srcCompat="@drawable/billiard" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/imgConsultarTodasEstanterias"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgConsultarTodasCajas"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imgConsultarTodasCajas"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
         app:srcCompat="@drawable/estanteria" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Objetos"
+        android:textColor="@color/blanco"
+        app:layout_constraintBottom_toTopOf="@+id/imgConsultarTodosObjetos"
+        app:layout_constraintEnd_toEndOf="@+id/imgConsultarTodosObjetos"
+        app:layout_constraintStart_toStartOf="@+id/imgConsultarTodosObjetos" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Cajas"
+        android:textColor="@color/blanco"
+        app:layout_constraintBottom_toTopOf="@+id/imgConsultarTodasCajas"
+        app:layout_constraintEnd_toEndOf="@+id/imgConsultarTodasCajas"
+        app:layout_constraintStart_toStartOf="@+id/imgConsultarTodasCajas" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Estanterías"
+        android:textColor="@color/blanco"
+        app:layout_constraintEnd_toEndOf="@+id/imgConsultarTodasEstanterias"
+        app:layout_constraintStart_toStartOf="@+id/imgConsultarTodasEstanterias"
+        app:layout_constraintTop_toBottomOf="@+id/imgConsultarTodasCajas" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

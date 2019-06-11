@@ -94,18 +94,6 @@ public class crearCodigoCaja extends Fragment {
                                 listadoEstanterias.add(est);
                             }
 
-                            //ArrayAdapter<Estanteria> adaptador = new ArrayAdapter<Estanteria>(view.getContext(), android.R.layout.simple_spinner_item, listadoEstanterias);
-
-                            //adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-/*
-                            spinnerEstanterias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Elemento pulsado").show();
-                                }
-                            });
-*/
                             EstanteriaSpinnerAdapter adaptador = new EstanteriaSpinnerAdapter(view.getContext(), listadoEstanterias);
                             spinnerEstanterias.setAdapter(adaptador);
                         } else {

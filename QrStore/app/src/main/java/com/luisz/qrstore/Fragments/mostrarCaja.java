@@ -142,8 +142,6 @@ public class mostrarCaja extends Fragment {
                             Objeto objeto = documentSnapshot.toObject(Objeto.class);
                             objeto.setidobjeto(documentSnapshot.getId());
 
-                            //miViewModel.setCajaEscaneada(null);
-                            //miViewModel.setEstanteriaEscaneada(null);
                             miViewModel.setObjetoEscaneado(objeto);
 
                             getFragmentManager().beginTransaction().replace(R.id.fragment_container,

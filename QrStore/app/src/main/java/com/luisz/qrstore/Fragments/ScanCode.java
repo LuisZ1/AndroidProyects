@@ -211,7 +211,6 @@ public class ScanCode extends Fragment {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                                 if (e != null) {
-                                    // Handle error
                                     return;
                                 }
 

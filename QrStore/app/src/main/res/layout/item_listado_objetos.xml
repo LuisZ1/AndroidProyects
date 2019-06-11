@@ -13,19 +13,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@color/blanco"
-        android:foreground="@drawable/ripple_custom"
-        app:cardCornerRadius="5dp">
+        android:foreground="@drawable/ripple_custom">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blanco">
+            android:background="@color/blanco"
+            android:padding="4dp">
 
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@color/blanco"
                 android:padding="4dp"
                 android:tint="@color/azulOscuro"
