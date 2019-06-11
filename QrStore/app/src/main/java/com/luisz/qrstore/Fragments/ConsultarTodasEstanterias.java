@@ -10,10 +10,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.Adapter.ListadoEstanteriasAdapter;
+import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Viewmodel.ViewModel;
@@ -21,9 +25,11 @@ import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
@@ -111,11 +117,11 @@ public class ConsultarTodasEstanterias extends Fragment {
 
     private void undoDelete(Estanteria objetoEliminado) {
         restaurarEstanteria(objetoEliminado);
+        listadoEstanterias.clear();
         consultarObjetos();
     }
 
     private void restaurarEstanteria(Estanteria objeto){
-
         Map<String, Object> map = new HashMap<>();
         map.put("ubicacion", objeto.getUbicacion());
         map.put("nombre", objeto.getNombre());
@@ -123,7 +129,7 @@ public class ConsultarTodasEstanterias extends Fragment {
         map.put("descripcion", objeto.getDescripcion());
 
         // Add a new document with a generated ID
-        db.collection("cajas")
+        db.collection("estanterias")
                 .document(objeto.getIdestanteria())
                 .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -141,26 +147,50 @@ public class ConsultarTodasEstanterias extends Fragment {
     }
 
     private void eliminarEstanteria(Estanteria objetoEliminado, int position){
-        db.collection("cajas").document(objetoEliminado.getIdestanteria())
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        adaptador.notifyItemRemoved(position);
-                        Snackbar snackbar = Snackbar.make(view, "Elemento eliminado: " + position, Snackbar.LENGTH_LONG);
-                        snackbar.setAction("Deshacer", v -> undoDelete(objetoEliminado));
-                        snackbar.setActionTextColor(getResources().getColor(R.color.azulClaro));
-                        snackbar.setBackgroundTint(getResources().getColor(R.color.blanco));
-                        snackbar.setTextColor(getResources().getColor(R.color.azulOscuro));
-                        snackbar.show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error deleting document", e);
-                    }
-                });
+
+        Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", objetoEliminado.getIdestanteria());
+
+        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    // Handle error
+                    return;
+                }
+
+                List<Caja> cajas = snapshot.toObjects(Caja.class);
+
+                if(cajas.size() > 0){
+                    DynamicToast.makeWarning(view.getContext().getApplicationContext(), "No puedes borrar esa estantería, hay cajas dentro").show();
+                    listadoEstanterias.clear();
+                    consultarObjetos();
+                }else{
+                    db.collection("estanterias").document(objetoEliminado.getIdestanteria())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    adaptador.notifyItemRemoved(position);
+                                    Snackbar snackbar = Snackbar.make(view, "Elemento eliminado: " + position, Snackbar.LENGTH_LONG);
+                                    snackbar.setAction("Deshacer", v -> undoDelete(objetoEliminado));
+                                    snackbar.setActionTextColor(getResources().getColor(R.color.azulClaro));
+                                    snackbar.setBackgroundTint(getResources().getColor(R.color.blanco));
+                                    snackbar.setTextColor(getResources().getColor(R.color.azulOscuro));
+                                    snackbar.show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    //Log.w(TAG, "Error deleting document", e);
+                                }
+                            });
+                }
+
+            }
+        });
+
     }
 
 }

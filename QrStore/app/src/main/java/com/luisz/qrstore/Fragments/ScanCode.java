@@ -170,8 +170,10 @@ public class ScanCode extends Fragment {
 
                                 vibrating = false;
 
-                                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                        new mostrarEstanteria()).addToBackStack(null).commit();
+                                if (getFragmentManager() != null) {
+                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                            new mostrarEstanteria()).addToBackStack(null).commit();
+                                }
                             }
                         });
                     }
@@ -196,7 +198,7 @@ public class ScanCode extends Fragment {
 
                         miViewModel.setCajaEscaneada(caja);
                         //miViewModel.setEstanteriaEscaneada(null);
-                       // miViewModel.setObjetoEscaneado(null);
+                        // miViewModel.setObjetoEscaneado(null);
 
 
                         //consultar Cajas de la estantería -----------------------------
@@ -216,7 +218,9 @@ public class ScanCode extends Fragment {
 
                                 vibrating = false;
 
-                                getFragmentManager().beginTransaction().replace(R.id.fragment_container,new mostrarCaja()).addToBackStack(null).commit();
+                                if (getFragmentManager() != null) {
+                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
+                                }
                             }
                         });
                     }
@@ -244,9 +248,10 @@ public class ScanCode extends Fragment {
 
                         vibrating = false;
 
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new mostrarObjeto()).addToBackStack(null).commit();
-
+                        if (getFragmentManager() != null) {
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                    new mostrarObjeto()).addToBackStack(null).commit();
+                        }
                     }
                 });
 
