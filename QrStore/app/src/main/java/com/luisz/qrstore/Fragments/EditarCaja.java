@@ -9,15 +9,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.Adapter.CajaSpinnerAdapter;
+import com.luisz.qrstore.Adapter.EstanteriaSpinnerAdapter;
 import com.luisz.qrstore.Models.Caja;
+import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Viewmodel.ViewModel;
@@ -31,38 +31,38 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-public class EditarObjeto extends Fragment {
+public class EditarCaja extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
-    private Objeto objeto;
-    private TextView txtNombreObjeto, txtDescripcionObjeto, txtIdCajaObjeto;
+    private Caja caja;
+    private TextView txtNombreCaja, txtDescripcionCaja;
     private FirebaseFirestore db;
-    private ArrayList<Caja> listadoCajas;
-    private CajaSpinnerAdapter adaptador;
-    private Spinner spinnerCajas;
+    private ArrayList<Estanteria> listadoEstanterias;
+    private EstanteriaSpinnerAdapter adaptador;
+    private Spinner spinnerEstanterias;
     private Button btnGuardar;
 
-    public EditarObjeto() {
+    public EditarCaja() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_editar_objeto, container, false);
+        view = inflater.inflate(R.layout.fragment_editar_caja, container, false);
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         db = FirebaseFirestore.getInstance();
-        listadoCajas = new ArrayList<Caja>();
+        listadoEstanterias = new ArrayList<Estanteria>();
 
-        objeto = miViewModel.getObjetoEscaneado();
-        spinnerCajas = view.findViewById(R.id.spinner_cajas_editar);
-        consultarTodasCajas();
+        caja = miViewModel.getCajaEscaneada();
+        spinnerEstanterias = view.findViewById(R.id.spinner_estanterias_editar);
+        consultarTodasEstanterias();
 
-        txtNombreObjeto = view.findViewById(R.id.editTextNombreObjeto);
-        txtNombreObjeto.setText(objeto.getNombre());
-        txtDescripcionObjeto = view.findViewById(R.id.editTextDescripcionObjeto);
-        txtDescripcionObjeto.setText(objeto.getDescripcion());
+        txtNombreCaja = view.findViewById(R.id.editTextNombreCaja);
+        txtNombreCaja.setText(caja.getNombre());
+        txtDescripcionCaja = view.findViewById(R.id.editTextDescripcionCaja);
+        txtDescripcionCaja.setText(caja.getDescripcion());
 
-        btnGuardar = view.findViewById(R.id.btnEditarObjeto);
+        btnGuardar = view.findViewById(R.id.btnEditarCaja);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,21 +72,21 @@ public class EditarObjeto extends Fragment {
         return view;
     }
 
-    private void consultarTodasCajas() {
-        listadoCajas.clear();
-        db.collection("cajas")
+    private void consultarTodasEstanterias() {
+        listadoEstanterias.clear();
+        db.collection("estanterias")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Caja caja = new Caja(document.getId(), document.get("idestanteria").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
-                                listadoCajas.add(caja);
+                                Estanteria est = new Estanteria(document.getId(), document.get("nombre").toString(), document.get("ubicacion").toString(), document.get("descripcion").toString());
+                                listadoEstanterias.add(est);
                             }
 
-                            adaptador = new CajaSpinnerAdapter(view.getContext(), listadoCajas);
-                            spinnerCajas.setAdapter(adaptador);
+                            EstanteriaSpinnerAdapter adaptador = new EstanteriaSpinnerAdapter(view.getContext(), listadoEstanterias);
+                            spinnerEstanterias.setAdapter(adaptador);
                         } else {
                             DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay estanterías disponibles").show();
                         }
@@ -95,23 +95,23 @@ public class EditarObjeto extends Fragment {
     }
 
     public void updateFields() {
-        String nombreObjeto = txtNombreObjeto.getText().toString();
-        String descripcionObjeto = txtDescripcionObjeto.getText().toString();
+        String nombreCaja = txtNombreCaja.getText().toString();
+        String descripcionCaja = txtDescripcionCaja.getText().toString();
 
-        Caja cajaSeleccionada = (Caja) spinnerCajas.getSelectedItem();
-        String idCajaSeleccionada = cajaSeleccionada.getidcaja();
+        Estanteria estanteriaSeleccionada = (Estanteria) spinnerEstanterias.getSelectedItem();
+        String idEstanteriaSeleccionada = estanteriaSeleccionada.getIdestanteria();
 
-        DocumentReference docRef = db.collection("objetos").document(objeto.getidobjeto());
+        DocumentReference docRef = db.collection("cajas").document(caja.getidcaja());
 
         Map<String,Object> updates = new HashMap<>();
-        updates.put("nombre", nombreObjeto);
-        updates.put("idcaja", idCajaSeleccionada);
-        updates.put("descripcion", descripcionObjeto);
+        updates.put("nombre", nombreCaja);
+        updates.put("idestanteria", idEstanteriaSeleccionada);
+        updates.put("descripcion", descripcionCaja);
 
         docRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Objeto guardado").show();
+                DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Caja guardada").show();
             }
         });
     }

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 
 import androidx.fragment.app.Fragment;
@@ -43,6 +44,7 @@ public class mostrarEstanteria extends Fragment {
     private ListadoCajasAdapter adaptador;
     private ScanCode escaner;
     private FirebaseFirestore db;
+    private ConstraintLayout tarjetaPrincipal;
 
     public mostrarEstanteria() {
     }
@@ -52,6 +54,16 @@ public class mostrarEstanteria extends Fragment {
         view = inflater.inflate(R.layout.fragment_mostrar_estanteria, container, false);
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         escaner = new ScanCode();
+
+        tarjetaPrincipal = view.findViewById(R.id.constraintLayoutMostrarEstanteria);
+        tarjetaPrincipal.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new EditarEstanteria()).addToBackStack(null).commit();
+                return true;
+            }
+        });
 
         estanteria = miViewModel.getEstanteriaEscaneada();
 
@@ -117,20 +129,6 @@ public class mostrarEstanteria extends Fragment {
                         }
                     });
 
-
-                    //DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Seleccionada:" + cajaSeleccionada);
-                    /*if (miViewModel.clickCompraMejoraAutoClick(mejoraSeleccionada)) {
-                        adaptador.eliminarMejoraComprada(mejoraSeleccionada);
-                        txtPuntos.setText(formateoDeNumeros.formatterV1.format(miViewModel.getPuntos()));
-                        if (miToast != null) { miToast.cancel(); }
-                        miToast = DynamicToast.makeSuccess(getActivity().getApplicationContext(), getString(R.string.mejora_comprada));
-                        miToast.show();
-                    } else {
-                        if (miToast != null) { miToast.cancel(); }
-                        miToast = DynamicToast.makeWarning(getActivity().getApplicationContext(), getString(R.string.cant_comprar_mejora));
-                        vb.vibrate(100);
-                        miToast.show();
-                    }*/
                 }
             }
         });

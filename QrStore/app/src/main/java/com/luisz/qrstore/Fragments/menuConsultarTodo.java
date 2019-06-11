@@ -20,8 +20,7 @@ public class menuConsultarTodo extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
-    private FragmentManager fragmentManager = getFragmentManager();
-    private Objeto objeto;
+    //private Objeto objeto;
     private ImageView btnObjetos, btnCajas, btnEstanterias;
 
     public menuConsultarTodo() {
@@ -32,7 +31,7 @@ public class menuConsultarTodo extends Fragment {
         view = inflater.inflate(R.layout.fragment_menu_consultar_todo, container, false);
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
 
-        objeto = miViewModel.getObjetoEscaneado();
+        //objeto = miViewModel.getObjetoEscaneado();
 
         btnObjetos = view.findViewById(R.id.imgConsultarTodosObjetos);
         btnCajas = view.findViewById(R.id.imgConsultarTodasCajas);
@@ -49,18 +48,16 @@ public class menuConsultarTodo extends Fragment {
         btnCajas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "En construcción").show();
-//                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new ConsultarTodosObjetos()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ConsultarTodasCajas()).addToBackStack(null).commit();
             }
         });
 
         btnEstanterias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "En construcción").show();
-//                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new ConsultarTodosObjetos()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ConsultarTodasEstanterias()).addToBackStack(null).commit();
             }
         });
 

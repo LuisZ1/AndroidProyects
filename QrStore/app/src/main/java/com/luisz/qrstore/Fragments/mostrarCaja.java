@@ -15,7 +15,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.luisz.qrstore.Adapter.ListadoCajasAdapter;
 import com.luisz.qrstore.Adapter.ListadoObjetosAdapter;
 import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
@@ -27,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
@@ -45,6 +45,7 @@ public class mostrarCaja extends Fragment {
     private ListadoObjetosAdapter adaptador;
     private FirebaseFirestore db;
     private ImageView imgBtnNavegarEstanteria;
+    private ConstraintLayout constraintLayoutMostrarCaja;
 
     public mostrarCaja() {
     }
@@ -54,8 +55,17 @@ public class mostrarCaja extends Fragment {
         view = inflater.inflate(R.layout.fragment_mostrar_caja, container, false);
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
 
+        constraintLayoutMostrarCaja = view.findViewById(R.id.constraintLayoutMostrarCaja);
+        constraintLayoutMostrarCaja.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new EditarCaja()).addToBackStack(null).commit();
+                return true;
+            }
+        });
+
         caja = miViewModel.getCajaEscaneada();
-        //estanteria = miViewModel.getEstanteriaEscaneada();
 
         txtNombreCaja = view.findViewById(R.id.txtNombreCajaEscaneada);
         txtNombreCaja.setText(caja.getNombre());
@@ -113,9 +123,6 @@ public class mostrarCaja extends Fragment {
                         });
                     }
                 });
-
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new mostrarEstanteria()).addToBackStack(null).commit();
             }
         });
 

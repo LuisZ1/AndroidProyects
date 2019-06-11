@@ -15,14 +15,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.luisz.qrstore.MainActivity;
 import com.luisz.qrstore.Models.Caja;
-import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
-import com.luisz.qrstore.Util.Utilidades;
 import com.luisz.qrstore.Viewmodel.ViewModel;
-import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +26,6 @@ import java.util.List;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 public class mostrarObjeto extends Fragment {
@@ -75,7 +70,9 @@ public class mostrarObjeto extends Fragment {
         tarjetaPrincipal.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                DynamicToast.makeError(view.getContext().getApplicationContext(), "LongClick").show();
+                //DynamicToast.makeError(view.getContext().getApplicationContext(), "LongClick").show();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new EditarObjeto()).addToBackStack(null).commit();
                 return true;
             }
         });

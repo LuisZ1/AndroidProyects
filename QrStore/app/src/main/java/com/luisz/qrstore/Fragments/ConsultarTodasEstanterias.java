@@ -4,16 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.luisz.qrstore.Adapter.CajaSpinnerAdapter;
+import com.luisz.qrstore.Adapter.ListadoEstanteriasAdapter;
 import com.luisz.qrstore.Adapter.ListadoObjetosAdapter;
-import com.luisz.qrstore.Models.Caja;
+import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Viewmodel.ViewModel;
@@ -28,17 +27,17 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ConsultarTodosObjetos extends Fragment {
+public class ConsultarTodasEstanterias extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
     private FragmentManager fragmentManager = getFragmentManager();
     private RecyclerView miRecycler;
     private FirebaseFirestore db;
-    private ArrayList<Objeto> listadoObjetos;
-    private ListadoObjetosAdapter adaptador;
+    private ArrayList<Estanteria> listadoEstanterias;
+    private ListadoEstanteriasAdapter adaptador;
 
-    public ConsultarTodosObjetos() {
+    public ConsultarTodasEstanterias() {
     }
 
     @Override
@@ -47,7 +46,7 @@ public class ConsultarTodosObjetos extends Fragment {
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         db = FirebaseFirestore.getInstance();
 
-        listadoObjetos = new ArrayList<Objeto>();
+        listadoEstanterias = new ArrayList<Estanteria>();
 
         consultarObjetos();
 
@@ -58,21 +57,21 @@ public class ConsultarTodosObjetos extends Fragment {
     }
 
     private void consultarObjetos(){
-        db.collection("objetos")
+        db.collection("estanterias")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Objeto objeto = new Objeto(document.getId(), document.get("idcaja").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
-                                listadoObjetos.add(objeto);
+                                Estanteria estanteria = new Estanteria(document.getId(), document.get("nombre").toString(), document.get("ubicacion").toString(), document.get("descripcion").toString());
+                                listadoEstanterias.add(estanteria);
                             }
-                            miViewModel.setListadoObjetos((ArrayList<Objeto>) listadoObjetos);
-                            adaptador = new ListadoObjetosAdapter(listadoObjetos);
+                            miViewModel.setListadoEstanterias((ArrayList<Estanteria>) listadoEstanterias);
+                            adaptador = new ListadoEstanteriasAdapter(listadoEstanterias);
                             miRecycler.setAdapter(adaptador);
                         } else {
-                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay objetos disponibles").show();
+                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay estanterias disponibles").show();
                         }
                     }
                 });

@@ -54,7 +54,7 @@ public class crearCodigoObjeto extends Fragment {
         txtNombre = view.findViewById(R.id.txtCrearNombreObjeto);
         txtDescripcion = view.findViewById(R.id.txtCrearDescripcionObjeto);
 
-        btnCrearCodigoObjeto = view.findViewById(R.id.btnCrearObjeto);
+        btnCrearCodigoObjeto = view.findViewById(R.id.btnEditarObjeto);
         btnCrearCodigoObjeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,16 +83,6 @@ public class crearCodigoObjeto extends Fragment {
                                 listadoCajas.add(caja);
                             }
 
-                            //ArrayAdapter<Caja> adaptador = new ArrayAdapter<Caja>(view.getContext(), android.R.layout.simple_spinner_item, listadoCajas);
-                            //adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-/*
-                            spinnerCajas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Elemento pulsado").show();
-                                }
-                            });
-*/
                             adaptador = new CajaSpinnerAdapter(view.getContext(), listadoCajas);
                             spinnerCajas.setAdapter(adaptador);
                         } else {
@@ -131,7 +121,7 @@ public class crearCodigoObjeto extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar la Caja").show();
+                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar el objeto").show();
                         botonPulsado = false;
                     }
                 });
