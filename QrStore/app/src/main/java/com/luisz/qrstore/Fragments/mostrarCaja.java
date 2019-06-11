@@ -83,49 +83,9 @@ public class mostrarCaja extends Fragment {
         imgBtnNavegarEstanteria.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                if (db == null) {
-                    db = FirebaseFirestore.getInstance();
-                }
-                if (miViewModel == null) {
-                    miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
-                }
-
-                DocumentReference docRef = db.collection("estanterias").document(caja.getIdestanteria());
-
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Estanteria estanteria = documentSnapshot.toObject(Estanteria.class);
-                        estanteria.setIdestanteria(documentSnapshot.getId());
-
-                        miViewModel.setEstanteriaEscaneada(estanteria);
-
-                        //consultar Cajas de la estantería -----------------------------
-
-                        Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", caja.getIdestanteria());
-
-                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable QuerySnapshot snapshot,
-                                                @Nullable FirebaseFirestoreException e) {
-                                if (e != null) {
-                                    return;
-                                }
-
-                                List<Caja> cajas = snapshot.toObjects(Caja.class);
-
-                                miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
-
-                                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                        new mostrarEstanteria()).addToBackStack(null).commit();
-                            }
-                        });
-                    }
-                });
+                navegarEstanteria();
             }
         });
-
 
         miRecyclerView = view.findViewById(R.id.recyclerObjetos);
         miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, RecyclerView.VERTICAL, false));
@@ -161,5 +121,48 @@ public class mostrarCaja extends Fragment {
         });
 
         return view;
+    }
+
+    private void navegarEstanteria(){
+
+        if (db == null) {
+            db = FirebaseFirestore.getInstance();
+        }
+        if (miViewModel == null) {
+            miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
+        }
+
+        DocumentReference docRef = db.collection("estanterias").document(caja.getIdestanteria());
+
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Estanteria estanteria = documentSnapshot.toObject(Estanteria.class);
+                estanteria.setIdestanteria(documentSnapshot.getId());
+
+                miViewModel.setEstanteriaEscaneada(estanteria);
+
+                //consultar Cajas de la estantería -----------------------------
+
+                Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", caja.getIdestanteria());
+
+                queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshot,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            return;
+                        }
+
+                        List<Caja> cajas = snapshot.toObjects(Caja.class);
+
+                        miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
+
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new mostrarEstanteria()).addToBackStack(null).commit();
+                    }
+                });
+            }
+        });
     }
 }

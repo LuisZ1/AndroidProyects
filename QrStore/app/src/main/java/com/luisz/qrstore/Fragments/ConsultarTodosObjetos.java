@@ -79,14 +79,12 @@ public class ConsultarTodosObjetos extends Fragment {
                             ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
                             itemTouchHelper.attachToRecyclerView(miRecycler);
 
-                            //setUpRecyclerView();
                         } else {
                             DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay objetos disponibles").show();
                         }
                     }
                 });
     }
-
 
     private ItemTouchHelper.Callback createHelperCallback() {
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,

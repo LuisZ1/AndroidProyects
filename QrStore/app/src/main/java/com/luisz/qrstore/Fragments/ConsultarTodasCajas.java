@@ -10,20 +10,26 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.Adapter.ListadoCajasAdapter;
 import com.luisz.qrstore.Models.Caja;
+import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Viewmodel.ViewModel;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -38,6 +44,7 @@ public class ConsultarTodasCajas extends Fragment {
     private FirebaseFirestore db;
     private ArrayList<Caja> listadoCajas;
     private ListadoCajasAdapter adaptador;
+    private boolean borrado;
 
     public ConsultarTodasCajas() {
     }
@@ -58,7 +65,7 @@ public class ConsultarTodasCajas extends Fragment {
         return view;
     }
 
-    private void consultarObjetos(){
+    private void consultarObjetos() {
         listadoCajas.clear();
         db.collection("cajas")
                 .get()
@@ -99,19 +106,14 @@ public class ConsultarTodasCajas extends Fragment {
 
                 Caja objetoEliminado = adaptador.getListaCajas().get(position);
 
-                listadoCajas.remove(position);
                 eliminarCaja(objetoEliminado, position);
             }
         };
         return simpleItemTouchCallback;
     }
 
-    private void undoDelete(Caja objetoEliminado) {
-        restaurarCaja(objetoEliminado);
-        consultarObjetos();
-    }
 
-    private void restaurarCaja(Caja objeto){
+    private void restaurarCaja(Caja objeto) {
 
         Map<String, Object> map = new HashMap<>();
         map.put("idcaja", objeto.getidcaja());
@@ -126,7 +128,8 @@ public class ConsultarTodasCajas extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Restaurado").show();
+                            DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Restaurado").show();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -137,26 +140,54 @@ public class ConsultarTodasCajas extends Fragment {
                 });
     }
 
-    private void eliminarCaja(Caja objetoEliminado, int position){
-        db.collection("cajas").document(objetoEliminado.getidcaja())
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        adaptador.notifyItemRemoved(position);
-                        Snackbar snackbar = Snackbar.make(view, "Elemento eliminado: " + position, Snackbar.LENGTH_LONG);
-                        snackbar.setAction("Deshacer", v -> undoDelete(objetoEliminado));
-                        snackbar.setActionTextColor(getResources().getColor(R.color.azulClaro));
-                        snackbar.setBackgroundTint(getResources().getColor(R.color.blanco));
-                        snackbar.setTextColor(getResources().getColor(R.color.azulOscuro));
-                        snackbar.show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error deleting document", e);
-                    }
-                });
+    private boolean eliminarCaja(Caja objetoEliminado, int position) {
+
+        Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", objetoEliminado.getidcaja());
+
+        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    return;
+                }
+
+                List<Objeto> cajas = snapshot.toObjects(Objeto.class);
+
+                if (cajas.size() > 0) {
+                    //TODO Toast no es puede borrar caja
+                    borrado = false;
+                    DynamicToast.makeWarning(view.getContext().getApplicationContext(), "No puedes borrar esa caja, hay objetos dentro").show();
+                    consultarObjetos();
+                } else {
+                    borrado = true;
+                    db.collection("cajas").document(objetoEliminado.getidcaja())
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                listadoCajas.remove(position);
+                                adaptador.notifyItemRemoved(position);
+                                Snackbar snackbar = Snackbar.make(view, "Elemento eliminado: " + position, Snackbar.LENGTH_LONG);
+                                snackbar.setAction("Deshacer", v -> undoDelete(objetoEliminado));
+                                snackbar.setActionTextColor(getResources().getColor(R.color.azulClaro));
+                                snackbar.setBackgroundTint(getResources().getColor(R.color.blanco));
+                                snackbar.setTextColor(getResources().getColor(R.color.azulOscuro));
+                                snackbar.show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
+                }
+            }
+        });
+        return borrado;
+    }
+
+    private void undoDelete(Caja objetoEliminado) {
+        restaurarCaja(objetoEliminado);
+        consultarObjetos();
     }
 }
