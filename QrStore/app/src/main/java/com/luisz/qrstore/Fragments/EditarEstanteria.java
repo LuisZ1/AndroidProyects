@@ -67,28 +67,6 @@ public class EditarEstanteria extends Fragment {
         return view;
     }
 
-//    private void consultarTodasCajas() {
-//        listadoCajas.clear();
-//        db.collection("cajas")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Caja caja = new Caja(document.getId(), document.get("idestanteria").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
-//                                listadoCajas.add(caja);
-//                            }
-//
-//                            adaptador = new CajaSpinnerAdapter(view.getContext(), listadoCajas);
-//                            spinnerCajas.setAdapter(adaptador);
-//                        } else {
-//                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay estanterías disponibles").show();
-//                        }
-//                    }
-//                });
-//    }
-
     public void updateFields() {
         String NombreEstanteria = txtNombreEstanteria.getText().toString();
         String DescripcionEstanteria = txtDescripcionEstanteria.getText().toString();

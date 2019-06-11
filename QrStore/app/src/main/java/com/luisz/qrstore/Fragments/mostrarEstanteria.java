@@ -26,10 +26,8 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.ViewModelProviders;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,12 +35,10 @@ public class mostrarEstanteria extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
-    private FragmentManager fragmentManager = getFragmentManager();
     private Estanteria estanteria;
     private TextView txtNombreEstanteria, txtIdEstanteria, txtnumerocajas, txtLugarEstanteria, txtDescripcionEstanteria;
     private RecyclerView miRecyclerView;
     private ListadoCajasAdapter adaptador;
-    private ScanCode escaner;
     private FirebaseFirestore db;
     private ConstraintLayout tarjetaPrincipal;
 
@@ -53,7 +49,6 @@ public class mostrarEstanteria extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mostrar_estanteria, container, false);
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
-        escaner = new ScanCode();
 
         tarjetaPrincipal = view.findViewById(R.id.constraintLayoutMostrarEstanteria);
         tarjetaPrincipal.setOnLongClickListener(new View.OnLongClickListener() {
@@ -103,9 +98,6 @@ public class mostrarEstanteria extends Fragment {
                             caja.setidcaja(documentSnapshot.getId());
 
                             miViewModel.setCajaEscaneada(caja);
-                            //miViewModel.setEstanteriaEscaneada(null);
-                            //miViewModel.setObjetoEscaneado(null);
-
 
                             //consultar Cajas de la estantería -----------------------------
 
@@ -123,7 +115,9 @@ public class mostrarEstanteria extends Fragment {
 
                                     miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
 
-                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
+                                    if (getFragmentManager() != null) {
+                                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
+                                    }
                                 }
                             });
                         }

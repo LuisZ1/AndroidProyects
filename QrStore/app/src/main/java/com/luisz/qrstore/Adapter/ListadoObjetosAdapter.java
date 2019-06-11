@@ -1,5 +1,6 @@
 package com.luisz.qrstore.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class ListadoObjetosAdapter extends RecyclerView.Adapter<ListadoObjetosAd
 
     private ArrayList<Objeto> listaObjetos;
     private View.OnClickListener listener;
+    private View view;
 
     public ListadoObjetosAdapter(ArrayList<Objeto> listaObjetos) {
         this.listaObjetos = listaObjetos;
@@ -25,7 +27,7 @@ public class ListadoObjetosAdapter extends RecyclerView.Adapter<ListadoObjetosAd
 
     @Override
     public ListadoObjetosAdapter.ViewHolderObjetos onCreateViewHolder(ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listado_objetos, null, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listado_objetos, null, false);
         view.setOnClickListener(this);
 
         return new ListadoObjetosAdapter.ViewHolderObjetos(view);
@@ -65,17 +67,25 @@ public class ListadoObjetosAdapter extends RecyclerView.Adapter<ListadoObjetosAd
         }
     }
 
-    public void setListaMejoras(ArrayList<Objeto> listaObjetos) {
+    public void setListaObjetos(ArrayList<Objeto> listaObjetos) {
         this.listaObjetos = listaObjetos;
         notifyDataSetChanged();
     }
 
-    public ArrayList<Objeto> getListaCajas() {
+    public ArrayList<Objeto> getListaObjetos() {
         return listaObjetos;
     }
 
     public void notifyChange() {
         notifyDataSetChanged();
+    }
+
+    public Context getContext(){
+        return view.getContext();
+    }
+
+    public void deleteItem(int position){
+
     }
 
 }

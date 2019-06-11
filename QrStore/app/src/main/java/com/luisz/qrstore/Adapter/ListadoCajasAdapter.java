@@ -1,7 +1,6 @@
 package com.luisz.qrstore.Adapter;
 
-import android.graphics.Color;
-import android.text.Html;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,13 @@ import com.luisz.qrstore.R;
 
 import java.util.ArrayList;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListadoCajasAdapter extends RecyclerView.Adapter<ListadoCajasAdapter.ViewHolderCajas> implements View.OnClickListener {
 
     private ArrayList<Caja> listaCajas;
     private View.OnClickListener listener;
+    private  View view;
 
     public ListadoCajasAdapter(ArrayList<Caja> listaMejoras) {
         this.listaCajas = listaMejoras;
@@ -26,7 +25,7 @@ public class ListadoCajasAdapter extends RecyclerView.Adapter<ListadoCajasAdapte
 
     @Override
     public ViewHolderCajas onCreateViewHolder(ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listado_cajas, null, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listado_cajas, null, false);
         view.setOnClickListener(this);
 
         return new ViewHolderCajas(view);
@@ -62,24 +61,12 @@ public class ListadoCajasAdapter extends RecyclerView.Adapter<ListadoCajasAdapte
 
     public class ViewHolderCajas extends RecyclerView.ViewHolder {
 
-        TextView txtNombreCaja, txtPrecio, txtLevel;
-       // TextView lblPrecio, lblLevel;
-        CardView miCardView;
+        TextView txtNombreCaja;
 
         public ViewHolderCajas(View itemView) {
             super(itemView);
 
-            //Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "awesome.ttf");
-
             txtNombreCaja = itemView.findViewById(R.id.txtNombreCaja);
-//            txtPrecio = itemView.findViewById(R.id.txtPrecio);
-//            txtLevel = itemView.findViewById(R.id.txtLevel);
-//            miCardView = itemView.findViewById(R.id.miCardView);
-//            lblPrecio = itemView.findViewById(R.id.lblPrecio);
-//            lblLevel = itemView.findViewById(R.id.lblNivel);
-//
-//            this.lblPrecio.setTypeface(typeface);
-//            this.lblLevel.setTypeface(typeface);
         }
     }
 
@@ -94,6 +81,10 @@ public class ListadoCajasAdapter extends RecyclerView.Adapter<ListadoCajasAdapte
 
     public void notifyChange() {
         notifyDataSetChanged();
+    }
+
+    public Context getContext(){
+        return view.getContext();
     }
 
 }

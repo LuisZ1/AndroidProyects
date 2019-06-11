@@ -4,13 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Vibrator;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -42,6 +35,11 @@ import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 public class ScanCode extends Fragment {
 
@@ -81,8 +79,6 @@ public class ScanCode extends Fragment {
                     return;
                 }
                 try {
-                    //cameraSource.start(holder);
-
                     cameraSource.start(surfaceView.getHolder());
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -108,10 +104,12 @@ public class ScanCode extends Fragment {
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
+
+                //miViewModel.reiniciarVariables();
+
                 final SparseArray<Barcode> qrCode = detections.getDetectedItems();
 
-
-                if (qrCode.size() != 0) {
+                if (qrCode.size() != 0 && !vibrating) {
                     textoResultado.post(new Runnable() {
                         @Override
                         public void run() {
@@ -128,8 +126,6 @@ public class ScanCode extends Fragment {
                 }
             }
         });
-
-        miViewModel.reiniciarVariables();
 
         return view;
     }
@@ -199,8 +195,8 @@ public class ScanCode extends Fragment {
                         caja.setidcaja(documentSnapshot.getId());
 
                         miViewModel.setCajaEscaneada(caja);
-                        miViewModel.setEstanteriaEscaneada(null);
-                        miViewModel.setObjetoEscaneado(null);
+                        //miViewModel.setEstanteriaEscaneada(null);
+                       // miViewModel.setObjetoEscaneado(null);
 
 
                         //consultar Cajas de la estantería -----------------------------
@@ -242,8 +238,8 @@ public class ScanCode extends Fragment {
                         Objeto objeto = documentSnapshot.toObject(Objeto.class);
                         objeto.setidobjeto(documentSnapshot.getId());
 
-                        miViewModel.setCajaEscaneada(null);
-                        miViewModel.setEstanteriaEscaneada(null);
+                        //miViewModel.setCajaEscaneada(null);
+                        //miViewModel.setEstanteriaEscaneada(null);
                         miViewModel.setObjetoEscaneado(objeto);
 
                         vibrating = false;
