@@ -9,7 +9,6 @@ import com.luisz.qrstore.Models.Objeto;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 public class ViewModel extends AndroidViewModel {
@@ -21,6 +20,7 @@ public class ViewModel extends AndroidViewModel {
     private ArrayList<Estanteria> listadoEstanterias;
     private ArrayList<Caja> listadoCajas;
     private ArrayList<Objeto> listadoObjetos;
+    private String nombreUsuario;
 
     public ViewModel(Application application) {
         super(application);
@@ -82,5 +82,13 @@ public class ViewModel extends AndroidViewModel {
 
     public void setListadoEstanterias(ArrayList<Estanteria> listadoEstanterias) {
         this.listadoEstanterias = listadoEstanterias;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 }

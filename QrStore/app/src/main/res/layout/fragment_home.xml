@@ -44,17 +44,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="ToDo"
-            android:textColor="@color/textoBlanco"
-            android:textSize="18sp"
+            android:textColor="@color/blanco"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtBienvenido"
             app:layout_constraintStart_toEndOf="@+id/txtBienvenido"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/txtBienvenido" />
 
         <View
             android:id="@+id/myRectangleView"
             android:layout_width="85dp"
-            android:layout_height="8dp"
+            android:layout_height="6dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/rectangleview"
@@ -190,6 +190,17 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgCerrarSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/azulOscuro"
+            android:src="@drawable/ic_power_settings_new_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

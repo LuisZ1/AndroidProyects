@@ -1,26 +1,27 @@
 package com.luisz.qrstore.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.luisz.qrstore.R;
-import com.pranavpandey.android.dynamic.toasts.DynamicToast;
+import com.luisz.qrstore.Viewmodel.ViewModel;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 public class Home extends Fragment {
 
     private View view;
-    private FragmentManager fragmentManager = getFragmentManager();
+    private ViewModel miViewModel;
     private LinearLayout btnConsultarTodo;
-    private ImageView imgScanCode, imgCreateEstanteria, imgCrearCaja, imgCrearObjeto;
+    private ImageView imgScanCode, imgCreateEstanteria, imgCrearCaja, imgCrearObjeto, imgCerrarSesion;
+    private TextView nombreUsuario;
 
     public Home() {
     }
@@ -33,6 +34,20 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
+
+        nombreUsuario = view.findViewById(R.id.txtNombreUsuario);
+        nombreUsuario.setText(miViewModel.getNombreUsuario());
+
+        imgCerrarSesion = (ImageView) view.findViewById(R.id.imgCerrarSesion);
+        imgCerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PantallaPrincipal()).commit();
+            }
+        });
 
         imgScanCode = (ImageView) view.findViewById(R.id.imgScanCode);
         imgScanCode.setImageResource(R.drawable.codigo);

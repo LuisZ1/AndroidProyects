@@ -2,13 +2,10 @@ package com.luisz.qrstore;
 
 import android.os.Bundle;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.luisz.qrstore.Fragments.Home;
+import com.luisz.qrstore.Fragments.PantallaPrincipal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProviders;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new Home()).commit();
+                    new PantallaPrincipal()).commit();
         }
     }
 }
