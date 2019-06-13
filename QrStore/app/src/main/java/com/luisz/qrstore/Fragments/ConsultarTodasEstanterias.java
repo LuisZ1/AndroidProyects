@@ -95,7 +95,7 @@ public class ConsultarTodasEstanterias extends Fragment {
     }
 
     private ItemTouchHelper.Callback createHelperCallback() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
+        return new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
@@ -128,13 +128,20 @@ public class ConsultarTodasEstanterias extends Fragment {
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
 
-                Estanteria objetoEliminado = adaptador.getListaEstanterias().get(position);
-
-                listadoEstanterias.remove(position);
-                eliminarEstanteria(objetoEliminado, position);
+                if (swipeDir == ItemTouchHelper.RIGHT) {
+                    Estanteria objetoEliminado = adaptador.getListaEstanterias().get(position);
+                    listadoEstanterias.remove(position);
+                    eliminarEstanteria(objetoEliminado, position);
+                } else if (swipeDir == ItemTouchHelper.LEFT) {
+                    //DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Consulta:" +position).show();
+                    miViewModel.setEstanteriaEscaneada(adaptador.getListaEstanterias().get(position));
+                    if (getFragmentManager() != null) {
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, new mostrarEstanteria()) .addToBackStack(null).commit();
+                    }
+                }
             }
         };
-        return simpleItemTouchCallback;
     }
 
     private void undoDelete(Estanteria objetoEliminado) {

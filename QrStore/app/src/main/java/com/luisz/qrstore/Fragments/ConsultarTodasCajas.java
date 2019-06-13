@@ -93,7 +93,9 @@ public class ConsultarTodasCajas extends Fragment {
     }
 
     private ItemTouchHelper.Callback createHelperCallback() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
+        //ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
+        return new ItemTouchHelper.SimpleCallback(0,
+
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
@@ -116,7 +118,6 @@ public class ConsultarTodasCajas extends Fragment {
 
             }
 
-            //not used, as the first parameter above is 0
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -126,12 +127,20 @@ public class ConsultarTodasCajas extends Fragment {
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
 
-                Caja objetoEliminado = adaptador.getListaCajas().get(position);
-
-                eliminarCaja(objetoEliminado, position);
+                if (swipeDir == ItemTouchHelper.RIGHT) {
+                    Caja objetoEliminado = adaptador.getListaCajas().get(position);
+                    eliminarCaja(objetoEliminado, position);
+                } else if (swipeDir == ItemTouchHelper.LEFT) {
+                    miViewModel.setCajaEscaneada(adaptador.getListaCajas().get(position));
+                    DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Consulta:" +position).show();
+                    if (getFragmentManager() != null) {
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja())
+                                .addToBackStack(null).commit();
+                    }
+                }
             }
         };
-        return simpleItemTouchCallback;
+        //return simpleItemTouchCallback;
     }
 
 
@@ -150,14 +159,14 @@ public class ConsultarTodasCajas extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                            DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Restaurado").show();
+                        DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Restaurado").show();
 
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar el objeto").show();
+                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al restaurar la caja :(").show();
                     }
                 });
     }
@@ -175,33 +184,32 @@ public class ConsultarTodasCajas extends Fragment {
 
                 List<Objeto> cajas = snapshot.toObjects(Objeto.class);
 
-                if (cajas.size() > 0) {
-                    //TODO Toast no es puede borrar caja
+                if (!cajas.isEmpty()) {
                     borrado = false;
                     DynamicToast.makeWarning(view.getContext().getApplicationContext(), "No puedes borrar esa caja, hay objetos dentro").show();
                     consultarObjetos();
                 } else {
                     borrado = true;
                     db.collection("cajas").document(objetoEliminado.getidcaja())
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                listadoCajas.remove(position);
-                                adaptador.notifyItemRemoved(position);
-                                Snackbar snackbar = Snackbar.make(view, "Elemento eliminado: " + position, Snackbar.LENGTH_LONG);
-                                snackbar.setAction("Deshacer", v -> undoDelete(objetoEliminado));
-                                snackbar.setActionTextColor(getResources().getColor(R.color.azulClaro));
-                                snackbar.setBackgroundTint(getResources().getColor(R.color.blanco));
-                                snackbar.setTextColor(getResources().getColor(R.color.azulOscuro));
-                                snackbar.show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                            }
-                        });
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    listadoCajas.remove(position);
+                                    adaptador.notifyItemRemoved(position);
+                                    Snackbar snackbar = Snackbar.make(view, "Elemento eliminado: " + position, Snackbar.LENGTH_LONG);
+                                    snackbar.setAction("Deshacer", v -> undoDelete(objetoEliminado));
+                                    snackbar.setActionTextColor(getResources().getColor(R.color.azulClaro));
+                                    snackbar.setBackgroundTint(getResources().getColor(R.color.blanco));
+                                    snackbar.setTextColor(getResources().getColor(R.color.azulOscuro));
+                                    snackbar.show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                }
+                            });
                 }
             }
         });

@@ -42,6 +42,7 @@ public class ConsultarTodosObjetos extends Fragment {
     private FirebaseFirestore db;
     private ArrayList<Objeto> listadoObjetos;
     private ListadoObjetosAdapter adaptador;
+    private final String stringobj = "objetos";
 
     public ConsultarTodosObjetos() {
     }
@@ -63,7 +64,7 @@ public class ConsultarTodosObjetos extends Fragment {
 
     private void consultarObjetos() {
         listadoObjetos.clear();
-        db.collection("objetos")
+        db.collection(stringobj)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -88,7 +89,7 @@ public class ConsultarTodosObjetos extends Fragment {
     }
 
     private ItemTouchHelper.Callback createHelperCallback() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
+        return new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
@@ -124,13 +125,17 @@ public class ConsultarTodosObjetos extends Fragment {
 
                 if(swipeDir == ItemTouchHelper.RIGHT ) {
                     Objeto objetoEliminado = adaptador.getListaObjetos().get(position);
-
                     listadoObjetos.remove(position);
                     eliminarObjeto(objetoEliminado, position);
+                }else if(swipeDir == ItemTouchHelper.LEFT){
+                    miViewModel.setObjetoEscaneado(adaptador.getListaObjetos().get(position));
+                    if (getFragmentManager() != null) {
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, new mostrarObjeto()) .addToBackStack(null).commit();
+                    }
                 }
             }
         };
-        return simpleItemTouchCallback;
     }
 
     private void undoDelete(Objeto objetoEliminado) {
@@ -151,7 +156,7 @@ public class ConsultarTodosObjetos extends Fragment {
         map.put("descripcion", descripcionObjeto);
 
         // Add a new document with a generated ID
-        db.collection("objetos")
+        db.collection(stringobj)
                 .document(objeto.getidobjeto())
                 .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -169,7 +174,7 @@ public class ConsultarTodosObjetos extends Fragment {
     }
 
     private void eliminarObjeto(Objeto objetoEliminado, int position) {
-        db.collection("objetos").document(objetoEliminado.getidobjeto())
+        db.collection(stringobj).document(objetoEliminado.getidobjeto())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
