@@ -1,5 +1,6 @@
 package com.luisz.qrstore.Fragments;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class ConsultarTodosObjetos extends Fragment {
 
@@ -89,6 +91,26 @@ public class ConsultarTodosObjetos extends Fragment {
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+                new RecyclerViewSwipeDecorator.Builder(view.getContext(), c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        .addSwipeRightBackgroundColor(getResources().getColor(R.color.rojo))
+                        .addSwipeRightActionIcon(R.drawable.ic_delete_sweep_black_24dp)
+                        .addSwipeRightLabel("Eliminar")
+                        .setSwipeRightLabelColor(getResources().getColor(R.color.blanco))
+
+                        .addSwipeLeftBackgroundColor(getResources().getColor(R.color.azulClaro))
+                        .addSwipeLeftActionIcon(R.drawable.ic_arrow_forward_black_24dp)
+                        .addSwipeLeftLabel("Consultar")
+                        .setSwipeLeftLabelColor(getResources().getColor(R.color.blanco))
+                        .create()
+                        .decorate();
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+            }
+
             //not used, as the first parameter above is 0
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
@@ -100,10 +122,12 @@ public class ConsultarTodosObjetos extends Fragment {
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
 
-                Objeto objetoEliminado = adaptador.getListaObjetos().get(position);
+                if(swipeDir == ItemTouchHelper.RIGHT ) {
+                    Objeto objetoEliminado = adaptador.getListaObjetos().get(position);
 
-                listadoObjetos.remove(position);
-                eliminarObjeto(objetoEliminado, position);
+                    listadoObjetos.remove(position);
+                    eliminarObjeto(objetoEliminado, position);
+                }
             }
         };
         return simpleItemTouchCallback;

@@ -1,5 +1,6 @@
 package com.luisz.qrstore.Fragments;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,7 +17,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.Adapter.ListadoObjetosAdapter;
 import com.luisz.qrstore.Models.Caja;
@@ -42,6 +40,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class mostrarCaja extends Fragment {
 
@@ -78,18 +77,19 @@ public class mostrarCaja extends Fragment {
             }
         });
 
-        listadoObjetos = miViewModel.getListadoObjetos();
-        consultarObjetos();
+
+        caja = miViewModel.getCajaEscaneada();
+        listadoObjetos = new ArrayList<Objeto>();
+//        consultarObjetos();
 
         //listadoObjetos = miViewModel.getListadoObjetos();
-        caja = miViewModel.getCajaEscaneada();
 
         txtNombreCaja = view.findViewById(R.id.txtNombreCajaEscaneada);
         txtNombreCaja.setText(caja.getNombre());
         txtIdCaja = view.findViewById(R.id.txtIdCajaEscaneada);
-        txtIdCaja.setText(caja.getIdestanteria());
+        txtIdCaja.setText(caja.getidcaja());
         TxtNumeroObjetos = view.findViewById(R.id.txtNumeroObjetosCajaEscaneada);
-        TxtNumeroObjetos.setText(String.valueOf(miViewModel.getListadoObjetos().size()));
+//        TxtNumeroObjetos.setText(String.valueOf(miViewModel.getListadoObjetos().size()));
 
         txtIdEstanteriaDeCaja = view.findViewById(R.id.txtIdEstanteriaDeCaja);
         txtIdEstanteriaDeCaja.setText(caja.getIdestanteria());
@@ -106,37 +106,43 @@ public class mostrarCaja extends Fragment {
 
         miRecyclerView = view.findViewById(R.id.recyclerObjetos);
         miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, RecyclerView.VERTICAL, false));
-        adaptador = new ListadoObjetosAdapter(listadoObjetos);
-        miRecyclerView.setAdapter(adaptador);
+//        adaptador = new ListadoObjetosAdapter(listadoObjetos);
+//        miRecyclerView.setAdapter(adaptador);
 
-        adaptador.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int objetoseleccionado = miRecyclerView.getChildAdapterPosition(view);
-                if (objetoseleccionado != -1) {
-                    final String codigo = listadoObjetos.get(objetoseleccionado).getidobjeto();
-                    if (db == null) {
-                        db = FirebaseFirestore.getInstance();
-                    }
+//        adaptador.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                navegarObjeto();
+//            }
+//        });
 
-                    DocumentReference docRefObjeto = db.collection("objetos").document(codigo);
-                    docRefObjeto.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            Objeto objeto = documentSnapshot.toObject(Objeto.class);
-                            objeto.setidobjeto(documentSnapshot.getId());
-
-                            miViewModel.setObjetoEscaneado(objeto);
-
-                            getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                    new mostrarObjeto()).addToBackStack(null).commit();
-                        }
-                    });
-                }
-            }
-        });
+        consultarObjetos();
 
         return view;
+    }
+
+    private void navegarObjeto(int position){
+        int objetoseleccionado = position;
+        if (objetoseleccionado != -1) {
+            final String codigo = listadoObjetos.get(objetoseleccionado).getidobjeto();
+            if (db == null) {
+                db = FirebaseFirestore.getInstance();
+            }
+
+            DocumentReference docRefObjeto = db.collection("objetos").document(codigo);
+            docRefObjeto.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Objeto objeto = documentSnapshot.toObject(Objeto.class);
+                    objeto.setidobjeto(documentSnapshot.getId());
+
+                    miViewModel.setObjetoEscaneado(objeto);
+
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new mostrarObjeto()).addToBackStack(null).commit();
+                }
+            });
+        }
     }
 
     private void navegarEstanteria(){
@@ -186,6 +192,26 @@ public class mostrarCaja extends Fragment {
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+                new RecyclerViewSwipeDecorator.Builder(view.getContext(), c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        .addSwipeRightBackgroundColor(getResources().getColor(R.color.rojo))
+                        .addSwipeRightActionIcon(R.drawable.ic_delete_sweep_black_24dp)
+                        .addSwipeRightLabel("Eliminar")
+                        .setSwipeRightLabelColor(getResources().getColor(R.color.blanco))
+
+                        .addSwipeLeftBackgroundColor(getResources().getColor(R.color.azulClaro))
+                        .addSwipeLeftActionIcon(R.drawable.ic_arrow_forward_black_24dp)
+                        .addSwipeLeftLabel("Consultar")
+                        .setSwipeLeftLabelColor(getResources().getColor(R.color.blanco))
+                        .create()
+                        .decorate();
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+            }
+
             //not used, as the first parameter above is 0
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
@@ -197,10 +223,19 @@ public class mostrarCaja extends Fragment {
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
 
-                Objeto objetoEliminado = adaptador.getListaObjetos().get(position);
 
-                listadoObjetos.remove(position);
-                eliminarObjeto(objetoEliminado, position);
+
+                if(swipeDir == ItemTouchHelper.RIGHT){
+
+                    Objeto objetoEliminado = adaptador.getListaObjetos().get(position);
+
+                    listadoObjetos.remove(position);
+                    eliminarObjeto(objetoEliminado, position);
+
+                }else if(swipeDir == ItemTouchHelper.LEFT){
+                    navegarObjeto(position);
+                }
+
             }
         };
         return simpleItemTouchCallback;
@@ -266,27 +301,54 @@ public class mostrarCaja extends Fragment {
 
     private void consultarObjetos() {
         listadoObjetos.clear();
-        db.collection("objetos")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Objeto objeto = new Objeto(document.getId(), document.get("idcaja").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
-                                listadoObjetos.add(objeto);
-                            }
-                            miViewModel.setListadoObjetos((ArrayList<Objeto>) listadoObjetos);
-                            adaptador = new ListadoObjetosAdapter(listadoObjetos);
-                            miRecyclerView.setAdapter(adaptador);
+//        db.collection("objetos")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Objeto objeto = new Objeto(document.getId(), document.get("idcaja").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
+//                                listadoObjetos.add(objeto);
+//                            }
+//                            miViewModel.setListadoObjetos((ArrayList<Objeto>) listadoObjetos);
+//                            adaptador = new ListadoObjetosAdapter(listadoObjetos);
+////                            miRecyclerView.setAdapter(adaptador);
+//
+//                            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+//                            itemTouchHelper.attachToRecyclerView(miRecyclerView);
+//
+//                            miRecyclerView.setAdapter(adaptador);
+//
+//                        } else {
+//                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay objetos disponibles").show();
+//                        }
+//                    }
+//                });
 
-                            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
-                            itemTouchHelper.attachToRecyclerView(miRecyclerView);
+        Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", caja.getidcaja());
 
-                        } else {
-                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay objetos disponibles").show();
-                        }
-                    }
-                });
+        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    return;
+                }
+
+                List<Objeto> objetos = snapshot.toObjects(Objeto.class);
+                listadoObjetos = (ArrayList<Objeto>) objetos;
+
+                TxtNumeroObjetos.setText(String.valueOf(listadoObjetos.size()));
+
+                adaptador = new ListadoObjetosAdapter(listadoObjetos);
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+                itemTouchHelper.attachToRecyclerView(miRecyclerView);
+                miRecyclerView.setAdapter(adaptador);
+
+//                if (getFragmentManager() != null) {
+//                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
+//                }
+            }
+        });
     }
 }

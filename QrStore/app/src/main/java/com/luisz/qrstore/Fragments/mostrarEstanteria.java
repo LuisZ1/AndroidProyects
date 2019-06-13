@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,7 +16,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.Adapter.ListadoCajasAdapter;
 import com.luisz.qrstore.Models.Caja;
@@ -54,6 +51,7 @@ public class mostrarEstanteria extends Fragment {
     private FirebaseFirestore db;
     private ConstraintLayout tarjetaPrincipal;
     private ArrayList<Caja> listadoCajas;
+    private boolean navegadoACaja;
 
     public mostrarEstanteria() {
     }
@@ -62,8 +60,9 @@ public class mostrarEstanteria extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mostrar_estanteria, container, false);
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
-
         db = FirebaseFirestore.getInstance();
+
+        navegadoACaja = false;
 
         listadoCajas = new ArrayList<Caja>();
         //consultarObjetos();
@@ -131,25 +130,31 @@ public class mostrarEstanteria extends Fragment {
 
                     //consultar Cajas de la estantería -----------------------------
 
-                    Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", codigo);
-
-                    queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                        @Override
-                        public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                            if (e != null) {
-                                // Handle error
-                                return;
-                            }
-
-                            List<Objeto> objetos = snapshot.toObjects(Objeto.class);
-
-                            miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
-
-                            if (getFragmentManager() != null) {
-                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
-                            }
+//                    Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", codigo);
+//
+//                    queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                        @Override
+//                        public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+//                            if (e != null) {
+//                                // Handle error
+//                                return;
+//                            }
+//
+//                            List<Objeto> objetos = snapshot.toObjects(Objeto.class);
+//
+//                            miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
+//
+////                            if (getFragmentManager() != null) {
+////                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
+////                            }
+//                        }
+//                    });
+                    if (getFragmentManager() != null) {
+                        if(!navegadoACaja) {
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
+                            navegadoACaja = true;
                         }
-                    });
+                    }
                 }
             });
 
@@ -158,39 +163,65 @@ public class mostrarEstanteria extends Fragment {
 
     private void consultarObjetos() {
         listadoCajas.clear();
-        db.collection("cajas")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Caja caja = new Caja(document.getId(), document.get("idestanteria").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
-                                listadoCajas.add(caja);
-                            }
-                            miViewModel.setListadoCajas((ArrayList<Caja>) listadoCajas);
+        Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", estanteria.getIdestanteria());
 
-                            adaptador = new ListadoCajasAdapter(listadoCajas);
+        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    // Handle error
+                    return;
+                }
 
-                            txtnumerocajas.setText(String.valueOf(listadoCajas.size()));
+                List<Caja> cajas = snapshot.toObjects(Caja.class);
 
-                            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
-                            itemTouchHelper.attachToRecyclerView(miRecyclerView);
+                miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
 
-//                            adaptador.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    navegarCaja();
-//                                }
-//                            });
+                listadoCajas = (ArrayList<Caja>) cajas;
 
-                            miRecyclerView.setAdapter(adaptador);
+                txtnumerocajas.setText(String.valueOf(listadoCajas.size()));
 
-                        } else {
-                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay cajas disponibles").show();
-                        }
-                    }
-                });
+                adaptador = new ListadoCajasAdapter(listadoCajas);
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+                itemTouchHelper.attachToRecyclerView(miRecyclerView);
+                miRecyclerView.setAdapter(adaptador);
+            }
+        });
+
+//        db.collection("cajas")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Caja caja = new Caja(document.getId(), document.get("idestanteria").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
+//                                listadoCajas.add(caja);
+//                            }
+//                            miViewModel.setListadoCajas((ArrayList<Caja>) listadoCajas);
+//
+//                            adaptador = new ListadoCajasAdapter(listadoCajas);
+//
+//                            txtnumerocajas.setText(String.valueOf(listadoCajas.size()));
+//
+//                            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+//                            itemTouchHelper.attachToRecyclerView(miRecyclerView);
+//
+////                            adaptador.setOnClickListener(new View.OnClickListener() {
+////                                @Override
+////                                public void onClick(View view) {
+////                                    navegarCaja();
+////                                }
+////                            });
+//
+//                            miRecyclerView.setAdapter(adaptador);
+//
+//                        } else {
+//                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay cajas disponibles").show();
+//                        }
+//                    }
+//                });
     }
 
     private ItemTouchHelper.Callback createHelperCallback() {

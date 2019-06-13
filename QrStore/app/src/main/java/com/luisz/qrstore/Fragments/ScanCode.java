@@ -20,11 +20,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.Models.Objeto;
@@ -33,10 +29,7 @@ import com.luisz.qrstore.Viewmodel.ViewModel;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -178,7 +171,7 @@ public class ScanCode extends Fragment {
 //                        });
                         if (getFragmentManager() != null) {
                             getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                    new mostrarEstanteria()).addToBackStack(null).commit();
+                                    new mostrarEstanteria())/*.addToBackStack(null)*/.commit();
                         }
                     }
                 });
@@ -207,26 +200,31 @@ public class ScanCode extends Fragment {
 
                         //consultar Cajas de la estantería -----------------------------
 
-                        Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", codigo);
-
-                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                                if (e != null) {
-                                    return;
-                                }
-
-                                List<Objeto> objetos = snapshot.toObjects(Objeto.class);
-
-                                miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
-
-                                vibrating = false;
-
-                                if (getFragmentManager() != null) {
-                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
-                                }
-                            }
-                        });
+//                        Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", codigo);
+//
+//                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+//                                if (e != null) {
+//                                    return;
+//                                }
+//
+//                                List<Objeto> objetos = snapshot.toObjects(Objeto.class);
+//
+//                                miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
+//
+//                                vibrating = false;
+//
+//                                if (getFragmentManager() != null) {
+//                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
+//                                }
+//                            }
+//                        });
+                        if (getFragmentManager() != null) {
+                            getFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment_container, new mostrarCaja())
+                                    /*.addToBackStack(null)*/.commit();
+                        }
                     }
                 });
 
@@ -239,29 +237,37 @@ public class ScanCode extends Fragment {
                 if (miViewModel == null) {
                     miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
                 }
+
                 DocumentReference docRefObjeto = db.collection("objetos").document(codigo);
-                docRefObjeto.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Objeto objeto = documentSnapshot.toObject(Objeto.class);
-                        objeto.setidobjeto(documentSnapshot.getId());
+                docRefObjeto.get().
 
-                        //miViewModel.setCajaEscaneada(null);
-                        //miViewModel.setEstanteriaEscaneada(null);
-                        miViewModel.setObjetoEscaneado(objeto);
+                        addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                Objeto objeto = documentSnapshot.toObject(Objeto.class);
+                                objeto.setidobjeto(documentSnapshot.getId());
 
-                        vibrating = false;
+                                //miViewModel.setCajaEscaneada(null);
+                                //miViewModel.setEstanteriaEscaneada(null);
+                                miViewModel.setObjetoEscaneado(objeto);
 
-                        if (getFragmentManager() != null) {
-                            getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                    new mostrarObjeto()).addToBackStack(null).commit();
-                        }
-                    }
-                });
+                                vibrating = false;
+
+                                if (getFragmentManager() != null) {
+                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                            new mostrarObjeto())/*.addToBackStack(null)*/.commit();
+                                }
+                            }
+                        });
 
                 break;
             default:
-                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Código no reconocido").show();
+                DynamicToast.makeWarning(view.getContext().
+
+                        getApplicationContext(), "Código no reconocido").
+
+                        show();
+
                 vibrating = false;
                 break;
         }
