@@ -153,29 +153,33 @@ public class ScanCode extends Fragment {
 
                         //consultar Cajas de la estantería -----------------------------
 
-                        Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", codigo);
-
-                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable QuerySnapshot snapshot,
-                                                @Nullable FirebaseFirestoreException e) {
-                                if (e != null) {
-                                    // Handle error
-                                    return;
-                                }
-
-                                List<Caja> cajas = snapshot.toObjects(Caja.class);
-
-                                miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
-
-                                vibrating = false;
-
-                                if (getFragmentManager() != null) {
-                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                            new mostrarEstanteria()).addToBackStack(null).commit();
-                                }
-                            }
-                        });
+//                        Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", codigo);
+//
+//                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onEvent(@Nullable QuerySnapshot snapshot,
+//                                                @Nullable FirebaseFirestoreException e) {
+//                                if (e != null) {
+//                                    // Handle error
+//                                    return;
+//                                }
+//
+//                                List<Caja> cajas = snapshot.toObjects(Caja.class);
+//
+//                                miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
+//
+//                                vibrating = false;
+//
+//                                if (getFragmentManager() != null) {
+//                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                                            new mostrarEstanteria()).addToBackStack(null).commit();
+//                                }
+//                            }
+//                        });
+                        if (getFragmentManager() != null) {
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                    new mostrarEstanteria()).addToBackStack(null).commit();
+                        }
                     }
                 });
 

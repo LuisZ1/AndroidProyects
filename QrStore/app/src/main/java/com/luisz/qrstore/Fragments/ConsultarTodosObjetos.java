@@ -51,16 +51,15 @@ public class ConsultarTodosObjetos extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         listadoObjetos = new ArrayList<Objeto>();
-        //setUpRecyclerView();
         consultarObjetos();
 
         miRecycler = view.findViewById(R.id.recyclerTodos);
-       miRecycler.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, RecyclerView.VERTICAL, false));
+        miRecycler.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, RecyclerView.VERTICAL, false));
 
         return view;
     }
 
-    private void consultarObjetos(){
+    private void consultarObjetos() {
         listadoObjetos.clear();
         db.collection("objetos")
                 .get()
@@ -115,37 +114,37 @@ public class ConsultarTodosObjetos extends Fragment {
         consultarObjetos();
     }
 
-    private void restaurarObjeto(Objeto objeto){
-            String nombreObjeto = objeto.getNombre();
-            String descripcionObjeto = objeto.getDescripcion();
-            String idCajaSeleccionada = objeto.getidcaja();
+    private void restaurarObjeto(Objeto objeto) {
+        String nombreObjeto = objeto.getNombre();
+        String descripcionObjeto = objeto.getDescripcion();
+        String idCajaSeleccionada = objeto.getidcaja();
 
 
-            Map<String, Object> map = new HashMap<>();
-            map.put("idobjeto", objeto.getidobjeto());
-            map.put("nombre", nombreObjeto);
-            map.put("idcaja", idCajaSeleccionada);
-            map.put("descripcion", descripcionObjeto);
+        Map<String, Object> map = new HashMap<>();
+        map.put("idobjeto", objeto.getidobjeto());
+        map.put("nombre", nombreObjeto);
+        map.put("idcaja", idCajaSeleccionada);
+        map.put("descripcion", descripcionObjeto);
 
-            // Add a new document with a generated ID
-            db.collection("objetos")
-                    .document(objeto.getidobjeto())
-                    .set(map)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Restaurado").show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar el objeto").show();
-                        }
-                    });
+        // Add a new document with a generated ID
+        db.collection("objetos")
+                .document(objeto.getidobjeto())
+                .set(map)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Restaurado").show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar el objeto").show();
+                    }
+                });
     }
 
-    private void eliminarObjeto(Objeto objetoEliminado, int position){
+    private void eliminarObjeto(Objeto objetoEliminado, int position) {
         db.collection("objetos").document(objetoEliminado.getidobjeto())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
