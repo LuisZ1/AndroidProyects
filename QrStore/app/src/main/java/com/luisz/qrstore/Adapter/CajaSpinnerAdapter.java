@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.luisz.qrstore.Models.Caja;
@@ -18,8 +17,8 @@ import androidx.annotation.Nullable;
 
 public class CajaSpinnerAdapter extends ArrayAdapter {
 
-    public CajaSpinnerAdapter(Context context, ArrayList<Caja> countryList) {
-        super(context, 0, countryList);
+    public CajaSpinnerAdapter(Context context, ArrayList<Caja> listaCaja) {
+        super(context, 0, listaCaja);
     }
 
     @NonNull
@@ -40,7 +39,6 @@ public class CajaSpinnerAdapter extends ArrayAdapter {
             );
         }
 
-        //ImageView imageViewFlag = convertView.findViewById(R.id.image_view_flag);
         TextView textViewName = convertView.findViewById(R.id.textoSpinner);
 
         Caja currentItem = (Caja) getItem(position);

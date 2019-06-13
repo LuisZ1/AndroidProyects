@@ -5,13 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.R;
 
 import java.util.ArrayList;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListadoEstanteriasAdapter extends RecyclerView.Adapter<ListadoEstanteriasAdapter.ViewHolderEstanterias> implements View.OnClickListener {

@@ -2,6 +2,7 @@ package com.luisz.qrstore.Fragments;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,6 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -37,15 +37,11 @@ public class ConsultarTodosObjetos extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
-    private FragmentManager fragmentManager = getFragmentManager();
     private RecyclerView miRecycler;
     private FirebaseFirestore db;
     private ArrayList<Objeto> listadoObjetos;
     private ListadoObjetosAdapter adaptador;
-    private final String stringobj = "objetos";
-
-    public ConsultarTodosObjetos() {
-    }
+    private static final String STRINGOBJ = "objetos";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +49,7 @@ public class ConsultarTodosObjetos extends Fragment {
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         db = FirebaseFirestore.getInstance();
 
-        listadoObjetos = new ArrayList<Objeto>();
+        listadoObjetos = new ArrayList<>();
         consultarObjetos();
 
         miRecycler = view.findViewById(R.id.recyclerTodos);
@@ -64,7 +60,7 @@ public class ConsultarTodosObjetos extends Fragment {
 
     private void consultarObjetos() {
         listadoObjetos.clear();
-        db.collection(stringobj)
+        db.collection(STRINGOBJ)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -131,7 +127,7 @@ public class ConsultarTodosObjetos extends Fragment {
                     miViewModel.setObjetoEscaneado(adaptador.getListaObjetos().get(position));
                     if (getFragmentManager() != null) {
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_container, new mostrarObjeto()) .addToBackStack(null).commit();
+                                .replace(R.id.fragment_container, new MostrarObjeto()) .addToBackStack(null).commit();
                     }
                 }
             }
@@ -156,7 +152,7 @@ public class ConsultarTodosObjetos extends Fragment {
         map.put("descripcion", descripcionObjeto);
 
         // Add a new document with a generated ID
-        db.collection(stringobj)
+        db.collection(STRINGOBJ)
                 .document(objeto.getidobjeto())
                 .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -174,7 +170,7 @@ public class ConsultarTodosObjetos extends Fragment {
     }
 
     private void eliminarObjeto(Objeto objetoEliminado, int position) {
-        db.collection(stringobj).document(objetoEliminado.getidobjeto())
+        db.collection(STRINGOBJ).document(objetoEliminado.getidobjeto())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -191,7 +187,7 @@ public class ConsultarTodosObjetos extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error deleting document", e);
+                        Log.e("ConsultaObjeto", "Error deleting document", e);
                     }
                 });
     }

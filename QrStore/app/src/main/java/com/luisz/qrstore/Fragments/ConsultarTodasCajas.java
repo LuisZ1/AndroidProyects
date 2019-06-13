@@ -47,9 +47,7 @@ public class ConsultarTodasCajas extends Fragment {
     private ArrayList<Caja> listadoCajas;
     private ListadoCajasAdapter adaptador;
     private boolean borrado;
-
-    public ConsultarTodasCajas() {
-    }
+    private static final String STRINGCAJA = "cajas";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +55,7 @@ public class ConsultarTodasCajas extends Fragment {
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         db = FirebaseFirestore.getInstance();
 
-        listadoCajas = new ArrayList<Caja>();
+        listadoCajas = new ArrayList<>();
 
         consultarObjetos();
 
@@ -69,7 +67,7 @@ public class ConsultarTodasCajas extends Fragment {
 
     private void consultarObjetos() {
         listadoCajas.clear();
-        db.collection("cajas")
+        db.collection(STRINGCAJA)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -134,13 +132,12 @@ public class ConsultarTodasCajas extends Fragment {
                     miViewModel.setCajaEscaneada(adaptador.getListaCajas().get(position));
                     DynamicToast.makeSuccess(view.getContext().getApplicationContext(), "Consulta:" +position).show();
                     if (getFragmentManager() != null) {
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja())
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MostrarCaja())
                                 .addToBackStack(null).commit();
                     }
                 }
             }
         };
-        //return simpleItemTouchCallback;
     }
 
 
@@ -153,7 +150,7 @@ public class ConsultarTodasCajas extends Fragment {
         map.put("descripcion", objeto.getDescripcion());
 
         // Add a new document with a generated ID
-        db.collection("cajas")
+        db.collection(STRINGCAJA)
                 .document(objeto.getidcaja())
                 .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -190,7 +187,7 @@ public class ConsultarTodasCajas extends Fragment {
                     consultarObjetos();
                 } else {
                     borrado = true;
-                    db.collection("cajas").document(objetoEliminado.getidcaja())
+                    db.collection(STRINGCAJA).document(objetoEliminado.getidcaja())
                             .delete()
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

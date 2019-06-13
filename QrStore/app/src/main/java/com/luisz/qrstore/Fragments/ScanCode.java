@@ -98,8 +98,6 @@ public class ScanCode extends Fragment {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
 
-                //miViewModel.reiniciarVariables();
-
                 final SparseArray<Barcode> qrCode = detections.getDetectedItems();
 
                 if (qrCode.size() != 0 && !vibrating) {
@@ -123,10 +121,9 @@ public class ScanCode extends Fragment {
         return view;
     }
 
-    public void consultarCodigo(final String codigo) {
+    private void consultarCodigo(final String codigo) {
         switch (codigo.charAt(0)) {
             case 'E':
-                //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una estanteria").show();
                 if (db == null) {
                     db = FirebaseFirestore.getInstance();
                 }
@@ -143,42 +140,15 @@ public class ScanCode extends Fragment {
                         estanteria.setIdestanteria(documentSnapshot.getId());
 
                         miViewModel.setEstanteriaEscaneada(estanteria);
-
-                        //consultar Cajas de la estantería -----------------------------
-
-//                        Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", codigo);
-//
-//                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onEvent(@Nullable QuerySnapshot snapshot,
-//                                                @Nullable FirebaseFirestoreException e) {
-//                                if (e != null) {
-//                                    // Handle error
-//                                    return;
-//                                }
-//
-//                                List<Caja> cajas = snapshot.toObjects(Caja.class);
-//
-//                                miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
-//
-//                                vibrating = false;
-//
-//                                if (getFragmentManager() != null) {
-//                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                                            new mostrarEstanteria()).addToBackStack(null).commit();
-//                                }
-//                            }
-//                        });
                         if (getFragmentManager() != null) {
                             getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                    new mostrarEstanteria())/*.addToBackStack(null)*/.commit();
+                                    new MostrarEstanteria()).commit();
                         }
                     }
                 });
 
                 break;
             case 'C':
-                //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una caja").show();
                 if (db == null) {
                     db = FirebaseFirestore.getInstance();
                 }
@@ -194,43 +164,15 @@ public class ScanCode extends Fragment {
                         caja.setidcaja(documentSnapshot.getId());
 
                         miViewModel.setCajaEscaneada(caja);
-                        //miViewModel.setEstanteriaEscaneada(null);
-                        // miViewModel.setObjetoEscaneado(null);
-
-
-                        //consultar Cajas de la estantería -----------------------------
-
-//                        Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", codigo);
-//
-//                        queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-//                                if (e != null) {
-//                                    return;
-//                                }
-//
-//                                List<Objeto> objetos = snapshot.toObjects(Objeto.class);
-//
-//                                miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
-//
-//                                vibrating = false;
-//
-//                                if (getFragmentManager() != null) {
-//                                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
-//                                }
-//                            }
-//                        });
                         if (getFragmentManager() != null) {
                             getFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container, new mostrarCaja())
-                                    /*.addToBackStack(null)*/.commit();
+                                    .replace(R.id.fragment_container, new MostrarCaja()).commit();
                         }
                     }
                 });
 
                 break;
             case 'T':
-                //DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Has escaneado una cosa").show();
                 if (db == null) {
                     db = FirebaseFirestore.getInstance();
                 }
@@ -239,34 +181,26 @@ public class ScanCode extends Fragment {
                 }
 
                 DocumentReference docRefObjeto = db.collection("objetos").document(codigo);
-                docRefObjeto.get().
-
-                        addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                docRefObjeto.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 Objeto objeto = documentSnapshot.toObject(Objeto.class);
                                 objeto.setidobjeto(documentSnapshot.getId());
 
-                                //miViewModel.setCajaEscaneada(null);
-                                //miViewModel.setEstanteriaEscaneada(null);
                                 miViewModel.setObjetoEscaneado(objeto);
 
                                 vibrating = false;
 
                                 if (getFragmentManager() != null) {
                                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                            new mostrarObjeto())/*.addToBackStack(null)*/.commit();
+                                            new MostrarObjeto()).commit();
                                 }
                             }
                         });
 
                 break;
             default:
-                DynamicToast.makeWarning(view.getContext().
-
-                        getApplicationContext(), "Código no reconocido").
-
-                        show();
+                DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Código no reconocido").show();
 
                 vibrating = false;
                 break;

@@ -1,10 +1,6 @@
 package com.luisz.qrstore.Fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +9,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.luisz.qrstore.MainActivity;
 import com.luisz.qrstore.R;
@@ -25,24 +19,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class crearCodigoEstanteria extends Fragment {
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+public class CrearCodigoEstanteria extends Fragment {
 
     private View view;
     private Button btnCrearCodigoEstanteria;
     private TextView txtNombre, txtLugar, txtDescripcion;
-    private DatabaseReference referenceDB;
     private FirebaseFirestore db ;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_crear_codigo_estanteria, container, false);
-
-        referenceDB = FirebaseDatabase.getInstance().getReference("estanterias");
 
         db = FirebaseFirestore.getInstance();
 

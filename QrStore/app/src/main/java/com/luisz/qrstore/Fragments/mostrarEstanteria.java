@@ -40,7 +40,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class mostrarEstanteria extends Fragment {
+public class MostrarEstanteria extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
@@ -51,9 +51,9 @@ public class mostrarEstanteria extends Fragment {
     private FirebaseFirestore db;
     private ConstraintLayout tarjetaPrincipal;
     private ArrayList<Caja> listadoCajas;
-    private boolean navegadoACaja;
+    private static final String STRINGCAJA = "cajas";
 
-    public mostrarEstanteria() {
+    public MostrarEstanteria() {
     }
 
     @Override
@@ -62,10 +62,7 @@ public class mostrarEstanteria extends Fragment {
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         db = FirebaseFirestore.getInstance();
 
-        navegadoACaja = false;
-
-        listadoCajas = new ArrayList<Caja>();
-        //consultarObjetos();
+        listadoCajas = new ArrayList<>();
 
         tarjetaPrincipal = view.findViewById(R.id.constraintLayoutMostrarEstanteria);
         tarjetaPrincipal.setOnLongClickListener(new View.OnLongClickListener() {
@@ -84,7 +81,6 @@ public class mostrarEstanteria extends Fragment {
         txtIdEstanteria = view.findViewById(R.id.txtIdEstanteriaEscaneada);
         txtIdEstanteria.setText(estanteria.getIdestanteria());
         txtnumerocajas = view.findViewById(R.id.txtCajasEstanteriaEscaneada);
-//        txtnumerocajas.setText(String.valueOf(miViewModel.getListadoCajas().size()));
 
         txtDescripcionEstanteria = view.findViewById(R.id.txtDescripcionEstanteria);
         txtDescripcionEstanteria.setText(estanteria.getDescripcion());
@@ -93,33 +89,21 @@ public class mostrarEstanteria extends Fragment {
 
         miRecyclerView = view.findViewById(R.id.recyclerCajas);
         miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, RecyclerView.VERTICAL, false));
-//        adaptador = new ListadoCajasAdapter(listadoCajas);
-//        adaptador = new ListadoCajasAdapter(miViewModel.getListadoCajas());
-//        miRecyclerView.setAdapter(adaptador);
-
-//        adaptador.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                navegarCaja();
-//            }
-//        });
 
         consultarObjetos();
 
         return view;
     }
 
-    private void navegarCaja(int position){
+    private void navegarCaja(int position) {
         int cajaSeleccionada = position;
-//        int cajaSeleccionada = miRecyclerView.getChildAdapterPosition(view);
         if (cajaSeleccionada != -1) {
             final String codigo = listadoCajas.get(cajaSeleccionada).getidcaja();
-            //escaner.consultarCodigo(idCaja, miViewModel);
 
             if (db == null) {
                 db = FirebaseFirestore.getInstance();
             }
-            DocumentReference docRefCaja = db.collection("cajas").document(codigo);
+            DocumentReference docRefCaja = db.collection(STRINGCAJA).document(codigo);
             docRefCaja.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -128,42 +112,20 @@ public class mostrarEstanteria extends Fragment {
 
                     miViewModel.setCajaEscaneada(caja);
 
-                    //consultar Cajas de la estantería -----------------------------
-
-//                    Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", codigo);
-//
-//                    queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-//                            if (e != null) {
-//                                // Handle error
-//                                return;
-//                            }
-//
-//                            List<Objeto> objetos = snapshot.toObjects(Objeto.class);
-//
-//                            miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
-//
-////                            if (getFragmentManager() != null) {
-////                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
-////                            }
-//                        }
-//                    });
                     if (getFragmentManager() != null) {
-                        if(!navegadoACaja) {
-                            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
-                            navegadoACaja = true;
-                        }
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MostrarCaja()).addToBackStack(null).commit();
                     }
+
                 }
             });
 
         }
+
     }
 
     private void consultarObjetos() {
         listadoCajas.clear();
-        Query queryCajas = db.collection("cajas").whereEqualTo("idestanteria", estanteria.getIdestanteria());
+        Query queryCajas = db.collection(STRINGCAJA).whereEqualTo("idestanteria", estanteria.getIdestanteria());
 
         queryCajas.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -188,67 +150,32 @@ public class mostrarEstanteria extends Fragment {
                 miRecyclerView.setAdapter(adaptador);
             }
         });
-
-//        db.collection("cajas")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Caja caja = new Caja(document.getId(), document.get("idestanteria").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
-//                                listadoCajas.add(caja);
-//                            }
-//                            miViewModel.setListadoCajas((ArrayList<Caja>) listadoCajas);
-//
-//                            adaptador = new ListadoCajasAdapter(listadoCajas);
-//
-//                            txtnumerocajas.setText(String.valueOf(listadoCajas.size()));
-//
-//                            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
-//                            itemTouchHelper.attachToRecyclerView(miRecyclerView);
-//
-////                            adaptador.setOnClickListener(new View.OnClickListener() {
-////                                @Override
-////                                public void onClick(View view) {
-////                                    navegarCaja();
-////                                }
-////                            });
-//
-//                            miRecyclerView.setAdapter(adaptador);
-//
-//                        } else {
-//                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay cajas disponibles").show();
-//                        }
-//                    }
-//                });
     }
 
     private ItemTouchHelper.Callback createHelperCallback() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
+        return new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
-                    new RecyclerViewSwipeDecorator.Builder(view.getContext(), c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                            .addSwipeRightBackgroundColor(getResources().getColor(R.color.rojo))
-                            .addSwipeRightActionIcon(R.drawable.ic_delete_sweep_black_24dp)
-                            .addSwipeRightLabel("Eliminar")
-                            .setSwipeRightLabelColor(getResources().getColor(R.color.blanco))
+                new RecyclerViewSwipeDecorator.Builder(view.getContext(), c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        .addSwipeRightBackgroundColor(getResources().getColor(R.color.rojo))
+                        .addSwipeRightActionIcon(R.drawable.ic_delete_sweep_black_24dp)
+                        .addSwipeRightLabel("Eliminar")
+                        .setSwipeRightLabelColor(getResources().getColor(R.color.blanco))
 
-                            .addSwipeLeftBackgroundColor(getResources().getColor(R.color.azulClaro))
-                            .addSwipeLeftActionIcon(R.drawable.ic_arrow_forward_black_24dp)
-                            .addSwipeLeftLabel("Consultar")
-                            .setSwipeLeftLabelColor(getResources().getColor(R.color.blanco))
-                            .create()
-                            .decorate();
+                        .addSwipeLeftBackgroundColor(getResources().getColor(R.color.azulClaro))
+                        .addSwipeLeftActionIcon(R.drawable.ic_arrow_forward_black_24dp)
+                        .addSwipeLeftLabel("Consultar")
+                        .setSwipeLeftLabelColor(getResources().getColor(R.color.blanco))
+                        .create()
+                        .decorate();
 
-                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 
             }
 
-            //not used, as the first parameter above is 0
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -258,20 +185,19 @@ public class mostrarEstanteria extends Fragment {
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
 
                 int position = viewHolder.getAdapterPosition();
-                if(swipeDir == ItemTouchHelper.RIGHT){
+                if (swipeDir == ItemTouchHelper.RIGHT) {
 
                     Caja objetoEliminado = adaptador.getListaCajas().get(position);
 
                     eliminarCaja(objetoEliminado, position);
 
-                }else if(swipeDir == ItemTouchHelper.LEFT){
+                } else if (swipeDir == ItemTouchHelper.LEFT) {
                     navegarCaja(position);
                 }
 
             }
 
         };
-        return simpleItemTouchCallback;
     }
 
     private void restaurarCaja(Caja objeto) {
@@ -283,7 +209,7 @@ public class mostrarEstanteria extends Fragment {
         map.put("descripcion", objeto.getDescripcion());
 
         // Add a new document with a generated ID
-        db.collection("cajas")
+        db.collection(STRINGCAJA)
                 .document(objeto.getidcaja())
                 .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -314,12 +240,11 @@ public class mostrarEstanteria extends Fragment {
 
                 List<Objeto> cajas = snapshot.toObjects(Objeto.class);
 
-                if (cajas.size() > 0) {
-                    //TODO Toast no es puede borrar caja
+                if (!cajas.isEmpty()) {
                     DynamicToast.makeWarning(view.getContext().getApplicationContext(), "No puedes borrar esa caja, hay objetos dentro").show();
                     consultarObjetos();
                 } else {
-                    db.collection("cajas").document(objetoEliminado.getidcaja())
+                    db.collection(STRINGCAJA).document(objetoEliminado.getidcaja())
                             .delete()
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

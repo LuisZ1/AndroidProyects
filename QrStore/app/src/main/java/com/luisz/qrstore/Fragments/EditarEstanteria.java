@@ -5,24 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.luisz.qrstore.Adapter.CajaSpinnerAdapter;
-import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
-import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Viewmodel.ViewModel;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,16 +61,16 @@ public class EditarEstanteria extends Fragment {
     }
 
     public void updateFields() {
-        String NombreEstanteria = txtNombreEstanteria.getText().toString();
-        String DescripcionEstanteria = txtDescripcionEstanteria.getText().toString();
-        String LugarEstanteria = txtLugarEstanteria.getText().toString();
+        String nombreEstanteria = txtNombreEstanteria.getText().toString();
+        String descripcionEstanteria = txtDescripcionEstanteria.getText().toString();
+        String lugarEstanteria = txtLugarEstanteria.getText().toString();
 
         DocumentReference docRef = db.collection("estanterias").document(estanteria.getIdestanteria());
 
         Map<String,Object> updates = new HashMap<>();
-        updates.put("nombre", NombreEstanteria);
-        updates.put("ubicacion", LugarEstanteria);
-        updates.put("descripcion", DescripcionEstanteria);
+        updates.put("nombre", nombreEstanteria);
+        updates.put("ubicacion", descripcionEstanteria);
+        updates.put("descripcion", lugarEstanteria);
 
         docRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

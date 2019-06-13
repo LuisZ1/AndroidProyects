@@ -1,10 +1,6 @@
 package com.luisz.qrstore.Fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +27,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
-public class crearCodigoObjeto extends Fragment {
+
+public class CrearCodigoObjeto extends Fragment {
 
     private View view;
     private Button btnCrearCodigoObjeto;

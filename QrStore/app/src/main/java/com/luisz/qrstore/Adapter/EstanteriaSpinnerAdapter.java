@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
 import com.luisz.qrstore.R;
 
@@ -18,8 +17,8 @@ import androidx.annotation.Nullable;
 
 public class EstanteriaSpinnerAdapter extends ArrayAdapter {
 
-    public EstanteriaSpinnerAdapter(Context context, ArrayList<Estanteria> countryList) {
-        super(context, 0, countryList);
+    public EstanteriaSpinnerAdapter(Context context, ArrayList<Estanteria> listaEstanterias) {
+        super(context, 0, listaEstanterias);
     }
 
     @NonNull
@@ -40,7 +39,6 @@ public class EstanteriaSpinnerAdapter extends ArrayAdapter {
             );
         }
 
-        //ImageView imageViewFlag = convertView.findViewById(R.id.image_view_flag);
         TextView textViewName = convertView.findViewById(R.id.textoSpinner);
 
         Estanteria currentItem = (Estanteria) getItem(position);

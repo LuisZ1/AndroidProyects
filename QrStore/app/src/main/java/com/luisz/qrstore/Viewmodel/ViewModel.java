@@ -1,7 +1,6 @@
 package com.luisz.qrstore.Viewmodel;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
@@ -13,7 +12,6 @@ import androidx.lifecycle.AndroidViewModel;
 
 public class ViewModel extends AndroidViewModel {
 
-    private static Context miAppContext;
     private Estanteria estanteriaEscaneada;
     private Caja cajaEscaneada;
     private Objeto objetoEscaneado;
@@ -24,7 +22,6 @@ public class ViewModel extends AndroidViewModel {
 
     public ViewModel(Application application) {
         super(application);
-        miAppContext = application.getApplicationContext();
     }
 
     public void reiniciarVariables() {

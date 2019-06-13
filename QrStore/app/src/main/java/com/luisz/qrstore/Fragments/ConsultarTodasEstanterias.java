@@ -2,6 +2,7 @@ package com.luisz.qrstore.Fragments;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,6 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -43,14 +43,11 @@ public class ConsultarTodasEstanterias extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
-    private FragmentManager fragmentManager = getFragmentManager();
     private RecyclerView miRecycler;
     private FirebaseFirestore db;
     private ArrayList<Estanteria> listadoEstanterias;
     private ListadoEstanteriasAdapter adaptador;
-
-    public ConsultarTodasEstanterias() {
-    }
+    private static final String STRINGESTANTERIA = "estanteria";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +55,7 @@ public class ConsultarTodasEstanterias extends Fragment {
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         db = FirebaseFirestore.getInstance();
 
-        listadoEstanterias = new ArrayList<Estanteria>();
+        listadoEstanterias = new ArrayList<>();
 
         consultarObjetos();
 
@@ -70,7 +67,7 @@ public class ConsultarTodasEstanterias extends Fragment {
 
     private void consultarObjetos(){
         listadoEstanterias.clear();
-        db.collection("estanterias")
+        db.collection(STRINGESTANTERIA)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -137,7 +134,7 @@ public class ConsultarTodasEstanterias extends Fragment {
                     miViewModel.setEstanteriaEscaneada(adaptador.getListaEstanterias().get(position));
                     if (getFragmentManager() != null) {
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_container, new mostrarEstanteria()) .addToBackStack(null).commit();
+                                .replace(R.id.fragment_container, new MostrarEstanteria()) .addToBackStack(null).commit();
                     }
                 }
             }
@@ -158,7 +155,7 @@ public class ConsultarTodasEstanterias extends Fragment {
         map.put("descripcion", objeto.getDescripcion());
 
         // Add a new document with a generated ID
-        db.collection("estanterias")
+        db.collection(STRINGESTANTERIA)
                 .document(objeto.getIdestanteria())
                 .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -190,12 +187,12 @@ public class ConsultarTodasEstanterias extends Fragment {
 
                 List<Caja> cajas = snapshot.toObjects(Caja.class);
 
-                if(cajas.size() > 0){
+                if(!cajas.isEmpty()){
                     DynamicToast.makeWarning(view.getContext().getApplicationContext(), "No puedes borrar esa estantería, hay cajas dentro").show();
                     listadoEstanterias.clear();
                     consultarObjetos();
                 }else{
-                    db.collection("estanterias").document(objetoEliminado.getIdestanteria())
+                    db.collection(STRINGESTANTERIA).document(objetoEliminado.getIdestanteria())
                             .delete()
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -212,7 +209,7 @@ public class ConsultarTodasEstanterias extends Fragment {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    //Log.w(TAG, "Error deleting document", e);
+                                    Log.e("consultarEstanteria", "Error deleting document", e);
                                 }
                             });
                 }

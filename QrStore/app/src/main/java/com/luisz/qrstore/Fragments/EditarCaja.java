@@ -14,11 +14,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.luisz.qrstore.Adapter.CajaSpinnerAdapter;
 import com.luisz.qrstore.Adapter.EstanteriaSpinnerAdapter;
 import com.luisz.qrstore.Models.Caja;
 import com.luisz.qrstore.Models.Estanteria;
-import com.luisz.qrstore.Models.Objeto;
 import com.luisz.qrstore.R;
 import com.luisz.qrstore.Viewmodel.ViewModel;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
@@ -85,7 +83,7 @@ public class EditarCaja extends Fragment {
                                 listadoEstanterias.add(est);
                             }
 
-                            EstanteriaSpinnerAdapter adaptador = new EstanteriaSpinnerAdapter(view.getContext(), listadoEstanterias);
+                            adaptador = new EstanteriaSpinnerAdapter(view.getContext(), listadoEstanterias);
                             spinnerEstanterias.setAdapter(adaptador);
                         } else {
                             DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay estanterías disponibles").show();

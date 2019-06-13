@@ -9,8 +9,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,7 +34,7 @@ public class EditarObjeto extends Fragment {
     private View view;
     private ViewModel miViewModel;
     private Objeto objeto;
-    private TextView txtNombreObjeto, txtDescripcionObjeto, txtIdCajaObjeto;
+    private TextView txtNombreObjeto, txtDescripcionObjeto;
     private FirebaseFirestore db;
     private ArrayList<Caja> listadoCajas;
     private CajaSpinnerAdapter adaptador;
@@ -51,7 +49,7 @@ public class EditarObjeto extends Fragment {
         view = inflater.inflate(R.layout.fragment_editar_objeto, container, false);
         miViewModel = ViewModelProviders.of(getActivity()).get(ViewModel.class);
         db = FirebaseFirestore.getInstance();
-        listadoCajas = new ArrayList<Caja>();
+        listadoCajas = new ArrayList<>();
 
         objeto = miViewModel.getObjetoEscaneado();
         spinnerCajas = view.findViewById(R.id.spinner_cajas_editar);

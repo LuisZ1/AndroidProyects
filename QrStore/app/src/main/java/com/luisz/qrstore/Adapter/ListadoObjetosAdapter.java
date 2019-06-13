@@ -80,11 +80,11 @@ public class ListadoObjetosAdapter extends RecyclerView.Adapter<ListadoObjetosAd
         notifyDataSetChanged();
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return view.getContext();
     }
 
-    public void deleteItem(int position){
+    public void deleteItem(int position) {
 
     }
 

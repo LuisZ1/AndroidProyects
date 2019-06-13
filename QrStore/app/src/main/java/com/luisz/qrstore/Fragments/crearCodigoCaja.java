@@ -1,17 +1,10 @@
 package com.luisz.qrstore.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,9 +13,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,16 +28,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
-public class crearCodigoCaja extends Fragment {
 
-    View view;
-    Button btnCrearCodigoCaja;
-    ArrayList<Estanteria> listadoEstanterias;
-    FirebaseFirestore db;
-    Spinner spinnerEstanterias;
-    EditText txtNombre, txtDescripcion;
-    Boolean botonPulsado = false;
+public class CrearCodigoCaja extends Fragment {
+
+    private View view;
+    private Button btnCrearCodigoCaja;
+    private ArrayList<Estanteria> listadoEstanterias;
+    private FirebaseFirestore db;
+    private Spinner spinnerEstanterias;
+    private EditText txtNombre, txtDescripcion;
+    private Boolean botonPulsado = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +50,7 @@ public class crearCodigoCaja extends Fragment {
         txtNombre = view.findViewById(R.id.txtCrearNombreCaja);
         txtDescripcion = view.findViewById(R.id.txtCrearDescripcionCaja);
 
-        listadoEstanterias = new ArrayList<Estanteria>();
+        listadoEstanterias = new ArrayList<>();
         spinnerEstanterias = view.findViewById(R.id.spinner_estanterias);
 
         consultarTodasEstanterias();

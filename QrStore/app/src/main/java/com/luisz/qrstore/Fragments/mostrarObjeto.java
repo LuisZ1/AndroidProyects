@@ -28,7 +28,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-public class mostrarObjeto extends Fragment {
+public class MostrarObjeto extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
@@ -36,10 +36,7 @@ public class mostrarObjeto extends Fragment {
     private TextView txtNombreObjeto, txtIdObjeto, txtDescripcionObjeto, txtIdCajaObjeto;
     private ConstraintLayout tarjetaPrincipal;
     private ImageView btnConsultarCaja;
-    FirebaseFirestore db;
-
-    public mostrarObjeto() {
-    }
+    private FirebaseFirestore db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +67,6 @@ public class mostrarObjeto extends Fragment {
         tarjetaPrincipal.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                //DynamicToast.makeError(view.getContext().getApplicationContext(), "LongClick").show();
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new EditarObjeto()).addToBackStack(null).commit();
                 return true;
@@ -114,7 +110,7 @@ public class mostrarObjeto extends Fragment {
 
                         miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
 
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,new mostrarCaja()).addToBackStack(null).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,new MostrarCaja()).addToBackStack(null).commit();
                     }
                 });
             }

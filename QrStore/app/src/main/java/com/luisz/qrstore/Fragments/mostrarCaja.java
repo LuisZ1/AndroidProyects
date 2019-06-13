@@ -2,6 +2,7 @@ package com.luisz.qrstore.Fragments;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,19 +36,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class mostrarCaja extends Fragment {
+public class MostrarCaja extends Fragment {
 
     private View view;
     private ViewModel miViewModel;
-    private FragmentManager fragmentManager = getFragmentManager();
-    private Estanteria estanteria;
     private Caja caja;
     private TextView txtNombreCaja, txtIdCaja, TxtNumeroObjetos, txtDescripciónCaja, txtIdEstanteriaDeCaja;
     private RecyclerView miRecyclerView;
@@ -58,7 +56,7 @@ public class mostrarCaja extends Fragment {
     private ArrayList<Objeto> listadoObjetos;
 
 
-    public mostrarCaja() {
+    public MostrarCaja() {
     }
 
     @Override
@@ -80,16 +78,12 @@ public class mostrarCaja extends Fragment {
 
         caja = miViewModel.getCajaEscaneada();
         listadoObjetos = new ArrayList<Objeto>();
-//        consultarObjetos();
-
-        //listadoObjetos = miViewModel.getListadoObjetos();
 
         txtNombreCaja = view.findViewById(R.id.txtNombreCajaEscaneada);
         txtNombreCaja.setText(caja.getNombre());
         txtIdCaja = view.findViewById(R.id.txtIdCajaEscaneada);
         txtIdCaja.setText(caja.getidcaja());
         TxtNumeroObjetos = view.findViewById(R.id.txtNumeroObjetosCajaEscaneada);
-//        TxtNumeroObjetos.setText(String.valueOf(miViewModel.getListadoObjetos().size()));
 
         txtIdEstanteriaDeCaja = view.findViewById(R.id.txtIdEstanteriaDeCaja);
         txtIdEstanteriaDeCaja.setText(caja.getIdestanteria());
@@ -106,15 +100,6 @@ public class mostrarCaja extends Fragment {
 
         miRecyclerView = view.findViewById(R.id.recyclerObjetos);
         miRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 1, RecyclerView.VERTICAL, false));
-//        adaptador = new ListadoObjetosAdapter(listadoObjetos);
-//        miRecyclerView.setAdapter(adaptador);
-
-//        adaptador.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                navegarObjeto();
-//            }
-//        });
 
         consultarObjetos();
 
@@ -139,7 +124,7 @@ public class mostrarCaja extends Fragment {
                     miViewModel.setObjetoEscaneado(objeto);
 
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new mostrarObjeto()).addToBackStack(null).commit();
+                            new MostrarObjeto()).addToBackStack(null).commit();
                 }
             });
         }
@@ -181,7 +166,7 @@ public class mostrarCaja extends Fragment {
                         miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
 
                         getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new mostrarEstanteria()).addToBackStack(null).commit();
+                                new MostrarEstanteria()).addToBackStack(null).commit();
                     }
                 });
             }
@@ -189,7 +174,7 @@ public class mostrarCaja extends Fragment {
     }
 
     private ItemTouchHelper.Callback createHelperCallback() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
+        return new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
@@ -238,7 +223,6 @@ public class mostrarCaja extends Fragment {
 
             }
         };
-        return simpleItemTouchCallback;
     }
 
     private void undoDelete(Objeto objetoEliminado) {
@@ -294,37 +278,13 @@ public class mostrarCaja extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error deleting document", e);
+                        Log.e("consultaCaja", "Error deleting document", e);
                     }
                 });
     }
 
     private void consultarObjetos() {
         listadoObjetos.clear();
-//        db.collection("objetos")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Objeto objeto = new Objeto(document.getId(), document.get("idcaja").toString(), document.get("nombre").toString(), document.get("descripcion").toString());
-//                                listadoObjetos.add(objeto);
-//                            }
-//                            miViewModel.setListadoObjetos((ArrayList<Objeto>) listadoObjetos);
-//                            adaptador = new ListadoObjetosAdapter(listadoObjetos);
-////                            miRecyclerView.setAdapter(adaptador);
-//
-//                            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
-//                            itemTouchHelper.attachToRecyclerView(miRecyclerView);
-//
-//                            miRecyclerView.setAdapter(adaptador);
-//
-//                        } else {
-//                            DynamicToast.makeError(view.getContext().getApplicationContext(), "No hay objetos disponibles").show();
-//                        }
-//                    }
-//                });
 
         Query queryCajas = db.collection("objetos").whereEqualTo("idcaja", caja.getidcaja());
 
@@ -345,9 +305,6 @@ public class mostrarCaja extends Fragment {
                 itemTouchHelper.attachToRecyclerView(miRecyclerView);
                 miRecyclerView.setAdapter(adaptador);
 
-//                if (getFragmentManager() != null) {
-//                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new mostrarCaja()).addToBackStack(null).commit();
-//                }
             }
         });
     }

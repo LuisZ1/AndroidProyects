@@ -20,16 +20,13 @@ public class Home extends Fragment {
     private View view;
     private ViewModel miViewModel;
     private LinearLayout btnConsultarTodo;
-    private ImageView imgScanCode, imgCreateEstanteria, imgCrearCaja, imgCrearObjeto, imgCerrarSesion;
+    private ImageView imgScanCode;
+    private ImageView imgCreateEstanteria;
+    private ImageView imgCrearCaja;
+    private ImageView imgCrearObjeto;
+    private ImageView imgCerrarSesion;
     private TextView nombreUsuario;
 
-    public Home() {
-    }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +61,7 @@ public class Home extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new crearCodigoEstanteria()).addToBackStack(null).commit();
+                        new CrearCodigoEstanteria()).addToBackStack(null).commit();
             }
         });
 
@@ -73,7 +70,7 @@ public class Home extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new crearCodigoCaja()).addToBackStack(null).commit();
+                        new CrearCodigoCaja()).addToBackStack(null).commit();
             }
         });
 
@@ -82,16 +79,16 @@ public class Home extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new crearCodigoObjeto()).addToBackStack(null).commit();
+                        new CrearCodigoObjeto()).addToBackStack(null).commit();
             }
         });
 
-        btnConsultarTodo  = (LinearLayout) view.findViewById(R.id.btnConsultarTodo);
+        btnConsultarTodo = (LinearLayout) view.findViewById(R.id.btnConsultarTodo);
         btnConsultarTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new menuConsultarTodo()).addToBackStack(null).commit();
+                        new MenuConsultarTodo()).addToBackStack(null).commit();
             }
         });
 

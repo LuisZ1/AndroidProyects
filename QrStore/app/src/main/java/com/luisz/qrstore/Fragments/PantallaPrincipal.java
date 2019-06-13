@@ -67,7 +67,7 @@ public class PantallaPrincipal extends Fragment {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    miViewModel.setNombreUsuario(user.getEmail().toString());
+                    miViewModel.setNombreUsuario(user.getEmail());
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new Home()).commit();
                 }
@@ -77,6 +77,7 @@ public class PantallaPrincipal extends Fragment {
         return view;
     }
 
+    @Override
     public void onStart() {
         super.onStart();
         FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);

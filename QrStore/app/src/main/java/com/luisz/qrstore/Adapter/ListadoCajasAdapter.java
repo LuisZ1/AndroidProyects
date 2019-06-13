@@ -17,10 +17,10 @@ public class ListadoCajasAdapter extends RecyclerView.Adapter<ListadoCajasAdapte
 
     private ArrayList<Caja> listaCajas;
     private View.OnClickListener listener;
-    private  View view;
+    private View view;
 
-    public ListadoCajasAdapter(ArrayList<Caja> listaMejoras) {
-        this.listaCajas = listaMejoras;
+    public ListadoCajasAdapter(ArrayList<Caja> listaCajas) {
+        this.listaCajas = listaCajas;
     }
 
     @Override
@@ -35,12 +35,6 @@ public class ListadoCajasAdapter extends RecyclerView.Adapter<ListadoCajasAdapte
     public void onBindViewHolder(ViewHolderCajas viewHolderCaja, int i) {
 
         viewHolderCaja.txtNombreCaja.setText(listaCajas.get(i).getNombre());
-//        viewHolderCaja.txtPrecio.setText(formateoDeNumeros.formatterV2(listaCajas.get(i).getPrecio()));
-//        viewHolderCaja.txtLevel.setText(formateoDeNumeros.formatterV2(listaCajas.get(i).getNivel()));
-//        viewHolderCaja.miCardView.setCardBackgroundColor(Color.parseColor(listaCajas.get(i).getColorFondo()));
-//
-//        viewHolderCaja.lblPrecio.setText(Html.fromHtml("&#xf3d1;"));
-//        viewHolderCaja.lblLevel.setText(Html.fromHtml("&#xf201;"));
     }
 
     public void setOnClickListener(View.OnClickListener listener) {
@@ -83,7 +77,7 @@ public class ListadoCajasAdapter extends RecyclerView.Adapter<ListadoCajasAdapte
         notifyDataSetChanged();
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return view.getContext();
     }
 
