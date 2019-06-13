@@ -67,8 +67,10 @@ public class MostrarObjeto extends Fragment {
         tarjetaPrincipal.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new EditarObjeto()).addToBackStack(null).commit();
+                if(getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new EditarObjeto()).addToBackStack(null).commit();
+                }
                 return true;
             }
         });
@@ -110,7 +112,9 @@ public class MostrarObjeto extends Fragment {
 
                         miViewModel.setListadoObjetos((ArrayList<Objeto>) objetos);
 
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,new MostrarCaja()).addToBackStack(null).commit();
+                        if(getFragmentManager() != null) {
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MostrarCaja()).addToBackStack(null).commit();
+                        }
                     }
                 });
             }

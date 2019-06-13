@@ -41,8 +41,10 @@ public class Home extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PantallaPrincipal()).commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new PantallaPrincipal()).commit();
+                }
             }
         });
 
@@ -51,8 +53,10 @@ public class Home extends Fragment {
         imgScanCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ScanCode()).addToBackStack(null).commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new ScanCode()).addToBackStack(null).commit();
+                }
             }
         });
 
@@ -60,8 +64,10 @@ public class Home extends Fragment {
         imgCreateEstanteria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CrearCodigoEstanteria()).addToBackStack(null).commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new CrearCodigoEstanteria()).addToBackStack(null).commit();
+                }
             }
         });
 
@@ -69,8 +75,10 @@ public class Home extends Fragment {
         imgCrearCaja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CrearCodigoCaja()).addToBackStack(null).commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new CrearCodigoCaja()).addToBackStack(null).commit();
+                }
             }
         });
 
@@ -78,8 +86,10 @@ public class Home extends Fragment {
         imgCrearObjeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CrearCodigoObjeto()).addToBackStack(null).commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new CrearCodigoObjeto()).addToBackStack(null).commit();
+                }
             }
         });
 
@@ -87,8 +97,10 @@ public class Home extends Fragment {
         btnConsultarTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MenuConsultarTodo()).addToBackStack(null).commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new MenuConsultarTodo()).addToBackStack(null).commit();
+                }
             }
         });
 

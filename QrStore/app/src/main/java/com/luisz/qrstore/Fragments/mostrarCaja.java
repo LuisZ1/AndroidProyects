@@ -165,8 +165,10 @@ public class MostrarCaja extends Fragment {
 
                         miViewModel.setListadoCajas((ArrayList<Caja>) cajas);
 
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new MostrarEstanteria()).addToBackStack(null).commit();
+                        if(getFragmentManager() != null) {
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                    new MostrarEstanteria()).addToBackStack(null).commit();
+                        }
                     }
                 });
             }

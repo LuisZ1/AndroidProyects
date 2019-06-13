@@ -68,8 +68,10 @@ public class MostrarEstanteria extends Fragment {
         tarjetaPrincipal.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new EditarEstanteria()).addToBackStack(null).commit();
+                if(getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new EditarEstanteria()).addToBackStack(null).commit();
+                }
                 return true;
             }
         });

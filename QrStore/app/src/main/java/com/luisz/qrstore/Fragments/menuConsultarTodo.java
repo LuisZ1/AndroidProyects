@@ -26,24 +26,30 @@ public class MenuConsultarTodo extends Fragment {
         btnObjetos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ConsultarTodosObjetos()).addToBackStack(null).commit();
+                if(getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new ConsultarTodosObjetos()).addToBackStack(null).commit();
+                }
             }
         });
 
         btnCajas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ConsultarTodasCajas()).addToBackStack(null).commit();
+                if(getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new ConsultarTodasCajas()).addToBackStack(null).commit();
+                }
             }
         });
 
         btnEstanterias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ConsultarTodasEstanterias()).addToBackStack(null).commit();
+                    if(getFragmentManager() != null) {
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new ConsultarTodasEstanterias()).addToBackStack(null).commit();
+                    }
             }
         });
 
