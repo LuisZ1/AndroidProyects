@@ -38,7 +38,6 @@ public class CrearCodigoObjeto extends Fragment {
     private ArrayList<Caja> listadoCajas = new ArrayList<>();
     private FirebaseFirestore db;
     private Spinner spinnerCajas;
-    private Boolean botonPulsado;
     private TextView txtNombre, txtDescripcion;
     private CajaSpinnerAdapter adaptador;
 
@@ -95,35 +94,39 @@ public class CrearCodigoObjeto extends Fragment {
         String nombreObjeto = txtNombre.getText().toString();
         String descripcionObjeto = txtDescripcion.getText().toString();
 
-        Caja cajaSeleccionada = (Caja) spinnerCajas.getSelectedItem();
-        String idCajaSeleccionada = cajaSeleccionada.getidcaja();
+        if (nombreObjeto.matches("") || descripcionObjeto.matches("")) {
+            DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Rellena todos los campos").show();
+        } else {
 
-        String uuidAutogen = UUID.randomUUID().toString();
-        final String idObjeto = "T" + uuidAutogen;
+            Caja cajaSeleccionada = (Caja) spinnerCajas.getSelectedItem();
+            String idCajaSeleccionada = cajaSeleccionada.getidcaja();
 
-        Map<String, Object> objeto = new HashMap<>();
-        objeto.put("idobjeto", idObjeto);
-        objeto.put("nombre", nombreObjeto);
-        objeto.put("idcaja", idCajaSeleccionada);
-        objeto.put("descripcion", descripcionObjeto);
+            String uuidAutogen = UUID.randomUUID().toString();
+            final String idObjeto = "T" + uuidAutogen;
 
-        // Add a new document with a generated ID
-        db.collection("objetos")
-                .document(idObjeto)
-                .set(objeto)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Utilidades.crearCodigoQR(view, idObjeto);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar el objeto").show();
-                        botonPulsado = false;
-                    }
-                });
+            Map<String, Object> objeto = new HashMap<>();
+            objeto.put("idobjeto", idObjeto);
+            objeto.put("nombre", nombreObjeto);
+            objeto.put("idcaja", idCajaSeleccionada);
+            objeto.put("descripcion", descripcionObjeto);
+
+            // Add a new document with a generated ID
+            db.collection("objetos")
+                    .document(idObjeto)
+                    .set(objeto)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Utilidades.crearCodigoQR(view, idObjeto);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar el objeto").show();
+                        }
+                    });
+        }
     }
 
 }

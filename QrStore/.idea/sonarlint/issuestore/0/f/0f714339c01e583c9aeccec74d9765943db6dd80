@@ -1,0 +1,20 @@
+
+~squid:S14500"bRemove the "txtNombreEstanteria" field and declare it as a local variable in the relevant methods.(αÿρόÿÿÿÿ
+ squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(£—8π®§µ-
+ƒsquid:S14500"gRemove the "txtDescripcionEstanteria" field and declare it as a local variable in the relevant methods.(αÿρόÿÿÿÿ
+Hsquid:S16590",Declare "txtnumerocajas" on a separate line.(αÿρόÿÿÿÿ
+Lsquid:S1604ω"(Make this anonymous inner class a lambda(Ολ£ωÿÿÿÿ8π®§µ-
+Lsquid:S16590"0Declare "txtLugarEstanteria" on a separate line.(αÿρόÿÿÿÿ
+Fsquid:S1604k"(Make this anonymous inner class a lambda(ΐΉΤΚ8π®§µ-
+vsquid:S14504"_Remove the "tarjetaPrincipal" field and declare it as a local variable in the relevant methods.(Ά­Ώ
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·ÒΪΉ
+Lsquid:S1604ή"(Make this anonymous inner class a lambda( Ήÿÿÿÿÿ8π®§µ-
+zsquid:S14500"^Remove the "txtIdEstanteria" field and declare it as a local variable in the relevant methods.(αÿρόÿÿÿÿ
+}squid:S14500"aRemove the "txtLugarEstanteria" field and declare it as a local variable in the relevant methods.(αÿρόÿÿÿÿ
+Lsquid:S1604κ"(Make this anonymous inner class a lambda(Ωζ»ύÿÿÿÿ8π®§µ-
+squid:S11868"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(·Ή®ρ
+Isquid:S16590"-Declare "txtIdEstanteria" on a separate line.(αÿρόÿÿÿÿ
+Rsquid:S16590"6Declare "txtDescripcionEstanteria" on a separate line.(αÿρόÿÿÿÿ
+Lsquid:S1604‚"(Make this anonymous inner class a lambda(Ωζ»ύÿÿÿÿ8π®§µ-
+Lsquid:S1604Χ"(Make this anonymous inner class a lambda(Ολ£ωÿÿÿÿ8π®§µ-
+Lsquid:S1604†"(Make this anonymous inner class a lambda( Ήÿÿÿÿÿ8π®§µ-

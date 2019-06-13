@@ -1,0 +1,7 @@
+
+squid:S1450%"cRemove the "btnCrearCodigoObjeto" field and declare it as a local variable in the relevant methods.(¦Š€­8–üŒµ-
+Osquid:S1659)",Declare "txtDescripcion" on a separate line.(ñ›¾ÿÿÿÿÿ8–üŒµ-
+Ksquid:S1604{"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ8–üŒµ-
+Ksquid:S1604K"(Make this anonymous inner class a lambda(¯‘àçúÿÿÿÿ8–üŒµ-
+Ksquid:S1604u"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ8–üŒµ-
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·ÒÚ¹

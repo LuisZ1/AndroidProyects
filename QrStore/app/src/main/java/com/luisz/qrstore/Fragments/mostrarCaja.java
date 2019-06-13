@@ -266,13 +266,13 @@ public class MostrarCaja extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        adaptador.notifyItemRemoved(position);
                         Snackbar snackbar = Snackbar.make(view, "Elemento eliminado: " + position, Snackbar.LENGTH_LONG);
                         snackbar.setAction("Deshacer", v -> undoDelete(objetoEliminado));
                         snackbar.setActionTextColor(getResources().getColor(R.color.azulClaro));
                         snackbar.setBackgroundTint(getResources().getColor(R.color.blanco));
                         snackbar.setTextColor(getResources().getColor(R.color.azulOscuro));
                         snackbar.show();
+                        adaptador.notifyItemRemoved(position);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

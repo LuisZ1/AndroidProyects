@@ -62,7 +62,7 @@ public class CrearCodigoCaja extends Fragment {
                 if (Utilidades.checkPermisos((MainActivity) getActivity())) {
                     if (!botonPulsado) {
                         addCaja();
-                    }else{
+                    } else {
                         DynamicToast.makeError(view.getContext().getApplicationContext(), "Ya has guardado esta caja, modifica algún campo").show();
                     }
                 } else {
@@ -100,35 +100,40 @@ public class CrearCodigoCaja extends Fragment {
         String nombreCaja = txtNombre.getText().toString();
         String descripcionCaja = txtDescripcion.getText().toString();
 
-        Estanteria estanteriaSeleccionada = (Estanteria) spinnerEstanterias.getSelectedItem();
-        String idEstanteriaSeleccionada = estanteriaSeleccionada.getIdestanteria();
+        if (nombreCaja.matches("") || descripcionCaja.matches("")) {
+            DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Rellena todos los campos").show();
+        } else {
 
-        String uuidAutogen = UUID.randomUUID().toString();
-        final String idCaja = "C" + uuidAutogen;
+            Estanteria estanteriaSeleccionada = (Estanteria) spinnerEstanterias.getSelectedItem();
+            String idEstanteriaSeleccionada = estanteriaSeleccionada.getIdestanteria();
 
-        Map<String, Object> caja = new HashMap<>();
-        caja.put("idcaja", idCaja);
-        caja.put("nombre", nombreCaja);
-        caja.put("idestanteria", idEstanteriaSeleccionada);
-        caja.put("descripcion", descripcionCaja);
+            String uuidAutogen = UUID.randomUUID().toString();
+            final String idCaja = "C" + uuidAutogen;
 
-        // Add a new document with a generated ID
-        db.collection("cajas")
-                .document(idCaja)
-                .set(caja)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Utilidades.crearCodigoQR(view, idCaja);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar la Caja").show();
-                        botonPulsado = false;
-                    }
-                });
+            Map<String, Object> caja = new HashMap<>();
+            caja.put("idcaja", idCaja);
+            caja.put("nombre", nombreCaja);
+            caja.put("idestanteria", idEstanteriaSeleccionada);
+            caja.put("descripcion", descripcionCaja);
+
+            // Add a new document with a generated ID
+            db.collection("cajas")
+                    .document(idCaja)
+                    .set(caja)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Utilidades.crearCodigoQR(view, idCaja);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar la Caja").show();
+                            botonPulsado = false;
+                        }
+                    });
+        }
     }
 
 }

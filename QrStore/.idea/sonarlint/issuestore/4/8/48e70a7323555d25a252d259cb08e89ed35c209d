@@ -1,0 +1,8 @@
+
+|squid:S1450"YRemove the "btnObjetos" field and declare it as a local variable in the relevant methods.(éĞúúÿÿÿÿ8Ê‘›µ-
+zsquid:S1450"WRemove the "btnCajas" field and declare it as a local variable in the relevant methods.(éĞúúÿÿÿÿ8Ê‘›µ-
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·ÒÚ¹
+qsquid:S1450"SRemove the "view" field and declare it as a local variable in the relevant methods.(ØÊ»¶8Ê‘›µ-
+€squid:S1450"]Remove the "btnEstanterias" field and declare it as a local variable in the relevant methods.(éĞúúÿÿÿÿ8Ê‘›µ-
+Isquid:S1659"&Declare "btnCajas" on a separate line.(éĞúúÿÿÿÿ8Ê‘›µ-
+Osquid:S1659",Declare "btnEstanterias" on a separate line.(éĞúúÿÿÿÿ8Ê‘›µ-

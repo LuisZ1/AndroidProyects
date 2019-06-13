@@ -1,0 +1,25 @@
+
+Msquid:S16592"1Declare "txtDescripciÃ³nCaja" on a separate line.(„Ÿ¬Ëøÿÿÿÿ
+~squid:S14502"bRemove the "txtDescripciÃ³nCaja" field and declare it as a local variable in the relevant methods.(„Ÿ¬Ëøÿÿÿÿ
+xsquid:S001162"[Rename this field "TxtNumeroObjetos" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„Ÿ¬Ëøÿÿÿÿ
+osquid:S2293P"YReplace the type specification in this constructor call with the diamond operator ("<>").(§œH
+tsquid:S14502"XRemove the "txtIdCaja" field and declare it as a local variable in the relevant methods.(„Ÿ¬Ëøÿÿÿÿ
+Dsquid:S1604v"(Make this anonymous inner class a lambda(¿—ååúÿÿÿÿ
+Osquid:S16592"3Declare "txtIdEstanteriaDeCaja" on a separate line.(„Ÿ¬Ëøÿÿÿÿ
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·ÒÚ¹
+Esquid:S1604Š"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ
+Esquid:S1604"(Make this anonymous inner class a lambda(ûàõãşÿÿÿÿ
+†squid:S14507"jRemove the "constraintLayoutMostrarCaja" field and declare it as a local variable in the relevant methods.(ôç×éøÿÿÿÿ
+€squid:S14502"dRemove the "txtIdEstanteriaDeCaja" field and declare it as a local variable in the relevant methods.(„Ÿ¬Ëøÿÿÿÿ
+˜squid:S1186;"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ğºè¬
+Csquid:S16592"'Declare "txtIdCaja" on a separate line.(„Ÿ¬Ëøÿÿÿÿ
+_squid:S1192u"HDefine a constant instead of duplicating this literal "objetos" 4 times.(Ü‡æİ
+Esquid:S1604ÿ"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ
+Esquid:S1604œ"(Make this anonymous inner class a lambda(Ùæœ»ıÿÿÿÿ
+Esquid:S1604£"(Make this anonymous inner class a lambda(Ùæœ»ıÿÿÿÿ
+‚squid:S14506"fRemove the "imgBtnNavegarEstanteria" field and declare it as a local variable in the relevant methods.(„›Æûÿÿÿÿ
+{squid:S001162"^Rename this field "txtDescripciÃ³nCaja" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„Ÿ¬Ëøÿÿÿÿ
+Esquid:S1604ù"(Make this anonymous inner class a lambda(Ïë£ùÿÿÿÿ
+Esquid:S1604–"(Make this anonymous inner class a lambda(Ÿ ¹ÿÿÿÿÿ
+xsquid:S14502"\Remove the "txtNombreCaja" field and declare it as a local variable in the relevant methods.(„Ÿ¬Ëøÿÿÿÿ
+Jsquid:S16592".Declare "TxtNumeroObjetos" on a separate line.(„Ÿ¬Ëøÿÿÿÿ

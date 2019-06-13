@@ -27,7 +27,7 @@ public class CrearCodigoEstanteria extends Fragment {
     private View view;
     private Button btnCrearCodigoEstanteria;
     private TextView txtNombre, txtLugar, txtDescripcion;
-    private FirebaseFirestore db ;
+    private FirebaseFirestore db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,33 +54,42 @@ public class CrearCodigoEstanteria extends Fragment {
         return view;
     }
 
-    private void addEstanteria(){
+    private void addEstanteria() {
 
-        String uuidAutogen = UUID.randomUUID().toString();
-        final String idEstanteria = "E" + uuidAutogen;
+        String nombreEstanteria = txtNombre.getText().toString();
+        String descripcionEstanteria = txtDescripcion.getText().toString();
+        String ubicacionEstanteria = txtLugar.getText().toString();
 
-        // Create a new user with a first and last name
-        Map<String, Object> estanteria = new HashMap<>();
-        estanteria.put("idestanteria", idEstanteria);
-        estanteria.put("nombre", txtNombre.getText().toString());
-        estanteria.put("ubicacion", txtLugar.getText().toString());
-        estanteria.put("descripcion", txtDescripcion.getText().toString());
+        if (nombreEstanteria.matches("") || descripcionEstanteria.matches("") || ubicacionEstanteria.matches("")) {
+            DynamicToast.makeWarning(view.getContext().getApplicationContext(), "Rellena todos los campos").show();
+        } else {
 
-        // Add a new document with a generated ID
-        db.collection("estanterias")
-                .document(idEstanteria)
-                .set(estanteria)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Utilidades.crearCodigoQR(view, idEstanteria);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar la estantería").show();
-                    }
-                });
+            String uuidAutogen = UUID.randomUUID().toString();
+            final String idEstanteria = "E" + uuidAutogen;
+
+            // Create a new user with a first and last name
+            Map<String, Object> estanteria = new HashMap<>();
+            estanteria.put("idestanteria", idEstanteria);
+            estanteria.put("nombre", nombreEstanteria);
+            estanteria.put("ubicacion", ubicacionEstanteria);
+            estanteria.put("descripcion", descripcionEstanteria);
+
+            // Add a new document with a generated ID
+            db.collection("estanterias")
+                    .document(idEstanteria)
+                    .set(estanteria)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Utilidades.crearCodigoQR(view, idEstanteria);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            DynamicToast.makeError(view.getContext().getApplicationContext(), "Error al guardar la estantería").show();
+                        }
+                    });
+        }
     }
 }

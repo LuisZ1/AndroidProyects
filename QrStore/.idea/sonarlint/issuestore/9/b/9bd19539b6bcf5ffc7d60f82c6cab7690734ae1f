@@ -1,0 +1,8 @@
+
+Dsquid:S1604M"(Make this anonymous inner class a lambda(¯‘àçúÿÿÿÿ
+psquid:S1450*"YRemove the "btnGuardar" field and declare it as a local variable in the relevant methods.(”“€ô
+?squid:S1604m"(Make this anonymous inner class a lambda(âÆÝÏ
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·ÒÚ¹
+Nsquid:S1659%"2Declare "txtDescripcionObjeto" on a separate line.(ŒÉðÃøÿÿÿÿ
+vsquid:S1450#"ZRemove the "miViewModel" field and declare it as a local variable in the relevant methods.(Â¶ñèýÿÿÿÿ
+˜squid:S1186,"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(éž¨¥

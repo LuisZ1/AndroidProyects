@@ -1,0 +1,11 @@
+
+P"squid:SwitchLastCaseIsDefaultCheck+""Add a default case to this switch.(ò¿Ä¶
+rsquid:S3923N"[Remove this conditional structure or edit its code blocks so that they're not all the same.(ŠÅßó
+Bsquid:S1481("+Remove this unused "result" local variable.(ıï‚
+Psquid:S1118":Add a private constructor to hide the implicit public one.(êº°F
+Fsquid:S00108$")Either remove or fill this block of code.(ˆ»ÎÁûÿÿÿÿ
+Psquid:S18549":Remove this useless assignment to local variable "result".(™¦Š
+nsquid:S00117H"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤ô”şÿÿÿÿ
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¼‘ ÿÿÿÿÿ
+Vsquid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ
+?squid:S1148@"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

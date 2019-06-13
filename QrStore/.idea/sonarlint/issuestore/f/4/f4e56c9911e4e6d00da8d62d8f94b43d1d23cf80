@@ -1,0 +1,11 @@
+
+jsquid:S1450"SRemove the "view" field and declare it as a local variable in the relevant methods.(ØÊ»¶
+ysquid:S1450"]Remove the "imgCrearObjeto" field and declare it as a local variable in the relevant methods.(ï‘Ö»ýÿÿÿÿ
+xsquid:S1450"bRemove the "imgCreateEstanteria" field and declare it as a local variable in the relevant methods.(™Ñ‹?
+rsquid:S1450"[Remove the "imgCrearCaja" field and declare it as a local variable in the relevant methods.( °»þ
+{squid:S1450"_Remove the "btnConsultarTodo" field and declare it as a local variable in the relevant methods.(Ÿø¬¬úÿÿÿÿ
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·ÒÚ¹
+qsquid:S1450"ZRemove the "imgScanCode" field and declare it as a local variable in the relevant methods.(¤§èœ
+vsquid:S1450"ZRemove the "miViewModel" field and declare it as a local variable in the relevant methods.(Â¶ñèýÿÿÿÿ
+usquid:S1450"^Remove the "imgCerrarSesion" field and declare it as a local variable in the relevant methods.(«õ¬÷
+xsquid:S1450"\Remove the "nombreUsuario" field and declare it as a local variable in the relevant methods.(õìñ„øÿÿÿÿ
